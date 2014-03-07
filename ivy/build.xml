@@ -3,14 +3,11 @@
 	<import file="common.xml" />
 	<target name="copy" depends="resolve">
 		
-		<copy overwrite="true" todir="../lib">
-			<firstmatchmapper>
-				<globmapper from="*-jar.jar" to="*.jar" />
-				<globmapper from="*-dist.tar.gz" to="*.tar.gz" />
-				<globmapper from="*" to="*" />
-			</firstmatchmapper>
+		<copy overwrite="true" todir="../lib" verbose="true">
+			<regexpmapper  from="^(.*?)(\-dist\.|\-jar\.)(.*?)$$" to="\1.\3" />
 			<fileset dir="artifacts/lib">
 				<exclude name="bsh-src.jar" />
+				<exclude name="ant-launcher-jar.jar" />
 				<exclude name="cojen-source.jar" />
 				<exclude name="commons-fileupload-javadoc.jar" />
 				<exclude name="commons-fileupload-source.jar" />

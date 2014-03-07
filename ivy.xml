@@ -20,11 +20,13 @@
 		<artifact name="exedio-cope-builder" type="log" ext="txt" />
 	</publications>
 	<dependencies>
+	 	<dependency org="ant" name="ant" rev="1.7.0"/>
+	 	<dependency org="cpsuite" name="cpsuite" rev="1.2.6"/>
 		<dependency org="junit" name="junit" rev="4.9" conf="build->default">
 			<exclude org="org.hamcrest" module="hamcrest-core" />
 		</dependency>
 		<dependency org="findbugs-x" name="findbugs" rev="2.0.1" conf="build->default" />
-		<dependency org="com.exedio" name="cope" rev="7497">
+		<dependency org="com.exedio" name="cope" rev="7538">
 			<conf name="runtime" mapped="runtime" />
 			<conf name="build" mapped="hsqldb,junit,sources" />
 		</dependency>

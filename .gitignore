@@ -1,1 +1,3 @@
 /.eclipse-output
+/build
+/ivy/artifacts
