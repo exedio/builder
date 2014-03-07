@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+
+<project name="copebuilder" default="build" basedir=".">
+
+	<property file="local.properties" />
+	<property file="project.properties" />
+	
+	<import file="macros/compile.xml" />
+	<import file="macros/findbugs.xml" />
+	
+	<taskdef resource="com/exedio/cope/instrument/ant.properties">
+		<classpath>
+			<pathelement location="lib/exedio-cope-instrument.jar" />
+			<pathelement location="lib/slf4j-api.jar" />
+		</classpath>
+	</taskdef>
+	
+	<target name="src.instrument" unless="skip.instrument">
+		<instrument verify="${instrument.verify}" finalArgs="true" suppressUnusedWarningOnPrivateActivationConstructor="true" verbose="false">
+			<fileset dir="src">
+				<include name="com/exedio/cope/patch/PatchRun.java" />
+			</fileset>
+		</instrument>
+	</target>
+	
+	<target name="src.compile" depends="src.instrument">
+		<compile srcdir="src">
+			<classpath>
+				<pathelement location="lib/exedio-cope.jar" />
+				<pathelement location="lib/slf4j-api.jar" />
+				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
+				<pathelement location="lib/findbugs-annotations.jar" />
+			</classpath>
+		</compile>
+	</target>
+	
+	<target name="testsrc.instrument" unless="skip.instrument">
+		<instrument verify="${instrument.verify}" finalArgs="true" suppressUnusedWarningOnPrivateActivationConstructor="true" verbose="false">
+			<fileset dir="testsrc">
+				<include name="com/exedio/cope/builder/*Item.java" />
+			</fileset>
+		</instrument>
+	</target>
+	
+	<target name="testsrc.compile" depends="src.compile, testsrc.instrument">
+		<compile srcdir="testsrc">
+			<classpath>
+				<pathelement location="build/classes/src" />
+				<pathelement location="lib/exedio-cope.jar" />
+				<pathelement location="lib/exedio-cope-junit.jar" />
+				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
+				<pathelement location="lib/junit.jar" />
+				<pathelement location="lib/cpsuite.jar" />
+				<pathelement location="lib/findbugs-annotations.jar" />
+			</classpath>
+		</compile>
+	</target>
+	
+	<target name="test" depends="testsrc.compile">
+		<mkdir dir="build/testresults" />
+		<mkdir dir="build/testtmpdir" />
+		<junit fork="yes" dir="${basedir}"
+				 haltonerror="true" haltonfailure="true"
+				 showoutput="true" printsummary="true">
+			<formatter type="brief" usefile="false" />
+			<formatter type="xml" />
+			<classpath>
+				<pathelement location="build/classes/src" />
+				<pathelement location="build/classes/testsrc" />
+				<pathelement location="lib/hsqldb.jar" />
+				<pathelement location="lib/junit.jar" />
+				<pathelement location="lib/cpsuite.jar" />
+				<pathelement location="lib/exedio-cope.jar" />
+				<pathelement location="lib/exedio-cope-junit.jar" />
+				<pathelement location="lib/slf4j-api.jar" />
+			</classpath>
+			<test name="${test}" todir="build/testresults" outfile="copebuilder" />
+			<sysproperty key="java.io.tmpdir" value="${basedir}/build/testtmpdir" />
+			<sysproperty key="java.awt.headless" value="true" />
+			<assertions><enable/></assertions>
+		</junit>
+	</target>
+	
+	<target name="jar" depends="src.compile">
+		<jar jarfile="build/exedio-cope-builder.jar" filesonly="true" duplicate="fail" strict="fail" level="9">
+			<fileset dir="build/classes/src" />
+			<manifest>
+				<attribute name="Specification-Title" value="exedio cope builder" />
+				<attribute name="Specification-Version" value="${build.tag}" />
+				<attribute name="Specification-Vendor" value="exedio GmbH" />
+				<attribute name="Implementation-Title" value="exedio cope builder" />
+				<attribute name="Implementation-Version" value="${build.tag}" />
+				<attribute name="Implementation-Vendor" value="exedio GmbH" />
+				<attribute name="Class-Path" value="exedio-cope.jar" />
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="jar.src">
+		<mkdir dir="build" />
+		<zip destfile="build/exedio-cope-builder-src.zip" filesonly="true" whenempty="fail" duplicate="fail" level="9">
+			<zipfileset dir="${basedir}/src"><include name="**/*.java"/><exclude name="**/*_Jspm.java" /></zipfileset>
+		</zip>
+	</target>
+	
+	<target name="clean">
+		<delete>
+			<fileset dir="src"><!-- not created anymore -->
+				<include name="**/*_Jspm.java" />
+			</fileset>
+		</delete>
+		<delete dir="build" />
+		<delete dir="webtestweb/WEB-INF/classes" /><!-- not created anymore -->
+		<delete dir="webtestweb/WEB-INF/lib" /><!-- not created anymore -->
+		<delete dir="tomcat" /><!-- not created anymore -->
+	</target>
+	
+	<target name="instrument" depends="src.instrument, testsrc.instrument" />
+	
+	<target name="compile" depends="src.compile, testsrc.compile" />
+	
+	<target name="api">
+
+		<javadoc
+				destdir="build/api"
+				maxmemory="60m"
+				source="1.5"
+				private="true"
+				author="on"
+				use="on"
+				version="on"
+				windowtitle="exedio cope"
+				splitindex="on"
+				failonerror="true"
+			>
+			<fileset dir="src" includes="**/*.java" />
+			<classpath>
+				<pathelement location="lib/exedio-cope.jar" />
+			</classpath>
+		</javadoc>
+	</target>
+	
+	<target name="build"
+			depends="compile, test, jar" />
+	
+	
+	<target name="findbugs" depends="compile, findbugs.taskdef">
+		<findbugs
+					home="${basedir}/build/findbugs-home"
+					jvmargs="-Xmx512M"
+					failOnError="true"
+					warningsProperty="findbugs.warnings"
+					output="${findbugs.output}"
+					outputFile="${basedir}/build/findbugs.${findbugs.output}"
+					excludeFilter="conf/findbugs-exclude.xml"
+					effort="max"
+					reportlevel="low">
+			<class location="${basedir}/build/classes/src" />
+			<class location="${basedir}/build/classes/testsrc" />
+			<auxclasspath>
+				<pathelement location="${basedir}/lib/exedio-cope.jar" />
+				<pathelement location="${basedir}/lib/exedio-cope-junit.jar" />
+				<pathelement location="${basedir}/lib/junit.jar" />
+				<pathelement location="${basedir}/lib/slf4j-api.jar" />
+			</auxclasspath>
+		</findbugs>
+	</target>
+	
+	<target name="all" depends="build, jar.src, findbugs" />
+	
+	<target name="jenkins" depends="all">
+		<copy todir="${basedir}/build/success">
+			<fileset file="${basedir}/build/exedio-cope-builder.jar" />
+			<fileset file="${basedir}/build/exedio-cope-builder-src.zip" />
+			<fileset file="${basedir}/exedio-cope-builder-log.txt" />
+		</copy>
+		<copy file="ivy.xml" tofile="build/success/ivy.xml" overwrite="true">
+			<filterset>
+				<filter token="BUILD_REVISION" value="${build.revision}" />
+			</filterset>
+		</copy>
+	</target>
+	
+</project>
