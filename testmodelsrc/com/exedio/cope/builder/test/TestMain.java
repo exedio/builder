@@ -6,6 +6,7 @@ public final class TestMain
 {
 	public static final Model model = new Model(
 			SimpleItem.TYPE,
+			FieldsItem.TYPE,
 			SuperItem.TYPE,
 			SubItem.TYPE,
 			CompositeItem.TYPE
