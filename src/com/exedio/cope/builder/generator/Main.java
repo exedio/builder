@@ -240,7 +240,7 @@ final class Main
 		writer.write(newLine);
 		writer.write(newLine);
 
-		writer.write("public class Generated");
+		writer.write("public abstract class Generated");
 		writer.write(simpleClassName);
 		writer.write("Builder<B extends Generated");
 		writer.write(simpleClassName);
