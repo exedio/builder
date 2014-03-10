@@ -1,3 +1,4 @@
 /.eclipse-output
 /build
 /ivy/artifacts
+/testsrc/com/exedio/cope/builder/test/Generated*Builder.java

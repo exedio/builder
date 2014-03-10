@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="testmodelsrc"/>
 	<classpathentry kind="src" path="testsrc"/>
 	<classpathentry kind="lib" path="lib/junit.jar"/>
 	<classpathentry kind="lib" path="lib/ant.jar"/>
@@ -8,6 +9,9 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/cpsuite.jar" sourcepath="lib/cpsuite-src.zip"/>
 	<classpathentry kind="lib" path="lib/findbugs-annotations.jar"/>
+	<classpathentry kind="lib" path="lib/exedio-cope-junit.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api.jar"/>
+	<classpathentry kind="lib" path="lib/hsqldb.jar"/>
 	<classpathentry kind="output" path=".eclipse-output"/>
 	<referencedentry kind="lib" path="lib/exedio-cope-util.jar" sourcepath="lib/exedio-cope-util-src.zip"/>
 </classpath>

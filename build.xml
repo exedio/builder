@@ -15,15 +15,7 @@
 		</classpath>
 	</taskdef>
 	
-	<target name="src.instrument" unless="skip.instrument">
-		<!--<instrument verify="${instrument.verify}" finalArgs="true" suppressUnusedWarningOnPrivateActivationConstructor="true" verbose="false">
-			<fileset dir="src">
-				<include name="com/exedio/cope/patch/PatchRun.java" />
-			</fileset>
-		</instrument>//-->
-	</target>
-	
-	<target name="src.compile" depends="src.instrument">
+	<target name="src.compile">
 		<compile srcdir="src">
 			<classpath>
 				<pathelement location="lib/ant.jar" />
@@ -35,20 +27,45 @@
 		</compile>
 	</target>
 	
-	<target name="testsrc.instrument" unless="skip.instrument">
-		<!--
+	<target name="testmodelsrc.instrument" unless="skip.instrument">
 		<instrument verify="${instrument.verify}" finalArgs="true" suppressUnusedWarningOnPrivateActivationConstructor="true" verbose="false">
-			<fileset dir="testsrc">
-				<include name="com/exedio/cope/builder/*Item.java" />
+			<fileset dir="testmodelsrc">
+				<include name="com/exedio/cope/builder/test/*Item.java" />
 			</fileset>
 		</instrument>
-		//-->
 	</target>
 	
-	<target name="testsrc.compile" depends="src.compile, testsrc.instrument">
+	<target name="testmodelsrc.compile" depends="testmodelsrc.instrument">
+		<compile srcdir="testmodelsrc">
+			<classpath>
+				<pathelement location="lib/exedio-cope.jar" />
+			</classpath>
+		</compile>
+	</target>
+
+	<target name="testbuilder.taskdef" depends="src.compile, testmodelsrc.compile">
+		<taskdef resource="com/exedio/cope/builder/generator/ant.properties">
+			<classpath>
+				<path path="build/classes/src"/>
+				<path path="build/classes/testmodelsrc"/>
+				<pathelement location="lib/exedio-cope.jar" />
+				<pathelement location="lib/slf4j-api.jar" />
+			</classpath>
+		</taskdef>
+	</target>
+	
+	<target name="testbuilder" depends="src.compile, testbuilder.taskdef">
+		<generateCopeBuilder
+				model="com.exedio.cope.builder.test.TestMain#model"
+				packagePrefix="com.exedio.cope.builder.test"
+				destdir="testsrc" />
+	</target>
+	
+	<target name="testsrc.compile" depends="src.compile, testmodelsrc.compile, testbuilder">
 		<compile srcdir="testsrc">
 			<classpath>
 				<pathelement location="build/classes/src" />
+				<pathelement location="build/classes/testmodelsrc" />
 				<pathelement location="lib/exedio-cope.jar" />
 				<pathelement location="lib/exedio-cope-junit.jar" />
 				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
@@ -69,6 +86,7 @@
 			<formatter type="xml" />
 			<classpath>
 				<pathelement location="build/classes/src" />
+				<pathelement location="build/classes/testmodelsrc" />
 				<pathelement location="build/classes/testsrc" />
 				<pathelement location="lib/hsqldb.jar" />
 				<pathelement location="lib/junit.jar" />
@@ -118,7 +136,7 @@
 		<delete dir="tomcat" /><!-- not created anymore -->
 	</target>
 	
-	<target name="instrument" depends="src.instrument, testsrc.instrument" />
+	<target name="instrument" depends="testmodelsrc.instrument" />
 	
 	<target name="compile" depends="src.compile, testsrc.compile" />
 	
