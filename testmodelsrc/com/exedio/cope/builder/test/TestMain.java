@@ -4,5 +4,9 @@ import com.exedio.cope.Model;
 
 public final class TestMain
 {
-	public static final Model model = new Model(SimpleItem.TYPE);
+	public static final Model model = new Model(
+			SimpleItem.TYPE,
+			SuperItem.TYPE,
+			SubItem.TYPE
+	);
 }
