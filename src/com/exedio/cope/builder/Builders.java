@@ -1,10 +1,9 @@
 package com.exedio.cope.builder;
 
+import com.exedio.cope.FunctionField;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import com.exedio.cope.FunctionField;
 
 /**
  * A collection of common builders re-usable in projects.

@@ -1,5 +1,9 @@
 package com.exedio.cope.builder;
 
+import com.exedio.cope.SetValue;
+import com.exedio.cope.Settable;
+import com.exedio.cope.pattern.EnumSetField;
+import com.exedio.cope.pattern.Hash;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -10,11 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import com.exedio.cope.SetValue;
-import com.exedio.cope.Settable;
-import com.exedio.cope.pattern.EnumSetField;
-import com.exedio.cope.pattern.Hash;
 
 public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ? >> implements Builder<O>
 {
