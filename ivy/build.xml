@@ -4,7 +4,11 @@
 	<target name="copy" depends="resolve">
 		
 		<copy overwrite="true" todir="../lib" verbose="true">
-			<regexpmapper  from="^(.*?)(\-dist\.|\-jar\.)(.*?)$$" to="\1.\3" />
+			<firstmatchmapper>
+				<globmapper from="*-jar.jar" to="*.jar" />
+				<globmapper from="*-dist.tar.gz" to="*.tar.gz" />
+				<globmapper from="*" to="*" />
+			</firstmatchmapper>
 			<fileset dir="artifacts/lib">
 				<exclude name="bsh-src.jar" />
 				<exclude name="ant-launcher-jar.jar" />
