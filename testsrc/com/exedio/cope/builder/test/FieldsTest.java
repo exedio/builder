@@ -6,6 +6,7 @@ import static java.util.Collections.emptyMap;
 import static java.util.Collections.emptySet;
 import static org.junit.Assert.assertEquals;
 
+import com.exedio.cope.builder.MediaBuilder;
 import com.exedio.cope.pattern.Price;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class FieldsTest extends MainTest
 		map.put("key1", "value1");
 		map.put("key2", "value2");
 		final FieldsItem i = new FieldsItemBuilder().
+				media(new MediaBuilder().type("major/minor").build()).
 				hash("hashValue").
 				price(Price.storeOf(1234)).
 				enumMap(enumMap).
@@ -32,6 +34,7 @@ public class FieldsTest extends MainTest
 				list(asList("setOne, setTwo")).
 				map(map).
 				build();
+		assertEquals("major/minor", i.getMediaContentType());
 		assertEquals(true, i.checkHash("hashValue"));
 		assertEquals(Price.storeOf(1234), i.getPrice());
 		assertEquals("enumMapValueOne"  , i.getEnumMap(TestEnum.one));
@@ -45,6 +48,7 @@ public class FieldsTest extends MainTest
 	public void fallback()
 	{
 		final FieldsItem i = new FieldsItemBuilder().build();
+		assertEquals("image/png", i.getMediaContentType());
 		assertEquals(true, i.checkHash("fallbackHashValue"));
 		assertEquals(Price.storeOf(7777777), i.getPrice());
 		assertEquals("fallbackEnumMapValueOne"  , i.getEnumMap(TestEnum.one));
