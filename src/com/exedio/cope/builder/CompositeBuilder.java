@@ -26,6 +26,7 @@ package com.exedio.cope.builder;
 import com.exedio.cope.SetValue;
 import com.exedio.cope.Settable;
 import com.exedio.cope.pattern.Composite;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
@@ -41,6 +42,7 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 	}
 
 	@SuppressWarnings("unchecked")
+	@SuppressFBWarnings("DP_DO_INSIDE_DO_PRIVILEGED")
 	protected B set(final String settableName, final Object value)
 	{
 		try
