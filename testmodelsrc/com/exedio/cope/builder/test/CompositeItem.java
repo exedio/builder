@@ -1,12 +1,13 @@
 package com.exedio.cope.builder.test;
 
+import com.exedio.cope.Item;
 import com.exedio.cope.pattern.CompositeField;
 
 /**
  * @cope.constructor none
  * @cope.generic.constructor none
  */
-final class CompositeItem extends SuperItem
+final class CompositeItem extends Item
 {
 	static final CompositeField<TestComposite> field = CompositeField.create(TestComposite.class);
 
