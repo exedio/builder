@@ -1,2 +1,6 @@
 <FindBugsFilter>
+	<Match>
+		<!-- experimental warning without description, that often happens with casts created by generics -->
+		<Bug pattern="BC_UNCONFIRMED_CAST_OF_RETURN_VALUE" />
+	</Match>
 </FindBugsFilter>
