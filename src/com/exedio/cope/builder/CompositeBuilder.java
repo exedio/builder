@@ -45,7 +45,9 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 	{
 		try
 		{
-			return set((Settable<Object>)targetClazz.getField(settableName).get(null), value);
+			final java.lang.reflect.Field field = targetClazz.getDeclaredField(settableName);
+			field.setAccessible(true);
+			return set((Settable<Object>)field.get(null), value);
 		}
 		catch( final IllegalAccessException e )
 		{
