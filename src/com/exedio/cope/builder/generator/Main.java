@@ -244,7 +244,7 @@ final class Main
 		writer.write(simpleClassName);
 		writer.write("Builder<B extends Generated");
 		writer.write(simpleClassName);
-		writer.write("Builder< ? >> extends ");
+		writer.write("Builder<?>> extends ");
 		writer.write(type.getExtends().getName()); // TODO obey inheritance
 		writer.write('<');
 		writer.write(simpleClassName);
@@ -262,11 +262,11 @@ final class Main
 		writer.write("\t{");
 		writer.write(newLine);
 
-		writer.write("\t\tsuper( ");
+		writer.write("\t\tsuper(");
 		writer.write(simpleClassName);
 		writer.write('.');
 		writer.write(type.getTypeName());
-		writer.write(" );");
+		writer.write(");");
 		writer.write(newLine);
 
 		writer.write("\t}");
@@ -290,7 +290,7 @@ final class Main
 
 			writer.write("\tpublic final B ");
 			writer.write(featureName);
-			writer.write("( final ");
+			writer.write("(final ");
 
 			if(feature instanceof FunctionField<?>)
 			{
@@ -367,16 +367,16 @@ final class Main
 
 			writer.write(" ");
 			writer.write(featureName);
-			writer.write(" )");
+			writer.write(")");
 			writer.write(newLine);
 			writer.write("\t{");
 			writer.write(newLine);
 
-			writer.write("\t\treturn set( \"");
+			writer.write("\t\treturn set(\"");
 			writer.write(featureName);
 			writer.write("\", ");
 			writer.write(featureName);
-			writer.write(" );");
+			writer.write(");");
 			writer.write(newLine);
 
 			writer.write("\t}");
