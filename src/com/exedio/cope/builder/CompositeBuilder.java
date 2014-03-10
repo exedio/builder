@@ -24,6 +24,7 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 	{
 		try
 		{
+			// TODO use some framework function for this
 			final java.lang.reflect.Field field = targetClazz.getDeclaredField(settableName);
 			field.setAccessible(true);
 			return set((Settable<Object>)field.get(null), value);
