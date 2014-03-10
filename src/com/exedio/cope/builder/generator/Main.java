@@ -1,5 +1,25 @@
 package com.exedio.cope.builder.generator;
 
+import com.exedio.cope.Feature;
+import com.exedio.cope.FunctionField;
+import com.exedio.cope.Model;
+import com.exedio.cope.Settable;
+import com.exedio.cope.Type;
+import com.exedio.cope.builder.CompositeBuilder;
+import com.exedio.cope.builder.ItemBuilder;
+import com.exedio.cope.misc.PrimitiveUtil;
+import com.exedio.cope.pattern.Composite;
+import com.exedio.cope.pattern.CompositeField;
+import com.exedio.cope.pattern.EnumMapField;
+import com.exedio.cope.pattern.Hash;
+import com.exedio.cope.pattern.ListField;
+import com.exedio.cope.pattern.MapField;
+import com.exedio.cope.pattern.Media;
+import com.exedio.cope.pattern.Price;
+import com.exedio.cope.pattern.PriceField;
+import com.exedio.cope.pattern.Range;
+import com.exedio.cope.pattern.RangeField;
+import com.exedio.cope.pattern.SetField;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,25 +38,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import com.exedio.cope.Feature;
-import com.exedio.cope.FunctionField;
-import com.exedio.cope.Model;
-import com.exedio.cope.Settable;
-import com.exedio.cope.Type;
-import com.exedio.cope.builder.CompositeBuilder;
-import com.exedio.cope.builder.ItemBuilder;
-import com.exedio.cope.misc.PrimitiveUtil;
-import com.exedio.cope.pattern.Composite;
-import com.exedio.cope.pattern.CompositeField;
-import com.exedio.cope.pattern.EnumMapField;
-import com.exedio.cope.pattern.Hash;
-import com.exedio.cope.pattern.ListField;
-import com.exedio.cope.pattern.MapField;
-import com.exedio.cope.pattern.Media;
-import com.exedio.cope.pattern.Price;
-import com.exedio.cope.pattern.PriceField;
-import com.exedio.cope.pattern.SetField;
 
 final class Main
 {
@@ -312,6 +313,13 @@ final class Main
 			else if(feature instanceof PriceField)
 			{
 				writer.write(Price.class.getName());
+			}
+			else if(feature instanceof RangeField)
+			{
+				writer.write(Range.class.getName());
+				writer.write('<');
+				writer.write(((RangeField)feature).getFrom().getValueClass().getCanonicalName());
+				writer.write('>');
 			}
 			else if(feature instanceof CompositeField)
 			{

@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.exedio.cope.builder.MediaBuilder;
 import com.exedio.cope.pattern.Price;
+import com.exedio.cope.pattern.Range;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,6 +30,7 @@ public class FieldsTest extends MainTest
 				media(new MediaBuilder().type("major/minor").build()).
 				hash("hashValue").
 				price(Price.storeOf(1234)).
+				range(Range.valueOf(44, 55)).
 				enumMap(enumMap).
 				set(new HashSet<String>(asList("setOne, setTwo"))).
 				list(asList("setOne, setTwo")).
@@ -37,6 +39,7 @@ public class FieldsTest extends MainTest
 		assertEquals("major/minor", i.getMediaContentType());
 		assertEquals(true, i.checkHash("hashValue"));
 		assertEquals(Price.storeOf(1234), i.getPrice());
+		assertEquals(Range.valueOf(44, 55), i.getRange());
 		assertEquals("enumMapValueOne"  , i.getEnumMap(TestEnum.one));
 		assertEquals("enumMapValueTwo"  , i.getEnumMap(TestEnum.two));
 		assertEquals("enumMapValueThree", i.getEnumMap(TestEnum.three));
@@ -51,6 +54,7 @@ public class FieldsTest extends MainTest
 		assertEquals("image/png", i.getMediaContentType());
 		assertEquals(true, i.checkHash("fallbackHashValue"));
 		assertEquals(Price.storeOf(7777777), i.getPrice());
+		assertEquals(Range.valueOf(7777777, 8888888), i.getRange());
 		assertEquals("fallbackEnumMapValueOne"  , i.getEnumMap(TestEnum.one));
 		assertEquals("fallbackEnumMapValueTwo"  , i.getEnumMap(TestEnum.two));
 		assertEquals("fallbackEnumMapValueThree", i.getEnumMap(TestEnum.three));
