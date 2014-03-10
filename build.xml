@@ -161,6 +161,7 @@
 			<class location="${basedir}/build/classes/src" />
 			<class location="${basedir}/build/classes/testsrc" />
 			<auxclasspath>
+				<pathelement location="${basedir}/lib/ant.jar" />
 				<pathelement location="${basedir}/lib/exedio-cope.jar" />
 				<pathelement location="${basedir}/lib/exedio-cope-junit.jar" />
 				<pathelement location="${basedir}/lib/junit.jar" />
