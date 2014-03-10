@@ -23,8 +23,8 @@ package com.exedio.cope.builder.generator;
 
 
 
+import com.exedio.cope.Cope;
 import com.exedio.cope.Model;
-import com.exedio.cope.misc.ModelByString;
 import java.io.File;
 
 final class Params
@@ -33,7 +33,7 @@ final class Params
 
 	void setModel(final String model)
 	{
-		this.model = ModelByString.get(model);
+		this.model = Cope.getModel(model);
 	}
 
 	Model getModel()
