@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class BuilderSimpleTest extends MainTest
+public class SimpleTest extends MainTest
 {
 	@Test
 	public void mandatoryExplicit()
