@@ -74,9 +74,12 @@ final class Main
 					return feature.getName();
 				}
 				@Override
-				Class<?> getExtends()
+				void writeExtends(final OutputStreamWriter writer) throws IOException
 				{
-					return ItemBuilder.class;
+					writer.write(ItemBuilder.class.getName()); // TODO obey inheritance
+					writer.write('<');
+					writer.write(clazz.getCanonicalName());
+					writer.write(", B>");
 				}
 				@Override
 				String getTypeName()
@@ -120,9 +123,12 @@ final class Main
 						return Composite.getTemplateName((FunctionField<?>)feature);
 					}
 					@Override
-					Class<?> getExtends()
+					void writeExtends(final OutputStreamWriter writer) throws IOException
 					{
-						return CompositeBuilder.class;
+						writer.write(CompositeBuilder.class.getName());
+						writer.write('<');
+						writer.write(clazz.getCanonicalName());
+						writer.write(", B>");
 					}
 					@Override
 					String getTypeName()
@@ -244,11 +250,10 @@ final class Main
 		writer.write(simpleClassName);
 		writer.write("Builder<B extends Generated");
 		writer.write(simpleClassName);
-		writer.write("Builder<?>> extends ");
-		writer.write(type.getExtends().getName()); // TODO obey inheritance
-		writer.write('<');
-		writer.write(simpleClassName);
-		writer.write(", B>");
+		writer.write("Builder<?>>");
+		writer.write(newLine);
+		writer.write("\textends ");
+		type.writeExtends(writer);
 		writer.write(newLine);
 
 		writer.write("{");
@@ -398,7 +403,7 @@ final class Main
 		abstract Class<?> getJavaClass();
 		abstract Collection<? extends Feature> getDeclaredFeatures();
 		abstract String getName(Feature feature);
-		abstract Class<?> getExtends();
+		abstract void writeExtends(OutputStreamWriter writer) throws IOException;
 		abstract String getTypeName();
 	}
 
