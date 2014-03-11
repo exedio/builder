@@ -476,6 +476,7 @@ final class Main
 			writer.write("Builder<?>>");
 		}
 
+		@SuppressWarnings("unused")
 		void writeTypeCast(final OutputStreamWriter writer) throws IOException
 		{
 			// do nothing
