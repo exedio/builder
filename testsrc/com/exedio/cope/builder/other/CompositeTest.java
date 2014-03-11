@@ -1,7 +1,8 @@
-package com.exedio.cope.builder.test;
+package com.exedio.cope.builder.other;
 
 import static org.junit.Assert.assertEquals;
 
+import com.exedio.cope.builder.test.MainTest;
 import org.junit.Test;
 
 public class CompositeTest extends MainTest

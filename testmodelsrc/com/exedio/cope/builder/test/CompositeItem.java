@@ -1,6 +1,7 @@
 package com.exedio.cope.builder.test;
 
 import com.exedio.cope.Item;
+import com.exedio.cope.builder.other.TestComposite;
 import com.exedio.cope.pattern.CompositeField;
 
 /**

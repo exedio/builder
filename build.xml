@@ -32,7 +32,7 @@
 		<instrument verify="${instrument.verify}" finalArgs="true" suppressUnusedWarningOnPrivateActivationConstructor="true" verbose="false">
 			<fileset dir="testmodelsrc">
 				<include name="com/exedio/cope/builder/test/*Item.java" />
-				<include name="com/exedio/cope/builder/test/*Composite.java" />
+				<include name="com/exedio/cope/builder/other/*Composite.java" />
 				<include name="com/exedio/cope/builder/test/TestEnum.java" />
 			</fileset>
 		</instrument>
@@ -63,7 +63,7 @@
 	<target name="testbuilder" depends="src.compile, testbuilder.taskdef">
 		<generateCopeBuilder
 				model="com.exedio.cope.builder.test.TestMain#model"
-				packagePrefix="com.exedio.cope.builder.test"
+				packagePrefix="com.exedio.cope.builder"
 				destdir="testsrc" />
 	</target>
 	

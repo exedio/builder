@@ -1,4 +1,4 @@
-package com.exedio.cope.builder.test;
+package com.exedio.cope.builder.other;
 
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.pattern.Composite;
@@ -6,7 +6,7 @@ import com.exedio.cope.pattern.Composite;
 /**
  * @cope.constructor none
  */
-final class TestComposite extends Composite
+public final class TestComposite extends Composite
 {
 	static final IntegerField integerMandatory = new IntegerField();
 

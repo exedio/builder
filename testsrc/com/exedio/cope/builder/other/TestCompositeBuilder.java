@@ -1,5 +1,5 @@
 
-package com.exedio.cope.builder.test;
+package com.exedio.cope.builder.other;
 
 public class TestCompositeBuilder extends GeneratedTestCompositeBuilder<TestCompositeBuilder>
 {
