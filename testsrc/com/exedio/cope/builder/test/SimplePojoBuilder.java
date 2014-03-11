@@ -2,29 +2,30 @@ package com.exedio.cope.builder.test;
 
 import com.exedio.cope.builder.Builder;
 import com.exedio.cope.builder.PojoBuilder;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SimplePojoBuilder extends PojoBuilder<SimplePojo>
 {
 
-	static class IntegerAutoBuilder implements  Builder<Integer>
+	static class IntegerAutoBuilder implements Builder<Integer>
 	{
-		static int	i	= 11;
+		static AtomicInteger	i	= new AtomicInteger( 11 );
 
 		@Override
 		public Integer build()
 		{
-			return i++;
+			return i.getAndIncrement();
 		}
 
 		public static void reset()
 		{
-			i = 11;
+			i.set( 11 );
 		}
 	}
 
-	private Integer			integerMandatory;
-	private Integer			integerOptional;
-	private Integer			integerAuto;
+	private Integer	integerMandatory;
+	private Integer	integerOptional;
+	private Integer	integerAuto;
 
 	@Override
 	public SimplePojo build()
