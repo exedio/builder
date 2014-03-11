@@ -11,7 +11,7 @@ public class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuil
 	@Override
 	public FieldsItem build()
 	{
-		fallback(FieldsItem.media, new MediaBuilder().build());
+		fallback(FieldsItem.media, new MediaBuilder());
 		fallback(FieldsItem.hash, "fallbackHashValue");
 		fallback(FieldsItem.price, Price.storeOf(7777777));
 		fallback(FieldsItem.range, Range.valueOf(7777777, 8888888));
