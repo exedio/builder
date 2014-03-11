@@ -121,7 +121,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	@SuppressWarnings("unchecked")
 	protected B set(final String settableName, final Object value)
 	{
-		final Feature feature = this.type.getDeclaredFeature(settableName);
+		final Feature feature = this.type.getFeature(settableName);
 		if(feature==null)
 			throw new NullPointerException(settableName);
 		if(feature instanceof Settable<?>)

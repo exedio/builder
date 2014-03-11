@@ -2,6 +2,8 @@ package com.exedio.cope.builder.test;
 
 import static org.junit.Assert.assertEquals;
 
+import com.exedio.cope.builder.other.SubItem;
+import com.exedio.cope.builder.other.SubItemBuilder;
 import org.junit.Test;
 
 public class HierarchyTest extends MainTest
@@ -9,7 +11,7 @@ public class HierarchyTest extends MainTest
 	@Test
 	public void superExplicit()
 	{
-		final SuperItem i = new SuperItemBuilder().superField(88).build();
+		final SuperItem i = (SuperItem)new SuperItemBuilder().superField(88).build(); // TODO FIXME !!!!!!!!!!!!!
 		assertEquals(88, i.getSuperField());
 	}
 	@Test
@@ -21,11 +23,15 @@ public class HierarchyTest extends MainTest
 	@Test
 	public void subExplicit()
 	{
-		// TODO
-	}
+		final SubItem i = new SubItemBuilder().superField(88).subField( 77 ).build();
+		assertEquals(88, i.getSuperField());
+		assertEquals(77, i.getSubField());
+ 	}
 	@Test
 	public void subFallback()
 	{
-		// TODO
+		final SubItem i = new SubItemBuilder().build();
+		assertEquals(888888, i.getSuperField());
+		assertEquals(777777, i.getSubField());
 	}
 }

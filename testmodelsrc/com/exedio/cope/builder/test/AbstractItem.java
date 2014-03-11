@@ -9,7 +9,10 @@ import com.exedio.cope.Item;
  */
 public abstract class AbstractItem extends Item
 {
-	public static final IntegerField abstractField = new IntegerField().toFinal();
+	/**
+	 * @cope.get public
+	 */
+	static final IntegerField abstractField = new IntegerField().toFinal();
 
 	/**
 

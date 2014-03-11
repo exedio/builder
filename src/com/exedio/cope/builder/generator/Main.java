@@ -74,12 +74,57 @@ final class Main
 					return feature.getName();
 				}
 				@Override
-				void writeExtends(final OutputStreamWriter writer) throws IOException
+				void writeGenericParams(final OutputStreamWriter writer, final String simpleClassName) throws IOException
 				{
-					writer.write(ItemBuilder.class.getName()); // TODO obey inheritance
+					if(type.getSubtypes().isEmpty())
+					{
+						super.writeGenericParams(writer, simpleClassName);
+					}
+					else
+					{
+						writer.write("<I extends ");
+						writer.write(simpleClassName);
+						writer.write(", ");
+						writer.write("B extends Generated");
+						writer.write(simpleClassName);
+						writer.write("Builder<?,?>>");
+					}
+				}
+				@Override
+				void writeExtends(final OutputStreamWriter writer, final String simpleClassname) throws IOException
+				{
+					final Type<?> supertype = type.getSupertype();
+					if(supertype!=null)
+					{
+						writer.write(supertype.getJavaClass().getCanonicalName());
+						writer.write("Builder<");
+						writer.write(simpleClassname);
+						writer.write(", B>");
+						return;
+					}
+
+					writer.write(ItemBuilder.class.getName());
 					writer.write('<');
-					writer.write(clazz.getCanonicalName());
+					if(type.getSubtypes().isEmpty())
+					{
+						writer.write(clazz.getCanonicalName());
+					}
+					else
+					{
+						writer.write('I');
+					}
 					writer.write(", B>");
+				}
+				@Override
+				void writeTypeCast(final OutputStreamWriter writer) throws IOException
+				{
+					if(!type.getSubtypes().isEmpty())
+						writer.write("(com.exedio.cope.Type<I>)");
+				}
+				@Override
+				boolean enableTypePropagationConstructor()
+				{
+					return !type.getSubtypes().isEmpty();
 				}
 				@Override
 				String getTypeName()
@@ -123,7 +168,7 @@ final class Main
 						return Composite.getTemplateName((FunctionField<?>)feature);
 					}
 					@Override
-					void writeExtends(final OutputStreamWriter writer) throws IOException
+					void writeExtends(final OutputStreamWriter writer, final String simpleClassName) throws IOException
 					{
 						writer.write(CompositeBuilder.class.getName());
 						writer.write('<');
@@ -252,7 +297,7 @@ final class Main
 		type.writeGenericParams(writer, simpleClassName);
 		writer.write(newLine);
 		writer.write("\textends ");
-		type.writeExtends(writer);
+		type.writeExtends(writer, simpleClassName);
 		writer.write(newLine);
 
 		writer.write("{");
@@ -267,6 +312,7 @@ final class Main
 		writer.write(newLine);
 
 		writer.write("\t\tsuper(");
+		type.writeTypeCast(writer);
 		writer.write(simpleClassName);
 		writer.write('.');
 		writer.write(type.getTypeName());
@@ -275,6 +321,25 @@ final class Main
 
 		writer.write("\t}");
 		writer.write(newLine);
+
+		if(type.enableTypePropagationConstructor())
+		{
+			writer.write(newLine);
+
+			writer.write("\tprotected Generated");
+			writer.write(simpleClassName);
+			writer.write("Builder(final com.exedio.cope.Type<I> type)");
+			writer.write(newLine);
+
+			writer.write("\t{");
+			writer.write(newLine);
+
+			writer.write("\t\tsuper(type);");
+			writer.write(newLine);
+
+			writer.write("\t}");
+			writer.write(newLine);
+		}
 
 		for(final Feature feature : type.getDeclaredFeatures())
 		{
@@ -402,14 +467,23 @@ final class Main
 		abstract Class<?> getJavaClass();
 		abstract Collection<? extends Feature> getDeclaredFeatures();
 		abstract String getName(Feature feature);
-		abstract void writeExtends(OutputStreamWriter writer) throws IOException;
+		abstract void writeExtends(OutputStreamWriter writer, String simpleClassName) throws IOException;
 
 		void writeGenericParams(final OutputStreamWriter writer, final String simpleClassName) throws IOException
 		{
 			writer.write("<B extends Generated");
 			writer.write(simpleClassName);
 			writer.write("Builder<?>>");
+		}
 
+		void writeTypeCast(final OutputStreamWriter writer) throws IOException
+		{
+			// do nothing
+		}
+
+		boolean enableTypePropagationConstructor()
+		{
+			return false;
 		}
 
 		abstract String getTypeName();

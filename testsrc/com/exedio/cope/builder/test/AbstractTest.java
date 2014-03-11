@@ -21,8 +21,8 @@ public class AbstractTest extends MainTest
 	@Test
 	public void superFallback()
 	{
-		/*final ConcreteItem i = new ConcreteItemBuilder().build();
+		final ConcreteItem i = new ConcreteItemBuilder().build();
 		assertEquals(777777, i.getAbstractField());
-		assertEquals(888888, i.getConcreteField()); TODO */
+		assertEquals(888888, i.getConcreteField());
 	}
 }

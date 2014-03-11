@@ -1,10 +1,23 @@
 
 package com.exedio.cope.builder.test;
 
-public class SuperItemBuilder extends GeneratedSuperItemBuilder<SuperItemBuilder>
+import com.exedio.cope.Type;
+
+public class SuperItemBuilder<I extends SuperItem, B extends SuperItemBuilder<?,?>>
+	extends GeneratedSuperItemBuilder<I,B>
 {
+	public SuperItemBuilder()
+	{
+		super();
+	}
+
+	protected SuperItemBuilder(final Type<I> type)
+	{
+		super(type);
+	}
+
 	@Override
-	public SuperItem build()
+	public I build()
 	{
 		fallback(SuperItem.superField, 888888);
 		return super.build();
