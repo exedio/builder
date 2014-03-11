@@ -33,6 +33,7 @@
 			<fileset dir="testmodelsrc">
 				<include name="com/exedio/cope/builder/test/*Item.java" />
 				<include name="com/exedio/cope/builder/other/*Composite.java" />
+				<include name="com/exedio/cope/builder/other/*Item.java" />
 				<include name="com/exedio/cope/builder/test/TestEnum.java" />
 			</fileset>
 		</instrument>
