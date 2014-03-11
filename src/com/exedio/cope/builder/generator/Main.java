@@ -248,9 +248,8 @@ final class Main
 
 		writer.write("public abstract class Generated");
 		writer.write(simpleClassName);
-		writer.write("Builder<B extends Generated");
-		writer.write(simpleClassName);
-		writer.write("Builder<?>>");
+		writer.write("Builder");
+		type.writeGenericParams(writer, simpleClassName);
 		writer.write(newLine);
 		writer.write("\textends ");
 		type.writeExtends(writer);
@@ -404,6 +403,15 @@ final class Main
 		abstract Collection<? extends Feature> getDeclaredFeatures();
 		abstract String getName(Feature feature);
 		abstract void writeExtends(OutputStreamWriter writer) throws IOException;
+
+		void writeGenericParams(final OutputStreamWriter writer, final String simpleClassName) throws IOException
+		{
+			writer.write("<B extends Generated");
+			writer.write(simpleClassName);
+			writer.write("Builder<?>>");
+
+		}
+
 		abstract String getTypeName();
 	}
 
