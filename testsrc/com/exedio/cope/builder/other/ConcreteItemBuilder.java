@@ -1,5 +1,7 @@
 
-package com.exedio.cope.builder.test;
+package com.exedio.cope.builder.other;
+
+import com.exedio.cope.builder.test.AbstractItem;
 
 public class ConcreteItemBuilder extends GeneratedConcreteItemBuilder<ConcreteItemBuilder>
 {

@@ -1,6 +1,7 @@
 package com.exedio.cope.builder.test;
 
 import com.exedio.cope.Model;
+import com.exedio.cope.builder.other.ConcreteItem;
 import com.exedio.cope.builder.other.SubItem;
 
 public final class TestMain

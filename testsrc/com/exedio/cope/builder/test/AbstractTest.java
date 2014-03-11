@@ -2,6 +2,8 @@ package com.exedio.cope.builder.test;
 
 import static org.junit.Assert.assertEquals;
 
+import com.exedio.cope.builder.other.ConcreteItem;
+import com.exedio.cope.builder.other.ConcreteItemBuilder;
 import org.junit.Test;
 
 public class AbstractTest extends MainTest
