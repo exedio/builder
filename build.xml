@@ -137,6 +137,11 @@
 				<include name="**/*_Jspm.java" />
 			</fileset>
 		</delete>
+		<delete>
+			<fileset dir="testsrc">
+				<include name="**/Generated*Builder.java" />
+			</fileset>
+		</delete>
 		<delete dir="build" />
 		<delete dir="webtestweb/WEB-INF/classes" /><!-- not created anymore -->
 		<delete dir="webtestweb/WEB-INF/lib" /><!-- not created anymore -->
