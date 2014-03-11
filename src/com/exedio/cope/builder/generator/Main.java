@@ -258,7 +258,7 @@ final class Main
 		writer.write("{");
 		writer.write(newLine);
 
-		writer.write("\tpublic Generated");
+		writer.write("\tprotected Generated");
 		writer.write(simpleClassName);
 		writer.write("Builder()");
 		writer.write(newLine);
