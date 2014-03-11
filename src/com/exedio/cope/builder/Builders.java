@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * A collection of common builders re-usable in projects.
  */
-public class Builders
+public final class Builders
 {
 	/**
 	 * Resets any internal static values used, for example, for generating unique values.
@@ -83,7 +83,7 @@ public class Builders
 			if(!nextValues.containsKey(field))
 				nextValues.put(field, new AtomicInteger(firstValue));
 			final AtomicInteger mutable = nextValues.get(field);
-			return mutable.incrementAndGet();
+			return mutable.getAndIncrement();
 		}
 	}
 
@@ -120,13 +120,8 @@ public class Builders
 
 	private static class EnumAutoIncrementBuilder<E extends Enum<E>> extends AutoIncrementBuilder<E>
 	{
-		private E startValue;
-		private boolean rotate;
-
-		private EnumAutoIncrementBuilder(final FunctionField<E> field, final E start)
-		{
-			this(field, start, false);
-		}
+		private final E startValue;
+		private final boolean rotate;
 
 		private EnumAutoIncrementBuilder(final FunctionField<E> field, final E start, final boolean rotate)
 		{
