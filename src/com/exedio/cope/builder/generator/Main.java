@@ -394,7 +394,7 @@ final class Main
 			{
 				writer.write(Range.class.getName());
 				writer.write('<');
-				writer.write(((RangeField)feature).getFrom().getValueClass().getCanonicalName());
+				writer.write(((RangeField<?>)feature).getFrom().getValueClass().getCanonicalName());
 				writer.write('>');
 			}
 			else if(feature instanceof CompositeField)
