@@ -13,6 +13,7 @@ public final class TestMain
 			AbstractItem.TYPE, ConcreteItem.TYPE,
 			CompositeItem.TYPE,
 			SourcePatternItem.TYPE,
-			UnknownPatternItem.TYPE
+			UnknownPatternItem.TYPE,
+			DynamicModelItem.TYPE
 	);
 }
