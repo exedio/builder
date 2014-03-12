@@ -12,6 +12,7 @@ public final class TestMain
 			SuperItem.TYPE, SubItem.TYPE,
 			AbstractItem.TYPE, ConcreteItem.TYPE,
 			CompositeItem.TYPE,
+			SourcePatternItem.TYPE,
 			UnknownPatternItem.TYPE
 	);
 }

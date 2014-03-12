@@ -360,9 +360,10 @@ final class Main
 			writer.write(newLine);
 
 			final String featureName = type.getName(feature);
+			final String featureIdentifier = featureName.replace('-', '_');
 
 			writer.write("\tpublic final B ");
-			writer.write(featureName);
+			writer.write(featureIdentifier);
 			writer.write("(final ");
 
 			if(feature instanceof FunctionField<?>)
@@ -439,7 +440,7 @@ final class Main
 				throw new RuntimeException("" + feature);
 
 			writer.write(" ");
-			writer.write(featureName);
+			writer.write(featureIdentifier);
 			writer.write(")");
 			writer.write(newLine);
 			writer.write("\t{");
@@ -448,7 +449,7 @@ final class Main
 			writer.write("\t\treturn set(\"");
 			writer.write(featureName);
 			writer.write("\", ");
-			writer.write(featureName);
+			writer.write(featureIdentifier);
 			writer.write(");");
 			writer.write(newLine);
 
