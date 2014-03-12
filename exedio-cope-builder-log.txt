@@ -8,4 +8,3 @@ The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
 bugfix: support fields covered by PartOf
-
