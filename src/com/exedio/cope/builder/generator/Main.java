@@ -11,6 +11,7 @@ import com.exedio.cope.builder.ItemBuilder;
 import com.exedio.cope.misc.PrimitiveUtil;
 import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeField;
+import com.exedio.cope.pattern.DynamicModel;
 import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.Hash;
 import com.exedio.cope.pattern.ListField;
@@ -353,7 +354,8 @@ final class Main
 
 			{
 				final Pattern pattern = feature.getPattern();
-				if( (pattern!=null) && (pattern instanceof Settable<?>) )
+				if((pattern!=null) &&
+					(pattern instanceof Settable<?> || pattern instanceof DynamicModel<?>) )
 					continue;
 			}
 
