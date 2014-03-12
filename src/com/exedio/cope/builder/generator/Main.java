@@ -3,6 +3,7 @@ package com.exedio.cope.builder.generator;
 import com.exedio.cope.Feature;
 import com.exedio.cope.FunctionField;
 import com.exedio.cope.Model;
+import com.exedio.cope.Pattern;
 import com.exedio.cope.Settable;
 import com.exedio.cope.Type;
 import com.exedio.cope.builder.CompositeBuilder;
@@ -350,8 +351,11 @@ final class Main
 				feature instanceof MapField<?,?>))
 				continue;
 
-			if(feature.getPattern()!=null)
-				continue;
+			{
+				final Pattern pattern = feature.getPattern();
+				if( (pattern!=null) && (pattern instanceof Settable<?>) )
+					continue;
+			}
 
 			writer.write(newLine);
 
