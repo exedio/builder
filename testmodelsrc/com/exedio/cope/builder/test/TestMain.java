@@ -11,6 +11,7 @@ public final class TestMain
 			FieldsItem.TYPE,
 			SuperItem.TYPE, SubItem.TYPE,
 			AbstractItem.TYPE, ConcreteItem.TYPE,
-			CompositeItem.TYPE
+			CompositeItem.TYPE,
+			UnknownPatternItem.TYPE
 	);
 }
