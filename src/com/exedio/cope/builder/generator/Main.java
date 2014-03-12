@@ -98,7 +98,9 @@ final class Main
 					final Type<?> supertype = type.getSupertype();
 					if(supertype!=null)
 					{
-						writer.write(supertype.getJavaClass().getCanonicalName());
+						writer.write(supertype.getJavaClass().getPackage().getName());
+						writer.write(".Common");
+						writer.write(supertype.getJavaClass().getSimpleName());
 						writer.write("Builder<");
 						writer.write(simpleClassname);
 						writer.write(", B>");
@@ -116,6 +118,11 @@ final class Main
 						writer.write('I');
 					}
 					writer.write(", B>");
+				}
+				@Override
+				public boolean enableCommonBuilder()
+				{
+					return !type.getSubtypes().isEmpty();
 				}
 				@Override
 				void writeTypeCast(final OutputStreamWriter writer) throws IOException
@@ -305,24 +312,46 @@ final class Main
 		writer.write("{");
 		writer.write(newLine);
 
-		writer.write("\tprotected Generated");
-		writer.write(simpleClassName);
-		writer.write("Builder()");
-		writer.write(newLine);
+		if (type.enableCommonBuilder())
+		{
+			final String pack=type.getJavaClass().getPackage().getName();
 
-		writer.write("\t{");
-		writer.write(newLine);
+			writer.write("\tpublic static class "+simpleClassName+"Builder extends "+pack+".Common"+simpleClassName+"Builder<"+simpleClassName+","+simpleClassName+"Builder>");
+			writer.write( newLine );
+			writer.write("\t{");
+			writer.write( newLine );
+			writer.write("\t\tprotected "+simpleClassName+"Builder( )");
+			writer.write( newLine );
+			writer.write("\t\t{");
+			writer.write( newLine );
+			writer.write("\t\t\tsuper( "+simpleClassName+".TYPE );");
+			writer.write( newLine );
+			writer.write("\t\t}");
+			writer.write( newLine );
+			writer.write("\t}");
+			writer.write( newLine );
+		}
+		else
+		{
+			writer.write("\tprotected Generated");
+			writer.write(simpleClassName);
+			writer.write("Builder()");
+			writer.write(newLine);
 
-		writer.write("\t\tsuper(");
-		type.writeTypeCast(writer);
-		writer.write(simpleClassName);
-		writer.write('.');
-		writer.write(type.getTypeName());
-		writer.write(");");
-		writer.write(newLine);
+			writer.write("\t{");
+			writer.write(newLine);
 
-		writer.write("\t}");
-		writer.write(newLine);
+			writer.write("\t\tsuper(");
+			type.writeTypeCast(writer);
+			writer.write(simpleClassName);
+			writer.write('.');
+			writer.write(type.getTypeName());
+			writer.write(");");
+			writer.write(newLine);
+
+			writer.write("\t}");
+			writer.write(newLine);
+		}
 
 		if(type.enableTypePropagationConstructor())
 		{
@@ -472,6 +501,9 @@ final class Main
 	static abstract class MyType
 	{
 		abstract Class<?> getJavaClass();
+
+
+
 		abstract Collection<? extends Feature> getDeclaredFeatures();
 		abstract String getName(Feature feature);
 		abstract void writeExtends(OutputStreamWriter writer, String simpleClassName) throws IOException;
@@ -487,6 +519,11 @@ final class Main
 		void writeTypeCast(final OutputStreamWriter writer) throws IOException
 		{
 			// do nothing
+		}
+
+		public boolean enableCommonBuilder()
+		{
+			return false;
 		}
 
 		boolean enableTypePropagationConstructor()

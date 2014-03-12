@@ -3,15 +3,10 @@ package com.exedio.cope.builder.test;
 
 import com.exedio.cope.Type;
 
-public class SuperItemBuilder<I extends SuperItem, B extends SuperItemBuilder<?,?>>
+public class CommonSuperItemBuilder<I extends SuperItem, B extends CommonSuperItemBuilder<?,?>>
 	extends GeneratedSuperItemBuilder<I,B>
 {
-	public SuperItemBuilder()
-	{
-		super();
-	}
-
-	protected SuperItemBuilder(final Type<I> type)
+	protected CommonSuperItemBuilder(final Type<I> type)
 	{
 		super(type);
 	}

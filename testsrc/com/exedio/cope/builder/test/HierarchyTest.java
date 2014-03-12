@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.exedio.cope.builder.other.SubItem;
 import com.exedio.cope.builder.other.SubItemBuilder;
+import com.exedio.cope.builder.test.GeneratedSuperItemBuilder.SuperItemBuilder;
 import org.junit.Test;
 
 public class HierarchyTest extends MainTest
@@ -11,7 +12,7 @@ public class HierarchyTest extends MainTest
 	@Test
 	public void superExplicit()
 	{
-		final SuperItem i = (SuperItem)new SuperItemBuilder().superField(88).build(); // TODO FIXME !!!!!!!!!!!!!
+		final SuperItem i = new SuperItemBuilder().superField(88).build();
 		assertEquals(88, i.getSuperField());
 	}
 	@Test
