@@ -1,9 +1,8 @@
-
 package com.exedio.cope.builder.test;
 
 import com.exedio.cope.Type;
 
-public class CommonSuperItemBuilder<I extends SuperItem, B extends CommonSuperItemBuilder<?,?>>
+public abstract class CommonSuperItemBuilder<I extends SuperItem, B extends CommonSuperItemBuilder<?,?>>
 	extends GeneratedSuperItemBuilder<I,B>
 {
 	protected CommonSuperItemBuilder(final Type<I> type)
