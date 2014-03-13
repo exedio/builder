@@ -7,4 +7,8 @@ omit bug fixes.
 The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
+feature: the initial concrete builder is also generated; 
+	TIP delete your Builders once after committing, generate the new concrete builders and apply your changes from the diff.
+feature: builder in an inheritance hierarchy are named Common...Builder, the Generated...Builder will implement the concrete ...Builder to prevent class casting issues
+	MIGRATION see TIP above
 bugfix: support fields covered by PartOf
