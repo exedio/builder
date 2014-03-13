@@ -1,5 +1,7 @@
 package com.exedio.cope.builder.generator;
 
+import java.io.FileNotFoundException;
+
 import com.exedio.cope.Feature;
 import com.exedio.cope.FunctionField;
 import com.exedio.cope.Model;
@@ -56,7 +58,7 @@ final class Main
 			if(!clazz.getName().startsWith(packagePrefix))
 				continue;
 
-			writeFile(params, new ItemType( type, clazz ), skipped, progress);
+			writeFiles(params, new ItemType( type, clazz ), skipped, progress);
 		}
 
 		final HashSet<Class<? extends Composite>> compositeClasses = new HashSet<Class<? extends Composite>>();
@@ -76,7 +78,7 @@ final class Main
 				if(!compositeClasses.add(clazz))
 					continue;
 
-				writeFile(params, new CompositeType( clazz, field ), skipped, progress);
+				writeFiles(params, new CompositeType( clazz, field ), skipped, progress);
 			}
 		}
 		for(final Map.Entry<File,ArrayList<Class<?>>> entry : skipped.entrySet())
@@ -94,7 +96,7 @@ final class Main
 		}
 	}
 
-	private static final void writeFile(
+	private static final void writeFiles(
 			final Params params,
 			final MyType type,
 			final HashMap<File,ArrayList<Class<?>>> skipped,
@@ -102,10 +104,8 @@ final class Main
 		throws HumanReadableException, IOException
 	{
 		final Class<?> clazz = type.getJavaClass();
-		final String clazzName = clazz.getName();
-		final int pos = clazzName.lastIndexOf('.');
-		final String packageName = clazzName.substring(0, pos);
-		final String simpleClassName = clazzName.substring(pos+1);
+		final String packageName = clazz.getPackage().getName();
+		final String simpleClassName = clazz.getSimpleName();
 
 		final File dir = new File(
 				params.getDestdir(),
@@ -125,9 +125,16 @@ final class Main
 		if(!dir.isDirectory())
 			throw new HumanReadableException("expected directory: " + dir.getAbsolutePath());
 
+		writeGenerated( type, clazz, packageName, simpleClassName, dir );
+		progress.incrementAndGet();
+	}
+
+	private static void writeGenerated( final MyType type, final Class< ? > clazz, final String packageName, final String simpleClassName, final File dir )
+			throws FileNotFoundException, IOException
+	{
 		final File file = new File(dir, "Generated" + simpleClassName + "Builder.java");
 
-		if(done(clazz, file))
+		if(isNoUpdateRequired(clazz, file))
 			return;
 
 		final CharsetEncoder encoder = Charset.forName("US-ASCII").newEncoder(); // TODO customizable
@@ -140,10 +147,9 @@ final class Main
 		{
 			writer.close();
 		}
-		progress.incrementAndGet();
 	}
 
-	private static boolean done(final Class<?> sourceClass, final File targetFile)
+	private static boolean isNoUpdateRequired(final Class<?> sourceClass, final File targetFile)
 	{
 		final long targetLastModified = targetFile.lastModified();
 		if(targetLastModified==0)
