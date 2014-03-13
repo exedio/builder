@@ -6,8 +6,6 @@ import com.exedio.cope.Model;
 import com.exedio.cope.Pattern;
 import com.exedio.cope.Settable;
 import com.exedio.cope.Type;
-import com.exedio.cope.builder.CompositeBuilder;
-import com.exedio.cope.builder.ItemBuilder;
 import com.exedio.cope.misc.PrimitiveUtil;
 import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeField;
@@ -32,7 +30,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -59,88 +56,7 @@ final class Main
 			if(!clazz.getName().startsWith(packagePrefix))
 				continue;
 
-			writeFile(params, new MyType(){
-				@Override
-				Class<?> getJavaClass()
-				{
-					return clazz;
-				}
-				@Override
-				Collection<? extends Feature> getDeclaredFeatures()
-				{
-					return type.getDeclaredFeatures();
-				}
-				@Override
-				String getName(final Feature feature)
-				{
-					return feature.getName();
-				}
-				@Override
-				void writeGenericParams(final OutputStreamWriter writer, final String simpleClassName) throws IOException
-				{
-					if(type.getSubtypes().isEmpty())
-					{
-						super.writeGenericParams(writer, simpleClassName);
-					}
-					else
-					{
-						writer.write("<I extends ");
-						writer.write(simpleClassName);
-						writer.write(", ");
-						writer.write("B extends Generated");
-						writer.write(simpleClassName);
-						writer.write("Builder<?,?>>");
-					}
-				}
-				@Override
-				void writeExtends(final OutputStreamWriter writer, final String simpleClassname) throws IOException
-				{
-					final Type<?> supertype = type.getSupertype();
-					if(supertype!=null)
-					{
-						writer.write(supertype.getJavaClass().getPackage().getName());
-						writer.write(".Common");
-						writer.write(supertype.getJavaClass().getSimpleName());
-						writer.write("Builder<");
-						writer.write(simpleClassname);
-						writer.write(", B>");
-						return;
-					}
-
-					writer.write(ItemBuilder.class.getName());
-					writer.write('<');
-					if(type.getSubtypes().isEmpty())
-					{
-						writer.write(clazz.getCanonicalName());
-					}
-					else
-					{
-						writer.write('I');
-					}
-					writer.write(", B>");
-				}
-				@Override
-				public boolean enableCommonBuilder()
-				{
-					return !type.getSubtypes().isEmpty();
-				}
-				@Override
-				void writeTypeCast(final OutputStreamWriter writer) throws IOException
-				{
-					if(!type.getSubtypes().isEmpty())
-						writer.write("(com.exedio.cope.Type<I>)");
-				}
-				@Override
-				boolean enableTypePropagationConstructor()
-				{
-					return !type.getSubtypes().isEmpty();
-				}
-				@Override
-				String getTypeName()
-				{
-					return "TYPE";
-				}
-			}, skipped, progress);
+			writeFile(params, new ItemType( type, clazz ), skipped, progress);
 		}
 
 		final HashSet<Class<? extends Composite>> compositeClasses = new HashSet<Class<? extends Composite>>();
@@ -160,36 +76,7 @@ final class Main
 				if(!compositeClasses.add(clazz))
 					continue;
 
-				writeFile(params, new MyType(){
-					@Override
-					Class<?> getJavaClass()
-					{
-						return clazz;
-					}
-					@Override
-					Collection<? extends Feature> getDeclaredFeatures()
-					{
-						return field.getTemplates();
-					}
-					@Override
-					String getName(final Feature feature)
-					{
-						return Composite.getTemplateName((FunctionField<?>)feature);
-					}
-					@Override
-					void writeExtends(final OutputStreamWriter writer, final String simpleClassName) throws IOException
-					{
-						writer.write(CompositeBuilder.class.getName());
-						writer.write('<');
-						writer.write(clazz.getCanonicalName());
-						writer.write(", B>");
-					}
-					@Override
-					String getTypeName()
-					{
-						return "class";
-					}
-				}, skipped, progress);
+				writeFile(params, new CompositeType( clazz, field ), skipped, progress);
 			}
 		}
 		for(final Map.Entry<File,ArrayList<Class<?>>> entry : skipped.entrySet())
@@ -496,42 +383,6 @@ final class Main
 	private static <K extends Enum<K>,V> Class<V> getValueClass(final EnumMapField<K,V> field)
 	{
 		return field.getField(field.getKeyClass().getEnumConstants()[0]).getValueClass();
-	}
-
-	static abstract class MyType
-	{
-		abstract Class<?> getJavaClass();
-
-
-
-		abstract Collection<? extends Feature> getDeclaredFeatures();
-		abstract String getName(Feature feature);
-		abstract void writeExtends(OutputStreamWriter writer, String simpleClassName) throws IOException;
-
-		void writeGenericParams(final OutputStreamWriter writer, final String simpleClassName) throws IOException
-		{
-			writer.write("<B extends Generated");
-			writer.write(simpleClassName);
-			writer.write("Builder<?>>");
-		}
-
-		@SuppressWarnings("unused")
-		void writeTypeCast(final OutputStreamWriter writer) throws IOException
-		{
-			// do nothing
-		}
-
-		public boolean enableCommonBuilder()
-		{
-			return false;
-		}
-
-		boolean enableTypePropagationConstructor()
-		{
-			return false;
-		}
-
-		abstract String getTypeName();
 	}
 
 	private Main()
