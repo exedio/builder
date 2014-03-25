@@ -307,83 +307,17 @@ final class Main
 			final String featureName = type.getName(feature);
 			final String featureIdentifier = featureName.replace('-', '_');
 
+			final String setterParameter=toSetterParameterType( feature );
+			if (setterParameter==null)
+			{
+				System.out.println( "Skipping setter for " + feature +". Not implemented yet." );
+				continue;
+			}
+
 			writer.write("\tpublic final B ");
 			writer.write(featureIdentifier);
 			writer.write("(final ");
-
-			if(feature instanceof FunctionField<?>)
-			{
-				final FunctionField<?> field = (FunctionField<?>)feature;
-				final Class<?> valueClass = field.getValueClass();
-				final Class<?> primitiveClass =
-						field.isMandatory()
-						? PrimitiveUtil.toPrimitive(valueClass)
-						: valueClass;
-				writer.write(((primitiveClass!=null) ? primitiveClass : valueClass).getCanonicalName());
-			}
-			else if(feature instanceof Media)
-			{
-				writer.write(Media.Value.class.getCanonicalName());
-			}
-			else if(feature instanceof Hash)
-			{
-				writer.write(String.class.getName());
-			}
-			else if(feature instanceof PriceField)
-			{
-				writer.write(Price.class.getName());
-			}
-			else if(feature instanceof RangeField)
-			{
-				writer.write(Range.class.getName());
-				writer.write('<');
-				writer.write(((RangeField<?>)feature).getFrom().getValueClass().getCanonicalName());
-				writer.write('>');
-			}
-			else if(feature instanceof CompositeField)
-			{
-				final CompositeField<?> field = (CompositeField<?>)feature;
-				writer.write(field.getValueClass().getCanonicalName());
-			}
-			else if(feature instanceof EnumMapField)
-			{
-				final EnumMapField<?,?> field = (EnumMapField<?,?>)feature;
-				writer.write(EnumMap.class.getName());
-				writer.write('<');
-				writer.write(field.getKeyClass().getCanonicalName());
-				writer.write(',');
-				writer.write(getValueClass(field).getCanonicalName());
-				writer.write('>');
-			}
-			else if(feature instanceof SetField<?>)
-			{
-				final SetField<?> field = (SetField<?>)feature;
-				writer.write(Set.class.getName());
-				writer.write('<');
-				writer.write(field.getElement().getValueClass().getCanonicalName());
-				writer.write('>');
-			}
-			else if(feature instanceof ListField<?>)
-			{
-				final ListField<?> field = (ListField<?>)feature;
-				writer.write(List.class.getName());
-				writer.write('<');
-				writer.write(field.getElement().getValueClass().getCanonicalName());
-				writer.write('>');
-			}
-			else if(feature instanceof MapField<?,?>)
-			{
-				final MapField<?,?> field = (MapField<?,?>)feature;
-				writer.write(Map.class.getName());
-				writer.write('<');
-				writer.write(field.getKey().getValueClass().getCanonicalName());
-				writer.write(',');
-				writer.write(field.getValue().getValueClass().getCanonicalName());
-				writer.write('>');
-			}
-			else
-				throw new RuntimeException("" + feature);
-
+			writer.write(setterParameter );
 			writer.write(" ");
 			writer.write(featureIdentifier);
 			writer.write(")");
@@ -406,6 +340,90 @@ final class Main
 		writer.write(newLine);
 	}
 
+	private static String toSetterParameterType( final Feature feature )
+	{
+		if(feature instanceof FunctionField<?>)
+		{
+			final FunctionField<?> field = (FunctionField<?>)feature;
+			final Class<?> valueClass = field.getValueClass();
+			final Class<?> primitiveClass =
+					field.isMandatory()
+					? PrimitiveUtil.toPrimitive(valueClass)
+					: valueClass;
+			return ((primitiveClass!=null) ? primitiveClass : valueClass).getCanonicalName();
+		}
+		else if(feature instanceof Media)
+		{
+			return Media.Value.class.getCanonicalName();
+		}
+		else if(feature instanceof Hash)
+		{
+			return String.class.getName();
+		}
+		else if(feature instanceof PriceField)
+		{
+			return Price.class.getName();
+		}
+		else if(feature instanceof RangeField)
+		{
+			final StringBuilder sb=new StringBuilder();
+			sb.append(Range.class.getName());
+			sb.append('<');
+			sb.append(((RangeField<?>)feature).getFrom().getValueClass().getCanonicalName());
+			sb.append('>');
+			return sb.toString();
+		}
+		else if(feature instanceof CompositeField)
+		{
+			final CompositeField<?> field = (CompositeField<?>)feature;
+			return field.getValueClass().getCanonicalName();
+		}
+		else if(feature instanceof EnumMapField)
+		{
+			final EnumMapField<?,?> field = (EnumMapField<?,?>)feature;
+			final StringBuilder sb=new StringBuilder();
+			sb.append(EnumMap.class.getName());
+			sb.append('<');
+			sb.append(field.getKeyClass().getCanonicalName());
+			sb.append(',');
+			sb.append(getValueClass(field).getCanonicalName());
+			sb.append('>');
+			return sb.toString();
+		}
+		else if(feature instanceof SetField<?>)
+		{
+			final SetField<?> field = (SetField<?>)feature;
+			final StringBuilder sb=new StringBuilder();
+			sb.append(Set.class.getName());
+			sb.append('<');
+			sb.append(field.getElement().getValueClass().getCanonicalName());
+			sb.append('>');
+			return sb.toString();
+		}
+		else if(feature instanceof ListField<?>)
+		{
+			final ListField<?> field = (ListField<?>)feature;
+			final StringBuilder sb=new StringBuilder();
+			sb.append(List.class.getName());
+			sb.append('<');
+			sb.append(field.getElement().getValueClass().getCanonicalName());
+			sb.append('>');
+			return sb.toString();
+		}
+		else if(feature instanceof MapField<?,?>)
+		{
+			final MapField<?,?> field = (MapField<?,?>)feature;
+			final StringBuilder sb=new StringBuilder();
+			sb.append(Map.class.getName());
+			sb.append('<');
+			sb.append(field.getKey().getValueClass().getCanonicalName());
+			sb.append(',');
+			sb.append(field.getValue().getValueClass().getCanonicalName());
+			sb.append('>');
+			return sb.toString();
+		}
+		return null;
+	}
 
 	private static final void writeConcrete(
 			final MyType type,
