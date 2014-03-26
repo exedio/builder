@@ -234,7 +234,7 @@ final class Main
 			writer.write( newLine );
 			writer.write("\t{");
 			writer.write( newLine );
-			writer.write("\t\tprotected "+simpleClassName+"Builder( )");
+			writer.write("\t\tpublic "+simpleClassName+"Builder( )");
 			writer.write( newLine );
 			writer.write("\t\t{");
 			writer.write( newLine );
