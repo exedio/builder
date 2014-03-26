@@ -14,6 +14,7 @@ public final class TestMain
 			CompositeItem.TYPE,
 			SourcePatternItem.TYPE,
 			UnknownPatternItem.TYPE,
-			DynamicModelItem.TYPE
+			DynamicModelItem.TYPE,
+			AbstractLevel1Item.TYPE, MixedLevel2Item.TYPE, ConcreteLevel3Item.TYPE
 	);
 }

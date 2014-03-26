@@ -63,9 +63,16 @@ final class ItemType extends MyType
 			writer.write(supertype.getJavaClass().getPackage().getName());
 			writer.write(".Common");
 			writer.write(supertype.getJavaClass().getSimpleName());
-			writer.write("Builder<");
-			writer.write(simpleClassname);
-			writer.write(", B>");
+			if(type.getSubtypes().isEmpty())
+			{
+				writer.write("Builder<");
+				writer.write(simpleClassname);
+				writer.write(", B>");
+			}
+			else
+			{
+				writer.write("Builder<I, B>");
+			}
 			return;
 		}
 
