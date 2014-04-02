@@ -65,20 +65,20 @@ public final class Builders
 		};
 	}
 
-	abstract private static class AutoIncrementBuilder<T> implements Builder<T>
+	abstract public static class AutoIncrementBuilder<T> implements Builder<T>
 	{
 		private static Map<FunctionField<?>, AtomicInteger> nextValues = new HashMap<FunctionField<?>, AtomicInteger>();
 
-		final FunctionField<T> field;
-		final int start;
+		protected final FunctionField<T> field;
+		protected  final int start;
 
-		AutoIncrementBuilder(final FunctionField<T> field, final int start)
+		public AutoIncrementBuilder(final FunctionField<T> field, final int start)
 		{
 			this.field = field;
 			this.start = start;
 		}
 
-		int nextValue(final FunctionField<T> field, final int firstValue)
+		protected int nextValue(final FunctionField<T> field, final int firstValue)
 		{
 			if(!nextValues.containsKey(field))
 				nextValues.put(field, new AtomicInteger(firstValue));
