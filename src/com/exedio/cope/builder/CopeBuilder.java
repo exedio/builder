@@ -58,6 +58,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 	@SuppressWarnings("unchecked")
 	protected <V> V get( final Settable<V> settable )
 	{
+		if (!values.containsKey( settable )) return null;
 		return (V) values.get(settable).value;
 	}
 
@@ -79,6 +80,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 	@SuppressWarnings("unchecked")
 	protected <V> V get( final Hash settable )
 	{
+		if (!values.containsKey( settable )) return null;
 		return (V) values.get(settable).value;
 	}
 

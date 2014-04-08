@@ -73,6 +73,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	@SuppressWarnings({"unchecked"})
 	protected <V> Set<V> get(final SetField<V> field)
 	{
+		if (!setValues.containsKey( field )) return null;
 		return (Set<V>) setValues.get(field);
 	}
 
@@ -94,6 +95,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	@SuppressWarnings("unchecked")
 	protected <V> List<V> get(final ListField<V> field)
 	{
+		if (!listValues.containsKey( field )) return null;
 		return (List<V>) listValues.get(field);
 	}
 
@@ -115,6 +117,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	@SuppressWarnings("unchecked")
 	protected <K, V>  Map<K, V> get(final MapField<K, V> field)
 	{
+		if (!mapValues.containsKey( field )) return null;
 		return (Map<K, V>) mapValues.get(field);
 	}
 
