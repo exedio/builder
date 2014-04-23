@@ -78,7 +78,7 @@ public final class Builders
 			this.start = start;
 		}
 
-		protected int nextValue(final FunctionField<T> field, final int firstValue)
+		protected int nextValue(final int firstValue)
 		{
 			if(!nextValues.containsKey(field))
 				nextValues.put(field, new AtomicInteger(firstValue));
@@ -97,7 +97,7 @@ public final class Builders
 		@Override
 		public Integer build()
 		{
-			return nextValue(this.field, start);
+			return nextValue(start);
 		}
 	}
 
@@ -114,7 +114,7 @@ public final class Builders
 		@Override
 		public String build()
 		{
-			return String.format(pattern, nextValue(field, start));
+			return String.format(pattern, nextValue(start));
 		}
 	}
 
@@ -136,7 +136,7 @@ public final class Builders
 	   @SuppressWarnings("unchecked")
 		public E build()
 		{
-			int nextIndex = nextValue(this.field, start);
+			int nextIndex = nextValue(start);
 			final Enum<E>[] constants = startValue.getClass().getEnumConstants();
 		   if (nextIndex >= constants.length)
 		   {
