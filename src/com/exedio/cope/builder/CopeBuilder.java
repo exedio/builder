@@ -19,6 +19,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 {
 	protected Map<Settable<?>, SetValue<?>>	values	= new HashMap<Settable<?>, SetValue<?>>();
 
+	@SafeVarargs
 	protected static <T> Set<T> toSet( final T... array )
 	{
 		final Set<T> result = new HashSet<T>();
@@ -92,6 +93,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 		return (B) this;
 	}
 
+	@SafeVarargs
 	protected static <T> List<T> toList( final T... array )
 	{
 		final List<T> result = new ArrayList<T>();
