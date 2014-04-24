@@ -48,7 +48,7 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 			// TODO use some framework function for this
 			final Constructor< ? extends C> constructor = targetClazz.getDeclaredConstructor( SetValue[].class );
 			constructor.setAccessible( true );
-			final SetValue< ? >[] vs = allValues.toArray( new SetValue[allValues.size()] );
+			final SetValue<?>[] vs = allValues.toArray( new SetValue<?>[allValues.size()] );
 			return constructor.newInstance( new Object[] { vs} );
 		}
 		catch( final InstantiationException e )
