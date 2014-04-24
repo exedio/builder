@@ -3,6 +3,7 @@ package com.exedio.cope.builder;
 import com.exedio.cope.FunctionField;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -74,7 +75,7 @@ public final class Builders
 
 		public AutoIncrementBuilder(final FunctionField<T> field, final int start)
 		{
-			this.field = field;
+			this.field = Objects.requireNonNull(field, "field");
 			this.start = start;
 		}
 
