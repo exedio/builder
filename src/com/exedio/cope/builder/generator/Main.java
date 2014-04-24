@@ -125,7 +125,7 @@ final class Main
 			throw new HumanReadableException("expected directory: " + dir.getAbsolutePath());
 
 		writeGenerated( type, clazz, packageName, simpleClassName, dir );
-		writeConcrete( type, clazz, packageName, simpleClassName, dir );
+		writeConcrete( type, packageName, simpleClassName, dir );
 		progress.incrementAndGet();
 	}
 
@@ -149,7 +149,7 @@ final class Main
 		}
 	}
 
-	private static void writeConcrete( final MyType type, final Class< ? > clazz, final String packageName, final String simpleClassName, final File dir )
+	private static void writeConcrete( final MyType type, final String packageName, final String simpleClassName, final File dir )
 			throws FileNotFoundException, IOException
 	{
 
