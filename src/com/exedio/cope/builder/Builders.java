@@ -71,7 +71,7 @@ public final class Builders
 		private static Map<FunctionField<?>, AtomicInteger> nextValues = new HashMap<FunctionField<?>, AtomicInteger>();
 
 		protected final FunctionField<T> field;
-		protected  final int start;
+		protected final int start;
 
 		public AutoIncrementBuilder(final FunctionField<T> field, final int start)
 		{
