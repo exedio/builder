@@ -34,7 +34,7 @@
 				<include name="com/exedio/cope/builder/test/*Item.java" />
 				<include name="com/exedio/cope/builder/other/*Composite.java" />
 				<include name="com/exedio/cope/builder/other/*Item.java" />
-				<include name="com/exedio/cope/builder/other/TestEnum.java" />
+				<include name="com/exedio/cope/builder/other/OuterClass.java" />
 			</fileset>
 		</instrument>
 	</target>

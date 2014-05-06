@@ -4,7 +4,7 @@ import com.exedio.cope.EnumField;
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.Item;
 import com.exedio.cope.StringField;
-import com.exedio.cope.builder.other.TestEnum;
+import com.exedio.cope.builder.other.OuterClass.TestEnum;
 
 /**
  * @cope.constructor none

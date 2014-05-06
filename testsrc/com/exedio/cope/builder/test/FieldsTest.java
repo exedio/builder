@@ -7,7 +7,7 @@ import static java.util.Collections.emptySet;
 import static org.junit.Assert.assertEquals;
 
 import com.exedio.cope.builder.MediaBuilder;
-import com.exedio.cope.builder.other.TestEnum;
+import com.exedio.cope.builder.other.OuterClass.TestEnum;
 import com.exedio.cope.pattern.Price;
 import com.exedio.cope.pattern.Range;
 import java.util.EnumMap;

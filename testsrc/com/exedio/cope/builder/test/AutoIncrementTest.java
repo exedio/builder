@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import com.exedio.cope.builder.Builder;
 import com.exedio.cope.builder.Builders;
-import com.exedio.cope.builder.other.TestEnum;
+import com.exedio.cope.builder.other.OuterClass.TestEnum;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -61,7 +61,7 @@ public class AutoIncrementTest extends MainTest
 		}
 		catch( final IllegalStateException e )
 		{
-			assertEquals( "Run out of values while incrementing class com.exedio.cope.builder.other.TestEnum", e.getMessage() );
+			assertEquals( "Run out of values while incrementing " + TestEnum.class, e.getMessage() );
 		}
 	}
 

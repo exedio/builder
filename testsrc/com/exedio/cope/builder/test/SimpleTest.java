@@ -2,7 +2,7 @@ package com.exedio.cope.builder.test;
 
 import static org.junit.Assert.assertEquals;
 
-import com.exedio.cope.builder.other.TestEnum;
+import com.exedio.cope.builder.other.OuterClass.TestEnum;
 import org.junit.Test;
 
 public class SimpleTest extends MainTest
