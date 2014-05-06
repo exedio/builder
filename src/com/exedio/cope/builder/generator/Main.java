@@ -1,7 +1,6 @@
 package com.exedio.cope.builder.generator;
 
 import com.exedio.cope.Feature;
-import com.exedio.cope.FunctionField;
 import com.exedio.cope.Model;
 import com.exedio.cope.Pattern;
 import com.exedio.cope.Settable;
@@ -10,28 +9,22 @@ import com.exedio.cope.misc.PrimitiveUtil;
 import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeField;
 import com.exedio.cope.pattern.DynamicModel;
-import com.exedio.cope.pattern.EnumMapField;
-import com.exedio.cope.pattern.Hash;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
-import com.exedio.cope.pattern.Media;
-import com.exedio.cope.pattern.Price;
-import com.exedio.cope.pattern.PriceField;
-import com.exedio.cope.pattern.Range;
-import com.exedio.cope.pattern.RangeField;
 import com.exedio.cope.pattern.SetField;
+import com.exedio.cope.util.Cast;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.ParameterizedType;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -342,53 +335,15 @@ final class Main
 
 	private static String toSetterParameterType( final Feature feature )
 	{
-		if(feature instanceof FunctionField<?>)
+		if(feature instanceof Settable<?>)
 		{
-			final FunctionField<?> field = (FunctionField<?>)feature;
-			final Class<?> valueClass = field.getValueClass();
-			final Class<?> primitiveClass =
-					field.isMandatory()
-					? PrimitiveUtil.toPrimitive(valueClass)
+			final Settable<?> field = (Settable<?>)feature;
+			final java.lang.reflect.Type valueClass = field.getInitialType();
+			final java.lang.reflect.Type primitiveClass =
+					(valueClass instanceof Class && field.isMandatory())
+					? PrimitiveUtil.toPrimitive((Class<?>)valueClass)
 					: valueClass;
-			return ((primitiveClass!=null) ? primitiveClass : valueClass).getCanonicalName();
-		}
-		else if(feature instanceof Media)
-		{
-			return Media.Value.class.getCanonicalName();
-		}
-		else if(feature instanceof Hash)
-		{
-			return String.class.getName();
-		}
-		else if(feature instanceof PriceField)
-		{
-			return Price.class.getName();
-		}
-		else if(feature instanceof RangeField)
-		{
-			final StringBuilder sb=new StringBuilder();
-			sb.append(Range.class.getName());
-			sb.append('<');
-			sb.append(((RangeField<?>)feature).getFrom().getValueClass().getCanonicalName());
-			sb.append('>');
-			return sb.toString();
-		}
-		else if(feature instanceof CompositeField)
-		{
-			final CompositeField<?> field = (CompositeField<?>)feature;
-			return field.getValueClass().getCanonicalName();
-		}
-		else if(feature instanceof EnumMapField)
-		{
-			final EnumMapField<?,?> field = (EnumMapField<?,?>)feature;
-			final StringBuilder sb=new StringBuilder();
-			sb.append(EnumMap.class.getName());
-			sb.append('<');
-			sb.append(field.getKeyClass().getCanonicalName());
-			sb.append(',');
-			sb.append(getValueClass(field).getCanonicalName());
-			sb.append('>');
-			return sb.toString();
+			return getCanonicalName((primitiveClass!=null) ? primitiveClass : valueClass);
 		}
 		else if(feature instanceof SetField<?>)
 		{
@@ -423,6 +378,48 @@ final class Main
 			return sb.toString();
 		}
 		return null;
+	}
+
+	private static String getCanonicalName(final java.lang.reflect.Type type)
+	{
+		if(type instanceof Class)
+			return ((Class<?>)type).getCanonicalName();
+		else if(type instanceof ParameterizedType)
+			return getCanonicalName((ParameterizedType)type);
+		else
+			throw new RuntimeException("" + type);
+	}
+
+	private static String getCanonicalName(final ParameterizedType type)
+	{
+		{
+			final java.lang.reflect.Type ownerType = type.getOwnerType();
+			if(ownerType != null)
+				throw new IllegalArgumentException(ownerType.toString());
+		}
+
+		final StringBuilder bf = new StringBuilder();
+
+		bf.append(Cast.verboseCast(Class.class, type.getRawType()).getCanonicalName());
+
+		final java.lang.reflect.Type[] arguments = type.getActualTypeArguments();
+		if(arguments!=null && arguments.length>0)
+		{
+			bf.append('<');
+			boolean first = true;
+			for(final java.lang.reflect.Type argument : arguments)
+			{
+				if(first)
+					first = false;
+				else
+					bf.append(',');
+
+				bf.append(getCanonicalName(argument));
+			}
+			bf.append('>');
+		}
+
+		return bf.toString();
 	}
 
 	private static final void writeConcrete(
@@ -511,12 +508,6 @@ final class Main
 		writer.write(newLine);
 	}
 
-
-	// TODO should be part of the framework
-	private static <K extends Enum<K>,V> Class<V> getValueClass(final EnumMapField<K,V> field)
-	{
-		return field.getField(field.getKeyClass().getEnumConstants()[0]).getValueClass();
-	}
 
 	private Main()
 	{
