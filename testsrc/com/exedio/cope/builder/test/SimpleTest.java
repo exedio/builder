@@ -2,6 +2,7 @@ package com.exedio.cope.builder.test;
 
 import static org.junit.Assert.assertEquals;
 
+import com.exedio.cope.builder.other.TestEnum;
 import org.junit.Test;
 
 public class SimpleTest extends MainTest
@@ -29,5 +30,16 @@ public class SimpleTest extends MainTest
 	{
 		final SimpleItem i = new SimpleItemBuilder().build();
 		assertEquals(null, i.getIntegerOptional());
+	}
+	public void enumExplicit()
+	{
+		final SimpleItem i = new SimpleItemBuilder().enumField(TestEnum.two).build();
+		assertEquals(TestEnum.two, i.getEnumField());
+	}
+	@Test
+	public void enumFallback()
+	{
+		final SimpleItem i = new SimpleItemBuilder().build();
+		assertEquals(TestEnum.one, i.getEnumField());
 	}
 }
