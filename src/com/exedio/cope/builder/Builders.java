@@ -79,10 +79,10 @@ public final class Builders
 			this.start = start;
 		}
 
-		protected int nextValue(final int firstValue)
+		protected int nextValue()
 		{
 			if(!nextValues.containsKey(field))
-				nextValues.put(field, new AtomicInteger(firstValue));
+				nextValues.put(field, new AtomicInteger(start));
 			final AtomicInteger mutable = nextValues.get(field);
 			return mutable.getAndIncrement();
 		}
@@ -98,7 +98,7 @@ public final class Builders
 		@Override
 		public Integer build()
 		{
-			return nextValue(start);
+			return nextValue();
 		}
 	}
 
@@ -115,7 +115,7 @@ public final class Builders
 		@Override
 		public String build()
 		{
-			return String.format(pattern, nextValue(start));
+			return String.format(pattern, nextValue());
 		}
 	}
 
@@ -137,7 +137,7 @@ public final class Builders
 	   @SuppressWarnings("unchecked")
 		public E build()
 		{
-			int nextIndex = nextValue(start);
+			int nextIndex = nextValue();
 			final Enum<E>[] constants = startValue.getClass().getEnumConstants();
 		   if (nextIndex >= constants.length)
 		   {
