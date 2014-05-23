@@ -68,22 +68,22 @@ public final class Builders
 
 	abstract public static class AutoIncrementBuilder<T> implements Builder<T>
 	{
-		private static Map<FunctionField<?>, AtomicInteger> nextValues = new HashMap<FunctionField<?>, AtomicInteger>();
+		private static Map<Object, AtomicInteger> nextValues = new HashMap<Object, AtomicInteger>();
 
-		protected final FunctionField<T> field;
+		protected final Object object;
 		protected final int start;
 
-		public AutoIncrementBuilder(final FunctionField<T> field, final int start)
+		public AutoIncrementBuilder(final Object object, final int start)
 		{
-			this.field = Objects.requireNonNull(field, "field");
+			this.object = Objects.requireNonNull(object, "object");
 			this.start = start;
 		}
 
 		protected int nextValue()
 		{
-			if(!nextValues.containsKey(field))
-				nextValues.put(field, new AtomicInteger(start));
-			final AtomicInteger mutable = nextValues.get(field);
+			if(!nextValues.containsKey(object))
+				nextValues.put(object, new AtomicInteger(start));
+			final AtomicInteger mutable = nextValues.get(object);
 			return mutable.getAndIncrement();
 		}
 	}
