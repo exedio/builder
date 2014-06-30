@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.TypeVariable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -333,7 +334,7 @@ final class Main
 		writer.write(newLine);
 	}
 
-	private static String toSetterParameterType( final Feature feature )
+	static String toSetterParameterType( final Feature feature )
 	{
 		if(feature instanceof Settable<?>)
 		{
@@ -343,7 +344,38 @@ final class Main
 					(valueClass instanceof Class && field.isMandatory())
 					? PrimitiveUtil.toPrimitive((Class<?>)valueClass)
 					: valueClass;
-			return getCanonicalName((primitiveClass!=null) ? primitiveClass : valueClass);
+			final String canonicalName = getCanonicalName((primitiveClass!=null) ? primitiveClass : valueClass);
+			if ( valueClass instanceof Class && ((Class)valueClass).getTypeParameters().length>0 )
+			{
+				final StringBuilder typeParamsString = new StringBuilder();
+				typeParamsString.append( "<" );
+				final TypeVariable[] typeParams = ((Class)valueClass).getTypeParameters();
+				for (int paramIndex = 0; paramIndex < typeParams.length; paramIndex++)
+				{
+					final TypeVariable<?> typeVariable = typeParams[paramIndex];
+					if ( paramIndex>0 )
+					{
+						typeParamsString.append( "," );
+					}
+					typeParamsString.append( "?" );
+					typeParamsString.append( " extends " );
+					for (int boundsIndex = 0; boundsIndex < typeVariable.getBounds().length; boundsIndex++)
+					{
+						final java.lang.reflect.Type bound = typeVariable.getBounds()[boundsIndex];
+						if ( boundsIndex!=0 )
+						{
+							typeParamsString.append( " & " );
+						}
+						typeParamsString.append( getCanonicalName(bound) );
+					}
+				}
+				typeParamsString.append( ">" );
+				return canonicalName + typeParamsString;
+			}
+			else
+			{
+				return canonicalName;
+			}
 		}
 		else if(feature instanceof SetField<?>)
 		{
