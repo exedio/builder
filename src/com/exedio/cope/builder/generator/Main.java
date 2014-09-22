@@ -345,11 +345,11 @@ final class Main
 					? PrimitiveUtil.toPrimitive((Class<?>)valueClass)
 					: valueClass;
 			final String canonicalName = getCanonicalName((primitiveClass!=null) ? primitiveClass : valueClass);
-			if ( valueClass instanceof Class && ((Class)valueClass).getTypeParameters().length>0 )
+			if ( valueClass instanceof Class && ((Class<?>)valueClass).getTypeParameters().length>0 )
 			{
 				final StringBuilder typeParamsString = new StringBuilder();
 				typeParamsString.append( "<" );
-				final TypeVariable[] typeParams = ((Class)valueClass).getTypeParameters();
+				final TypeVariable<?>[] typeParams = ((Class<?>)valueClass).getTypeParameters();
 				for (int paramIndex = 0; paramIndex < typeParams.length; paramIndex++)
 				{
 					final TypeVariable<?> typeVariable = typeParams[paramIndex];
