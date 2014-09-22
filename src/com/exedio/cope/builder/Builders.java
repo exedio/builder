@@ -90,7 +90,7 @@ public final class Builders
 
 	private static class IntegerAutoIncrementBuilder extends AutoIncrementBuilder<Integer>
 	{
-		private IntegerAutoIncrementBuilder(final FunctionField<Integer> field, final int start)
+		IntegerAutoIncrementBuilder(final FunctionField<Integer> field, final int start)
 		{
 			super(field, start);
 		}
@@ -106,7 +106,7 @@ public final class Builders
 	{
 		private final String pattern;
 
-		private StringAutoIncrementBuilder(final FunctionField<String> field, final String pattern, final int start)
+		StringAutoIncrementBuilder(final FunctionField<String> field, final String pattern, final int start)
 		{
 			super(field, start);
 			this.pattern = pattern;
@@ -124,7 +124,7 @@ public final class Builders
 		private final E startValue;
 		private final boolean rotate;
 
-		private EnumAutoIncrementBuilder(final FunctionField<E> field, final E start, final boolean rotate)
+		EnumAutoIncrementBuilder(final FunctionField<E> field, final E start, final boolean rotate)
 		{
 			super(field, start.ordinal());
 			if (start.getClass().getEnumConstants().length == 0)
