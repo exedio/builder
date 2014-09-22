@@ -14,34 +14,34 @@ public class MainTest
 	{
 		private static final long serialVersionUID = 1L;
 	}
-	
+
 	static class WithOneBoundParam<X extends Number> extends Item
 	{
 		private static final long serialVersionUID = 1L;
 	}
-	
+
 	static class WithOneMultiboundParam<X extends Number & Serializable> extends Item
 	{
 		private static final long serialVersionUID = 1L;
 	}
-	
+
 	static class WithTwoParams<X extends Number, Y> extends Item
 	{
 		private static final long serialVersionUID = 1L;
 	}
-	
+
 	@Test
 	public void testToSetterParameterType()
 	{
 		assertEquals( "java.lang.String", Main.toSetterParameterType(new StringField()) );
 		assertEquals( "com.exedio.cope.builder.other.SubItem", Main.toSetterParameterType(ItemField.create(SubItem.class)) );
 		assertEquals( "int", Main.toSetterParameterType(SubItem.TYPE.getFeature("subField")) );
-		assertEquals( 
-			"com.exedio.cope.builder.generator.MainTest.WithOneUnboundParam<? extends java.lang.Object>", 
+		assertEquals(
+			"com.exedio.cope.builder.generator.MainTest.WithOneUnboundParam<? extends java.lang.Object>",
 			Main.toSetterParameterType(ItemField.create(WithOneUnboundParam.class))
 		);
 		assertEquals(
-			"com.exedio.cope.builder.generator.MainTest.WithOneMultiboundParam<? extends java.lang.Number & java.io.Serializable>", 
+			"com.exedio.cope.builder.generator.MainTest.WithOneMultiboundParam<? extends java.lang.Number & java.io.Serializable>",
 			Main.toSetterParameterType(ItemField.create(WithOneMultiboundParam.class))
 		);
 		assertEquals(
@@ -49,5 +49,4 @@ public class MainTest
 			Main.toSetterParameterType(ItemField.create(WithTwoParams.class))
 		);
 	}
-	
 }
