@@ -1,11 +1,12 @@
 package com.exedio.cope.builder.generator;
 
+import static org.junit.Assert.assertEquals;
+
 import com.exedio.cope.Item;
 import com.exedio.cope.ItemField;
 import com.exedio.cope.StringField;
 import com.exedio.cope.builder.other.SubItem;
 import java.io.Serializable;
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class MainTest
