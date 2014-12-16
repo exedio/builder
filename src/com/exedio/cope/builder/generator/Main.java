@@ -118,13 +118,15 @@ final class Main
 		if(!dir.isDirectory())
 			throw new HumanReadableException("expected directory: " + dir.getAbsolutePath());
 
-		writeGenerated( type, clazz, packageName, simpleClassName, dir );
+		writeGenerated( type, clazz, packageName, simpleClassName, dir, progress );
 		writeConcrete( type, packageName, simpleClassName, dir );
-		progress.incrementAndGet();
 	}
 
-	private static void writeGenerated( final MyType type, final Class< ? > clazz, final String packageName, final String simpleClassName, final File dir )
-			throws FileNotFoundException, IOException
+	private static void writeGenerated(
+			final MyType type, final Class< ? > clazz,
+			final String packageName, final String simpleClassName,
+			final File dir, final AtomicInteger progress )
+	throws FileNotFoundException, IOException
 	{
 		final File file = new File(dir, "Generated" + simpleClassName + "Builder.java");
 
@@ -141,6 +143,7 @@ final class Main
 		{
 			writer.close();
 		}
+		progress.incrementAndGet();
 	}
 
 	private static void writeConcrete( final MyType type, final String packageName, final String simpleClassName, final File dir )
