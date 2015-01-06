@@ -118,13 +118,13 @@ final class Main
 		if(!dir.isDirectory())
 			throw new HumanReadableException("expected directory: " + dir.getAbsolutePath());
 
-		writeGenerated( type, clazz, packageName, simpleClassName, dir, progress );
+		writeGenerated( type, clazz, packageName, simpleClassName, typeParameterWildCards(clazz), dir, progress );
 		writeConcrete( type, packageName, simpleClassName, dir );
 	}
 
 	private static void writeGenerated(
 			final MyType type, final Class< ? > clazz,
-			final String packageName, final String simpleClassName,
+			final String packageName, final String simpleClassName, final String wildcards,
 			final File dir, final AtomicInteger progress )
 	throws FileNotFoundException, IOException
 	{
@@ -137,7 +137,7 @@ final class Main
 		final OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder);
 		try
 		{
-			write(type, packageName, simpleClassName, writer);
+			write(type, packageName, simpleClassName, wildcards, writer);
 		}
 		finally
 		{
@@ -195,6 +195,7 @@ final class Main
 			final MyType type,
 			final String packageName,
 			final String simpleClassName,
+			final String wildcards,
 			final OutputStreamWriter writer)
 		throws IOException
 	{
@@ -227,7 +228,7 @@ final class Main
 		{
 			final String pack=type.getJavaClass().getPackage().getName();
 
-			writer.write("\tpublic static class "+simpleClassName+"Builder extends "+pack+".Common"+simpleClassName+"Builder<"+simpleClassName+","+simpleClassName+"Builder>");
+			writer.write("\tpublic static class "+simpleClassName+"Builder extends "+pack+".Common"+simpleClassName+"Builder<"+simpleClassName+wildcards+","+simpleClassName+"Builder>");
 			writer.write( newLine );
 			writer.write("\t{");
 			writer.write( newLine );
@@ -541,6 +542,20 @@ final class Main
 		writer.write(newLine);
 		writer.write("}");
 		writer.write(newLine);
+	}
+
+	private static String typeParameterWildCards(final Class<?> clazz)
+	{
+		final int typeParameters = clazz.getTypeParameters().length;
+		if(typeParameters==0)
+			return "";
+
+		final StringBuilder bf = new StringBuilder();
+		bf.append("<?");
+		for(int i = 1; i<typeParameters; i++)
+			bf.append(",?");
+		bf.append('>');
+		return bf.toString();
 	}
 
 
