@@ -215,7 +215,7 @@ final class Main
 		writer.write("public abstract class Generated");
 		writer.write(simpleClassName);
 		writer.write("Builder");
-		type.writeGenericParams(writer, simpleClassName);
+		type.writeGenericParams(writer, simpleClassName, wildcards);
 		writer.write(newLine);
 		writer.write("\textends ");
 		type.writeExtends(writer, simpleClassName);
