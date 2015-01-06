@@ -37,16 +37,21 @@ final class ItemType extends MyType
 	}
 
 	@Override
-	void writeGenericParams(final OutputStreamWriter writer, final String simpleClassName) throws IOException
+	void writeGenericParams(
+			final OutputStreamWriter writer,
+			final String simpleClassName,
+			final String wildcards)
+	throws IOException
 	{
 		if(type.getSubtypes().isEmpty())
 		{
-			super.writeGenericParams(writer, simpleClassName);
+			super.writeGenericParams(writer, simpleClassName, wildcards);
 		}
 		else
 		{
 			writer.write("<I extends ");
 			writer.write(simpleClassName);
+			writer.write(wildcards);
 			writer.write(", ");
 			writer.write("B extends Generated");
 			writer.write(simpleClassName);
