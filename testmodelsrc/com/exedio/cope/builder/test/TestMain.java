@@ -15,6 +15,7 @@ public final class TestMain
 			SourcePatternItem.TYPE,
 			UnknownPatternItem.TYPE,
 			DynamicModelItem.TYPE,
+			GenericComplexSuper.TYPE, GenericComplexMid.TYPE, GenericComplexSub.TYPE,
 			AbstractLevel1Item.TYPE, MixedLevel2Item.TYPE, ConcreteLevel3Item.TYPE
 	);
 }
