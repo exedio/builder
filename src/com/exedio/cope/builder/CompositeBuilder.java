@@ -11,7 +11,7 @@ import java.util.List;
 
 public abstract class CompositeBuilder<C extends Composite, B extends CompositeBuilder< ? , ? >> extends CopeBuilder<C, B>
 {
-	private final Class<C>	targetClazz;
+	private final Class<C> targetClazz;
 
 	public CompositeBuilder( final Class<C> targetClazz )
 	{
