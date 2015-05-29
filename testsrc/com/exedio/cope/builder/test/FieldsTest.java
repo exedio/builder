@@ -20,11 +20,11 @@ public class FieldsTest extends MainTest
 	@Test
 	public void explicit()
 	{
-		final EnumMap<TestEnum,String> enumMap = new EnumMap<TestEnum,String>(TestEnum.class);
+		final EnumMap<TestEnum,String> enumMap = new EnumMap<>(TestEnum.class);
 		enumMap.put(TestEnum.one  , "enumMapValueOne"  );
 		enumMap.put(TestEnum.two  , "enumMapValueTwo"  );
 		enumMap.put(TestEnum.three, "enumMapValueThree");
-		final HashMap<String, String> map = new HashMap<String, String>();
+		final HashMap<String, String> map = new HashMap<>();
 		map.put("key1", "value1");
 		map.put("key2", "value2");
 		final FieldsItem i = new FieldsItemBuilder().
@@ -33,8 +33,8 @@ public class FieldsTest extends MainTest
 				price(Price.storeOf(1234)).
 				range(Range.valueOf(44, 55)).
 				enumMap(enumMap).
-				set(new HashSet<String>(asList("setOne, setTwo"))).
-				list(asList("setOne, setTwo")).
+				set(new HashSet<String>(asList("setOne", "setTwo"))).
+				list(asList("setOne", "setTwo")).
 				map(map).
 				build();
 		assertEquals("major/minor", i.getMediaContentType());
@@ -44,8 +44,8 @@ public class FieldsTest extends MainTest
 		assertEquals("enumMapValueOne"  , i.getEnumMap(TestEnum.one));
 		assertEquals("enumMapValueTwo"  , i.getEnumMap(TestEnum.two));
 		assertEquals("enumMapValueThree", i.getEnumMap(TestEnum.three));
-		assertEquals(new HashSet<String>(asList("setOne, setTwo")), i.getSet());
-		assertEquals(asList("setOne, setTwo"), i.getList());
+		assertEquals(new HashSet<>(asList("setOne", "setTwo")), i.getSet());
+		assertEquals(asList("setOne", "setTwo"), i.getList());
 		assertEquals(map, i.getMapMap());
 	}
 	@Test
@@ -62,5 +62,26 @@ public class FieldsTest extends MainTest
 		assertEquals(emptySet (), i.getSet());
 		assertEquals(emptyList(), i.getList());
 		assertEquals(emptyMap (), i.getMapMap());
+	}
+	@Test
+	public void listSetPriceRangeShortcuts()
+	{
+		final FieldsItem i = new FieldsItemBuilder().
+				price(1234).
+				range(44, 55).
+				set("setOne", "setTwo").
+				list("setOne", "setTwo").
+				build();
+		assertEquals(Price.storeOf(1234), i.getPrice());
+		assertEquals(Range.valueOf(44, 55), i.getRange());
+		assertEquals(new HashSet<>(asList("setOne", "setTwo")), i.getSet());
+		assertEquals(asList("setOne", "setTwo"), i.getList());
+
+		//fallbacks
+		assertEquals("image/png", i.getMediaContentType());
+		assertEquals(true, i.checkHash("fallbackHashValue"));
+		assertEquals("fallbackEnumMapValueOne"  , i.getEnumMap(TestEnum.one));
+		assertEquals("fallbackEnumMapValueTwo"  , i.getEnumMap(TestEnum.two));
+		assertEquals("fallbackEnumMapValueThree", i.getEnumMap(TestEnum.three));
 	}
 }

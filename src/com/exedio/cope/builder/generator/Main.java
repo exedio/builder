@@ -11,8 +11,11 @@ import com.exedio.cope.pattern.CompositeField;
 import com.exedio.cope.pattern.DynamicModel;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
+import com.exedio.cope.pattern.PriceField;
+import com.exedio.cope.pattern.RangeField;
 import com.exedio.cope.pattern.SetField;
 import com.exedio.cope.util.Cast;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -338,9 +341,57 @@ final class Main
 
 			writer.write("\t}");
 			writer.write(newLine);
+
+			if (feature instanceof ListField<?>)
+			{
+				String itemClass= ((ListField<?>)feature).getElement().getValueClass().getCanonicalName();
+				String parameterList="final "+itemClass+"... "+featureIdentifier;
+				String mapping="java.util.Arrays.asList("+featureIdentifier+")";
+				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,mapping);
+			}
+			else if (feature instanceof SetField<?>)
+			{
+				String itemClass= ((SetField<?>)feature).getElement().getValueClass().getCanonicalName();
+				String parameterList="final "+itemClass+"... "+featureIdentifier;
+				String mapping="new java.util.HashSet<>(java.util.Arrays.asList("+featureIdentifier+"))";
+				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,mapping);
+			}
+			else if (feature instanceof RangeField<?>)
+			{
+				String fromClass= ((RangeField<?>)feature).getFrom().getValueClass().getCanonicalName();
+				String toClass= ((RangeField<?>)feature).getTo().getValueClass().getCanonicalName();
+				String parameterList="final "+fromClass+" from, final "+toClass+" to";
+				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,"com.exedio.cope.pattern.Range.valueOf(from, to)");
+			}
+			else if (feature instanceof PriceField)
+			{
+				writeRedirectSetter(writer,newLine,featureIdentifier,"final int store","com.exedio.cope.pattern.Price.storeOf(store)");
+			}
+
 		}
 
 		writer.write("}");
+		writer.write(newLine);
+	}
+
+	private static void writeRedirectSetter(OutputStreamWriter writer, String newLine, String featureIdentifier, String parameterList, String mapping) throws IOException
+	{
+		writer.write(newLine);
+		writer.write("\tpublic final B ");
+		writer.write(featureIdentifier);
+		writer.write("(");
+		writer.write(parameterList);
+		writer.write(")");
+		writer.write(newLine);
+		writer.write("\t{");
+		writer.write(newLine);
+
+		writer.write("\t\treturn "+featureIdentifier+"(");
+		writer.write(mapping);
+		writer.write(");");
+		writer.write(newLine);
+
+		writer.write("\t}");
 		writer.write(newLine);
 	}
 
