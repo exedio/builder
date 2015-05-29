@@ -4,3 +4,5 @@
 /testsrc/com/exedio/cope/builder/test/Generated*Builder.java
 /testsrc/com/exedio/cope/builder/other/Generated*Builder.java
 /nbproject/private/
+/.idea/workspace.xml
+/.idea/scopes/scope_settings.xml
