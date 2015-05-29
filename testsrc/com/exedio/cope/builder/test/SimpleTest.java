@@ -31,6 +31,7 @@ public class SimpleTest extends MainTest
 		final SimpleItem i = new SimpleItemBuilder().build();
 		assertEquals(null, i.getIntegerOptional());
 	}
+	@Test
 	public void enumExplicit()
 	{
 		final SimpleItem i = new SimpleItemBuilder().enumField(TestEnum.two).build();
