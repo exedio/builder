@@ -138,14 +138,9 @@ final class Main
 			return;
 
 		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
-		final OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder);
-		try
+		try(OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
 		{
 			write(type, packageName, simpleClassName, wildcards, writer);
-		}
-		finally
-		{
-			writer.close();
 		}
 		progress.incrementAndGet();
 	}
@@ -165,14 +160,9 @@ final class Main
 			return;
 
 		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
-		final OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder);
-		try
+		try(OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
 		{
 			writeConcrete(type, packageName, simpleClassName, wildcards, writer);
-		}
-		finally
-		{
-			writer.close();
 		}
 	}
 
