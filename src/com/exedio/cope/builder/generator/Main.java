@@ -344,23 +344,23 @@ final class Main
 
 			if (feature instanceof ListField<?>)
 			{
-				String itemClass= ((ListField<?>)feature).getElement().getValueClass().getCanonicalName();
-				String parameterList="final "+itemClass+"... "+featureIdentifier;
-				String mapping="java.util.Arrays.asList("+featureIdentifier+")";
+				final String itemClass = ((ListField<?>)feature).getElement().getValueClass().getCanonicalName();
+				final String parameterList ="final "+itemClass+"... "+featureIdentifier;
+				final String mapping = "java.util.Arrays.asList("+featureIdentifier+")";
 				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,mapping);
 			}
 			else if (feature instanceof SetField<?>)
 			{
-				String itemClass= ((SetField<?>)feature).getElement().getValueClass().getCanonicalName();
-				String parameterList="final "+itemClass+"... "+featureIdentifier;
-				String mapping="new java.util.HashSet<>(java.util.Arrays.asList("+featureIdentifier+"))";
+				final String itemClass = ((SetField<?>)feature).getElement().getValueClass().getCanonicalName();
+				final String parameterList ="final "+itemClass+"... "+featureIdentifier;
+				final String mapping = "new java.util.HashSet<>(java.util.Arrays.asList("+featureIdentifier+"))";
 				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,mapping);
 			}
 			else if (feature instanceof RangeField<?>)
 			{
-				String fromClass= ((RangeField<?>)feature).getFrom().getValueClass().getCanonicalName();
-				String toClass= ((RangeField<?>)feature).getTo().getValueClass().getCanonicalName();
-				String parameterList="final "+fromClass+" from, final "+toClass+" to";
+				final String fromClass = ((RangeField<?>)feature).getFrom().getValueClass().getCanonicalName();
+				final String toClass = ((RangeField<?>)feature).getTo().getValueClass().getCanonicalName();
+				final String parameterList = "final "+fromClass+" from, final "+toClass+" to";
 				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,"com.exedio.cope.pattern.Range.valueOf(from, to)");
 			}
 			else if (feature instanceof PriceField)
@@ -381,7 +381,13 @@ final class Main
 		writer.write(newLine);
 	}
 
-	private static void writeRedirectSetter(OutputStreamWriter writer, String newLine, String featureIdentifier, String parameterList, String mapping) throws IOException
+	private static void writeRedirectSetter(
+			final OutputStreamWriter writer,
+			final String newLine,
+			final String featureIdentifier,
+			final String parameterList,
+			final String mapping)
+		throws IOException
 	{
 		writer.write(newLine);
 		writer.write("\tpublic final B ");

@@ -14,7 +14,7 @@ final class CompositeType extends MyType
 	private final Class< ? extends Composite>	clazz;
 	private final CompositeField< ? >			field;
 
-	CompositeType( Class< ? extends Composite> clazz, CompositeField< ? > field )
+	CompositeType( final Class<? extends Composite> clazz, final CompositeField<?> field )
 	{
 		this.clazz = clazz;
 		this.field = field;
