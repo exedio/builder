@@ -366,12 +366,19 @@ final class Main
 			else if (feature instanceof PriceField)
 			{
 				writeRedirectSetter(writer, newLine, featureIdentifier,
+						"final double value",
+						"com.exedio.cope.pattern.Price.valueOf(value)");
+				writeRedirectSetter(writer, newLine, featureIdentifier,
 						"final int store",
 						"com.exedio.cope.pattern.Price.storeOf(store)");
 			}
 			else if (feature instanceof MoneyField)
 			{
 				final MoneyField<?> field = (MoneyField<?>)feature;
+				writeRedirectSetter(writer, newLine, featureIdentifier,
+						"final double value," +
+						"final " + field.getCurrency().getValueClass().getCanonicalName() + " currency",
+						"com.exedio.cope.pattern.Money.valueOf(value,currency)");
 				writeRedirectSetter(writer, newLine, featureIdentifier,
 						"final int store," +
 						"final " + field.getCurrency().getValueClass().getCanonicalName() + " currency",

@@ -92,4 +92,14 @@ public class FieldsTest extends MainTest
 		assertEquals("fallbackEnumMapValueTwo"  , i.getEnumMap(TestEnum.two));
 		assertEquals("fallbackEnumMapValueThree", i.getEnumMap(TestEnum.three));
 	}
+	@Test
+	public void doubleShortcuts()
+	{
+		final FieldsItem i = new FieldsItemBuilder().
+				price(12.34).
+				money(45.67, GBP).
+				build();
+		assertEquals(Price.storeOf(1234), i.getPrice());
+		assertEquals(Money.storeOf(4567, GBP), i.getMoney());
+	}
 }
