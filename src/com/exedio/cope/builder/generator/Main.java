@@ -345,14 +345,14 @@ final class Main
 			if (feature instanceof ListField<?>)
 			{
 				final String itemClass = ((ListField<?>)feature).getElement().getValueClass().getCanonicalName();
-				final String parameterList ="final "+itemClass+"... "+featureIdentifier;
+				final String parameterList = "final "+itemClass+"... "+featureIdentifier;
 				final String mapping = "java.util.Arrays.asList("+featureIdentifier+")";
 				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,mapping);
 			}
 			else if (feature instanceof SetField<?>)
 			{
 				final String itemClass = ((SetField<?>)feature).getElement().getValueClass().getCanonicalName();
-				final String parameterList ="final "+itemClass+"... "+featureIdentifier;
+				final String parameterList = "final "+itemClass+"... "+featureIdentifier;
 				final String mapping = "new java.util.HashSet<>(java.util.Arrays.asList("+featureIdentifier+"))";
 				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,mapping);
 			}
@@ -365,12 +365,14 @@ final class Main
 			}
 			else if (feature instanceof PriceField)
 			{
-				writeRedirectSetter(writer,newLine,featureIdentifier,"final int store","com.exedio.cope.pattern.Price.storeOf(store)");
+				writeRedirectSetter(writer, newLine, featureIdentifier,
+						"final int store",
+						"com.exedio.cope.pattern.Price.storeOf(store)");
 			}
 			else if (feature instanceof MoneyField)
 			{
 				final MoneyField<?> field = (MoneyField<?>)feature;
-				writeRedirectSetter(writer,newLine,featureIdentifier,
+				writeRedirectSetter(writer, newLine, featureIdentifier,
 						"final int store," +
 						"final " + field.getCurrency().getValueClass().getCanonicalName() + " currency",
 						"com.exedio.cope.pattern.Money.storeOf(store,currency)");
