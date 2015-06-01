@@ -17,12 +17,12 @@ import java.util.Set;
 
 public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ? >> implements Builder<O>
 {
-	protected Map<Settable<?>, SetValue<?>>	values	= new HashMap<Settable<?>, SetValue<?>>();
+	protected Map<Settable<?>, SetValue<?>>	values	= new HashMap<>();
 
 	@SafeVarargs
 	protected static <T> Set<T> toSet( final T... array )
 	{
-		final Set<T> result = new HashSet<T>();
+		final Set<T> result = new HashSet<>();
 		for (final T t: array)
 			result.add(t);
 		return result;
@@ -96,7 +96,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 	@SafeVarargs
 	protected static <T> List<T> toList( final T... array )
 	{
-		final List<T> result = new ArrayList<T>();
+		final List<T> result = new ArrayList<>();
 		for (final T t: array)
 			result.add(t);
 		return result;
@@ -105,14 +105,14 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 
 	protected static <K, V> Map<K, V> toMap( final K key, final V value )
 	{
-		final Map<K, V> map = new HashMap<K, V>();
+		final Map<K, V> map = new HashMap<>();
 		map.put(key, value);
 		return map;
 	}
 
 	protected static <K, V> Map<K, V> toMap( final K key1, final V value1, final K key2, final V value2 )
 	{
-		final Map<K, V> map = new HashMap<K, V>();
+		final Map<K, V> map = new HashMap<>();
 		map.put(key1, value1);
 		map.put(key2, value2);
 		return map;
@@ -125,7 +125,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 
 	protected <K extends Enum<K>, V> EnumMap<K, V> toEnumMap( final K key, final V value )
 	{
-		return new EnumMap<K, V>(toMap(key, value));
+		return new EnumMap<>(toMap(key, value));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -135,7 +135,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 		{
 			final Constructor<?> constructor = getClass().getConstructor();
 			final B copy = (B) constructor.newInstance();
-			copy.values = new HashMap<Settable<?>, SetValue<?>>( values );
+			copy.values = new HashMap<>( values );
 			return copy;
 		}
 		catch( final InstantiationException e )

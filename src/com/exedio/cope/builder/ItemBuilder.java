@@ -29,9 +29,9 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 {
 
 	private final Type<I> type;
-	protected Map<ListField<?>, List<?>>	listValues	= new HashMap<ListField<?>, List<?>>();
-	protected Map<SetField<?>, Set<?>>	setValues	= new HashMap<SetField<?>, Set<?>>();
-	protected Map<MapField<?, ?>, Map<?, ?>>	mapValues	= new HashMap<MapField<?,?>, Map<?,?>>();
+	protected Map<ListField<?>, List<?>>	listValues	= new HashMap<>();
+	protected Map<SetField<?>, Set<?>>	setValues	= new HashMap<>();
+	protected Map<MapField<?, ?>, Map<?, ?>>	mapValues	= new HashMap<>();
 	/**
 	 * @param type the type of the item you want to build
 	 */
@@ -147,7 +147,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	@Override
 	public I build()
 	{
-		final I result = type.newItem(new ArrayList<SetValue<?>>(values.values()));
+		final I result = type.newItem(new ArrayList<>(values.values()));
 		for(final Map.Entry<ListField<?>, List<?>> entry: listValues.entrySet())
 			setListValue(result, entry.getKey(), entry.getValue());
 		for(final Map.Entry<SetField<?>, Set<?>> entry: setValues.entrySet())
@@ -211,10 +211,10 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		{
 			final Constructor<?> constructor = getClass().getConstructor();
 			final B copy = (B) constructor.newInstance();
-			copy.values = new HashMap<Settable<?>, SetValue<?>>( values );
-			copy.listValues = new HashMap<ListField<?>, List<?>>( listValues );
-			copy.setValues = new HashMap<SetField<?>, Set<?>>( setValues );
-			copy.mapValues = new HashMap<MapField<?,?>, Map<?,?>>( mapValues );
+			copy.values = new HashMap<>( values );
+			copy.listValues = new HashMap<>( listValues );
+			copy.setValues = new HashMap<>( setValues );
+			copy.mapValues = new HashMap<>( mapValues );
 			return copy;
 		}
 		catch( final InstantiationException e )

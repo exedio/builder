@@ -42,7 +42,7 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 	@Override
 	public C build()
 	{
-		final List<SetValue< ? >> allValues = new LinkedList<SetValue< ? >>( values.values() );
+		final List<SetValue< ? >> allValues = new LinkedList<>( values.values() );
 		try
 		{
 			// TODO use some framework function for this

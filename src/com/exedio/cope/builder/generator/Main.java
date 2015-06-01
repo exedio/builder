@@ -43,7 +43,7 @@ final class Main
 		final Model model = params.getModel();
 		final String packagePrefix = params.getPackagePrefix();
 
-		final HashMap<File,ArrayList<Class<?>>> skipped = new HashMap<File,ArrayList<Class<?>>>();
+		final HashMap<File,ArrayList<Class<?>>> skipped = new HashMap<>();
 		final AtomicInteger progress = new AtomicInteger(0);
 		for(final Type<?> type : model.getTypes())
 		{
@@ -57,7 +57,7 @@ final class Main
 			writeFiles(params, new ItemType( type, clazz ), skipped, progress);
 		}
 
-		final HashSet<Class<? extends Composite>> compositeClasses = new HashSet<Class<? extends Composite>>();
+		final HashSet<Class<? extends Composite>> compositeClasses = new HashSet<>();
 		for(final Type<?> type : model.getTypes())
 		{
 			for(final Feature feature : type.getDeclaredFeatures())
@@ -112,7 +112,7 @@ final class Main
 			ArrayList<Class<?>> classes = skipped.get(dir);
 			if(classes==null)
 			{
-				classes = new ArrayList<Class<?>>();
+				classes = new ArrayList<>();
 				skipped.put(dir, classes);
 			}
 			classes.add(clazz);

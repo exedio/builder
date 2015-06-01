@@ -48,7 +48,7 @@ public final class Builders
 	 */
 	public static <E extends Enum<E>> Builder<E> autoIncrement(final FunctionField<E> field, final E start, final boolean rotate)
 	{
-		return new EnumAutoIncrementBuilder<E>(field, start, rotate);
+		return new EnumAutoIncrementBuilder<>(field, start, rotate);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public final class Builders
 
 	abstract public static class AutoIncrementBuilder<T> implements Builder<T>
 	{
-		private static Map<Object, AtomicInteger> nextValues = new HashMap<Object, AtomicInteger>();
+		private static Map<Object, AtomicInteger> nextValues = new HashMap<>();
 
 		protected final Object object;
 		protected final int start;

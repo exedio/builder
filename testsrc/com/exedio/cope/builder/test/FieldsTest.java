@@ -37,7 +37,7 @@ public class FieldsTest extends MainTest
 				money(Money.storeOf(4567, GBP)).
 				range(Range.valueOf(44, 55)).
 				enumMap(enumMap).
-				set(new HashSet<String>(asList("setOne", "setTwo"))).
+				set(new HashSet<>(asList("setOne", "setTwo"))).
 				list(asList("setOne", "setTwo")).
 				map(map).
 				build();
