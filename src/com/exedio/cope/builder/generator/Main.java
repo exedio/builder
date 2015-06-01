@@ -16,7 +16,6 @@ import com.exedio.cope.pattern.PriceField;
 import com.exedio.cope.pattern.RangeField;
 import com.exedio.cope.pattern.SetField;
 import com.exedio.cope.util.Cast;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
