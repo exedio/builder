@@ -11,6 +11,7 @@ import com.exedio.cope.pattern.CompositeField;
 import com.exedio.cope.pattern.DynamicModel;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
+import com.exedio.cope.pattern.MoneyField;
 import com.exedio.cope.pattern.PriceField;
 import com.exedio.cope.pattern.RangeField;
 import com.exedio.cope.pattern.SetField;
@@ -367,7 +368,14 @@ final class Main
 			{
 				writeRedirectSetter(writer,newLine,featureIdentifier,"final int store","com.exedio.cope.pattern.Price.storeOf(store)");
 			}
-
+			else if (feature instanceof MoneyField)
+			{
+				final MoneyField<?> field = (MoneyField<?>)feature;
+				writeRedirectSetter(writer,newLine,featureIdentifier,
+						"final int store," +
+						"final " + field.getCurrency().getValueClass().getCanonicalName() + " currency",
+						"com.exedio.cope.pattern.Money.storeOf(store,currency)");
+			}
 		}
 
 		writer.write("}");

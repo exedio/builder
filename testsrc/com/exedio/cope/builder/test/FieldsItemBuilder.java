@@ -25,9 +25,4 @@ public class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuil
 		fallback(FieldsItem.enumMap, enumMap);
 		return super.build();
 	}
-
-	public final FieldsItemBuilder money(final int store, final FieldsItem.Currency currency)
-	{
-		return money(Money.storeOf(store, currency));
-	}
 }
