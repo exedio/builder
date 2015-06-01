@@ -26,8 +26,8 @@ import java.lang.reflect.TypeVariable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -137,7 +137,7 @@ final class Main
 		if(isNoUpdateRequired(clazz, file))
 			return;
 
-		final CharsetEncoder encoder = Charset.forName("US-ASCII").newEncoder(); // TODO customizable
+		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
 		final OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder);
 		try
 		{
@@ -164,7 +164,7 @@ final class Main
 		if( file.exists())
 			return;
 
-		final CharsetEncoder encoder = Charset.forName("US-ASCII").newEncoder(); // TODO customizable
+		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
 		final OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder);
 		try
 		{
