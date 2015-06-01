@@ -1,5 +1,7 @@
 package com.exedio.cope.builder.test;
 
+import static com.exedio.cope.builder.test.FieldsItem.Currency.EUR;
+import static com.exedio.cope.builder.test.FieldsItem.Currency.GBP;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
@@ -8,6 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.exedio.cope.builder.MediaBuilder;
 import com.exedio.cope.builder.other.OuterClass.TestEnum;
+import com.exedio.cope.pattern.Money;
 import com.exedio.cope.pattern.Price;
 import com.exedio.cope.pattern.Range;
 import java.util.EnumMap;
@@ -31,6 +34,7 @@ public class FieldsTest extends MainTest
 				media(new MediaBuilder().type("major/minor").build()).
 				hash("hashValue").
 				price(Price.storeOf(1234)).
+				money(Money.storeOf(4567, GBP)).
 				range(Range.valueOf(44, 55)).
 				enumMap(enumMap).
 				set(new HashSet<String>(asList("setOne", "setTwo"))).
@@ -40,6 +44,7 @@ public class FieldsTest extends MainTest
 		assertEquals("major/minor", i.getMediaContentType());
 		assertEquals(true, i.checkHash("hashValue"));
 		assertEquals(Price.storeOf(1234), i.getPrice());
+		assertEquals(Money.storeOf(4567, GBP), i.getMoney());
 		assertEquals(Range.valueOf(44, 55), i.getRange());
 		assertEquals("enumMapValueOne"  , i.getEnumMap(TestEnum.one));
 		assertEquals("enumMapValueTwo"  , i.getEnumMap(TestEnum.two));
@@ -55,6 +60,7 @@ public class FieldsTest extends MainTest
 		assertEquals("image/png", i.getMediaContentType());
 		assertEquals(true, i.checkHash("fallbackHashValue"));
 		assertEquals(Price.storeOf(7777777), i.getPrice());
+		assertEquals(Money.storeOf(8888888, EUR), i.getMoney());
 		assertEquals(Range.valueOf(7777777, 8888888), i.getRange());
 		assertEquals("fallbackEnumMapValueOne"  , i.getEnumMap(TestEnum.one));
 		assertEquals("fallbackEnumMapValueTwo"  , i.getEnumMap(TestEnum.two));
@@ -68,11 +74,13 @@ public class FieldsTest extends MainTest
 	{
 		final FieldsItem i = new FieldsItemBuilder().
 				price(1234).
+				money(4567, GBP).
 				range(44, 55).
 				set("setOne", "setTwo").
 				list("setOne", "setTwo").
 				build();
 		assertEquals(Price.storeOf(1234), i.getPrice());
+		assertEquals(Money.storeOf(4567, GBP), i.getMoney());
 		assertEquals(Range.valueOf(44, 55), i.getRange());
 		assertEquals(new HashSet<>(asList("setOne", "setTwo")), i.getSet());
 		assertEquals(asList("setOne", "setTwo"), i.getList());

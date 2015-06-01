@@ -3,6 +3,7 @@ package com.exedio.cope.builder.test;
 
 import com.exedio.cope.builder.MediaBuilder;
 import com.exedio.cope.builder.other.OuterClass.TestEnum;
+import com.exedio.cope.pattern.Money;
 import com.exedio.cope.pattern.Price;
 import com.exedio.cope.pattern.Range;
 import java.util.EnumMap;
@@ -15,6 +16,7 @@ public class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuil
 		fallback(FieldsItem.media, new MediaBuilder());
 		fallback(FieldsItem.hash, "fallbackHashValue");
 		fallback(FieldsItem.price, Price.storeOf(7777777));
+		fallback(FieldsItem.money, Money.storeOf(8888888, FieldsItem.Currency.EUR));
 		fallback(FieldsItem.range, Range.valueOf(7777777, 8888888));
 		final EnumMap<TestEnum,String> enumMap = new EnumMap<TestEnum,String>(TestEnum.class);
 		enumMap.put(TestEnum.one  , "fallbackEnumMapValueOne"  );
@@ -22,5 +24,10 @@ public class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuil
 		enumMap.put(TestEnum.three, "fallbackEnumMapValueThree");
 		fallback(FieldsItem.enumMap, enumMap);
 		return super.build();
+	}
+
+	public final FieldsItemBuilder money(final int store, final FieldsItem.Currency currency)
+	{
+		return money(Money.storeOf(store, currency));
 	}
 }
