@@ -14,12 +14,19 @@ import com.exedio.cope.pattern.CompositeField;
 public final class SourceFeatureClassPattern extends Pattern
 {
 	public enum EnumPublic { A,B; }
+	enum EnumPackage { A,B; }
 
 
 	public static final class CompositePublic extends Composite
 	{
 		static final IntegerField integer = new IntegerField();
 		CompositePublic(final SetValue<?>... sv) { super(sv); }
+		private static final long serialVersionUID = 1l;
+	}
+	static final class CompositePackage extends Composite
+	{
+		static final IntegerField integer = new IntegerField();
+		CompositePackage(final SetValue<?>... sv) { super(sv); }
 		private static final long serialVersionUID = 1l;
 	}
 
@@ -31,13 +38,23 @@ public final class SourceFeatureClassPattern extends Pattern
 		static final BlockType<BlockPublic> TYPE = BlockType.newType(BlockPublic.class);
 		private static final long serialVersionUID = 1l;
 	}
+	static final class BlockPackage extends Block
+	{
+		static final IntegerField integer = new IntegerField().optional();
+		BlockPackage(final BlockActivationParameters ap) { super(ap); }
+		static final BlockType<BlockPackage> TYPE = BlockType.newType(BlockPackage.class);
+		private static final long serialVersionUID = 1l;
+	}
 
 
 	public SourceFeatureClassPattern()
 	{
 		addSource(EnumField.create(EnumPublic.class).optional(), "enumPublic");
+		addSource(EnumField.create(EnumPackage.class).optional(), "enumPackage");
 		addSource(CompositeField.create(CompositePublic.class).optional(), "compositePublic");
+		addSource(CompositeField.create(CompositePackage.class).optional(), "compositePackage");
 		addSource(BlockField.create(BlockPublic.TYPE), "blockPublic");
+		addSource(BlockField.create(BlockPackage.TYPE), "blockPackage");
 	}
 
 
