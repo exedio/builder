@@ -1,5 +1,6 @@
 package com.exedio.cope.builder.generator;
 
+import com.exedio.cope.EnumField;
 import com.exedio.cope.Feature;
 import com.exedio.cope.Model;
 import com.exedio.cope.Pattern;
@@ -21,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.TypeVariable;
 import java.net.URI;
@@ -291,6 +293,13 @@ final class Main
 				feature instanceof ListField<?> ||
 				feature instanceof MapField<?,?>))
 				continue;
+
+			if(feature instanceof EnumField &&
+					!Modifier.isPublic(((EnumField<?>)feature).getValueClass().getModifiers()))
+					continue;
+			if(feature instanceof CompositeField &&
+					!Modifier.isPublic(((CompositeField<?>)feature).getValueClass().getModifiers()))
+					continue;
 
 			{
 				final Pattern pattern = feature.getPattern();
