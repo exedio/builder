@@ -13,6 +13,7 @@ public final class TestMain
 			AbstractItem.TYPE, ConcreteItem.TYPE,
 			CompositeItem.TYPE,
 			SourcePatternItem.TYPE,
+			SourceFeatureClassItem.TYPE,
 			UnknownPatternItem.TYPE,
 			DynamicModelItem.TYPE,
 			GenericComplexSuper.TYPE, GenericComplexMid.TYPE, GenericComplexSub.TYPE,
