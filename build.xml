@@ -29,7 +29,7 @@
 	</target>
 
 	<target name="testmodelsrc.instrument" unless="skip.instrument">
-		<instrument verify="${instrument.verify}" finalArgs="true" suppressUnusedWarningOnPrivateActivationConstructor="true" annotateGenerated="false" verbose="false">
+		<instrument verify="${instrument.verify}" verbose="false">
 			<fileset dir="testmodelsrc">
 				<include name="com/exedio/cope/builder/test/*Item.java" />
 				<include name="com/exedio/cope/builder/other/*Composite.java" />
