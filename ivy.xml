@@ -29,6 +29,7 @@
 		<dependency org="com.exedio" name="cope" rev="7944">
 			<conf name="runtime" mapped="runtime" />
 			<conf name="build" mapped="hsqldb,junit,sources" />
+			<exclude org="com.exedio" module="copeservletutil" />
 		</dependency>
 	</dependencies>
 </ivy-module>
