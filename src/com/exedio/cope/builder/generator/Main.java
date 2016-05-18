@@ -376,11 +376,11 @@ final class Main
 				final MoneyField<?> field = (MoneyField<?>)feature;
 				writeRedirectSetter(writer, newLine, featureIdentifier,
 						"final double value," +
-						"final " + field.getCurrency().getValueClass().getCanonicalName() + " currency",
+						"final " + field.getCurrencyClass().getCanonicalName() + " currency",
 						"com.exedio.cope.pattern.Money.valueOf(value,currency)");
 				writeRedirectSetter(writer, newLine, featureIdentifier,
 						"final int store," +
-						"final " + field.getCurrency().getValueClass().getCanonicalName() + " currency",
+						"final " + field.getCurrencyClass().getCanonicalName() + " currency",
 						"com.exedio.cope.pattern.Money.storeOf(store,currency)");
 			}
 		}
