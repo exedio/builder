@@ -17,7 +17,7 @@ The items are sorted inversely, i.e. latest items are on top
 * supports <testbuilder ... as well
 * supports Settable generically
 * requires JDK 1.7
-* feature: the initial concrete builder is also generated; 
+* feature: the initial concrete builder is also generated;
 	TIP delete your Builders once after committing, generate the new concrete builders and apply your changes from the diff.
 * feature: builder in an inheritance hierarchy are named Common...Builder, the Generated...Builder will implement the concrete ...Builder to prevent class casting issues
 	MIGRATION see TIP above

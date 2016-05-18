@@ -4,10 +4,10 @@
 
 	<property file="local.properties" />
 	<property file="project.properties" />
-	
+
 	<import file="macros/compile.xml" />
 	<import file="macros/findbugs.xml" />
-	
+
 	<taskdef resource="com/exedio/cope/instrument/ant.properties">
 		<classpath>
 			<pathelement location="lib/exedio-cope-instrument.jar" />
@@ -15,7 +15,7 @@
 			<pathelement location="lib/slf4j-api.jar" />
 		</classpath>
 	</taskdef>
-	
+
 	<target name="src.compile">
 		<compile srcdir="src">
 			<classpath>
@@ -27,7 +27,7 @@
 			</classpath>
 		</compile>
 	</target>
-	
+
 	<target name="testmodelsrc.instrument" unless="skip.instrument">
 		<instrument verify="${instrument.verify}" finalArgs="true" suppressUnusedWarningOnPrivateActivationConstructor="true" verbose="false">
 			<fileset dir="testmodelsrc">
@@ -38,7 +38,7 @@
 			</fileset>
 		</instrument>
 	</target>
-	
+
 	<target name="testmodelsrc.compile" depends="testmodelsrc.instrument">
 		<compile srcdir="testmodelsrc">
 			<classpath>
@@ -60,14 +60,14 @@
 			</classpath>
 		</taskdef>
 	</target>
-	
+
 	<target name="testbuilder" depends="src.compile, testbuilder.taskdef">
 		<generateCopeBuilder
 				model="com.exedio.cope.builder.test.TestMain#model"
 				packagePrefix="com.exedio.cope.builder"
 				destdir="testsrc" />
 	</target>
-	
+
 	<target name="testsrc.compile" depends="src.compile, testmodelsrc.compile, testbuilder">
 		<compile srcdir="testsrc">
 			<classpath>
@@ -82,7 +82,7 @@
 			</classpath>
 		</compile>
 	</target>
-	
+
 	<target name="test" depends="testsrc.compile">
 		<mkdir dir="build/testresults" />
 		<mkdir dir="build/testtmpdir" />
@@ -109,7 +109,7 @@
 			<assertions><enable/></assertions>
 		</junit>
 	</target>
-	
+
 	<target name="jar" depends="src.compile">
 		<jar jarfile="build/exedio-cope-builder.jar" filesonly="true" duplicate="fail" strict="fail" level="9">
 			<fileset dir="build/classes/src" />
@@ -124,14 +124,14 @@
 			</manifest>
 		</jar>
 	</target>
-	
+
 	<target name="jar.src">
 		<mkdir dir="build" />
 		<zip destfile="build/exedio-cope-builder-src.zip" filesonly="true" whenempty="fail" duplicate="fail" level="9">
 			<zipfileset dir="${basedir}/src"><include name="**/*.java"/><exclude name="**/*_Jspm.java" /></zipfileset>
 		</zip>
 	</target>
-	
+
 	<target name="clean">
 		<delete>
 			<fileset dir="src"><!-- not created anymore -->
@@ -148,11 +148,11 @@
 		<delete dir="webtestweb/WEB-INF/lib" /><!-- not created anymore -->
 		<delete dir="tomcat" /><!-- not created anymore -->
 	</target>
-	
+
 	<target name="instrument" depends="testmodelsrc.instrument" />
-	
+
 	<target name="compile" depends="src.compile, testsrc.compile" />
-	
+
 	<target name="api">
 
 		<javadoc
@@ -173,14 +173,14 @@
 			</classpath>
 		</javadoc>
 	</target>
-	
+
 	<target name="src"
 			depends="testbuilder"
 			description="creates all sources, so the IDE does not complain" />
 	<target name="build"
 			depends="compile, test, jar" />
-	
-	
+
+
 	<target name="findbugs" depends="compile, findbugs.taskdef">
 		<findbugs
 					home="${basedir}/build/findbugs-home"
@@ -203,9 +203,9 @@
 			</auxclasspath>
 		</findbugs>
 	</target>
-	
+
 	<target name="all" depends="build, jar.src, findbugs" />
-	
+
 	<target name="jenkins" depends="all">
 		<copy todir="${basedir}/build/success">
 			<fileset file="${basedir}/build/exedio-cope-builder.jar" />
@@ -218,5 +218,5 @@
 			</filterset>
 		</copy>
 	</target>
-	
+
 </project>
