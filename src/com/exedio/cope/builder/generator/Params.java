@@ -59,7 +59,7 @@ final class Params
 		this.packagePrefixesDisplay.append(packagePrefix);
 	}
 
-	boolean matchesPackagePrefix(final Class<?> clazz)
+	boolean matchesPackagePrefixes(final Class<?> clazz)
 	{
 		final String clazzName = clazz.getName();
 
@@ -70,7 +70,7 @@ final class Params
 		return false;
 	}
 
-	String getPackagePrefix()
+	String getPackagePrefixes()
 	{
 		return packagePrefixesDisplay.toString();
 	}
