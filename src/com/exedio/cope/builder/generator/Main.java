@@ -45,6 +45,7 @@ final class Main
 		final Model model = params.getModel();
 		final String packagePrefix = params.getPackagePrefix();
 
+		final ArrayList<Class<?>> skippedPackagePrefix = new ArrayList<>();
 		final HashMap<File,ArrayList<Class<?>>> skipped = new HashMap<>();
 		final AtomicInteger progress = new AtomicInteger(0);
 		for(final Type<?> type : model.getTypes())
@@ -54,7 +55,10 @@ final class Main
 
 			final Class<?> clazz = type.getJavaClass();
 			if(!clazz.getName().startsWith(packagePrefix))
+			{
+				skippedPackagePrefix.add(clazz);
 				continue;
+			}
 
 			writeFiles(params, new ItemType( type, clazz ), skipped, progress);
 		}
@@ -71,13 +75,26 @@ final class Main
 
 				final Class<? extends Composite> clazz = field.getValueClass();
 				if(!clazz.getName().startsWith(packagePrefix))
+				{
+					skippedPackagePrefix.add(clazz);
 					continue;
+				}
 
 				if(!compositeClasses.add(clazz))
 					continue;
 
 				writeFiles(params, new CompositeType( clazz, field ), skipped, progress);
 			}
+		}
+
+		switch(skippedPackagePrefix.size())
+		{
+			case 0: // nothing
+				break;
+			case 1:
+				System.out.println("Skipping " + skippedPackagePrefix.get(0).getName() + " because not in packagePrefix '" + packagePrefix + "'."); break;
+			default:
+				System.out.println("Skipping " + skippedPackagePrefix.size() +   " classes because not in packagePrefix '" + packagePrefix + "'."); break;
 		}
 		for(final Map.Entry<File,ArrayList<Class<?>>> entry : skipped.entrySet())
 		{

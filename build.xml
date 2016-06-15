@@ -36,6 +36,7 @@
 				<include name="com/exedio/cope/builder/other/*Item.java" />
 				<include name="com/exedio/cope/builder/other/OuterClass.java" />
 				<include name="com/exedio/cope/builder/skipped/*Item.java" />
+				<include name="com/exedio/cope/builderSkipped/*Item.java" />
 			</fileset>
 		</instrument>
 	</target>
