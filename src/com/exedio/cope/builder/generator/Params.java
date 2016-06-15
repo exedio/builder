@@ -19,7 +19,8 @@ final class Params
 	}
 
 
-	private String packagePrefix = null;
+	private String packagePrefixMatch = null;
+	private String packagePrefixDisplay = null;
 
 	void setPackagePrefix(final String packagePrefix)
 	{
@@ -42,12 +43,18 @@ final class Params
 			throw new IllegalArgumentException(
 					"packagePrefix \"" + packagePrefix + "\" must not end with dot.");
 
-		this.packagePrefix = packagePrefix + '.';
+		this.packagePrefixMatch = packagePrefix + '.';
+		this.packagePrefixDisplay = packagePrefix;
+	}
+
+	boolean matchesPackagePrefix(final Class<?> clazz)
+	{
+		return clazz.getName().startsWith(packagePrefixMatch);
 	}
 
 	String getPackagePrefix()
 	{
-		return packagePrefix;
+		return packagePrefixDisplay;
 	}
 
 

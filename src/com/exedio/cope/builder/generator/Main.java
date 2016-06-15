@@ -43,7 +43,6 @@ final class Main
 	static final void main(final Params params) throws HumanReadableException, IOException
 	{
 		final Model model = params.getModel();
-		final String packagePrefix = params.getPackagePrefix();
 
 		final ArrayList<Class<?>> skippedPackagePrefix = new ArrayList<>();
 		final HashMap<File,ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist = new HashMap<>();
@@ -54,7 +53,7 @@ final class Main
 				continue;
 
 			final Class<?> clazz = type.getJavaClass();
-			if(!clazz.getName().startsWith(packagePrefix))
+			if(!params.matchesPackagePrefix(clazz))
 			{
 				skippedPackagePrefix.add(clazz);
 				continue;
@@ -74,7 +73,7 @@ final class Main
 				final CompositeField<?> field = (CompositeField<?>)feature;
 
 				final Class<? extends Composite> clazz = field.getValueClass();
-				if(!clazz.getName().startsWith(packagePrefix))
+				if(!params.matchesPackagePrefix(clazz))
 				{
 					skippedPackagePrefix.add(clazz);
 					continue;
@@ -92,9 +91,9 @@ final class Main
 			case 0: // nothing
 				break;
 			case 1:
-				System.out.println("Skipping " + skippedPackagePrefix.get(0).getName() + " because not in packagePrefix '" + packagePrefix + "'."); break;
+				System.out.println("Skipping " + skippedPackagePrefix.get(0).getName() + " because not in packagePrefix '" + params.getPackagePrefix() + "'."); break;
 			default:
-				System.out.println("Skipping " + skippedPackagePrefix.size() +   " classes because not in packagePrefix '" + packagePrefix + "'."); break;
+				System.out.println("Skipping " + skippedPackagePrefix.size() +   " classes because not in packagePrefix '" + params.getPackagePrefix() + "'."); break;
 		}
 		for(final Map.Entry<File,ArrayList<Class<?>>> entry : skippedTargetDirectoryDoesNotExist.entrySet())
 		{
@@ -107,7 +106,7 @@ final class Main
 		{
 			final int progressResult = progress.get();
 			if(progressResult>0)
-				System.out.println("Generated " + progressResult + " builders for " + model + " in '" + packagePrefix + "'.");
+				System.out.println("Generated " + progressResult + " builders for " + model + " in '" + params.getPackagePrefix() + "'.");
 		}
 	}
 
