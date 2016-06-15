@@ -46,7 +46,7 @@ final class Main
 		final String packagePrefix = params.getPackagePrefix();
 
 		final ArrayList<Class<?>> skippedPackagePrefix = new ArrayList<>();
-		final HashMap<File,ArrayList<Class<?>>> skipped = new HashMap<>();
+		final HashMap<File,ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist = new HashMap<>();
 		final AtomicInteger progress = new AtomicInteger(0);
 		for(final Type<?> type : model.getTypes())
 		{
@@ -60,7 +60,7 @@ final class Main
 				continue;
 			}
 
-			writeFiles(params, new ItemType( type, clazz ), skipped, progress);
+			writeFiles(params, new ItemType( type, clazz ), skippedTargetDirectoryDoesNotExist, progress);
 		}
 
 		final HashSet<Class<? extends Composite>> compositeClasses = new HashSet<>();
@@ -83,7 +83,7 @@ final class Main
 				if(!compositeClasses.add(clazz))
 					continue;
 
-				writeFiles(params, new CompositeType( clazz, field ), skipped, progress);
+				writeFiles(params, new CompositeType( clazz, field ), skippedTargetDirectoryDoesNotExist, progress);
 			}
 		}
 
@@ -96,7 +96,7 @@ final class Main
 			default:
 				System.out.println("Skipping " + skippedPackagePrefix.size() +   " classes because not in packagePrefix '" + packagePrefix + "'."); break;
 		}
-		for(final Map.Entry<File,ArrayList<Class<?>>> entry : skipped.entrySet())
+		for(final Map.Entry<File,ArrayList<Class<?>>> entry : skippedTargetDirectoryDoesNotExist.entrySet())
 		{
 			final ArrayList<Class<?>> classes = entry.getValue();
 			if(classes.size()==1)
@@ -114,7 +114,7 @@ final class Main
 	private static final void writeFiles(
 			final Params params,
 			final MyType type,
-			final HashMap<File,ArrayList<Class<?>>> skipped,
+			final HashMap<File,ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist,
 			final AtomicInteger progress)
 		throws HumanReadableException, IOException
 	{
@@ -128,11 +128,11 @@ final class Main
 
 		if(!dir.exists())
 		{
-			ArrayList<Class<?>> classes = skipped.get(dir);
+			ArrayList<Class<?>> classes = skippedTargetDirectoryDoesNotExist.get(dir);
 			if(classes==null)
 			{
 				classes = new ArrayList<>();
-				skipped.put(dir, classes);
+				skippedTargetDirectoryDoesNotExist.put(dir, classes);
 			}
 			classes.add(clazz);
 			return;
