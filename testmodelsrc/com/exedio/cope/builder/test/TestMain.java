@@ -19,4 +19,9 @@ public final class TestMain
 			GenericComplexSuper.TYPE, GenericComplexMid.TYPE, GenericComplexSub.TYPE,
 			AbstractLevel1Item.TYPE, MixedLevel2Item.TYPE, ConcreteLevel3Item.TYPE
 	);
+
+	static
+	{
+		model.enableSerialization(TestMain.class, "model");
+	}
 }
