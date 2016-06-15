@@ -16,7 +16,7 @@ public final class AntTask extends Task
 
 	public void setPackagePrefix(final String value)
 	{
-		params.setPackagePrefix(value);
+		params.addPackagePrefixes(value);
 	}
 
 	public void setDestdir(final File value)

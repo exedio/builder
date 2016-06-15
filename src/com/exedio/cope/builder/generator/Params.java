@@ -3,6 +3,8 @@ package com.exedio.cope.builder.generator;
 import com.exedio.cope.Model;
 import com.exedio.cope.misc.ModelByString;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 final class Params
 {
@@ -19,10 +21,18 @@ final class Params
 	}
 
 
-	private String packagePrefixMatch = null;
-	private String packagePrefixDisplay = null;
+	private final ArrayList<String> packagePrefixesMatch   = new ArrayList<>();
+	private final StringBuilder     packagePrefixesDisplay = new StringBuilder();
 
-	void setPackagePrefix(final String packagePrefix)
+	void addPackagePrefixes(final String packagePrefixes)
+	{
+		for(final StringTokenizer t =
+				new StringTokenizer(packagePrefixes, ",");
+				t.hasMoreTokens(); )
+			addPackagePrefix(t.nextToken());
+	}
+
+	private void addPackagePrefix(final String packagePrefix)
 	{
 		for(int i = 0; i<packagePrefix.length(); i++)
 		{
@@ -43,18 +53,26 @@ final class Params
 			throw new IllegalArgumentException(
 					"packagePrefix \"" + packagePrefix + "\" must not end with dot.");
 
-		this.packagePrefixMatch = packagePrefix + '.';
-		this.packagePrefixDisplay = packagePrefix;
+		this.packagePrefixesMatch.add(packagePrefix + '.');
+		if(this.packagePrefixesDisplay.length()>0)
+			this.packagePrefixesDisplay.append(',');
+		this.packagePrefixesDisplay.append(packagePrefix);
 	}
 
 	boolean matchesPackagePrefix(final Class<?> clazz)
 	{
-		return clazz.getName().startsWith(packagePrefixMatch);
+		final String clazzName = clazz.getName();
+
+		for(final String packagePrefixMatch : packagePrefixesMatch)
+			if(clazzName.startsWith(packagePrefixMatch))
+				return true;
+
+		return false;
 	}
 
 	String getPackagePrefix()
 	{
-		return packagePrefixDisplay;
+		return packagePrefixesDisplay.toString();
 	}
 
 

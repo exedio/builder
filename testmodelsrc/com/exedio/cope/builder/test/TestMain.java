@@ -4,6 +4,7 @@ import com.exedio.cope.Model;
 import com.exedio.cope.builder.other.ConcreteItem;
 import com.exedio.cope.builder.other.SubItem;
 import com.exedio.cope.builder.skipped.SkippedBecauseTargetDirectoryDoesNotExistsItem;
+import com.exedio.cope.builderSecond.SecondPackageItem;
 import com.exedio.cope.builderSkipped.SkippedBecauseNotInPackagePrefixItem;
 
 public final class TestMain
@@ -20,6 +21,7 @@ public final class TestMain
 			DynamicModelItem.TYPE,
 			SkippedBecauseTargetDirectoryDoesNotExistsItem.TYPE,
 			SkippedBecauseNotInPackagePrefixItem.TYPE,
+			SecondPackageItem.TYPE,
 			GenericComplexSuper.TYPE, GenericComplexMid.TYPE, GenericComplexSub.TYPE,
 			AbstractLevel1Item.TYPE, MixedLevel2Item.TYPE, ConcreteLevel3Item.TYPE
 	);
