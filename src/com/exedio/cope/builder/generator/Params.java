@@ -23,6 +23,25 @@ final class Params
 
 	void setPackagePrefix(final String packagePrefix)
 	{
+		for(int i = 0; i<packagePrefix.length(); i++)
+		{
+			final char c = packagePrefix.charAt(i);
+			if(!(
+				('0'<=c && c<='9') ||
+				('A'<=c && c<='Z') ||
+				('a'<=c && c<='z') ||
+				c == '.'))
+				throw new IllegalArgumentException(
+						"packagePrefix \"" + packagePrefix + "\" contains " +
+						"illegal character \"" + c + "\" at position " + i + '.');
+		}
+		if(packagePrefix.startsWith("."))
+			throw new IllegalArgumentException(
+					"packagePrefix \"" + packagePrefix + "\" must not start with dot.");
+		if(packagePrefix.endsWith("."))
+			throw new IllegalArgumentException(
+					"packagePrefix \"" + packagePrefix + "\" must not end with dot.");
+
 		this.packagePrefix = packagePrefix + '.';
 	}
 
