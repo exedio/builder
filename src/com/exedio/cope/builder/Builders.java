@@ -15,6 +15,7 @@ public final class Builders
 	 * Resets any internal static values used, for example, for generating unique values.
 	 * Doesn't need to be called but makes test data better understandable when called in @Before method.
 	 */
+	@SuppressWarnings("synthetic-access")
 	public static void reset()
 	{
 		AutoIncrementBuilder.nextValues.clear();

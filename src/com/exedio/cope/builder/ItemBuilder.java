@@ -171,6 +171,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		@Override
 		public I build()
 		{
+			@SuppressWarnings("synthetic-access")
 			final Query<I> query = builder.type.newQuery();
 			for (final Map.Entry<Settable<?>, SetValue<?>> key :builder.values.entrySet())
 			{
