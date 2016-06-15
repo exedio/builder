@@ -30,6 +30,9 @@
 
 	<target name="testmodelsrc.instrument" unless="skip.instrument">
 		<instrument verify="${instrument.verify}" verbose="false">
+			<fileset dir="testmodeljarsrc">
+				<include name="com/exedio/cope/builder/test/*Item.java" />
+			</fileset>
 			<fileset dir="testmodelsrc">
 				<include name="com/exedio/cope/builder/test/*Item.java" />
 				<include name="com/exedio/cope/builder/other/*Composite.java" />
@@ -42,9 +45,35 @@
 		</instrument>
 	</target>
 
-	<target name="testmodelsrc.compile" depends="testmodelsrc.instrument">
+	<target name="testmodeljarsrc.compile" depends="testmodelsrc.instrument">
+		<compile srcdir="testmodeljarsrc">
+			<classpath>
+				<pathelement location="lib/exedio-cope.jar" />
+				<pathelement location="lib/slf4j-api.jar" />
+				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
+				<pathelement location="lib/findbugs-annotations.jar" />
+			</classpath>
+		</compile>
+	</target>
+
+	<target name="testmodeljarsrc.jar" depends="testmodeljarsrc.compile">
+		<jar jarfile="build/testmodeljarsrc.jar" filesonly="true" duplicate="fail" strict="fail" level="9">
+			<fileset dir="build/classes/testmodeljarsrc" />
+			<manifest>
+				<attribute name="Specification-Title" value="exedio cope builder testmodeljarsrc" />
+				<attribute name="Specification-Version" value="${build.tag}" />
+				<attribute name="Specification-Vendor" value="exedio GmbH" />
+				<attribute name="Implementation-Title" value="exedio cope builder testmodeljarsrc" />
+				<attribute name="Implementation-Version" value="${build.tag}" />
+				<attribute name="Implementation-Vendor" value="exedio GmbH" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="testmodelsrc.compile" depends="testmodelsrc.instrument, testmodeljarsrc.jar">
 		<compile srcdir="testmodelsrc">
 			<classpath>
+				<pathelement location="build/testmodeljarsrc.jar" />
 				<pathelement location="lib/exedio-cope.jar" />
 				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
@@ -56,6 +85,7 @@
 		<taskdef resource="com/exedio/cope/builder/generator/ant.properties">
 			<classpath>
 				<path path="build/classes/src"/>
+				<path path="build/testmodeljarsrc.jar" />
 				<path path="build/classes/testmodelsrc"/>
 				<pathelement location="lib/exedio-cope.jar" />
 				<pathelement location="lib/servlet-api.jar" />
@@ -69,12 +99,18 @@
 				model="com.exedio.cope.builder.test.TestMain#model"
 				packagePrefix="com.exedio.cope.builder,com.exedio.cope.builderSecond"
 				destdir="testsrc" />
+		<echo message="do it twice to test modification detection" />
+		<generateCopeBuilder
+				model="com.exedio.cope.builder.test.TestMain#model"
+				packagePrefix="com.exedio.cope.builder,com.exedio.cope.builderSecond"
+				destdir="testsrc" />
 	</target>
 
 	<target name="testsrc.compile" depends="src.compile, testmodelsrc.compile, testbuilder">
 		<compile srcdir="testsrc">
 			<classpath>
 				<pathelement location="build/classes/src" />
+				<pathelement location="build/testmodeljarsrc.jar" />
 				<pathelement location="build/classes/testmodelsrc" />
 				<pathelement location="lib/exedio-cope.jar" />
 				<pathelement location="lib/exedio-cope-junit.jar" />
@@ -96,6 +132,7 @@
 			<formatter type="xml" />
 			<classpath>
 				<pathelement location="build/classes/src" />
+				<pathelement location="build/testmodeljarsrc.jar" />
 				<pathelement location="build/classes/testmodelsrc" />
 				<pathelement location="build/classes/testsrc" />
 				<pathelement location="lib/hsqldb.jar" />

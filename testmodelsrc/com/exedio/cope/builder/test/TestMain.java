@@ -22,6 +22,7 @@ public final class TestMain
 			SkippedBecauseTargetDirectoryDoesNotExistsItem.TYPE,
 			SkippedBecauseNotInPackagePrefixItem.TYPE,
 			SecondPackageItem.TYPE,
+			JarItem.TYPE,
 			GenericComplexSuper.TYPE, GenericComplexMid.TYPE, GenericComplexSub.TYPE,
 			AbstractLevel1Item.TYPE, MixedLevel2Item.TYPE, ConcreteLevel3Item.TYPE
 	);
