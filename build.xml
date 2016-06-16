@@ -198,7 +198,6 @@
 		<javadoc
 				destdir="build/api"
 				maxmemory="60m"
-				source="1.5"
 				private="true"
 				author="on"
 				use="on"
@@ -210,6 +209,7 @@
 			<fileset dir="src" includes="**/*.java" />
 			<classpath>
 				<pathelement location="lib/exedio-cope.jar" />
+				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
 		</javadoc>
 	</target>
@@ -244,7 +244,7 @@
 		</findbugs>
 	</target>
 
-	<target name="all" depends="build, jar.src, findbugs" />
+	<target name="all" depends="build, jar.src, api, findbugs" />
 
 	<target name="jenkins" depends="all">
 		<copy todir="${basedir}/build/success">
