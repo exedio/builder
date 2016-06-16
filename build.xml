@@ -197,24 +197,16 @@
 	<target name="compile" depends="src.compile, testsrc.compile" />
 
 	<target name="api">
-
-		<javadoc
-				destdir="build/api"
-				maxmemory="60m"
-				private="true"
-				author="on"
-				use="on"
-				version="on"
-				windowtitle="exedio cope"
-				splitindex="on"
-				failonerror="true"
-			>
-			<fileset dir="src" includes="**/*.java" />
-			<classpath>
+		<api title="cope builder">
+			<src>
+				<fileset file="src/com" includes="**/*.java" />
+			</src>
+			<myClasspath>
 				<pathelement location="lib/exedio-cope.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
-			</classpath>
-		</javadoc>
+				<pathelement location="${ant.core.lib}" />
+			</myClasspath>
+		</api>
 	</target>
 
 	<target name="src"
