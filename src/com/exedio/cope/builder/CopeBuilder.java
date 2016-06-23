@@ -2,13 +2,10 @@ package com.exedio.cope.builder;
 
 import com.exedio.cope.SetValue;
 import com.exedio.cope.Settable;
-import com.exedio.cope.pattern.EnumSetField;
-import com.exedio.cope.pattern.Hash;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -61,36 +58,6 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 	{
 		if (!values.containsKey( settable )) return null;
 		return (V) values.get(settable).value;
-	}
-
-	@SuppressWarnings("unchecked")
-	protected B fallback( final Hash settable, final String value )
-	{
-		if(!isSet(settable))
-			set(settable, value);
-		return (B) this;
-	}
-
-	@SuppressWarnings("unchecked")
-	protected B set( final Hash settable, final String value )
-	{
-		values.put(settable, settable.map(value));
-		return (B) this;
-	}
-
-	@SuppressWarnings("unchecked")
-	protected <V> V get( final Hash settable )
-	{
-		if (!values.containsKey( settable )) return null;
-		return (V) values.get(settable).value;
-	}
-
-	@SuppressWarnings("unchecked")
-	protected <V extends Enum<V>> B fallback( final EnumSetField<V> field, final EnumSet<V> value )
-	{
-		if(!isSet(field))
-			set(field, value);
-		return (B) this;
 	}
 
 	@SafeVarargs
