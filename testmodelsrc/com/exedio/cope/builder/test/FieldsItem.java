@@ -206,6 +206,8 @@ final class FieldsItem extends Item
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
 	final void setRange(final com.exedio.cope.pattern.Range<? extends Integer> range)
+			throws
+				com.exedio.cope.MandatoryViolationException
 	{
 		FieldsItem.range.set(this,range);
 	}/**
@@ -236,6 +238,8 @@ final class FieldsItem extends Item
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
 	final void setRangeFrom(final Integer range)
+			throws
+				com.exedio.cope.MandatoryViolationException
 	{
 		FieldsItem.range.setFrom(this,range);
 	}/**
@@ -246,6 +250,8 @@ final class FieldsItem extends Item
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
 	final void setRangeTo(final Integer range)
+			throws
+				com.exedio.cope.MandatoryViolationException
 	{
 		FieldsItem.range.setTo(this,range);
 	}/**

@@ -14,7 +14,7 @@
 	<taskdef resource="com/exedio/cope/instrument/ant.properties">
 		<classpath>
 			<pathelement location="lib/exedio-cope-instrument.jar" />
-			<pathelement location="lib/servlet-api.jar" />
+			<pathelement location="lib/javax.servlet-api.jar" />
 			<pathelement location="lib/slf4j-api.jar" />
 		</classpath>
 	</taskdef>
@@ -91,7 +91,7 @@
 				<path path="build/testmodeljarsrc.jar" />
 				<path path="build/classes/testmodelsrc"/>
 				<pathelement location="lib/exedio-cope.jar" />
-				<pathelement location="lib/servlet-api.jar" />
+				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
 			</classpath>
 		</taskdef>
@@ -143,7 +143,7 @@
 				<pathelement location="lib/cpsuite.jar" />
 				<pathelement location="lib/exedio-cope.jar" />
 				<pathelement location="lib/exedio-cope-junit.jar" />
-				<pathelement location="lib/servlet-api.jar" />
+				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
 			</classpath>
 			<test name="${test}" todir="build/testresults" outfile="copebuilder" />
