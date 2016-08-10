@@ -20,12 +20,12 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 
 	@SuppressWarnings("unchecked")
 	@SuppressFBWarnings("DP_DO_INSIDE_DO_PRIVILEGED")
-	protected B set(final String settableName, final Object value)
+	protected B set(final String featureName, final Object value)
 	{
 		try
 		{
 			// TODO use some framework function for this
-			final java.lang.reflect.Field field = targetClazz.getDeclaredField(settableName);
+			final java.lang.reflect.Field field = targetClazz.getDeclaredField(featureName);
 			field.setAccessible(true);
 			return set((Settable<Object>)field.get(null), value);
 		}

@@ -122,11 +122,11 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	}
 
 	@SuppressWarnings("unchecked")
-	protected B set(final String settableName, final Object value)
+	protected B set(final String featureName, final Object value)
 	{
-		final Feature feature = this.type.getFeature(settableName);
+		final Feature feature = this.type.getFeature(featureName);
 		if(feature==null)
-			throw new NullPointerException(settableName);
+			throw new NullPointerException(featureName);
 		if(feature instanceof Settable<?>)
 			return set((Settable<Object>)feature, value);
 		else if(feature instanceof SetField<?>)
@@ -136,7 +136,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		else if(feature instanceof MapField<?,?>)
 			return set((MapField<Object,Object>)feature, (Map<Object,Object>)value); // TODO kaputt
 		else
-			throw new IllegalArgumentException(settableName);
+			throw new IllegalArgumentException(featureName);
 	}
 
 	/**
