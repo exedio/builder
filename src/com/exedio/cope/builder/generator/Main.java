@@ -1,6 +1,5 @@
 package com.exedio.cope.builder.generator;
 
-import com.exedio.cope.EnumField;
 import com.exedio.cope.Feature;
 import com.exedio.cope.Model;
 import com.exedio.cope.Pattern;
@@ -341,13 +340,13 @@ final class Main
 				feature instanceof MapField<?,?>))
 				continue;
 
-			if(feature instanceof EnumField &&
-					!isVisible(packageName, ((EnumField<?>)feature).getValueClass()))
+			if(feature instanceof Settable)
+			{
+				final java.lang.reflect.Type initialType = ((Settable<?>)feature).getInitialType();
+				if(initialType instanceof Class<?> &&
+					!isVisible(packageName, ((Class<?>)initialType)))
 					continue;
-			if(feature instanceof CompositeField &&
-					!isVisible(packageName, ((CompositeField<?>)feature).getValueClass()))
-					continue;
-
+			}
 			{
 				final Pattern pattern = feature.getPattern();
 				if((pattern!=null) &&
