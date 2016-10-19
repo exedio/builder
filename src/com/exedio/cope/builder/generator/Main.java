@@ -342,10 +342,10 @@ final class Main
 				continue;
 
 			if(feature instanceof EnumField &&
-					!Modifier.isPublic(((EnumField<?>)feature).getValueClass().getModifiers()))
+					!isVisible(packageName, ((EnumField<?>)feature).getValueClass()))
 					continue;
 			if(feature instanceof CompositeField &&
-					!Modifier.isPublic(((CompositeField<?>)feature).getValueClass().getModifiers()))
+					!isVisible(packageName, ((CompositeField<?>)feature).getValueClass()))
 					continue;
 
 			{
@@ -433,6 +433,17 @@ final class Main
 
 		writer.write("}");
 		writer.write(newLine);
+	}
+
+	private static boolean isVisible(final String packageName, final Class<?> valueClass)
+	{
+		final int modifier = valueClass.getModifiers();
+		if(Modifier.isPublic(modifier))
+			return true;
+		if(Modifier.isPrivate(modifier))
+			return false;
+
+		return packageName.equals(valueClass.getPackage().getName());
 	}
 
 	private static void writeRedirectSetter(
