@@ -355,8 +355,6 @@ final class Main
 					continue;
 			}
 
-			writer.write(newLine);
-
 			final String featureName = type.getName(feature);
 			final String featureIdentifier = featureName.replace('-', '_');
 
@@ -367,6 +365,7 @@ final class Main
 				continue;
 			}
 
+			writer.write(newLine);
 			writer.write("\tpublic final B ");
 			writer.write(featureIdentifier);
 			writer.write("(final ");
