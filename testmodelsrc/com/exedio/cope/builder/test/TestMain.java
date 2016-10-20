@@ -13,6 +13,7 @@ public final class TestMain
 	public static final Model model = new Model(
 			(com.exedio.cope.Revisions.Factory)null,
 			new TypeSet[]{
+					com.exedio.cope.builder.test.genericComplex.Types.types,
 					com.exedio.cope.builder.test.packagePrivate.Types.types,
 			},
 			SimpleItem.TYPE,
@@ -28,7 +29,6 @@ public final class TestMain
 			SkippedBecauseNotInPackagePrefixItem.TYPE,
 			SecondPackageItem.TYPE,
 			JarItem.TYPE,
-			GenericComplexSuper.TYPE, GenericComplexMid.TYPE, GenericComplexSub.TYPE,
 			AbstractLevel1Item.TYPE, MixedLevel2Item.TYPE, ConcreteLevel3Item.TYPE
 	);
 

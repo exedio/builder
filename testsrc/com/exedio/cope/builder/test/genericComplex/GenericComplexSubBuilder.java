@@ -1,4 +1,4 @@
-package com.exedio.cope.builder.test;
+package com.exedio.cope.builder.test.genericComplex;
 
 public class GenericComplexSubBuilder extends GeneratedGenericComplexSubBuilder<GenericComplexSubBuilder>
 {

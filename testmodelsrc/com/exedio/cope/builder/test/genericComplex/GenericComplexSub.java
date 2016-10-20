@@ -1,4 +1,4 @@
-package com.exedio.cope.builder.test;
+package com.exedio.cope.builder.test.genericComplex;
 
 import java.util.List;
 
