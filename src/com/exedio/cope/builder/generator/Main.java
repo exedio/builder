@@ -343,8 +343,7 @@ final class Main
 			if(feature instanceof Settable)
 			{
 				final java.lang.reflect.Type initialType = ((Settable<?>)feature).getInitialType();
-				if(initialType instanceof Class<?> &&
-					!isVisible(packageName, ((Class<?>)initialType)))
+				if(!isVisible(packageName, initialType))
 					continue;
 			}
 			{
@@ -432,6 +431,28 @@ final class Main
 
 		writer.write("}");
 		writer.write(newLine);
+	}
+
+	private static boolean isVisible(final String packageName, final java.lang.reflect.Type valueType)
+	{
+		if(valueType instanceof Class<?>)
+			return isVisible(packageName, (Class<?>)valueType);
+		else if(valueType instanceof ParameterizedType)
+			return isVisible(packageName, (ParameterizedType)valueType);
+		else
+			throw new RuntimeException(valueType.getTypeName() + ' ' + valueType.getClass());
+	}
+
+	private static boolean isVisible(final String packageName, final ParameterizedType valueType)
+	{
+		if(!isVisible(packageName, valueType.getRawType()))
+			return false;
+
+		for(final java.lang.reflect.Type argument : valueType.getActualTypeArguments())
+			if(!isVisible(packageName, argument))
+				return false;
+
+		return true;
 	}
 
 	private static boolean isVisible(final String packageName, final Class<?> valueClass)

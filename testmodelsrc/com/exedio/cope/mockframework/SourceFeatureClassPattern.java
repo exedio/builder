@@ -10,6 +10,7 @@ import com.exedio.cope.pattern.BlockField;
 import com.exedio.cope.pattern.BlockType;
 import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeField;
+import com.exedio.cope.pattern.RangeField;
 
 public final class SourceFeatureClassPattern extends Pattern
 {
@@ -55,6 +56,8 @@ public final class SourceFeatureClassPattern extends Pattern
 		addSource(CompositeField.create(CompositePackage.class).optional(), "compositePackage");
 		addSource(BlockField.create(BlockPublic.TYPE), "blockPublic");
 		addSource(BlockField.create(BlockPackage.TYPE), "blockPackage");
+		addSource(RangeField.create(EnumField.create(EnumPublic.class).optional()), "rangeEnumPublic");
+		addSource(RangeField.create(EnumField.create(EnumPackage.class).optional()), "rangeEnumPackage");
 	}
 
 
