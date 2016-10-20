@@ -1,5 +1,6 @@
 package com.exedio.cope.builder.test;
 
+import com.exedio.cope.mockframework.SourceFeatureClassPattern;
 import org.junit.Test;
 
 public class SourceFeatureClassTest extends MainTest
@@ -11,9 +12,9 @@ public class SourceFeatureClassTest extends MainTest
 	public void methodsExist()
 	{
 		new SourceFeatureClassItemBuilder().
-			pattern_enumPublic(null).
-			pattern_compositePublic(null).
-			pattern_blockPublic_integer(null).
+			pattern_enumPublic((SourceFeatureClassPattern.EnumPublic)null).
+			pattern_compositePublic((SourceFeatureClassPattern.CompositePublic)null).
+			pattern_blockPublic_integer((Integer)null).
 			build();
 	}
 }
