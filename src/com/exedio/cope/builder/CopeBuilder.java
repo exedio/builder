@@ -25,13 +25,13 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 		return result;
 	}
 
-	protected <V> boolean isSet( final Settable<V> settable )
+	protected final <V> boolean isSet( final Settable<V> settable )
 	{
 		return values.containsKey(settable);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <V> B fallback( final Settable<V> settable, final V value )
+	protected final <V> B fallback( final Settable<V> settable, final V value )
 	{
 		if(!isSet(settable))
 			set(settable, value);
@@ -39,7 +39,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <V> B fallback( final Settable<V> settable, final Builder<? extends V> builder )
+	protected final <V> B fallback( final Settable<V> settable, final Builder<? extends V> builder )
 	{
 		if(!isSet(settable))
 			set(settable, builder.build());
@@ -47,14 +47,14 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <V> B set( final Settable<V> settable, final V value )
+	protected final <V> B set( final Settable<V> settable, final V value )
 	{
 		values.put(settable, settable.map(value));
 		return (B) this;
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <V> V get( final Settable<V> settable )
+	protected final <V> V get( final Settable<V> settable )
 	{
 		if (!values.containsKey( settable )) return null;
 		return (V) values.get(settable).value;
@@ -90,7 +90,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 		super();
 	}
 
-	protected <K extends Enum<K>, V> EnumMap<K, V> toEnumMap( final K key, final V value )
+	protected static <K extends Enum<K>, V> EnumMap<K, V> toEnumMap( final K key, final V value )
 	{
 		return new EnumMap<>(toMap(key, value));
 	}

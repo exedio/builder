@@ -80,7 +80,7 @@ public final class Builders
 			this.start = start;
 		}
 
-		protected int nextValue()
+		protected final int nextValue()
 		{
 			if(!nextValues.containsKey(object))
 				nextValues.put(object, new AtomicInteger(start));

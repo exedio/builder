@@ -40,23 +40,23 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		this.type = type;
 	}
 
-	protected <V> boolean isSet( final ListField<V> field )
+	protected final <V> boolean isSet( final ListField<V> field )
 	{
 		return listValues.containsKey(field);
 	}
 
-	protected <K, V> boolean isSet(final MapField<K, V> field)
+	protected final <K, V> boolean isSet(final MapField<K, V> field)
 	{
 		return mapValues.containsKey(field);
 	}
 
-	protected <V> boolean isSet(final SetField<V> field)
+	protected final <V> boolean isSet(final SetField<V> field)
 	{
 		return setValues.containsKey(field);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <V> B fallback( final SetField<V> field, final Set<V> value )
+	protected final <V> B fallback( final SetField<V> field, final Set<V> value )
 	{
 		if(!isSet(field))
 			set(field, value);
@@ -64,21 +64,21 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <V> B set(final SetField<V> field, final Set<V> value)
+	protected final <V> B set(final SetField<V> field, final Set<V> value)
 	{
 		setValues.put(field, value);
 		return (B) this;
 	}
 
 	@SuppressWarnings({"unchecked"})
-	protected <V> Set<V> get(final SetField<V> field)
+	protected final <V> Set<V> get(final SetField<V> field)
 	{
 		if (!setValues.containsKey( field )) return null;
 		return (Set<V>) setValues.get(field);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <V> B fallback( final ListField<V> field, final List<V> value )
+	protected final <V> B fallback( final ListField<V> field, final List<V> value )
 	{
 		if(!isSet(field))
 			set(field, value);
@@ -86,21 +86,21 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <V> B set( final ListField<V> field, final List<V> value )
+	protected final <V> B set( final ListField<V> field, final List<V> value )
 	{
 		listValues.put(field, value);
 		return (B) this;
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <V> List<V> get(final ListField<V> field)
+	protected final <V> List<V> get(final ListField<V> field)
 	{
 		if (!listValues.containsKey( field )) return null;
 		return (List<V>) listValues.get(field);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <K, V> B fallback(final MapField<K, V> field, final Map<K, V> value)
+	protected final <K, V> B fallback(final MapField<K, V> field, final Map<K, V> value)
 	{
 		if(!isSet(field))
 			set(field, value);
@@ -108,21 +108,21 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <K, V> B set(final MapField<K, V> field, final Map<K, V> value)
+	protected final <K, V> B set(final MapField<K, V> field, final Map<K, V> value)
 	{
 		mapValues.put(field, value);
 		return (B) this;
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <K, V>  Map<K, V> get(final MapField<K, V> field)
+	protected final <K, V>  Map<K, V> get(final MapField<K, V> field)
 	{
 		if (!mapValues.containsKey( field )) return null;
 		return (Map<K, V>) mapValues.get(field);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected B set(final String featureName, final Object value)
+	protected final B set(final String featureName, final Object value)
 	{
 		final Feature feature = this.type.getFeature(featureName);
 		if(feature==null)
@@ -162,7 +162,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	{
 		private final ItemBuilder<I, B> builder;
 
-		public DefaultItemBuilder(final ItemBuilder<I, B> builder)
+		DefaultItemBuilder(final ItemBuilder<I, B> builder)
 		{
 			this.builder = builder;
 		}
@@ -194,7 +194,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		}
 	}
 
-	protected Builder<I> toDefault()
+	protected final Builder<I> toDefault()
 	{
 		return new DefaultItemBuilder( this );
 	}

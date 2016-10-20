@@ -20,7 +20,7 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 
 	@SuppressWarnings("unchecked")
 	@SuppressFBWarnings("DP_DO_INSIDE_DO_PRIVILEGED")
-	protected B set(final String featureName, final Object value)
+	protected final B set(final String featureName, final Object value)
 	{
 		try
 		{
