@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.TypeVariable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -417,11 +418,11 @@ final class Main
 				final MoneyField<?> field = (MoneyField<?>)feature;
 				writeRedirectSetter(writer, newLine, featureIdentifier,
 						"final double value," +
-						"final " + field.getCurrencyClass().getCanonicalName() + " currency",
+						"final " + getCanonicalName(field.getCurrencyClass()) + " currency",
 						"com.exedio.cope.pattern.Money.valueOf(value,currency)");
 				writeRedirectSetter(writer, newLine, featureIdentifier,
 						"final int store," +
-						"final " + field.getCurrencyClass().getCanonicalName() + " currency",
+						"final " + getCanonicalName(field.getCurrencyClass()) + " currency",
 						"com.exedio.cope.pattern.Money.storeOf(store,currency)");
 			}
 		}
@@ -500,20 +501,7 @@ final class Main
 					(valueClass instanceof Class && field.isMandatory())
 					? PrimitiveUtil.toPrimitive((Class<?>)valueClass)
 					: valueClass;
-			final String canonicalName = getCanonicalName((primitiveClass!=null) ? primitiveClass : valueClass);
-			if ( valueClass instanceof Class && ((Class<?>)valueClass).getTypeParameters().length>0 )
-			{
-				final StringBuilder typeParamsString = new StringBuilder();
-				typeParamsString.append("<?");
-				for(int i = 1; i<((Class<?>)valueClass).getTypeParameters().length; i++)
-					typeParamsString.append(",?");
-				typeParamsString.append('>');
-				return canonicalName + typeParamsString;
-			}
-			else
-			{
-				return canonicalName;
-			}
+			return getCanonicalName((primitiveClass!=null) ? primitiveClass : valueClass);
 		}
 		else if(feature instanceof SetField<?>)
 		{
@@ -553,11 +541,27 @@ final class Main
 	private static String getCanonicalName(final java.lang.reflect.Type type)
 	{
 		if(type instanceof Class)
-			return ((Class<?>)type).getCanonicalName();
+			return getCanonicalName((Class<?>)type);
 		else if(type instanceof ParameterizedType)
 			return getCanonicalName((ParameterizedType)type);
 		else
 			throw new RuntimeException("" + type);
+	}
+
+	private static String getCanonicalName(final Class<?> type)
+	{
+		final String rawName = type.getCanonicalName();
+
+		final TypeVariable<?>[] typeParams = type.getTypeParameters();
+		if(typeParams.length==0)
+			return rawName;
+
+		final StringBuilder bf = new StringBuilder(rawName);
+		bf.append("<?");
+		for(int i = 1; i<typeParams.length; i++)
+			bf.append(",?");
+		bf.append('>');
+		return bf.toString();
 	}
 
 	private static String getCanonicalName(final ParameterizedType type)

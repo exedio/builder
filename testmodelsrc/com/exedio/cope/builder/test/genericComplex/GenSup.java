@@ -1,9 +1,10 @@
 package com.exedio.cope.builder.test.genericComplex;
 
 import com.exedio.cope.Item;
+import com.exedio.cope.pattern.Money;
 import java.util.Collection;
 
-class GenSup<N extends Number, L extends Collection<String>> extends Item
+class GenSup<N extends Number, L extends Collection<String>> extends Item implements Money.Currency
 {
 	static final class classWildcard
 	{
