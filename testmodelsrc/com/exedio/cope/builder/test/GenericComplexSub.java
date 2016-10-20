@@ -2,7 +2,7 @@ package com.exedio.cope.builder.test;
 
 import java.util.List;
 
-public final class GenericComplexSub extends GenericComplexMid<List<String>>
+final class GenericComplexSub extends GenericComplexMid<List<String>>
 {
 	/**
 
@@ -12,7 +12,7 @@ public final class GenericComplexSub extends GenericComplexMid<List<String>>
 	 *       It can be customized with the tags <tt>@cope.constructor public|package|protected|private|none</tt> in the class comment and <tt>@cope.initial</tt> in the comment of fields.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	public GenericComplexSub()
+	GenericComplexSub()
 	{
 		this(new com.exedio.cope.SetValue<?>[]{
 		});
@@ -41,7 +41,7 @@ public final class GenericComplexSub extends GenericComplexMid<List<String>>
 	 *       It can be customized with the tag <tt>@cope.type public|package|protected|private|none</tt> in the class comment.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	public static final com.exedio.cope.Type<GenericComplexSub> TYPE = com.exedio.cope.TypesBound.newType(GenericComplexSub.class);/**
+	static final com.exedio.cope.Type<GenericComplexSub> TYPE = com.exedio.cope.TypesBound.newType(GenericComplexSub.class);/**
 
 	 **
 	 * Activation constructor. Used for internal purposes only.

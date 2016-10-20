@@ -2,12 +2,12 @@ package com.exedio.cope.builder.test;
 
 import java.util.Collection;
 
-public class GenericComplexMid<L extends Collection<String>> extends GenericComplexSuper<Long, L>
+class GenericComplexMid<L extends Collection<String>> extends GenericComplexSuper<Long, L>
 {
-	public static final class classWildcard
+	static final class classWildcard
 	{
 		@SuppressWarnings("unchecked")
-		public static final Class<GenericComplexMid<?>> value = (Class<GenericComplexMid<?>>)(Class<?>)GenericComplexMid.class;
+		static final Class<GenericComplexMid<?>> value = (Class<GenericComplexMid<?>>)(Class<?>)GenericComplexMid.class;
 	}
 
 	/**
@@ -18,7 +18,7 @@ public class GenericComplexMid<L extends Collection<String>> extends GenericComp
 	 *       It can be customized with the tags <tt>@cope.constructor public|package|protected|private|none</tt> in the class comment and <tt>@cope.initial</tt> in the comment of fields.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	public GenericComplexMid()
+	GenericComplexMid()
 	{
 		this(new com.exedio.cope.SetValue<?>[]{
 		});
@@ -47,7 +47,7 @@ public class GenericComplexMid<L extends Collection<String>> extends GenericComp
 	 *       It can be customized with the tag <tt>@cope.type public|package|protected|private|none</tt> in the class comment.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	public static final com.exedio.cope.Type<GenericComplexMid<?>> TYPE = com.exedio.cope.TypesBound.newType(GenericComplexMid.classWildcard.value);/**
+	static final com.exedio.cope.Type<GenericComplexMid<?>> TYPE = com.exedio.cope.TypesBound.newType(GenericComplexMid.classWildcard.value);/**
 
 	 **
 	 * Activation constructor. Used for internal purposes only.

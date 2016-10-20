@@ -3,12 +3,12 @@ package com.exedio.cope.builder.test;
 import com.exedio.cope.Item;
 import java.util.Collection;
 
-public class GenericComplexSuper<N extends Number, L extends Collection<String>> extends Item
+class GenericComplexSuper<N extends Number, L extends Collection<String>> extends Item
 {
-	public static final class classWildcard
+	static final class classWildcard
 	{
 		@SuppressWarnings("unchecked")
-		public static final Class<GenericComplexSuper<?,?>> value = (Class<GenericComplexSuper<?,?>>)(Class<?>)GenericComplexSuper.class;
+		static final Class<GenericComplexSuper<?,?>> value = (Class<GenericComplexSuper<?,?>>)(Class<?>)GenericComplexSuper.class;
 	}
 
 	/**
@@ -19,7 +19,7 @@ public class GenericComplexSuper<N extends Number, L extends Collection<String>>
 	 *       It can be customized with the tags <tt>@cope.constructor public|package|protected|private|none</tt> in the class comment and <tt>@cope.initial</tt> in the comment of fields.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	public GenericComplexSuper()
+	GenericComplexSuper()
 	{
 		this(new com.exedio.cope.SetValue<?>[]{
 		});
@@ -48,7 +48,7 @@ public class GenericComplexSuper<N extends Number, L extends Collection<String>>
 	 *       It can be customized with the tag <tt>@cope.type public|package|protected|private|none</tt> in the class comment.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	public static final com.exedio.cope.Type<GenericComplexSuper<?,?>> TYPE = com.exedio.cope.TypesBound.newType(GenericComplexSuper.classWildcard.value);/**
+	static final com.exedio.cope.Type<GenericComplexSuper<?,?>> TYPE = com.exedio.cope.TypesBound.newType(GenericComplexSuper.classWildcard.value);/**
 
 	 **
 	 * Activation constructor. Used for internal purposes only.
