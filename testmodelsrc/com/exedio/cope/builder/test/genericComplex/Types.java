@@ -5,9 +5,9 @@ import com.exedio.cope.TypeSet;
 public final class Types
 {
 	public static final TypeSet types = new TypeSet(
-			GenericComplexSuper.TYPE,
-			GenericComplexMid.TYPE,
-			GenericComplexSub.TYPE);
+			GenSup.TYPE,
+			GenMid.TYPE,
+			GenSub.TYPE);
 
 	private Types()
 	{
