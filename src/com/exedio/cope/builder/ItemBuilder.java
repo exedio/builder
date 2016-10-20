@@ -121,12 +121,25 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		return (Map<K, V>) mapValues.get(field);
 	}
 
-	@SuppressWarnings("unchecked")
-	protected final B set(final String featureName, final Object value)
+	@Override
+	protected final <F extends Feature> F getFeature(final String featureName)
 	{
 		final Feature feature = this.type.getFeature(featureName);
 		if(feature==null)
 			throw new NullPointerException(featureName);
+		@SuppressWarnings("unchecked")
+		final F result = (F)feature;
+		return result;
+	}
+
+	/**
+	 * @deprecated Use fields filled by {@link #getFeature(String)} instead.
+	 */
+	@Deprecated
+	@SuppressWarnings("unchecked")
+	protected final B set(final String featureName, final Object value)
+	{
+		final Feature feature = getFeature(featureName);
 		if(feature instanceof Settable<?>)
 			return set((Settable<Object>)feature, value);
 		else if(feature instanceof SetField<?>)

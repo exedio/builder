@@ -361,6 +361,53 @@ final class Main
 				continue;
 			}
 
+
+			writer.write(newLine);
+			writer.write(newLine);
+			writer.write("\tprotected final ");
+
+			if(feature instanceof Settable)
+			{
+				writer.write(Settable.class.getName());
+				writer.write('<');
+				writer.write(getCanonicalName(((Settable<?>)feature).getInitialType()));
+				writer.write('>');
+			}
+			else if(feature instanceof SetField)
+			{
+				writer.write(SetField.class.getName());
+				writer.write('<');
+				writer.write(getCanonicalName(((SetField<?>)feature).getElement().getValueClass()));
+				writer.write('>');
+			}
+			else if(feature instanceof ListField)
+			{
+				writer.write(ListField.class.getName());
+				writer.write('<');
+				writer.write(getCanonicalName(((ListField<?>)feature).getElement().getValueClass()));
+				writer.write('>');
+			}
+			else if(feature instanceof MapField)
+			{
+				final MapField<?,?> field = (MapField<?,?>)feature;
+				writer.write(MapField.class.getName());
+				writer.write('<');
+				writer.write(getCanonicalName(field.getKey().getValueClass()));
+				writer.write(',');
+				writer.write(getCanonicalName(field.getValue().getValueClass()));
+				writer.write('>');
+			}
+			else
+				throw new RuntimeException("" + feature.getClass());
+
+			writer.write(' ');
+			writer.write(featureIdentifier);
+			writer.write(" = getFeature(\"");
+			writer.write(featureName);
+			writer.write("\");");
+			writer.write(newLine);
+
+
 			writer.write(newLine);
 			writer.write("\tpublic final B ");
 			writer.write(featureIdentifier);
@@ -373,9 +420,9 @@ final class Main
 			writer.write("\t{");
 			writer.write(newLine);
 
-			writer.write("\t\treturn set(\"");
-			writer.write(featureName);
-			writer.write("\", ");
+			writer.write("\t\treturn set(this.");
+			writer.write(featureIdentifier);
+			writer.write(",");
 			writer.write(featureIdentifier);
 			writer.write(");");
 			writer.write(newLine);

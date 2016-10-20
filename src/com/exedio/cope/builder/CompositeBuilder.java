@@ -1,5 +1,6 @@
 package com.exedio.cope.builder;
 
+import com.exedio.cope.Feature;
 import com.exedio.cope.SetValue;
 import com.exedio.cope.Settable;
 import com.exedio.cope.pattern.Composite;
@@ -18,16 +19,21 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 		this.targetClazz = targetClazz;
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
 	@SuppressFBWarnings("DP_DO_INSIDE_DO_PRIVILEGED")
-	protected final B set(final String featureName, final Object value)
+	protected final <F extends Feature> F getFeature(final String featureName)
 	{
 		try
 		{
 			// TODO use some framework function for this
 			final java.lang.reflect.Field field = targetClazz.getDeclaredField(featureName);
 			field.setAccessible(true);
-			return set((Settable<Object>)field.get(null), value);
+			final Feature feature = (Feature)field.get(null);
+			if(feature==null)
+				throw new NullPointerException(featureName);
+			@SuppressWarnings("unchecked")
+			final F result = (F)feature;
+			return result;
 		}
 		catch( final IllegalAccessException e )
 		{
@@ -37,6 +43,16 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 		{
 			throw new RuntimeException( e );
 		}
+	}
+
+	/**
+	 * @deprecated Use fields filled by {@link #getFeature(String)} instead.
+	 */
+	@Deprecated
+	@SuppressWarnings("unchecked")
+	protected final B set(final String featureName, final Object value)
+	{
+		return set((Settable<Object>)getFeature(featureName), value);
 	}
 
 	@Override
