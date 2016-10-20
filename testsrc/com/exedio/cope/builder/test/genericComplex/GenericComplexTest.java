@@ -1,5 +1,11 @@
 package com.exedio.cope.builder.test.genericComplex;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
+import static java.util.Collections.emptySet;
+import static java.util.Collections.singleton;
+import static java.util.Collections.singletonList;
+import static java.util.Collections.singletonMap;
 import static org.junit.Assert.assertEquals;
 
 import com.exedio.cope.builder.test.MainTest;
@@ -20,6 +26,15 @@ public class GenericComplexTest extends MainTest
 		assertEquals(null, i.getMoneySup());
 		assertEquals(null, i.getMoneyMid());
 		assertEquals(null, i.getMoneySub());
+		assertEquals(emptySet(), i.getSetSup());
+		assertEquals(emptySet(), i.getSetMid());
+		assertEquals(emptySet(), i.getSetSub());
+		assertEquals(emptyList(), i.getListSup());
+		assertEquals(emptyList(), i.getListMid());
+		assertEquals(emptyList(), i.getListSub());
+		assertEquals(emptyMap(), i.getMapSupMap());
+		assertEquals(emptyMap(), i.getMapMidMap());
+		assertEquals(emptyMap(), i.getMapSubMap());
 	}
 	@Test
 	public void set()
@@ -35,6 +50,15 @@ public class GenericComplexTest extends MainTest
 				moneySup(Money.valueOf(1.1, sup)).
 				moneyMid(Money.valueOf(1.2, mid)).
 				moneySub(Money.valueOf(1.3, sub)).
+				setSup(singleton(sup)).
+				setMid(singleton(mid)).
+				setSub(singleton(sub)).
+				listSup(singletonList(sup)).
+				listMid(singletonList(mid)).
+				listSub(singletonList(sub)).
+				mapSup(singletonMap(sup,sup)).
+				mapMid(singletonMap(mid,mid)).
+				mapSub(singletonMap(sub,sub)).
 				build();
 		assertEquals(sup, i.getSup());
 		assertEquals(mid, i.getMid());
@@ -42,6 +66,15 @@ public class GenericComplexTest extends MainTest
 		assertEquals(Money.valueOf(1.1, sup), i.getMoneySup());
 		assertEquals(Money.valueOf(1.2, mid), i.getMoneyMid());
 		assertEquals(Money.valueOf(1.3, sub), i.getMoneySub());
+		assertEquals(singleton(sup), i.getSetSup());
+		assertEquals(singleton(mid), i.getSetMid());
+		assertEquals(singleton(sub), i.getSetSub());
+		assertEquals(singletonList(sup), i.getListSup());
+		assertEquals(singletonList(mid), i.getListMid());
+		assertEquals(singletonList(sub), i.getListSub());
+		assertEquals(singletonMap(sup,sup), i.getMapSupMap());
+		assertEquals(singletonMap(mid,mid), i.getMapMidMap());
+		assertEquals(singletonMap(sub,sub), i.getMapSubMap());
 	}
 	@Test
 	public void redirect()
@@ -54,10 +87,22 @@ public class GenericComplexTest extends MainTest
 				moneySup(1.1, sup).
 				moneyMid(1.2, mid).
 				moneySub(1.3, sub).
+				setSup(sup).
+				setMid(mid).
+				setSub(sub).
+				listSup(sup).
+				listMid(mid).
+				listSub(sub).
 				build();
 		assertEquals(Money.valueOf(1.1, sup), i.getMoneySup());
 		assertEquals(Money.valueOf(1.2, mid), i.getMoneyMid());
 		assertEquals(Money.valueOf(1.3, sub), i.getMoneySub());
+		assertEquals(singleton(sup), i.getSetSup());
+		assertEquals(singleton(mid), i.getSetMid());
+		assertEquals(singleton(sub), i.getSetSub());
+		assertEquals(singletonList(sup), i.getListSup());
+		assertEquals(singletonList(mid), i.getListMid());
+		assertEquals(singletonList(sub), i.getListSub());
 	}
 	@Test
 	public void redirect2()

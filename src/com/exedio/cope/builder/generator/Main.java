@@ -385,14 +385,20 @@ final class Main
 
 			if (feature instanceof ListField<?>)
 			{
-				final String itemClass = ((ListField<?>)feature).getElement().getValueClass().getCanonicalName();
+				writer.write(newLine);
+				final Class<?> elementClass = ((ListField<?>)feature).getElement().getValueClass();
+				writeVarargsSuppressor(writer, elementClass);
+				final String itemClass = getCanonicalName(elementClass);
 				final String parameterList = "final "+itemClass+"... "+featureIdentifier;
 				final String mapping = "java.util.Arrays.asList("+featureIdentifier+")";
 				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,mapping);
 			}
 			else if (feature instanceof SetField<?>)
 			{
-				final String itemClass = ((SetField<?>)feature).getElement().getValueClass().getCanonicalName();
+				writer.write(newLine);
+				final Class<?> elementClass = ((SetField<?>)feature).getElement().getValueClass();
+				writeVarargsSuppressor(writer, elementClass);
+				final String itemClass = getCanonicalName(elementClass);
 				final String parameterList = "final "+itemClass+"... "+featureIdentifier;
 				final String mapping = "new java.util.HashSet<>(java.util.Arrays.asList("+featureIdentifier+"))";
 				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,mapping);
@@ -464,6 +470,15 @@ final class Main
 		return packageName.equals(valueClass.getPackage().getName());
 	}
 
+	private static void writeVarargsSuppressor(
+			final OutputStreamWriter writer,
+			final Class<?> elementClass)
+	throws IOException
+	{
+		if(elementClass.getTypeParameters().length>0)
+			writer.write("\t@SafeVarargs @SuppressWarnings(\"varargs\")");
+	}
+
 	private static void writeRedirectSetter(
 			final OutputStreamWriter writer,
 			final String newLine,
@@ -509,7 +524,7 @@ final class Main
 			final StringBuilder sb=new StringBuilder();
 			sb.append(Set.class.getName());
 			sb.append('<');
-			sb.append(field.getElement().getValueClass().getCanonicalName());
+			sb.append(getCanonicalName(field.getElement().getValueClass()));
 			sb.append('>');
 			return sb.toString();
 		}
@@ -519,7 +534,7 @@ final class Main
 			final StringBuilder sb=new StringBuilder();
 			sb.append(List.class.getName());
 			sb.append('<');
-			sb.append(field.getElement().getValueClass().getCanonicalName());
+			sb.append(getCanonicalName(field.getElement().getValueClass()));
 			sb.append('>');
 			return sb.toString();
 		}
@@ -529,9 +544,9 @@ final class Main
 			final StringBuilder sb=new StringBuilder();
 			sb.append(Map.class.getName());
 			sb.append('<');
-			sb.append(field.getKey().getValueClass().getCanonicalName());
+			sb.append(getCanonicalName(field.getKey().getValueClass()));
 			sb.append(',');
-			sb.append(field.getValue().getValueClass().getCanonicalName());
+			sb.append(getCanonicalName(field.getValue().getValueClass()));
 			sb.append('>');
 			return sb.toString();
 		}
