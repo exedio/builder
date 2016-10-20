@@ -340,12 +340,10 @@ final class Main
 				feature instanceof MapField<?,?>))
 				continue;
 
-			if(feature instanceof Settable)
-			{
-				final java.lang.reflect.Type initialType = ((Settable<?>)feature).getInitialType();
-				if(!isVisible(packageName, initialType))
-					continue;
-			}
+			if(feature instanceof Settable &&
+				!isVisible(packageName, ((Settable<?>)feature).getInitialType()))
+				continue;
+
 			{
 				final Pattern pattern = feature.getPattern();
 				if((pattern!=null) &&
