@@ -12,7 +12,7 @@ public final class ConcreteItem extends AbstractItem
 	/**
 	 * @cope.get public
 	 */
-	static final IntegerField concreteField = new IntegerField().toFinal();
+	private static final IntegerField concreteField = new IntegerField().toFinal();
 
 	/**
 

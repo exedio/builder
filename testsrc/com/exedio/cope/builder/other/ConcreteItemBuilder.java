@@ -6,7 +6,7 @@ public class ConcreteItemBuilder extends GeneratedConcreteItemBuilder<ConcreteIt
 	@Override
 	public ConcreteItem build()
 	{
-		fallback(ConcreteItem.concreteField, 888888);
+		fallback(concreteField, 888888);
 		return super.build();
 	}
 }
