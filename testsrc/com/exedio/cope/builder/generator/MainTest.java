@@ -38,15 +38,15 @@ public class MainTest
 		assertEquals( "com.exedio.cope.builder.other.SubItem", Main.toSetterParameterType(ItemField.create(SubItem.class)) );
 		assertEquals( "int", Main.toSetterParameterType(SubItem.TYPE.getFeature("subField")) );
 		assertEquals(
-			"com.exedio.cope.builder.generator.MainTest.WithOneUnboundParam<? extends java.lang.Object>",
+			"com.exedio.cope.builder.generator.MainTest.WithOneUnboundParam<?>",
 			Main.toSetterParameterType(ItemField.create(WithOneUnboundParam.class))
 		);
 		assertEquals(
-			"com.exedio.cope.builder.generator.MainTest.WithOneMultiboundParam<? extends java.lang.Number & java.io.Serializable>",
+			"com.exedio.cope.builder.generator.MainTest.WithOneMultiboundParam<?>",
 			Main.toSetterParameterType(ItemField.create(WithOneMultiboundParam.class))
 		);
 		assertEquals(
-			"com.exedio.cope.builder.generator.MainTest.WithTwoParams<? extends java.lang.Number,? extends java.lang.Object>",
+			"com.exedio.cope.builder.generator.MainTest.WithTwoParams<?,?>",
 			Main.toSetterParameterType(ItemField.create(WithTwoParams.class))
 		);
 	}

@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.TypeVariable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -505,28 +504,10 @@ final class Main
 			if ( valueClass instanceof Class && ((Class<?>)valueClass).getTypeParameters().length>0 )
 			{
 				final StringBuilder typeParamsString = new StringBuilder();
-				typeParamsString.append( "<" );
-				final TypeVariable<?>[] typeParams = ((Class<?>)valueClass).getTypeParameters();
-				for (int paramIndex = 0; paramIndex < typeParams.length; paramIndex++)
-				{
-					final TypeVariable<?> typeVariable = typeParams[paramIndex];
-					if ( paramIndex>0 )
-					{
-						typeParamsString.append( "," );
-					}
-					typeParamsString.append( "?" );
-					typeParamsString.append( " extends " );
-					for (int boundsIndex = 0; boundsIndex < typeVariable.getBounds().length; boundsIndex++)
-					{
-						final java.lang.reflect.Type bound = typeVariable.getBounds()[boundsIndex];
-						if ( boundsIndex!=0 )
-						{
-							typeParamsString.append( " & " );
-						}
-						typeParamsString.append( getCanonicalName(bound) );
-					}
-				}
-				typeParamsString.append( ">" );
+				typeParamsString.append("<?");
+				for(int i = 1; i<((Class<?>)valueClass).getTypeParameters().length; i++)
+					typeParamsString.append(",?");
+				typeParamsString.append('>');
 				return canonicalName + typeParamsString;
 			}
 			else
