@@ -8,8 +8,8 @@ public class SimpleItemBuilder extends GeneratedSimpleItemBuilder<SimpleItemBuil
 	@Override
 	public SimpleItem build()
 	{
-		fallback(SimpleItem.integerMandatory, 777777);
-		fallback(SimpleItem.enumField, TestEnum.one);
+		fallback(integerMandatory, 777777);
+		fallback(enumField, TestEnum.one);
 		return super.build();
 	}
 }

@@ -13,7 +13,7 @@ public abstract class CommonSuperItemBuilder<I extends SuperItem, B extends Comm
 	@Override
 	public I build()
 	{
-		fallback(SuperItem.superField, 888888);
+		fallback(superField, 888888);
 		return super.build();
 	}
 }

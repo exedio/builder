@@ -14,7 +14,7 @@ public abstract class CommonAbstractItemBuilder<I extends AbstractItem, B extend
 	@Override
 	public I build()
 	{
-		fallback(AbstractItem.abstractField, 777777);
+		fallback(abstractField, 777777);
 		return super.build();
 	}
 }
