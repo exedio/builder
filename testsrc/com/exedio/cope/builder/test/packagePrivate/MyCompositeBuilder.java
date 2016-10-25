@@ -5,7 +5,7 @@ public class MyCompositeBuilder extends GeneratedMyCompositeBuilder<MyCompositeB
 	@Override
 	public MyComposite build()
 	{
-		fallback(MyComposite.string, "FALLBACK");
+		fallback(string, "FALLBACK");
 		return super.build();
 	}
 }

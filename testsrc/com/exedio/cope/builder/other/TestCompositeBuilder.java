@@ -6,7 +6,7 @@ public class TestCompositeBuilder extends GeneratedTestCompositeBuilder<TestComp
 	@Override
 	public TestComposite build()
 	{
-		fallback(TestComposite.integerMandatory, 777777);
+		fallback(integerMandatory, 777777);
 		return super.build();
 	}
 }

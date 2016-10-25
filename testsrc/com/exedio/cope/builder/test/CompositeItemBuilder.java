@@ -8,7 +8,7 @@ public class CompositeItemBuilder extends GeneratedCompositeItemBuilder<Composit
 	@Override
 	public CompositeItem build()
 	{
-		fallback(CompositeItem.field, new TestCompositeBuilder());
+		fallback(field, new TestCompositeBuilder());
 		return super.build();
 	}
 }

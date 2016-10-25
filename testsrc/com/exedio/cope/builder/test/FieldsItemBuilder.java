@@ -13,16 +13,16 @@ public class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuil
 	@Override
 	public FieldsItem build()
 	{
-		fallback(FieldsItem.media, new MediaBuilder());
-		fallback(FieldsItem.hash, "fallbackHashValue");
-		fallback(FieldsItem.price, Price.storeOf(7777777));
-		fallback(FieldsItem.money, Money.storeOf(8888888, FieldsItem.Currency.EUR));
-		fallback(FieldsItem.range, Range.valueOf(7777777, 8888888));
+		fallback(media, new MediaBuilder());
+		fallback(hash, "fallbackHashValue");
+		fallback(price, Price.storeOf(7777777));
+		fallback(money, Money.storeOf(8888888, FieldsItem.Currency.EUR));
+		fallback(range, Range.valueOf(7777777, 8888888));
 		final EnumMap<TestEnum,String> enumMap = new EnumMap<>(TestEnum.class);
 		enumMap.put(TestEnum.one  , "fallbackEnumMapValueOne"  );
 		enumMap.put(TestEnum.two  , "fallbackEnumMapValueTwo"  );
 		enumMap.put(TestEnum.three, "fallbackEnumMapValueThree");
-		fallback(FieldsItem.enumMap, enumMap);
+		fallback(this.enumMap, enumMap);
 		return super.build();
 	}
 }

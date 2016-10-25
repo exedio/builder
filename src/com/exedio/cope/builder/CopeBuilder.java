@@ -1,5 +1,6 @@
 package com.exedio.cope.builder;
 
+import com.exedio.cope.Feature;
 import com.exedio.cope.SetValue;
 import com.exedio.cope.Settable;
 import java.lang.reflect.Constructor;
@@ -94,6 +95,8 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder< ? , ?
 	{
 		return new EnumMap<>(toMap(key, value));
 	}
+
+	protected abstract <F extends Feature> F getFeature(String featureName);
 
 	@SuppressWarnings("unchecked")
 	public B copy()
