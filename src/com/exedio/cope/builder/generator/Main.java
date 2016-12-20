@@ -207,7 +207,7 @@ final class Main
 		return sourceLastModified<=targetLastModified;
 	}
 
-	private static File getFileContaining(final URI uri)
+	static File getFileContaining(final URI uri)
 	{
 		final String scheme = uri.getScheme();
 		if(scheme==null)
@@ -219,7 +219,7 @@ final class Main
 				return new File(uri);
 			case "jar":
 			{
-				final String ssp = uri.getSchemeSpecificPart();
+				final String ssp = uri.getRawSchemeSpecificPart();
 				final int exclamation = ssp.indexOf('!');
 				if(exclamation<0)
 					throw new IllegalArgumentException("no exclamation in " + ssp + " from " + uri);

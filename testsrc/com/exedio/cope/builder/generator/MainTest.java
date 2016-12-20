@@ -6,7 +6,9 @@ import com.exedio.cope.Item;
 import com.exedio.cope.ItemField;
 import com.exedio.cope.StringField;
 import com.exedio.cope.builder.other.SubItem;
+import java.io.File;
 import java.io.Serializable;
+import java.net.URI;
 import org.junit.Test;
 
 public class MainTest
@@ -49,5 +51,13 @@ public class MainTest
 			"com.exedio.cope.builder.generator.MainTest.WithTwoParams<?,?>",
 			Main.toSetterParameterType(ItemField.create(WithTwoParams.class))
 		);
+	}
+
+	@Test
+	public void testSpaceInPath()
+	{
+		final File file = new File("with space");
+		final URI uri=file.toURI();
+		assertEquals(file.getAbsoluteFile(), Main.getFileContaining(uri));
 	}
 }
