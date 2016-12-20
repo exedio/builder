@@ -180,7 +180,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 			this.builder = builder;
 		}
 
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({"rawtypes", "unchecked"})
 		@Override
 		public I build()
 		{
@@ -188,9 +188,12 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 			final Query<I> query = builder.type.newQuery();
 			for (final Map.Entry<Settable<?>, SetValue<?>> key :builder.values.entrySet())
 			{
-				final Settable<?> field = key.getKey();
-				if (field instanceof FunctionField)
-					query.narrow(equalCondition((FunctionField<?>) field, key.getValue()));
+				final Settable field = key.getKey();
+				for (final SetValue setValue: field.execute(key.getValue().value, null))
+				{
+					if (setValue.settable instanceof FunctionField)
+						query.narrow(equalCondition((FunctionField<?>) setValue.settable, setValue));
+				}
 			}
 			I value = query.searchSingleton();
 			if (value == null || !value.existsCopeItem())
