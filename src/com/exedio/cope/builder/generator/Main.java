@@ -1,10 +1,13 @@
 package com.exedio.cope.builder.generator;
 
 import com.exedio.cope.Feature;
+import com.exedio.cope.Item;
+import com.exedio.cope.ItemField;
 import com.exedio.cope.Model;
 import com.exedio.cope.Pattern;
 import com.exedio.cope.Settable;
 import com.exedio.cope.Type;
+import com.exedio.cope.TypesBound;
 import com.exedio.cope.misc.PrimitiveUtil;
 import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeField;
@@ -478,6 +481,25 @@ final class Main
 						"final " + getCanonicalName(field.getCurrencyClass()) + " currency",
 						"com.exedio.cope.pattern.Money.storeOf(store,currency)");
 			}
+			else if( feature instanceof ItemField )
+			{
+				final ItemField<?> field = (ItemField<?>) feature;
+				final Class<? extends Item> elementClass = field.getValueClass();
+				MyType myType=new ItemType(TypesBound.forClass(elementClass), elementClass);
+
+				if (!myType.enableCommonBuilder()) //TODO generate in all children if a common builder exists
+				{
+					final String itemClass = myType.getJavaClass().getCanonicalName();
+					final String itemClassBuilder = itemClass + "Builder";
+					writeRedirectSetter(writer, newLine, featureIdentifier,
+						"final java.util.function.Function<" + itemClassBuilder + ", " + itemClassBuilder + "> " + featureIdentifier + "BuilderConsumer",
+						featureIdentifier + "BuilderConsumer.apply( new " + itemClassBuilder + "() ).build()");
+					if( !field.isMandatory() )
+					{
+						writeRedirectSetter(writer, newLine, featureIdentifier + "Null", featureIdentifier, "", "(" + itemClass + ") null");
+					}
+				}
+			}
 		}
 
 		writer.write("}");
@@ -526,17 +548,19 @@ final class Main
 			writer.write("\t@SafeVarargs @SuppressWarnings(\"varargs\")");
 	}
 
-	private static void writeRedirectSetter(
-			final OutputStreamWriter writer,
-			final String newLine,
-			final String featureIdentifier,
-			final String parameterList,
-			final String mapping)
+	private static void writeRedirectSetter(final OutputStreamWriter writer, final String newLine, final String featureIdentifier, final String parameterList,
+		final String mapping)
 		throws IOException
+	{
+		writeRedirectSetter(writer, newLine, featureIdentifier, featureIdentifier, parameterList, mapping);
+	}
+
+	private static void writeRedirectSetter(final OutputStreamWriter writer, final String newLine, final String methodName, final String featureIdentifier,
+		final String parameterList, final String mapping) throws IOException
 	{
 		writer.write(newLine);
 		writer.write("\tpublic final B ");
-		writer.write(featureIdentifier);
+		writer.write(methodName);
 		writer.write("(");
 		writer.write(parameterList);
 		writer.write(")");

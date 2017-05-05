@@ -7,11 +7,15 @@ import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import com.exedio.cope.builder.test.MainTest;
 import com.exedio.cope.builder.test.genericComplex.GeneratedGenMidBuilder.GenMidBuilder;
 import com.exedio.cope.builder.test.genericComplex.GeneratedGenSupBuilder.GenSupBuilder;
 import com.exedio.cope.pattern.Money;
+import java.util.function.Function;
 import org.junit.Test;
 
 public class GenericComplexTest extends MainTest
@@ -23,6 +27,7 @@ public class GenericComplexTest extends MainTest
 		assertEquals(null, i.getSup());
 		assertEquals(null, i.getMid());
 		assertEquals(null, i.getSub());
+		assertNotNull(i.getSubFallback());
 		assertEquals(null, i.getMoneySup());
 		assertEquals(null, i.getMoneyMid());
 		assertEquals(null, i.getMoneySub());
@@ -76,6 +81,51 @@ public class GenericComplexTest extends MainTest
 		assertEquals(singletonMap(mid,mid), i.getMapMidMap());
 		assertEquals(singletonMap(sub,sub), i.getMapSubMap());
 	}
+
+	@Test
+	public void setNull() throws NoSuchMethodException
+	{
+		assertNull(new GenSourceBuilder().subFallbackNull().build().getSubFallback());
+		assertNotNull(new GenSourceBuilder().build().getSubFallback());
+
+		assertNotNull(GenSourceBuilder.class.getMethod("subMandatory", GenSub.class));
+		try
+		{
+			GenSourceBuilder.class.getMethod("subMandatoryNull");
+			fail("Null-Setter generated for mandatory");
+		}
+		catch( NoSuchMethodException e )
+		{
+			assertEquals("com.exedio.cope.builder.test.genericComplex.GenSourceBuilder.subMandatoryNull()", e.getMessage());
+		}
+	}
+
+	@Test
+	public void setLambda() throws NoSuchMethodException
+	{
+		assertNotNull(new GenSourceBuilder().sub(s -> s).build().getSubFallback());
+		assertNotNull(GenSourceBuilder.class.getMethod("sub", Function.class));
+		try
+		{
+			GenSourceBuilder.class.getMethod("midNull");
+			fail("Lambda-Setter generated for inherited");
+		}
+		catch( NoSuchMethodException e )
+		{
+			assertEquals("com.exedio.cope.builder.test.genericComplex.GenSourceBuilder.midNull()", e.getMessage());
+		}
+
+		try
+		{
+			GenSourceBuilder.class.getMethod("mid", Function.class);
+			fail("Null-Setter generated for inherited");
+		}
+		catch( NoSuchMethodException e )
+		{
+			assertEquals("com.exedio.cope.builder.test.genericComplex.GenSourceBuilder.mid(java.util.function.Function)", e.getMessage());
+		}
+	}
+
 	@Test
 	public void redirect()
 	{

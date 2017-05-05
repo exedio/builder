@@ -42,4 +42,10 @@ public class PackagePrivateTest extends MainTest
 		assertEquals(MyEnum.TWO, built.getEnumF());
 		assertEquals(itemValue, built.getItem());
 	}
+	@Test
+	public void lambda()
+	{
+		final MyItem itemValue = new MyItemBuilder().item(i->i.enumF(MyEnum.TWO)).enumF(MyEnum.ONE).build();
+		assertEquals(MyEnum.TWO, itemValue.getItem().getEnumF());
+	}
 }

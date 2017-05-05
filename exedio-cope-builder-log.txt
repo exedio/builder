@@ -7,6 +7,14 @@ omit bug fixes.
 The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
+* generate null setter for non-inherited optional item fields
+    OPTIONAL MIGRATION replace xyz(null) by xyzNull()
+    MIGRATION If you have already created them manually in the past, the compiler will tell you and you have to delete them in your builders.
+* generate lambda builder setters for non-inherited item fields
+    MIGRATION this will overload the 1 parameter setter and will required a cast for NULL setter or usage of xyzNull() [see above]
+    MIGRATION If you have already created them manually in the past, the compiler will tell you and you have to delete them in your builders.
+* use Settable instead of FunctionField for field method parameter to be usable with generated Builder.settable fields;
+    MIGRATION remove useless cast
 * the getOrBuild() query now includes FunctionFields that are parts of Patterns
 * now compatible with COPE version that has default implementations for interface methods (>=8904..8919)
 * requires JDK 1.8.0_60
