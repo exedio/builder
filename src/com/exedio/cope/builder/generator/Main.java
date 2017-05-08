@@ -44,7 +44,7 @@ final class Main
 				continue;
 			}
 
-			writer.add(writeFiles(params, new ItemType(type, clazz), skippedTargetDirectoryDoesNotExist, progress, generated));
+			writer.add(writeFiles(params, new ItemType(type), skippedTargetDirectoryDoesNotExist, progress, generated));
 		}
 
 		final HashSet<Class<? extends Composite>> compositeClasses = new HashSet<>();

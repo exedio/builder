@@ -270,7 +270,7 @@ public class Writer
 			{
 				final ItemField<?> field = (ItemField<?>) feature;
 				final Class<? extends Item> elementClass = field.getValueClass();
-				MyType myType = new ItemType(TypesBound.forClass(elementClass), elementClass);
+				MyType myType = new ItemType(TypesBound.forClass(elementClass));
 
 				if(!myType.enableCommonBuilder()) //TODO generate in all children if a common builder exists
 				{

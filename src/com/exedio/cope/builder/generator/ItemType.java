@@ -12,10 +12,10 @@ final class ItemType extends MyType
 	private final Type<?>  type;
 	private final Class<?> clazz;
 
-	ItemType(final Type<?> type, final Class<?> clazz)
+	ItemType(final Type<?> type)
 	{
 		this.type = type;
-		this.clazz = clazz;
+		this.clazz = type.getJavaClass();
 	}
 
 	@Override
