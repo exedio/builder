@@ -7,6 +7,7 @@ omit bug fixes.
 The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
+* private constructor for builder of abstract class
 * generate null setter for non-inherited optional item fields
     OPTIONAL MIGRATION replace xyz(null) by xyzNull()
     MIGRATION If you have already created them manually in the past, the compiler will tell you and you have to delete them in your builders.

@@ -282,7 +282,8 @@ final class Main
 			writer.write( newLine );
 			writer.write("\t{");
 			writer.write( newLine );
-			writer.write("\t\tpublic "+simpleClassName+"Builder( )");
+			final String visibility = Modifier.isAbstract(type.getJavaClass().getModifiers()) ? "private" : "public";
+			writer.write("\t\t" + visibility + " " +simpleClassName+"Builder( )");
 			writer.write( newLine );
 			writer.write("\t\t{");
 			writer.write( newLine );
