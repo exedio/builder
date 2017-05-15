@@ -1,6 +1,7 @@
 package com.exedio.cope.builder.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import com.exedio.cope.builder.other.ConcreteItem;
 import com.exedio.cope.builder.other.ConcreteItemBuilder;
@@ -31,7 +32,7 @@ public class AbstractTest extends MainTest
 	@Test
 	public void commonAbstract() throws NoSuchMethodException
 	{
-		Modifier.isPublic(MixedLevel2ItemBuilder.class.getDeclaredConstructor().getModifiers());
-		Modifier.isPrivate(AbstractLevel1ItemBuilder.class.getDeclaredConstructor().getModifiers());
+		assertTrue(Modifier.isPublic(MixedLevel2ItemBuilder.class.getDeclaredConstructor().getModifiers()));
+		assertTrue(Modifier.isPrivate(AbstractLevel1ItemBuilder.class.getDeclaredConstructor().getModifiers()));
 	}
 }
