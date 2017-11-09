@@ -7,8 +7,11 @@ import com.exedio.cope.ItemField;
 import com.exedio.cope.StringField;
 import com.exedio.cope.builder.other.SubItem;
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.net.URI;
+import java.nio.file.Files;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class MainTest
@@ -59,5 +62,19 @@ public class MainTest
 		final File file = new File("with space");
 		final URI uri = file.toURI();
 		assertEquals(file.getAbsoluteFile(), Main.getFileContaining(uri));
+	}
+
+	@Ignore("for debugging")
+	@Test
+	public void testMain() throws HumanReadableException, IOException
+	{
+		final Params params = new Params();
+		params.setModel("com.exedio.cope.builder.test.TestMain#model");
+		params.addPackagePrefixes("com.exedio.cope.builder,com.exedio.cope.builderSecond");
+		params.setSkipMissingTargetDirectory(false);
+		final File maintest = Files.createTempDirectory("maintest").toFile();
+		System.out.println(maintest);
+		params.setDestdir(maintest);
+		Main.main(params);
 	}
 }

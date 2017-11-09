@@ -29,6 +29,7 @@ public final class AntTask extends Task
 	{
 		try
 		{
+			params.setSkipMissingTargetDirectory(true); // TODO expose in task ?
 			Main.main(params);
 		}
 		catch(final HumanReadableException e)

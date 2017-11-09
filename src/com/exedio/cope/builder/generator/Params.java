@@ -88,4 +88,16 @@ final class Params
 
 		return destdir;
 	}
+
+	private boolean skipMissingTargetDirectory = true;
+
+	boolean getSkipMissingTargetDirectory()
+	{
+		return skipMissingTargetDirectory;
+	}
+
+	public void setSkipMissingTargetDirectory(final boolean skipMissingTargetDirectory)
+	{
+		this.skipMissingTargetDirectory = skipMissingTargetDirectory;
+	}
 }

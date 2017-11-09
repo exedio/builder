@@ -132,14 +132,22 @@ final class Main
 
 		if(!dir.exists())
 		{
-			ArrayList<Class<?>> classes = skippedTargetDirectoryDoesNotExist.get(dir);
-			if(classes == null)
+			if(params.getSkipMissingTargetDirectory())
 			{
-				classes = new ArrayList<>();
-				skippedTargetDirectoryDoesNotExist.put(dir, classes);
+				ArrayList<Class<?>> classes = skippedTargetDirectoryDoesNotExist.get(dir);
+				if(classes == null)
+				{
+					classes = new ArrayList<>();
+					skippedTargetDirectoryDoesNotExist.put(dir, classes);
+				}
+				classes.add(clazz);
+				return;
 			}
-			classes.add(clazz);
-			return;
+			else
+			{
+				if(!dir.mkdirs())
+					throw new IOException("Couldn't create " + dir);
+			}
 		}
 		if(!dir.isDirectory())
 			throw new HumanReadableException("expected directory: " + dir.getAbsolutePath());
