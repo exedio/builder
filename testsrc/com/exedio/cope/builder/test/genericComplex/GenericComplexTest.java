@@ -41,30 +41,31 @@ public class GenericComplexTest extends MainTest
 		assertEquals(emptyMap(), i.getMapMidMap());
 		assertEquals(emptyMap(), i.getMapSubMap());
 	}
+
 	@Test
 	public void set()
 	{
-		final GenSup<?,?> sup = new GenSupBuilder().build();
-		final GenMid<?>   mid = new GenMidBuilder().build();
-		final GenSub      sub = new GenSubBuilder().build();
+		final GenSup<?, ?> sup = new GenSupBuilder().build();
+		final GenMid<?> mid = new GenMidBuilder().build();
+		final GenSub sub = new GenSubBuilder().build();
 
 		final GenSource i = new GenSourceBuilder().
-				sup(sup).
-				mid(mid).
-				sub(sub).
-				moneySup(Money.valueOf(1.1, sup)).
-				moneyMid(Money.valueOf(1.2, mid)).
-				moneySub(Money.valueOf(1.3, sub)).
-				setSup(singleton(sup)).
-				setMid(singleton(mid)).
-				setSub(singleton(sub)).
-				listSup(singletonList(sup)).
-				listMid(singletonList(mid)).
-				listSub(singletonList(sub)).
-				mapSup(singletonMap(sup,sup)).
-				mapMid(singletonMap(mid,mid)).
-				mapSub(singletonMap(sub,sub)).
-				build();
+			sup(sup).
+			mid(mid).
+			sub(sub).
+			moneySup(Money.valueOf(1.1, sup)).
+			moneyMid(Money.valueOf(1.2, mid)).
+			moneySub(Money.valueOf(1.3, sub)).
+			setSup(singleton(sup)).
+			setMid(singleton(mid)).
+			setSub(singleton(sub)).
+			listSup(singletonList(sup)).
+			listMid(singletonList(mid)).
+			listSub(singletonList(sub)).
+			mapSup(singletonMap(sup, sup)).
+			mapMid(singletonMap(mid, mid)).
+			mapSub(singletonMap(sub, sub)).
+			build();
 		assertEquals(sup, i.getSup());
 		assertEquals(mid, i.getMid());
 		assertEquals(sub, i.getSub());
@@ -77,9 +78,9 @@ public class GenericComplexTest extends MainTest
 		assertEquals(singletonList(sup), i.getListSup());
 		assertEquals(singletonList(mid), i.getListMid());
 		assertEquals(singletonList(sub), i.getListSub());
-		assertEquals(singletonMap(sup,sup), i.getMapSupMap());
-		assertEquals(singletonMap(mid,mid), i.getMapMidMap());
-		assertEquals(singletonMap(sub,sub), i.getMapSubMap());
+		assertEquals(singletonMap(sup, sup), i.getMapSupMap());
+		assertEquals(singletonMap(mid, mid), i.getMapMidMap());
+		assertEquals(singletonMap(sub, sub), i.getMapSubMap());
 	}
 
 	@Test
@@ -94,7 +95,7 @@ public class GenericComplexTest extends MainTest
 			GenSourceBuilder.class.getMethod("subMandatoryNull");
 			fail("Null-Setter generated for mandatory");
 		}
-		catch( NoSuchMethodException e )
+		catch(NoSuchMethodException e)
 		{
 			assertEquals("com.exedio.cope.builder.test.genericComplex.GenSourceBuilder.subMandatoryNull()", e.getMessage());
 		}
@@ -110,7 +111,7 @@ public class GenericComplexTest extends MainTest
 			GenSourceBuilder.class.getMethod("midNull");
 			fail("Lambda-Setter generated for inherited");
 		}
-		catch( NoSuchMethodException e )
+		catch(NoSuchMethodException e)
 		{
 			assertEquals("com.exedio.cope.builder.test.genericComplex.GenSourceBuilder.midNull()", e.getMessage());
 		}
@@ -120,7 +121,7 @@ public class GenericComplexTest extends MainTest
 			GenSourceBuilder.class.getMethod("mid", Function.class);
 			fail("Null-Setter generated for inherited");
 		}
-		catch( NoSuchMethodException e )
+		catch(NoSuchMethodException e)
 		{
 			assertEquals("com.exedio.cope.builder.test.genericComplex.GenSourceBuilder.mid(java.util.function.Function)", e.getMessage());
 		}
@@ -129,21 +130,21 @@ public class GenericComplexTest extends MainTest
 	@Test
 	public void redirect()
 	{
-		final GenSup<?,?> sup = new GenSupBuilder().build();
-		final GenMid<?>   mid = new GenMidBuilder().build();
-		final GenSub      sub = new GenSubBuilder().build();
+		final GenSup<?, ?> sup = new GenSupBuilder().build();
+		final GenMid<?> mid = new GenMidBuilder().build();
+		final GenSub sub = new GenSubBuilder().build();
 
 		final GenSource i = new GenSourceBuilder().
-				moneySup(1.1, sup).
-				moneyMid(1.2, mid).
-				moneySub(1.3, sub).
-				setSup(sup).
-				setMid(mid).
-				setSub(sub).
-				listSup(sup).
-				listMid(mid).
-				listSub(sub).
-				build();
+			moneySup(1.1, sup).
+			moneyMid(1.2, mid).
+			moneySub(1.3, sub).
+			setSup(sup).
+			setMid(mid).
+			setSub(sub).
+			listSup(sup).
+			listMid(mid).
+			listSub(sub).
+			build();
 		assertEquals(Money.valueOf(1.1, sup), i.getMoneySup());
 		assertEquals(Money.valueOf(1.2, mid), i.getMoneyMid());
 		assertEquals(Money.valueOf(1.3, sub), i.getMoneySub());
@@ -154,18 +155,19 @@ public class GenericComplexTest extends MainTest
 		assertEquals(singletonList(mid), i.getListMid());
 		assertEquals(singletonList(sub), i.getListSub());
 	}
+
 	@Test
 	public void redirect2()
 	{
-		final GenSup<?,?> sup = new GenSupBuilder().build();
-		final GenMid<?>   mid = new GenMidBuilder().build();
-		final GenSub      sub = new GenSubBuilder().build();
+		final GenSup<?, ?> sup = new GenSupBuilder().build();
+		final GenMid<?> mid = new GenMidBuilder().build();
+		final GenSub sub = new GenSubBuilder().build();
 
 		final GenSource i = new GenSourceBuilder().
-				moneySup(110, sup).
-				moneyMid(120, mid).
-				moneySub(130, sub).
-				build();
+			moneySup(110, sup).
+			moneyMid(120, mid).
+			moneySub(130, sub).
+			build();
 		assertEquals(Money.valueOf(1.1, sup), i.getMoneySup());
 		assertEquals(Money.valueOf(1.2, mid), i.getMoneyMid());
 		assertEquals(Money.valueOf(1.3, sub), i.getMoneySub());

@@ -40,7 +40,6 @@ public final class Builders
 		return new IntegerAutoIncrementBuilder(field, start);
 	}
 
-
 	/**
 	 * Generates per-field unique values every time {@link Builder#build()} is called.
 	 * The result value is counting up using the internal ordinal value of the enum constants from the given start value.
@@ -72,7 +71,7 @@ public final class Builders
 		private static Map<Object, AtomicInteger> nextValues = new HashMap<>();
 
 		protected final Object object;
-		protected final int start;
+		protected final int    start;
 
 		public AutoIncrementBuilder(final Object object, final int start)
 		{
@@ -122,31 +121,31 @@ public final class Builders
 
 	private static class EnumAutoIncrementBuilder<E extends Enum<E>> extends AutoIncrementBuilder<E>
 	{
-		private final E startValue;
+		private final E       startValue;
 		private final boolean rotate;
 
 		EnumAutoIncrementBuilder(final Settable<E> field, final E start, final boolean rotate)
 		{
 			super(field, start.ordinal());
-			if (start.getClass().getEnumConstants().length == 0)
+			if(start.getClass().getEnumConstants().length == 0)
 				throw new IllegalArgumentException("Cannot handle empty enum class.");
 			this.startValue = start;
 			this.rotate = rotate;
 		}
 
 		@Override
-	   @SuppressWarnings("unchecked")
+		@SuppressWarnings("unchecked")
 		public E build()
 		{
 			int nextIndex = nextValue();
 			final Enum<E>[] constants = startValue.getClass().getEnumConstants();
-		   if (nextIndex >= constants.length)
-		   {
-		   	if (rotate)
-		   		nextIndex = 0;
-		   	else
-		   		throw new IllegalStateException("Run out of values while incrementing "+startValue.getClass());
-		   }
+			if(nextIndex >= constants.length)
+			{
+				if(rotate)
+					nextIndex = 0;
+				else
+					throw new IllegalStateException("Run out of values while incrementing " + startValue.getClass());
+			}
 			return (E) constants[nextIndex];
 		}
 	}

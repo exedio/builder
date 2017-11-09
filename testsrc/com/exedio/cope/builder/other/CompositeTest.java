@@ -13,18 +13,21 @@ public class CompositeTest extends MainTest
 		final TestComposite i = new TestCompositeBuilder().integerMandatory(88).build();
 		assertEquals(88, i.getIntegerMandatory());
 	}
+
 	@Test
 	public void mandatoryFallback()
 	{
 		final TestComposite i = new TestCompositeBuilder().build();
 		assertEquals(777777, i.getIntegerMandatory());
 	}
+
 	@Test
 	public void optionalExplicit()
 	{
 		final TestComposite i = new TestCompositeBuilder().integerOptional(88).build();
 		assertEquals(Integer.valueOf(88), i.getIntegerOptional());
 	}
+
 	@Test
 	public void optionalFallback()
 	{

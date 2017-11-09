@@ -20,41 +20,40 @@ final class Params
 		return model;
 	}
 
-
 	private final ArrayList<String> packagePrefixesMatch   = new ArrayList<>();
 	private final StringBuilder     packagePrefixesDisplay = new StringBuilder();
 
 	void addPackagePrefixes(final String packagePrefixes)
 	{
 		for(final StringTokenizer t =
-				new StringTokenizer(packagePrefixes, ",");
-				t.hasMoreTokens(); )
+			new StringTokenizer(packagePrefixes, ",");
+			t.hasMoreTokens(); )
 			addPackagePrefix(t.nextToken());
 	}
 
 	private void addPackagePrefix(final String packagePrefix)
 	{
-		for(int i = 0; i<packagePrefix.length(); i++)
+		for(int i = 0; i < packagePrefix.length(); i++)
 		{
 			final char c = packagePrefix.charAt(i);
 			if(!(
-				('0'<=c && c<='9') ||
-				('A'<=c && c<='Z') ||
-				('a'<=c && c<='z') ||
-				c == '.'))
+				('0' <= c && c <= '9') ||
+					('A' <= c && c <= 'Z') ||
+					('a' <= c && c <= 'z') ||
+					c == '.'))
 				throw new IllegalArgumentException(
-						"packagePrefix \"" + packagePrefix + "\" contains " +
+					"packagePrefix \"" + packagePrefix + "\" contains " +
 						"illegal character \"" + c + "\" at position " + i + '.');
 		}
 		if(packagePrefix.startsWith("."))
 			throw new IllegalArgumentException(
-					"packagePrefix \"" + packagePrefix + "\" must not start with dot.");
+				"packagePrefix \"" + packagePrefix + "\" must not start with dot.");
 		if(packagePrefix.endsWith("."))
 			throw new IllegalArgumentException(
-					"packagePrefix \"" + packagePrefix + "\" must not end with dot.");
+				"packagePrefix \"" + packagePrefix + "\" must not end with dot.");
 
 		this.packagePrefixesMatch.add(packagePrefix + '.');
-		if(this.packagePrefixesDisplay.length()>0)
+		if(this.packagePrefixesDisplay.length() > 0)
 			this.packagePrefixesDisplay.append(',');
 		this.packagePrefixesDisplay.append(packagePrefix);
 	}
@@ -75,7 +74,6 @@ final class Params
 		return packagePrefixesDisplay.toString();
 	}
 
-
 	private File destdir;
 
 	void setDestdir(final File destdir)
@@ -85,7 +83,7 @@ final class Params
 
 	File getDestdir() throws HumanReadableException
 	{
-		if(destdir==null)
+		if(destdir == null)
 			throw new HumanReadableException("attribute destdir is mandatory");
 
 		return destdir;

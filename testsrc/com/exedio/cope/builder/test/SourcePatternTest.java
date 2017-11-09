@@ -11,12 +11,13 @@ public class SourcePatternTest extends MainTest
 	public void explicit()
 	{
 		final SourcePatternItem i = new SourcePatternItemBuilder().
-				schedule_enabled(false).
-				schedule_interval(Interval.MONTHLY).
-				build();
+			schedule_enabled(false).
+			schedule_interval(Interval.MONTHLY).
+			build();
 		assertEquals(false, i.isScheduleEnabled());
 		assertEquals(Interval.MONTHLY, i.getScheduleInterval());
 	}
+
 	@Test
 	public void copeDefault()
 	{

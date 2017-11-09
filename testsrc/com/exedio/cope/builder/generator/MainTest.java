@@ -36,9 +36,9 @@ public class MainTest
 	@Test
 	public void testToSetterParameterType()
 	{
-		assertEquals( "java.lang.String", Main.toSetterParameterType(new StringField()) );
-		assertEquals( "com.exedio.cope.builder.other.SubItem", Main.toSetterParameterType(ItemField.create(SubItem.class)) );
-		assertEquals( "int", Main.toSetterParameterType(SubItem.TYPE.getFeature("subField")) );
+		assertEquals("java.lang.String", Main.toSetterParameterType(new StringField()));
+		assertEquals("com.exedio.cope.builder.other.SubItem", Main.toSetterParameterType(ItemField.create(SubItem.class)));
+		assertEquals("int", Main.toSetterParameterType(SubItem.TYPE.getFeature("subField")));
 		assertEquals(
 			"com.exedio.cope.builder.generator.MainTest.WithOneUnboundParam<?>",
 			Main.toSetterParameterType(ItemField.create(WithOneUnboundParam.class))
@@ -57,7 +57,7 @@ public class MainTest
 	public void testSpaceInPath()
 	{
 		final File file = new File("with space");
-		final URI uri=file.toURI();
+		final URI uri = file.toURI();
 		assertEquals(file.getAbsoluteFile(), Main.getFileContaining(uri));
 	}
 }

@@ -15,19 +15,22 @@ public class HierarchyTest extends MainTest
 		final SuperItem i = new SuperItemBuilder().superField(88).build();
 		assertEquals(88, i.getSuperField());
 	}
+
 	@Test
 	public void superFallback()
 	{
 		final SuperItem i = new SuperItemBuilder().build();
 		assertEquals(888888, i.getSuperField());
 	}
+
 	@Test
 	public void subExplicit()
 	{
-		final SubItem i = new SubItemBuilder().superField(88).subField( 77 ).build();
+		final SubItem i = new SubItemBuilder().superField(88).subField(77).build();
 		assertEquals(88, i.getSuperField());
 		assertEquals(77, i.getSubField());
- 	}
+	}
+
 	@Test
 	public void subFallback()
 	{

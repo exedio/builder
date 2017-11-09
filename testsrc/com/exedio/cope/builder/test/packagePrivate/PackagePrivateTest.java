@@ -16,13 +16,13 @@ public class PackagePrivateTest extends MainTest
 		final MyComposite compositeValue = new MyCompositeBuilder().build();
 
 		final MyItem built = new MyItemBuilder().
-				enumF(MyEnum.TWO).
-				item(itemValue).
-				composite(compositeValue).
-				rangeEnum(Range.valueOf(MyEnum.ONE, MyEnum.TWO)).
-				moneyEnum(Money.valueOf(1.3, MyEnum.ONE)).
-				moneyItem(Money.valueOf(1.4, itemValue)).
-				build();
+			enumF(MyEnum.TWO).
+			item(itemValue).
+			composite(compositeValue).
+			rangeEnum(Range.valueOf(MyEnum.ONE, MyEnum.TWO)).
+			moneyEnum(Money.valueOf(1.3, MyEnum.ONE)).
+			moneyItem(Money.valueOf(1.4, itemValue)).
+			build();
 		assertEquals(MyEnum.TWO, built.getEnumF());
 		assertEquals(itemValue, built.getItem());
 		assertEquals(compositeValue, built.getComposite());
@@ -30,22 +30,24 @@ public class PackagePrivateTest extends MainTest
 		assertEquals(Money.valueOf(1.3, MyEnum.ONE), built.getMoneyEnum());
 		assertEquals(Money.valueOf(1.4, itemValue), built.getMoneyItem());
 	}
+
 	@Test
 	public void composite()
 	{
 		final MyItem itemValue = new MyItemBuilder().build();
 
 		final MyComposite built = new MyCompositeBuilder().
-				enumF(MyEnum.TWO).
-				item(itemValue).
-				build();
+			enumF(MyEnum.TWO).
+			item(itemValue).
+			build();
 		assertEquals(MyEnum.TWO, built.getEnumF());
 		assertEquals(itemValue, built.getItem());
 	}
+
 	@Test
 	public void lambda()
 	{
-		final MyItem itemValue = new MyItemBuilder().item(i->i.enumF(MyEnum.TWO)).enumF(MyEnum.ONE).build();
+		final MyItem itemValue = new MyItemBuilder().item(i -> i.enumF(MyEnum.TWO)).enumF(MyEnum.ONE).build();
 		assertEquals(MyEnum.TWO, itemValue.getItem().getEnumF());
 	}
 }

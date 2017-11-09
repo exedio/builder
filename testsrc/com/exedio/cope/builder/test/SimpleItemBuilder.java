@@ -1,4 +1,3 @@
-
 package com.exedio.cope.builder.test;
 
 import com.exedio.cope.builder.other.OuterClass.TestEnum;

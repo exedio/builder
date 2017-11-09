@@ -9,10 +9,10 @@ import java.util.Collection;
 
 final class ItemType extends MyType
 {
-	private final Type< ? >		type;
-	private final Class< ? >	clazz;
+	private final Type<?>  type;
+	private final Class<?> clazz;
 
-	ItemType( final Type< ? > type, final Class< ? > clazz )
+	ItemType(final Type<?> type, final Class<?> clazz)
 	{
 		this.type = type;
 		this.clazz = clazz;
@@ -38,10 +38,10 @@ final class ItemType extends MyType
 
 	@Override
 	void writeGenericParams(
-			final OutputStreamWriter writer,
-			final String simpleClassName,
-			final String wildcards)
-	throws IOException
+		final OutputStreamWriter writer,
+		final String simpleClassName,
+		final String wildcards)
+		throws IOException
 	{
 		if(type.getSubtypes().isEmpty())
 		{
@@ -63,7 +63,7 @@ final class ItemType extends MyType
 	void writeExtends(final OutputStreamWriter writer, final String simpleClassname) throws IOException
 	{
 		final Type<?> supertype = type.getSupertype();
-		if(supertype!=null)
+		if(supertype != null)
 		{
 			writer.write(supertype.getJavaClass().getPackage().getName());
 			writer.write(".Common");

@@ -29,9 +29,10 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 {
 
 	private final Type<I> type;
-	protected Map<ListField<?>, List<?>>	listValues	= new HashMap<>();
-	protected Map<SetField<?>, Set<?>>	setValues	= new HashMap<>();
-	protected Map<MapField<?, ?>, Map<?, ?>>	mapValues	= new HashMap<>();
+	protected Map<ListField<?>, List<?>>     listValues = new HashMap<>();
+	protected Map<SetField<?>, Set<?>>       setValues  = new HashMap<>();
+	protected Map<MapField<?, ?>, Map<?, ?>> mapValues  = new HashMap<>();
+
 	/**
 	 * @param type the type of the item you want to build
 	 */
@@ -40,7 +41,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		this.type = type;
 	}
 
-	protected final <V> boolean isSet( final ListField<V> field )
+	protected final <V> boolean isSet(final ListField<V> field)
 	{
 		return listValues.containsKey(field);
 	}
@@ -56,7 +57,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	}
 
 	@SuppressWarnings("unchecked")
-	protected final <V> B fallback( final SetField<V> field, final Set<V> value )
+	protected final <V> B fallback(final SetField<V> field, final Set<V> value)
 	{
 		if(!isSet(field))
 			set(field, value);
@@ -73,12 +74,13 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	@SuppressWarnings({"unchecked"})
 	protected final <V> Set<V> get(final SetField<V> field)
 	{
-		if (!setValues.containsKey( field )) return null;
+		if(!setValues.containsKey(field))
+			return null;
 		return (Set<V>) setValues.get(field);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected final <V> B fallback( final ListField<V> field, final List<V> value )
+	protected final <V> B fallback(final ListField<V> field, final List<V> value)
 	{
 		if(!isSet(field))
 			set(field, value);
@@ -86,7 +88,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	}
 
 	@SuppressWarnings("unchecked")
-	protected final <V> B set( final ListField<V> field, final List<V> value )
+	protected final <V> B set(final ListField<V> field, final List<V> value)
 	{
 		listValues.put(field, value);
 		return (B) this;
@@ -95,7 +97,8 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	@SuppressWarnings("unchecked")
 	protected final <V> List<V> get(final ListField<V> field)
 	{
-		if (!listValues.containsKey( field )) return null;
+		if(!listValues.containsKey(field))
+			return null;
 		return (List<V>) listValues.get(field);
 	}
 
@@ -115,9 +118,10 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	}
 
 	@SuppressWarnings("unchecked")
-	protected final <K, V>  Map<K, V> get(final MapField<K, V> field)
+	protected final <K, V> Map<K, V> get(final MapField<K, V> field)
 	{
-		if (!mapValues.containsKey( field )) return null;
+		if(!mapValues.containsKey(field))
+			return null;
 		return (Map<K, V>) mapValues.get(field);
 	}
 
@@ -125,10 +129,10 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	protected final <F extends Feature> F getFeature(final String featureName)
 	{
 		final Feature feature = this.type.getFeature(featureName);
-		if(feature==null)
+		if(feature == null)
 			throw new NullPointerException(featureName);
 		@SuppressWarnings("unchecked")
-		final F result = (F)feature;
+		final F result = (F) feature;
 		return result;
 	}
 
@@ -141,13 +145,13 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	{
 		final Feature feature = getFeature(featureName);
 		if(feature instanceof Settable<?>)
-			return set((Settable<Object>)feature, value);
+			return set((Settable<Object>) feature, value);
 		else if(feature instanceof SetField<?>)
-			return set((SetField<Object>)feature, (Set<Object>)value); // TODO kaputt
+			return set((SetField<Object>) feature, (Set<Object>) value); // TODO kaputt
 		else if(feature instanceof ListField<?>)
-			return set((ListField<Object>)feature, (List<Object>)value); // TODO kaputt
-		else if(feature instanceof MapField<?,?>)
-			return set((MapField<Object,Object>)feature, (Map<Object,Object>)value); // TODO kaputt
+			return set((ListField<Object>) feature, (List<Object>) value); // TODO kaputt
+		else if(feature instanceof MapField<?, ?>)
+			return set((MapField<Object, Object>) feature, (Map<Object, Object>) value); // TODO kaputt
 		else
 			throw new IllegalArgumentException(featureName);
 	}
@@ -161,15 +165,14 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	public I build()
 	{
 		final I result = type.newItem(new ArrayList<>(values.values()));
-		for(final Map.Entry<ListField<?>, List<?>> entry: listValues.entrySet())
+		for(final Map.Entry<ListField<?>, List<?>> entry : listValues.entrySet())
 			setListValue(result, entry.getKey(), entry.getValue());
-		for(final Map.Entry<SetField<?>, Set<?>> entry: setValues.entrySet())
+		for(final Map.Entry<SetField<?>, Set<?>> entry : setValues.entrySet())
 			setSetValue(result, entry.getKey(), entry.getValue());
-		for(final Map.Entry<MapField<?, ?>, Map<?, ?>> entry: mapValues.entrySet())
+		for(final Map.Entry<MapField<?, ?>, Map<?, ?>> entry : mapValues.entrySet())
 			setMapValue(result, entry.getKey(), entry.getValue());
 		return result;
 	}
-
 
 	private final class DefaultItemBuilder implements Builder<I>
 	{
@@ -186,19 +189,19 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		{
 			@SuppressWarnings("synthetic-access")
 			final Query<I> query = builder.type.newQuery();
-			for (final Map.Entry<Settable<?>, SetValue<?>> key :builder.values.entrySet())
+			for(final Map.Entry<Settable<?>, SetValue<?>> key : builder.values.entrySet())
 			{
 				final Settable field = key.getKey();
-				for (final SetValue setValue: field.execute(key.getValue().value, null))
+				for(final SetValue setValue : field.execute(key.getValue().value, null))
 				{
-					if (setValue.settable instanceof FunctionField)
+					if(setValue.settable instanceof FunctionField)
 						query.narrow(equalCondition((FunctionField<?>) setValue.settable, setValue));
 				}
 			}
 			I value = query.searchSingleton();
-			if (value == null || !value.existsCopeItem())
+			if(value == null || !value.existsCopeItem())
 			{
-				value=(I) builder.copy().build();
+				value = (I) builder.copy().build();
 			}
 			return value;
 		}
@@ -206,13 +209,13 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		@SuppressWarnings("unchecked")
 		private <T> Condition equalCondition(final FunctionField<?> key, final SetValue<?> value)
 		{
-			return ((FunctionField<T>)key).equal(((SetValue<T>)value).value);
+			return ((FunctionField<T>) key).equal(((SetValue<T>) value).value);
 		}
 	}
 
 	protected final Builder<I> toDefault()
 	{
-		return new DefaultItemBuilder( this );
+		return new DefaultItemBuilder(this);
 	}
 
 	public final I getOrBuild()
@@ -228,27 +231,27 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		{
 			final Constructor<?> constructor = getClass().getConstructor();
 			final B copy = (B) constructor.newInstance();
-			copy.values = new HashMap<>( values );
-			copy.listValues = new HashMap<>( listValues );
-			copy.setValues = new HashMap<>( setValues );
-			copy.mapValues = new HashMap<>( mapValues );
+			copy.values = new HashMap<>(values);
+			copy.listValues = new HashMap<>(listValues);
+			copy.setValues = new HashMap<>(setValues);
+			copy.mapValues = new HashMap<>(mapValues);
 			return copy;
 		}
-		catch( final InstantiationException e )
+		catch(final InstantiationException e)
 		{
-			throw new RuntimeException( "Failed to copy builder: " + getClass().getName(), e );
+			throw new RuntimeException("Failed to copy builder: " + getClass().getName(), e);
 		}
-		catch( final IllegalAccessException e )
+		catch(final IllegalAccessException e)
 		{
-			throw new RuntimeException( "Failed to copy builder: " + getClass().getName(), e );
+			throw new RuntimeException("Failed to copy builder: " + getClass().getName(), e);
 		}
-		catch( final InvocationTargetException e )
+		catch(final InvocationTargetException e)
 		{
-			throw new RuntimeException( "Failed to copy builder: " + getClass().getName(), e );
+			throw new RuntimeException("Failed to copy builder: " + getClass().getName(), e);
 		}
-		catch( final NoSuchMethodException e )
+		catch(final NoSuchMethodException e)
 		{
-			throw new RuntimeException( "Failed to copy builder: " + getClass().getName(), e );
+			throw new RuntimeException("Failed to copy builder: " + getClass().getName(), e);
 		}
 	}
 
@@ -269,5 +272,4 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	{
 		((MapField<K, V>) mapField).setMap(result, (Map<K, V>) map);
 	}
-
 }

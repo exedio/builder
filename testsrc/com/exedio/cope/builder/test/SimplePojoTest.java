@@ -13,11 +13,11 @@ public class SimplePojoTest
 		try
 		{
 			new SimplePojoBuilder().build();
-			fail( "NullPointerException expected" );
+			fail("NullPointerException expected");
 		}
-		catch( final NullPointerException e )
+		catch(final NullPointerException e)
 		{
-			assertEquals( "integerMandatory is required", e.getMessage() );
+			assertEquals("integerMandatory is required", e.getMessage());
 		}
 	}
 
@@ -25,35 +25,34 @@ public class SimplePojoTest
 	public void fallback()
 	{
 		SimplePojoBuilder.IntegerAutoBuilder.reset();
-		final SimplePojo p = new SimplePojoBuilder().integerMandatory( 20 ).build();
-		assertEquals( 20, p.getIntegerMandatory() );
-		assertEquals( 77, p.getIntegerOptional() );
-		assertEquals( 11, p.getIntegerAuto() );
+		final SimplePojo p = new SimplePojoBuilder().integerMandatory(20).build();
+		assertEquals(20, p.getIntegerMandatory());
+		assertEquals(77, p.getIntegerOptional());
+		assertEquals(11, p.getIntegerAuto());
 	}
 
 	@Test
 	public void builder()
 	{
 		SimplePojoBuilder.IntegerAutoBuilder.reset();
-		SimplePojo p = new SimplePojoBuilder().integerMandatory( 20 ).build();
-		assertEquals( 20, p.getIntegerMandatory() );
-		assertEquals( 77, p.getIntegerOptional() );
-		assertEquals( 11, p.getIntegerAuto() );
+		SimplePojo p = new SimplePojoBuilder().integerMandatory(20).build();
+		assertEquals(20, p.getIntegerMandatory());
+		assertEquals(77, p.getIntegerOptional());
+		assertEquals(11, p.getIntegerAuto());
 
-		p = new SimplePojoBuilder().integerMandatory( 20 ).build();
-		assertEquals( 20, p.getIntegerMandatory() );
-		assertEquals( 77, p.getIntegerOptional() );
-		assertEquals( 12, p.getIntegerAuto() );
+		p = new SimplePojoBuilder().integerMandatory(20).build();
+		assertEquals(20, p.getIntegerMandatory());
+		assertEquals(77, p.getIntegerOptional());
+		assertEquals(12, p.getIntegerAuto());
 	}
 
 	@Test
 	public void explicit()
 	{
 		SimplePojoBuilder.IntegerAutoBuilder.reset();
-		final SimplePojo p = new SimplePojoBuilder().integerMandatory( 20 ).integerOptional( 333 ).integerAuto( 444 ).build();
-		assertEquals( 20, p.getIntegerMandatory() );
-		assertEquals( 333, p.getIntegerOptional() );
-		assertEquals( 444, p.getIntegerAuto() );
+		final SimplePojo p = new SimplePojoBuilder().integerMandatory(20).integerOptional(333).integerAuto(444).build();
+		assertEquals(20, p.getIntegerMandatory());
+		assertEquals(333, p.getIntegerOptional());
+		assertEquals(444, p.getIntegerAuto());
 	}
-
 }

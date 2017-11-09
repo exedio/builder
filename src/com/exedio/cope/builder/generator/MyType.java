@@ -10,17 +10,19 @@ abstract class MyType
 	abstract Class<?> getJavaClass();
 
 	abstract Collection<? extends Feature> getDeclaredFeatures();
+
 	abstract String getName(Feature feature);
+
 	abstract void writeExtends(OutputStreamWriter writer, String simpleClassName) throws IOException;
 
 	/**
 	 * @param wildcards needed by subclasses
 	 */
 	void writeGenericParams(
-			final OutputStreamWriter writer,
-			final String simpleClassName,
-			final String wildcards)
-	throws IOException
+		final OutputStreamWriter writer,
+		final String simpleClassName,
+		final String wildcards)
+		throws IOException
 	{
 		writer.write("<B extends Generated");
 		writer.write(simpleClassName);

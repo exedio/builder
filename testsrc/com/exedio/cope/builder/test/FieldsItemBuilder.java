@@ -1,4 +1,3 @@
-
 package com.exedio.cope.builder.test;
 
 import com.exedio.cope.builder.MediaBuilder;
@@ -18,9 +17,9 @@ public class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuil
 		fallback(price, Price.storeOf(7777777));
 		fallback(money, Money.storeOf(8888888, FieldsItem.Currency.EUR));
 		fallback(range, Range.valueOf(7777777, 8888888));
-		final EnumMap<TestEnum,String> enumMap = new EnumMap<>(TestEnum.class);
-		enumMap.put(TestEnum.one  , "fallbackEnumMapValueOne"  );
-		enumMap.put(TestEnum.two  , "fallbackEnumMapValueTwo"  );
+		final EnumMap<TestEnum, String> enumMap = new EnumMap<>(TestEnum.class);
+		enumMap.put(TestEnum.one, "fallbackEnumMapValueOne");
+		enumMap.put(TestEnum.two, "fallbackEnumMapValueTwo");
 		enumMap.put(TestEnum.three, "fallbackEnumMapValueThree");
 		fallback(this.enumMap, enumMap);
 		return super.build();

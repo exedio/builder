@@ -11,10 +11,10 @@ import java.util.Collection;
 
 final class CompositeType extends MyType
 {
-	private final Class< ? extends Composite>	clazz;
-	private final CompositeField< ? >			field;
+	private final Class<? extends Composite> clazz;
+	private final CompositeField<?>          field;
 
-	CompositeType( final Class<? extends Composite> clazz, final CompositeField<?> field )
+	CompositeType(final Class<? extends Composite> clazz, final CompositeField<?> field)
 	{
 		this.clazz = clazz;
 		this.field = field;
@@ -35,7 +35,7 @@ final class CompositeType extends MyType
 	@Override
 	String getName(final Feature feature)
 	{
-		return Composite.getTemplateName((FunctionField<?>)feature);
+		return Composite.getTemplateName((FunctionField<?>) feature);
 	}
 
 	@Override

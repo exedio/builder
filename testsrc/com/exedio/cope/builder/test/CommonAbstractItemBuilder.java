@@ -1,10 +1,9 @@
-
 package com.exedio.cope.builder.test;
 
 import com.exedio.cope.Type;
 
-public abstract class CommonAbstractItemBuilder<I extends AbstractItem, B extends CommonAbstractItemBuilder<?,?>>
-	extends GeneratedAbstractItemBuilder<I,B>
+public abstract class CommonAbstractItemBuilder<I extends AbstractItem, B extends CommonAbstractItemBuilder<?, ?>>
+	extends GeneratedAbstractItemBuilder<I, B>
 {
 	protected CommonAbstractItemBuilder(final Type<I> type)
 	{

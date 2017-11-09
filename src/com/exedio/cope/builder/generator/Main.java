@@ -47,7 +47,7 @@ final class Main
 		final Model model = params.getModel();
 
 		final ArrayList<Class<?>> skippedPackagePrefix = new ArrayList<>();
-		final HashMap<File,ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist = new HashMap<>();
+		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist = new HashMap<>();
 		final AtomicInteger progress = new AtomicInteger(0);
 		for(final Type<?> type : model.getTypes())
 		{
@@ -61,7 +61,7 @@ final class Main
 				continue;
 			}
 
-			writeFiles(params, new ItemType( type, clazz ), skippedTargetDirectoryDoesNotExist, progress);
+			writeFiles(params, new ItemType(type, clazz), skippedTargetDirectoryDoesNotExist, progress);
 		}
 
 		final HashSet<Class<? extends Composite>> compositeClasses = new HashSet<>();
@@ -72,7 +72,7 @@ final class Main
 				if(!(feature instanceof CompositeField<?>))
 					continue;
 
-				final CompositeField<?> field = (CompositeField<?>)feature;
+				final CompositeField<?> field = (CompositeField<?>) feature;
 
 				final Class<? extends Composite> clazz = field.getValueClass();
 				if(!params.matchesPackagePrefixes(clazz))
@@ -84,7 +84,7 @@ final class Main
 				if(!compositeClasses.add(clazz))
 					continue;
 
-				writeFiles(params, new CompositeType( clazz, field ), skippedTargetDirectoryDoesNotExist, progress);
+				writeFiles(params, new CompositeType(clazz, field), skippedTargetDirectoryDoesNotExist, progress);
 			}
 		}
 
@@ -93,30 +93,33 @@ final class Main
 			case 0: // nothing
 				break;
 			case 1:
-				System.out.println("Skipping " + skippedPackagePrefix.get(0).getName() + " because not in packagePrefix '" + params.getPackagePrefixes() + "'."); break;
+				final String clasName = skippedPackagePrefix.get(0).getName();
+				System.out.println("Skipping " + clasName + " because not in packagePrefix '" + params.getPackagePrefixes() + "'.");
+				break;
 			default:
-				System.out.println("Skipping " + skippedPackagePrefix.size() +   " classes because not in packagePrefix '" + params.getPackagePrefixes() + "'."); break;
+				System.out.println("Skipping " + skippedPackagePrefix.size() + " classes because not in packagePrefix '" + params.getPackagePrefixes() + "'.");
+				break;
 		}
-		for(final Map.Entry<File,ArrayList<Class<?>>> entry : skippedTargetDirectoryDoesNotExist.entrySet())
+		for(final Map.Entry<File, ArrayList<Class<?>>> entry : skippedTargetDirectoryDoesNotExist.entrySet())
 		{
 			final ArrayList<Class<?>> classes = entry.getValue();
-			if(classes.size()==1)
+			if(classes.size() == 1)
 				System.out.println("Skipping " + classes.get(0).getName() + " because target directory does not exist: " + entry.getKey().getAbsolutePath());
 			else
-				System.out.println("Skipping " + classes.size() +   " classes because target directory does not exist: " + entry.getKey().getAbsolutePath());
+				System.out.println("Skipping " + classes.size() + " classes because target directory does not exist: " + entry.getKey().getAbsolutePath());
 		}
 		{
 			final int progressResult = progress.get();
-			if(progressResult>0)
+			if(progressResult > 0)
 				System.out.println("Generated " + progressResult + " builders for " + model + " in '" + params.getPackagePrefixes() + "'.");
 		}
 	}
 
 	private static final void writeFiles(
-			final Params params,
-			final MyType type,
-			final HashMap<File,ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist,
-			final AtomicInteger progress)
+		final Params params,
+		final MyType type,
+		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist,
+		final AtomicInteger progress)
 		throws HumanReadableException, IOException
 	{
 		final Class<?> clazz = type.getJavaClass();
@@ -124,13 +127,13 @@ final class Main
 		final String simpleClassName = clazz.getSimpleName();
 
 		final File dir = new File(
-				params.getDestdir(),
-				packageName.replace('.', '/'));
+			params.getDestdir(),
+			packageName.replace('.', '/'));
 
 		if(!dir.exists())
 		{
 			ArrayList<Class<?>> classes = skippedTargetDirectoryDoesNotExist.get(dir);
-			if(classes==null)
+			if(classes == null)
 			{
 				classes = new ArrayList<>();
 				skippedTargetDirectoryDoesNotExist.put(dir, classes);
@@ -142,15 +145,15 @@ final class Main
 			throw new HumanReadableException("expected directory: " + dir.getAbsolutePath());
 
 		final String wildcards = typeParameterWildCards(clazz);
-		writeGenerated( type, clazz, packageName, simpleClassName, wildcards, dir, progress );
-		writeConcrete( type, packageName, simpleClassName, wildcards, dir );
+		writeGenerated(type, clazz, packageName, simpleClassName, wildcards, dir, progress);
+		writeConcrete(type, packageName, simpleClassName, wildcards, dir);
 	}
 
 	private static void writeGenerated(
-			final MyType type, final Class< ? > clazz,
-			final String packageName, final String simpleClassName, final String wildcards,
-			final File dir, final AtomicInteger progress )
-	throws FileNotFoundException, IOException
+		final MyType type, final Class<?> clazz,
+		final String packageName, final String simpleClassName, final String wildcards,
+		final File dir, final AtomicInteger progress)
+		throws FileNotFoundException, IOException
 	{
 		final File file = new File(dir, "Generated" + simpleClassName + "Builder.java");
 
@@ -158,7 +161,7 @@ final class Main
 			return;
 
 		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
-		try(OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
+		try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
 		{
 			write(type, packageName, simpleClassName, wildcards, writer);
 		}
@@ -166,21 +169,21 @@ final class Main
 	}
 
 	private static void writeConcrete(
-			final MyType type,
-			final String packageName,
-			final String simpleClassName,
-			final String wildcards,
-			final File dir )
-	throws FileNotFoundException, IOException
+		final MyType type,
+		final String packageName,
+		final String simpleClassName,
+		final String wildcards,
+		final File dir)
+		throws FileNotFoundException, IOException
 	{
 
-		final File file = new File(dir, (type.enableCommonBuilder()?"Common":"") + simpleClassName + "Builder.java");
+		final File file = new File(dir, (type.enableCommonBuilder() ? "Common" : "") + simpleClassName + "Builder.java");
 
-		if( file.exists())
+		if(file.exists())
 			return;
 
 		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
-		try(OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
+		try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
 		{
 			writeConcrete(type, packageName, simpleClassName, wildcards, writer);
 		}
@@ -189,7 +192,7 @@ final class Main
 	private static boolean isNoUpdateRequired(final Class<?> sourceClass, final File targetFile)
 	{
 		final long targetLastModified = targetFile.lastModified();
-		if(targetLastModified==0)
+		if(targetLastModified == 0)
 			return false;
 
 		final URL url = sourceClass.getResource(sourceClass.getSimpleName() + ".class");
@@ -204,16 +207,16 @@ final class Main
 		}
 		final File sourceFile = getFileContaining(uri);
 		final long sourceLastModified = sourceFile.lastModified();
-		if(sourceLastModified==0)
+		if(sourceLastModified == 0)
 			throw new RuntimeException(sourceFile.getAbsolutePath());
 
-		return sourceLastModified<=targetLastModified;
+		return sourceLastModified <= targetLastModified;
 	}
 
 	static File getFileContaining(final URI uri)
 	{
 		final String scheme = uri.getScheme();
-		if(scheme==null)
+		if(scheme == null)
 			throw new IllegalArgumentException("scheme null in " + uri);
 
 		switch(scheme)
@@ -224,13 +227,13 @@ final class Main
 			{
 				final String ssp = uri.getRawSchemeSpecificPart();
 				final int exclamation = ssp.indexOf('!');
-				if(exclamation<0)
+				if(exclamation < 0)
 					throw new IllegalArgumentException("no exclamation in " + ssp + " from " + uri);
 
 				final URI jar;
 				try
 				{
-					jar = new URI(ssp.substring(0,  exclamation));
+					jar = new URI(ssp.substring(0, exclamation));
 				}
 				catch(final URISyntaxException e)
 				{
@@ -245,11 +248,11 @@ final class Main
 	}
 
 	private static final void write(
-			final MyType type,
-			final String packageName,
-			final String simpleClassName,
-			final String wildcards,
-			final OutputStreamWriter writer)
+		final MyType type,
+		final String packageName,
+		final String simpleClassName,
+		final String wildcards,
+		final OutputStreamWriter writer)
 		throws IOException
 	{
 		final String newLine = System.lineSeparator();
@@ -274,25 +277,26 @@ final class Main
 		writer.write("{");
 		writer.write(newLine);
 
-		if (type.enableCommonBuilder())
+		if(type.enableCommonBuilder())
 		{
-			final String pack=type.getJavaClass().getPackage().getName();
+			final String pack = type.getJavaClass().getPackage().getName();
 
-			writer.write("\tpublic static class "+simpleClassName+"Builder extends "+pack+".Common"+simpleClassName+"Builder<"+simpleClassName+wildcards+","+simpleClassName+"Builder>");
-			writer.write( newLine );
+			final String generics = "<" + simpleClassName + wildcards + "," + simpleClassName + "Builder>";
+			writer.write("\tpublic static class " + simpleClassName + "Builder extends " + pack + ".Common" + simpleClassName + "Builder" + generics);
+			writer.write(newLine);
 			writer.write("\t{");
-			writer.write( newLine );
+			writer.write(newLine);
 			final String visibility = Modifier.isAbstract(type.getJavaClass().getModifiers()) ? "private" : "public";
-			writer.write("\t\t" + visibility + " " +simpleClassName+"Builder( )");
-			writer.write( newLine );
+			writer.write("\t\t" + visibility + " " + simpleClassName + "Builder( )");
+			writer.write(newLine);
 			writer.write("\t\t{");
-			writer.write( newLine );
-			writer.write("\t\t\tsuper( "+simpleClassName+".TYPE );");
-			writer.write( newLine );
+			writer.write(newLine);
+			writer.write("\t\t\tsuper( " + simpleClassName + ".TYPE );");
+			writer.write(newLine);
 			writer.write("\t\t}");
-			writer.write( newLine );
+			writer.write(newLine);
 			writer.write("\t}");
-			writer.write( newLine );
+			writer.write(newLine);
 		}
 		else
 		{
@@ -338,33 +342,32 @@ final class Main
 		for(final Feature feature : type.getDeclaredFeatures())
 		{
 			if(!(
-				feature instanceof Settable<?>  ||
-				feature instanceof SetField<?>  ||
-				feature instanceof ListField<?> ||
-				feature instanceof MapField<?,?>))
+				feature instanceof Settable<?> ||
+					feature instanceof SetField<?> ||
+					feature instanceof ListField<?> ||
+					feature instanceof MapField<?, ?>))
 				continue;
 
 			if(feature instanceof Settable &&
-				!isVisible(packageName, ((Settable<?>)feature).getInitialType()))
+				!isVisible(packageName, ((Settable<?>) feature).getInitialType()))
 				continue;
 
 			{
 				final Pattern pattern = feature.getPattern();
-				if((pattern!=null) &&
-					(pattern instanceof Settable<?> || pattern instanceof DynamicModel<?>) )
+				if((pattern != null) &&
+					(pattern instanceof Settable<?> || pattern instanceof DynamicModel<?>))
 					continue;
 			}
 
 			final String featureName = type.getName(feature);
 			final String featureIdentifier = featureName.replace('-', '_');
 
-			final String setterParameter=toSetterParameterType( feature );
-			if (setterParameter==null)
+			final String setterParameter = toSetterParameterType(feature);
+			if(setterParameter == null)
 			{
-				System.out.println( "Skipping setter for " + feature +". Not implemented yet." );
+				System.out.println("Skipping setter for " + feature + ". Not implemented yet.");
 				continue;
 			}
-
 
 			writer.write(newLine);
 			writer.write(newLine);
@@ -374,26 +377,26 @@ final class Main
 			{
 				writer.write(Settable.class.getName());
 				writer.write('<');
-				writer.write(getCanonicalName(((Settable<?>)feature).getInitialType()));
+				writer.write(getCanonicalName(((Settable<?>) feature).getInitialType()));
 				writer.write('>');
 			}
 			else if(feature instanceof SetField)
 			{
 				writer.write(SetField.class.getName());
 				writer.write('<');
-				writer.write(getCanonicalName(((SetField<?>)feature).getElement().getValueClass()));
+				writer.write(getCanonicalName(((SetField<?>) feature).getElement().getValueClass()));
 				writer.write('>');
 			}
 			else if(feature instanceof ListField)
 			{
 				writer.write(ListField.class.getName());
 				writer.write('<');
-				writer.write(getCanonicalName(((ListField<?>)feature).getElement().getValueClass()));
+				writer.write(getCanonicalName(((ListField<?>) feature).getElement().getValueClass()));
 				writer.write('>');
 			}
 			else if(feature instanceof MapField)
 			{
-				final MapField<?,?> field = (MapField<?,?>)feature;
+				final MapField<?, ?> field = (MapField<?, ?>) feature;
 				writer.write(MapField.class.getName());
 				writer.write('<');
 				writer.write(getCanonicalName(field.getKey().getValueClass()));
@@ -411,12 +414,11 @@ final class Main
 			writer.write("\");");
 			writer.write(newLine);
 
-
 			writer.write(newLine);
 			writer.write("\tpublic final B ");
 			writer.write(featureIdentifier);
 			writer.write("(final ");
-			writer.write(setterParameter );
+			writer.write(setterParameter);
 			writer.write(" ");
 			writer.write(featureIdentifier);
 			writer.write(")");
@@ -434,68 +436,68 @@ final class Main
 			writer.write("\t}");
 			writer.write(newLine);
 
-			if (feature instanceof ListField<?>)
+			if(feature instanceof ListField<?>)
 			{
 				writer.write(newLine);
-				final Class<?> elementClass = ((ListField<?>)feature).getElement().getValueClass();
+				final Class<?> elementClass = ((ListField<?>) feature).getElement().getValueClass();
 				writeVarargsSuppressor(writer, elementClass);
 				final String itemClass = getCanonicalName(elementClass);
-				final String parameterList = "final "+itemClass+"... "+featureIdentifier;
-				final String mapping = "java.util.Arrays.asList("+featureIdentifier+")";
-				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,mapping);
+				final String parameterList = "final " + itemClass + "... " + featureIdentifier;
+				final String mapping = "java.util.Arrays.asList(" + featureIdentifier + ")";
+				writeRedirectSetter(writer, newLine, featureIdentifier, parameterList, mapping);
 			}
-			else if (feature instanceof SetField<?>)
+			else if(feature instanceof SetField<?>)
 			{
 				writer.write(newLine);
-				final Class<?> elementClass = ((SetField<?>)feature).getElement().getValueClass();
+				final Class<?> elementClass = ((SetField<?>) feature).getElement().getValueClass();
 				writeVarargsSuppressor(writer, elementClass);
 				final String itemClass = getCanonicalName(elementClass);
-				final String parameterList = "final "+itemClass+"... "+featureIdentifier;
-				final String mapping = "new java.util.HashSet<>(java.util.Arrays.asList("+featureIdentifier+"))";
-				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,mapping);
+				final String parameterList = "final " + itemClass + "... " + featureIdentifier;
+				final String mapping = "new java.util.HashSet<>(java.util.Arrays.asList(" + featureIdentifier + "))";
+				writeRedirectSetter(writer, newLine, featureIdentifier, parameterList, mapping);
 			}
-			else if (feature instanceof RangeField<?>)
+			else if(feature instanceof RangeField<?>)
 			{
-				final String fromClass = ((RangeField<?>)feature).getFrom().getValueClass().getCanonicalName();
-				final String toClass = ((RangeField<?>)feature).getTo().getValueClass().getCanonicalName();
-				final String parameterList = "final "+fromClass+" from, final "+toClass+" to";
-				writeRedirectSetter(writer,newLine,featureIdentifier,parameterList,"com.exedio.cope.pattern.Range.valueOf(from, to)");
+				final String fromClass = ((RangeField<?>) feature).getFrom().getValueClass().getCanonicalName();
+				final String toClass = ((RangeField<?>) feature).getTo().getValueClass().getCanonicalName();
+				final String parameterList = "final " + fromClass + " from, final " + toClass + " to";
+				writeRedirectSetter(writer, newLine, featureIdentifier, parameterList, "com.exedio.cope.pattern.Range.valueOf(from, to)");
 			}
-			else if (feature instanceof PriceField)
+			else if(feature instanceof PriceField)
 			{
 				writeRedirectSetter(writer, newLine, featureIdentifier,
-						"final double value",
-						"com.exedio.cope.pattern.Price.valueOf(value)");
+					"final double value",
+					"com.exedio.cope.pattern.Price.valueOf(value)");
 				writeRedirectSetter(writer, newLine, featureIdentifier,
-						"final int store",
-						"com.exedio.cope.pattern.Price.storeOf(store)");
+					"final int store",
+					"com.exedio.cope.pattern.Price.storeOf(store)");
 			}
-			else if (feature instanceof MoneyField)
+			else if(feature instanceof MoneyField)
 			{
-				final MoneyField<?> field = (MoneyField<?>)feature;
+				final MoneyField<?> field = (MoneyField<?>) feature;
 				writeRedirectSetter(writer, newLine, featureIdentifier,
-						"final double value," +
+					"final double value," +
 						"final " + getCanonicalName(field.getCurrencyClass()) + " currency",
-						"com.exedio.cope.pattern.Money.valueOf(value,currency)");
+					"com.exedio.cope.pattern.Money.valueOf(value,currency)");
 				writeRedirectSetter(writer, newLine, featureIdentifier,
-						"final int store," +
+					"final int store," +
 						"final " + getCanonicalName(field.getCurrencyClass()) + " currency",
-						"com.exedio.cope.pattern.Money.storeOf(store,currency)");
+					"com.exedio.cope.pattern.Money.storeOf(store,currency)");
 			}
-			else if( feature instanceof ItemField )
+			else if(feature instanceof ItemField)
 			{
 				final ItemField<?> field = (ItemField<?>) feature;
 				final Class<? extends Item> elementClass = field.getValueClass();
-				MyType myType=new ItemType(TypesBound.forClass(elementClass), elementClass);
+				MyType myType = new ItemType(TypesBound.forClass(elementClass), elementClass);
 
-				if (!myType.enableCommonBuilder()) //TODO generate in all children if a common builder exists
+				if(!myType.enableCommonBuilder()) //TODO generate in all children if a common builder exists
 				{
 					final String itemClass = myType.getJavaClass().getCanonicalName();
 					final String itemClassBuilder = itemClass + "Builder";
 					writeRedirectSetter(writer, newLine, featureIdentifier,
 						"final java.util.function.Function<" + itemClassBuilder + ", " + itemClassBuilder + "> " + featureIdentifier + "BuilderConsumer",
 						featureIdentifier + "BuilderConsumer.apply( new " + itemClassBuilder + "() ).build()");
-					if( !field.isMandatory() )
+					if(!field.isMandatory())
 					{
 						writeRedirectSetter(writer, newLine, featureIdentifier + "Null", featureIdentifier, "", "(" + itemClass + ") null");
 					}
@@ -510,9 +512,9 @@ final class Main
 	private static boolean isVisible(final String packageName, final java.lang.reflect.Type valueType)
 	{
 		if(valueType instanceof Class<?>)
-			return isVisible(packageName, (Class<?>)valueType);
+			return isVisible(packageName, (Class<?>) valueType);
 		else if(valueType instanceof ParameterizedType)
-			return isVisible(packageName, (ParameterizedType)valueType);
+			return isVisible(packageName, (ParameterizedType) valueType);
 		else
 			throw new RuntimeException(valueType.getTypeName() + ' ' + valueType.getClass());
 	}
@@ -541,11 +543,11 @@ final class Main
 	}
 
 	private static void writeVarargsSuppressor(
-			final OutputStreamWriter writer,
-			final Class<?> elementClass)
-	throws IOException
+		final OutputStreamWriter writer,
+		final Class<?> elementClass)
+		throws IOException
 	{
-		if(elementClass.getTypeParameters().length>0)
+		if(elementClass.getTypeParameters().length > 0)
 			writer.write("\t@SafeVarargs @SuppressWarnings(\"varargs\")");
 	}
 
@@ -569,7 +571,7 @@ final class Main
 		writer.write("\t{");
 		writer.write(newLine);
 
-		writer.write("\t\treturn "+featureIdentifier+"(");
+		writer.write("\t\treturn " + featureIdentifier + "(");
 		writer.write(mapping);
 		writer.write(");");
 		writer.write(newLine);
@@ -578,22 +580,22 @@ final class Main
 		writer.write(newLine);
 	}
 
-	static String toSetterParameterType( final Feature feature )
+	static String toSetterParameterType(final Feature feature)
 	{
 		if(feature instanceof Settable<?>)
 		{
-			final Settable<?> field = (Settable<?>)feature;
+			final Settable<?> field = (Settable<?>) feature;
 			final java.lang.reflect.Type valueClass = field.getInitialType();
 			final java.lang.reflect.Type primitiveClass =
-					(valueClass instanceof Class && field.isMandatory())
-					? PrimitiveUtil.toPrimitive((Class<?>)valueClass)
+				(valueClass instanceof Class && field.isMandatory())
+					? PrimitiveUtil.toPrimitive((Class<?>) valueClass)
 					: valueClass;
-			return getCanonicalName((primitiveClass!=null) ? primitiveClass : valueClass);
+			return getCanonicalName((primitiveClass != null) ? primitiveClass : valueClass);
 		}
 		else if(feature instanceof SetField<?>)
 		{
-			final SetField<?> field = (SetField<?>)feature;
-			final StringBuilder sb=new StringBuilder();
+			final SetField<?> field = (SetField<?>) feature;
+			final StringBuilder sb = new StringBuilder();
 			sb.append(Set.class.getName());
 			sb.append('<');
 			sb.append(getCanonicalName(field.getElement().getValueClass()));
@@ -602,18 +604,18 @@ final class Main
 		}
 		else if(feature instanceof ListField<?>)
 		{
-			final ListField<?> field = (ListField<?>)feature;
-			final StringBuilder sb=new StringBuilder();
+			final ListField<?> field = (ListField<?>) feature;
+			final StringBuilder sb = new StringBuilder();
 			sb.append(List.class.getName());
 			sb.append('<');
 			sb.append(getCanonicalName(field.getElement().getValueClass()));
 			sb.append('>');
 			return sb.toString();
 		}
-		else if(feature instanceof MapField<?,?>)
+		else if(feature instanceof MapField<?, ?>)
 		{
-			final MapField<?,?> field = (MapField<?,?>)feature;
-			final StringBuilder sb=new StringBuilder();
+			final MapField<?, ?> field = (MapField<?, ?>) feature;
+			final StringBuilder sb = new StringBuilder();
 			sb.append(Map.class.getName());
 			sb.append('<');
 			sb.append(getCanonicalName(field.getKey().getValueClass()));
@@ -628,9 +630,9 @@ final class Main
 	private static String getCanonicalName(final java.lang.reflect.Type type)
 	{
 		if(type instanceof Class)
-			return getCanonicalName((Class<?>)type);
+			return getCanonicalName((Class<?>) type);
 		else if(type instanceof ParameterizedType)
-			return getCanonicalName((ParameterizedType)type);
+			return getCanonicalName((ParameterizedType) type);
 		else
 			throw new RuntimeException("" + type);
 	}
@@ -640,12 +642,12 @@ final class Main
 		final String rawName = type.getCanonicalName();
 
 		final TypeVariable<?>[] typeParams = type.getTypeParameters();
-		if(typeParams.length==0)
+		if(typeParams.length == 0)
 			return rawName;
 
 		final StringBuilder bf = new StringBuilder(rawName);
 		bf.append("<?");
-		for(int i = 1; i<typeParams.length; i++)
+		for(int i = 1; i < typeParams.length; i++)
 			bf.append(",?");
 		bf.append('>');
 		return bf.toString();
@@ -664,7 +666,7 @@ final class Main
 		bf.append(Cast.verboseCast(Class.class, type.getRawType()).getCanonicalName());
 
 		final java.lang.reflect.Type[] arguments = type.getActualTypeArguments();
-		if(arguments!=null && arguments.length>0)
+		if(arguments != null && arguments.length > 0)
 		{
 			bf.append('<');
 			boolean first = true;
@@ -684,11 +686,11 @@ final class Main
 	}
 
 	private static final void writeConcrete(
-			final MyType type,
-			final String packageName,
-			final String simpleClassName,
-			final String wildcards,
-			final OutputStreamWriter writer)
+		final MyType type,
+		final String packageName,
+		final String simpleClassName,
+		final String wildcards,
+		final OutputStreamWriter writer)
 		throws IOException
 	{
 		final String newLine = System.lineSeparator();
@@ -699,7 +701,7 @@ final class Main
 		writer.write(newLine);
 		writer.write(newLine);
 
-		if (type.enableCommonBuilder())
+		if(type.enableCommonBuilder())
 		{
 			writer.write("import com.exedio.cope.Type;");
 			writer.write(newLine);
@@ -707,36 +709,37 @@ final class Main
 		}
 
 		writer.write("public ");
-		if (type.enableCommonBuilder()) writer.write("abstract ");
+		if(type.enableCommonBuilder())
+			writer.write("abstract ");
 		writer.write("class ");
 
-		if (type.enableCommonBuilder()) writer.write("Common");
+		if(type.enableCommonBuilder())
+			writer.write("Common");
 		writer.write(simpleClassName);
 		writer.write("Builder");
 
-		if (type.enableCommonBuilder())
+		if(type.enableCommonBuilder())
 		{
 
-			writer.write("<I extends "+simpleClassName+wildcards+", B extends Common"+simpleClassName+"Builder<?,?>>");
+			writer.write("<I extends " + simpleClassName + wildcards + ", B extends Common" + simpleClassName + "Builder<?,?>>");
 			writer.write(newLine);
 			writer.write("\textends ");
-			writer.write("Generated"+simpleClassName+"Builder<I,B>");
+			writer.write("Generated" + simpleClassName + "Builder<I,B>");
 		}
 		else
 		{
 			writer.write(" extends ");
-			writer.write("Generated"+simpleClassName+"Builder<"+simpleClassName+"Builder>");
+			writer.write("Generated" + simpleClassName + "Builder<" + simpleClassName + "Builder>");
 		}
-
 
 		writer.write(newLine);
 
 		writer.write("{");
 		writer.write(newLine);
 
-		if (type.enableCommonBuilder())
+		if(type.enableCommonBuilder())
 		{
-			writer.write("\tprotected Common"+simpleClassName+"Builder(final Type<I> type)");
+			writer.write("\tprotected Common" + simpleClassName + "Builder(final Type<I> type)");
 			writer.write(newLine);
 			writer.write("\t{");
 			writer.write(newLine);
@@ -749,13 +752,13 @@ final class Main
 
 		writer.write("\t@Override");
 		writer.write(newLine);
-		if (type.enableCommonBuilder())
+		if(type.enableCommonBuilder())
 		{
 			writer.write("\tpublic I build()");
 		}
 		else
 		{
-			writer.write("\tpublic "+simpleClassName+" build()");
+			writer.write("\tpublic " + simpleClassName + " build()");
 		}
 
 		writer.write(newLine);
@@ -773,17 +776,16 @@ final class Main
 	private static String typeParameterWildCards(final Class<?> clazz)
 	{
 		final int typeParameters = clazz.getTypeParameters().length;
-		if(typeParameters==0)
+		if(typeParameters == 0)
 			return "";
 
 		final StringBuilder bf = new StringBuilder();
 		bf.append("<?");
-		for(int i = 1; i<typeParameters; i++)
+		for(int i = 1; i < typeParameters; i++)
 			bf.append(",?");
 		bf.append('>');
 		return bf.toString();
 	}
-
 
 	private Main()
 	{

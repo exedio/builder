@@ -15,36 +15,42 @@ public class SimpleTest extends MainTest
 		final SimpleItem i = new SimpleItemBuilder().integerMandatory(88).build();
 		assertEquals(88, i.getIntegerMandatory());
 	}
+
 	@Test
 	public void mandatoryFallback()
 	{
 		final SimpleItem i = new SimpleItemBuilder().build();
 		assertEquals(777777, i.getIntegerMandatory());
 	}
+
 	@Test
 	public void optionalExplicit()
 	{
 		final SimpleItem i = new SimpleItemBuilder().integerOptional(88).build();
 		assertEquals(Integer.valueOf(88), i.getIntegerOptional());
 	}
+
 	@Test
 	public void optionalFallback()
 	{
 		final SimpleItem i = new SimpleItemBuilder().build();
 		assertEquals(null, i.getIntegerOptional());
 	}
+
 	@Test
 	public void enumExplicit()
 	{
 		final SimpleItem i = new SimpleItemBuilder().enumField(TestEnum.two).build();
 		assertEquals(TestEnum.two, i.getEnumField());
 	}
+
 	@Test
 	public void enumFallback()
 	{
 		final SimpleItem i = new SimpleItemBuilder().build();
 		assertEquals(TestEnum.one, i.getEnumField());
 	}
+
 	@Test
 	public void integerGetOrBuild()
 	{
@@ -55,6 +61,7 @@ public class SimpleTest extends MainTest
 		assertTrue(!i1.equals(i2));
 		assertEquals(2, i2.getIntegerMandatory());
 	}
+
 	@Test
 	public void enumGetOrBuild()
 	{
@@ -65,6 +72,7 @@ public class SimpleTest extends MainTest
 		assertTrue(!i1.equals(i2));
 		assertEquals(TestEnum.two, i2.getEnumField());
 	}
+
 	@Test
 	public void getOrBuildDuplicateFails()
 	{
@@ -75,7 +83,7 @@ public class SimpleTest extends MainTest
 			new SimpleItemBuilder().integerMandatory(1).getOrBuild();
 			fail();
 		}
-		catch (IllegalArgumentException e)
+		catch(IllegalArgumentException e)
 		{
 			assertTrue(e.getMessage().startsWith("expected result of size one or less, but was "));
 		}

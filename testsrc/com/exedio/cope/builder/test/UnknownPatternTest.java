@@ -11,9 +11,9 @@ public class UnknownPatternTest extends MainTest
 	{
 		final SimpleItem parent = new SimpleItemBuilder().build();
 		final UnknownPatternItem i = new UnknownPatternItemBuilder().
-				parent(parent).
-				order(5).
-				build();
+			parent(parent).
+			order(5).
+			build();
 		assertEquals(parent, i.getParent());
 		assertEquals(5, i.getOrder());
 	}

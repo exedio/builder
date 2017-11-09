@@ -1,4 +1,3 @@
-
 package com.exedio.cope.builder.other;
 
 public class ConcreteItemBuilder extends GeneratedConcreteItemBuilder<ConcreteItemBuilder>
