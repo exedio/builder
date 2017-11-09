@@ -7,6 +7,8 @@ import com.exedio.cope.Pattern;
 import com.exedio.cope.Settable;
 import com.exedio.cope.TypesBound;
 import com.exedio.cope.misc.PrimitiveUtil;
+import com.exedio.cope.pattern.Composite;
+import com.exedio.cope.pattern.CompositeField;
 import com.exedio.cope.pattern.DynamicModel;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
@@ -31,7 +33,8 @@ public class Writer
 		final String packageName,
 		final String simpleClassName,
 		final String wildcards,
-		final OutputStreamWriter writer)
+		final OutputStreamWriter writer,
+		final Set<MyType> generated)
 		throws IOException
 	{
 		final String newLine = System.lineSeparator();
@@ -280,6 +283,31 @@ public class Writer
 					{
 						writeRedirectSetter(writer, newLine, featureIdentifier + "Null", featureIdentifier, "", "(" + itemClass + ") null");
 					}
+				}
+			}
+			else if(feature instanceof CompositeField)
+			{
+				final CompositeField<?> field = (CompositeField<?>) feature;
+				final Class<? extends Composite> elementClass = field.getValueClass();
+				MyType myType = new CompositeType(elementClass, field);
+				if(generated.contains(myType))
+				{
+
+					final String compositeClass = myType.getJavaClass().getCanonicalName();
+					final String compositeClassBuilder = compositeClass + "Builder";
+
+					writeRedirectSetter(writer, newLine, featureIdentifier,
+						"final java.util.function.Function<" + compositeClassBuilder + ", " + compositeClassBuilder + "> " + featureIdentifier
+							+ "BuilderConsumer",
+						featureIdentifier + "BuilderConsumer.apply( new " + compositeClassBuilder + "() ).build()");
+					if(!field.isMandatory())
+					{
+						writeRedirectSetter(writer, newLine, featureIdentifier + "Null", featureIdentifier, "", "(" + compositeClass + ") null");
+					}
+				}
+				else
+				{
+					System.out.println("Skip external composite lambda builder setter:" + field + " " + elementClass);
 				}
 			}
 		}

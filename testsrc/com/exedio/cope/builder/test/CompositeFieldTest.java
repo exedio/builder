@@ -35,4 +35,11 @@ public class CompositeFieldTest extends MainTest
 		assertTrue(i0 != i1);
 		assertEquals(asList(i0, i1), CompositeItem.TYPE.search());
 	}
+
+	@Test
+	public void lambda()
+	{
+		final CompositeItem i = new CompositeItemBuilder().field(c -> c.integerMandatory(33)).build();
+		assertEquals(33, i.getField().getIntegerMandatory());
+	}
 }

@@ -118,4 +118,16 @@ final class ItemType extends MyType
 	{
 		return "TYPE";
 	}
+
+	@Override
+	public boolean equals(final Object obj)
+	{
+		return obj instanceof ItemType && clazz.equals(((ItemType) obj).clazz);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return clazz.hashCode();
+	}
 }

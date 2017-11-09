@@ -7,6 +7,12 @@ omit bug fixes.
 The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
+* generate null setter for optional composite fields
+    OPTIONAL MIGRATION replace xyz(null) by xyzNull()
+    MIGRATION If you have already created them manually in the past, the compiler will tell you and you have to delete them in your builders.
+* generate lambda builder setters for composite fields
+    MIGRATION this will overload the 1 parameter setter and will required a cast for NULL setter or usage of xyzNull() [see above]
+    MIGRATION If you have already created them manually in the past, the compiler will tell you and you have to delete them in your builders.
 * private constructor for builder of abstract class
 * generate null setter for non-inherited optional item fields
     OPTIONAL MIGRATION replace xyz(null) by xyzNull()

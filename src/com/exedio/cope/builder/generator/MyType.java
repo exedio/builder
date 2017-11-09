@@ -46,4 +46,8 @@ abstract class MyType
 	}
 
 	abstract String getTypeName();
+
+	public abstract boolean equals(final Object obj);
+
+	public abstract int hashCode();
 }

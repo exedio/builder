@@ -52,4 +52,16 @@ final class CompositeType extends MyType
 	{
 		return "class";
 	}
+
+	@Override
+	public boolean equals(final Object obj)
+	{
+		return obj instanceof CompositeType && clazz.equals(((CompositeType) obj).clazz); // TODO maybe different fields?
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return clazz.hashCode();
+	}
 }
