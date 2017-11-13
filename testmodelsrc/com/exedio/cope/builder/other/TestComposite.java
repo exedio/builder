@@ -14,7 +14,7 @@ public final class TestComposite extends Composite
 	static final IntegerField integerMandatory = new IntegerField();
 
 	/**
-	 * @cope.get package
+	 * @cope.get public
 	 * @cope.set none
 	 */
 	private static final IntegerField integerOptional = new IntegerField().optional();
@@ -60,7 +60,7 @@ public final class TestComposite extends Composite
 	 *       It can be customized with the tag <tt>@cope.get public|package|protected|private|none|non-final</tt> in the comment of the field.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	final java.lang.Integer getIntegerOptional()
+	public final java.lang.Integer getIntegerOptional()
 	{
 		return get(TestComposite.integerOptional);
 	}/**

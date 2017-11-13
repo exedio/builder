@@ -42,4 +42,44 @@ public class CompositeFieldTest extends MainTest
 		final CompositeItem i = new CompositeItemBuilder().field(c -> c.integerMandatory(33)).build();
 		assertEquals(33, i.getField().getIntegerMandatory());
 	}
+
+	@Test
+	public void lambda2()
+	{
+		final CompositeItem i = new CompositeItemBuilder().
+			field(c -> c.integerMandatory(33).integerOptional(44)).
+			build();
+		assertEquals(33, i.getField().getIntegerMandatory());
+		assertEquals(Integer.valueOf(44), i.getField().getIntegerOptional());
+	}
+
+	@Test
+	public void lambda3()
+	{
+		final CompositeItem i = new CompositeItemBuilder().
+			field(c -> c.integerMandatory(33).integerMandatory(55)).
+			build();
+		assertEquals(55, i.getField().getIntegerMandatory());
+	}
+
+	@Test
+	public void lambda4()
+	{
+		final CompositeItem i = new CompositeItemBuilder().
+			field(c -> c.integerMandatory(33)).
+			field(c -> c.integerMandatory(55)).
+			build();
+		assertEquals(55, i.getField().getIntegerMandatory());
+	}
+
+	@Test
+	public void lambda5()
+	{
+		final CompositeItem i = new CompositeItemBuilder().
+			field(c -> c.integerMandatory(33)).
+			field(c -> c.integerOptional(55)).
+			build();
+		assertEquals(777777, i.getField().getIntegerMandatory());
+		assertEquals(Integer.valueOf(55), i.getField().getIntegerOptional());
+	}
 }
