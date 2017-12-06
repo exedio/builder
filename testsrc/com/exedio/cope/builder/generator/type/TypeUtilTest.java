@@ -1,6 +1,8 @@
 package com.exedio.cope.builder.generator.type;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.Item;
@@ -73,5 +75,29 @@ public class TypeUtilTest extends MainTest
 		assertEquals("java.util.List<java.lang.String>", TypeUtil.toSetterParameterType(ListField.create(new StringField())));
 		assertEquals("java.util.Map<java.lang.String,java.lang.Integer>",
 			TypeUtil.toSetterParameterType(MapField.create(new StringField(), new IntegerField())));
+	}
+
+	@SuppressWarnings("unused")
+	private static class PrivateClass<A, B>
+	{
+
+	}
+
+	@Test
+	public void isVisible() throws ClassNotFoundException
+	{
+		assertTrue(TypeUtil.isVisible("any", Object.class));
+
+		final Class<?> packageProtected = Class.forName("com.exedio.cope.builder.test.genericComplex.GenSub");
+		assertFalse(TypeUtil.isVisible("other", packageProtected));
+		assertTrue(TypeUtil.isVisible("com.exedio.cope.builder.test.genericComplex", packageProtected));
+
+		assertFalse(TypeUtil.isVisible("any", PrivateClass.class));
+
+		assertTrue(TypeUtil.isVisible("any", ReflectionTypes.parameterized(Function.class, Object.class, Function.class)));
+		assertFalse(TypeUtil.isVisible("any", ReflectionTypes.parameterized(Function.class, PrivateClass.class, Function.class)));
+		assertFalse(TypeUtil.isVisible("any", ReflectionTypes.parameterized(Function.class, packageProtected, Function.class)));
+		assertTrue(
+			TypeUtil.isVisible("com.exedio.cope.builder.test.genericComplex", ReflectionTypes.parameterized(Function.class, packageProtected, Function.class)));
 	}
 }

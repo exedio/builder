@@ -21,7 +21,6 @@ import com.exedio.cope.pattern.SetField;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
 import java.util.Set;
 
 public class Writer
@@ -128,7 +127,7 @@ public class Writer
 				continue;
 
 			if(feature instanceof Settable &&
-				!isVisible(packageName, ((Settable<?>) feature).getInitialType()))
+				!TypeUtil.isVisible(packageName, ((Settable<?>) feature).getInitialType()))
 				continue;
 
 			{
@@ -310,39 +309,6 @@ public class Writer
 
 		writer.write("}");
 		writer.write(newLine);
-	}
-
-	private static boolean isVisible(final String packageName, final java.lang.reflect.Type valueType)
-	{
-		if(valueType instanceof Class<?>)
-			return isVisible(packageName, (Class<?>) valueType);
-		else if(valueType instanceof ParameterizedType)
-			return isVisible(packageName, (ParameterizedType) valueType);
-		else
-			throw new RuntimeException(valueType.getTypeName() + ' ' + valueType.getClass());
-	}
-
-	private static boolean isVisible(final String packageName, final ParameterizedType valueType)
-	{
-		if(!isVisible(packageName, valueType.getRawType()))
-			return false;
-
-		for(final java.lang.reflect.Type argument : valueType.getActualTypeArguments())
-			if(!isVisible(packageName, argument))
-				return false;
-
-		return true;
-	}
-
-	private static boolean isVisible(final String packageName, final Class<?> valueClass)
-	{
-		final int modifier = valueClass.getModifiers();
-		if(Modifier.isPublic(modifier))
-			return true;
-		if(Modifier.isPrivate(modifier))
-			return false;
-
-		return packageName.equals(valueClass.getPackage().getName());
 	}
 
 	private static void writeVarargsSuppressor(

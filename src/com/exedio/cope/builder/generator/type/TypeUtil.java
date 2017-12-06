@@ -7,6 +7,7 @@ import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
 import com.exedio.cope.pattern.SetField;
 import com.exedio.cope.util.Cast;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -93,5 +94,38 @@ public class TypeUtil
 				+ '>';
 		}
 		return null;
+	}
+
+	public static boolean isVisible(final String packageName, final Type type)
+	{
+		if(type instanceof Class<?>)
+			return isVisible(packageName, (Class<?>) type);
+		else if(type instanceof ParameterizedType)
+			return isVisible(packageName, (ParameterizedType) type);
+		else
+			throw new RuntimeException(type.getTypeName() + ' ' + type.getClass());
+	}
+
+	private static boolean isVisible(final String packageName, final ParameterizedType type)
+	{
+		if(!isVisible(packageName, type.getRawType()))
+			return false;
+
+		for(final Type argument : type.getActualTypeArguments())
+			if(!isVisible(packageName, argument))
+				return false;
+
+		return true;
+	}
+
+	private static boolean isVisible(final String packageName, final Class<?> clazz)
+	{
+		final int modifier = clazz.getModifiers();
+		if(Modifier.isPublic(modifier))
+			return true;
+		if(Modifier.isPrivate(modifier))
+			return false;
+
+		return packageName.equals(clazz.getPackage().getName());
 	}
 }
