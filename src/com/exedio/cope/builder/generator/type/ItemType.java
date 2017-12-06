@@ -1,4 +1,4 @@
-package com.exedio.cope.builder.generator;
+package com.exedio.cope.builder.generator.type;
 
 import com.exedio.cope.Feature;
 import com.exedio.cope.Type;
@@ -7,37 +7,37 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Collection;
 
-final class ItemType extends MyType
+public final class ItemType extends MyType
 {
 	private final Type<?>  type;
 	private final Class<?> clazz;
 
-	ItemType(final Type<?> type)
+	public ItemType(final Type<?> type)
 	{
 		this.type = type;
 		this.clazz = type.getJavaClass();
 	}
 
 	@Override
-	Class<?> getJavaClass()
+	public Class<?> getJavaClass()
 	{
 		return clazz;
 	}
 
 	@Override
-	Collection<? extends Feature> getDeclaredFeatures()
+	public Collection<? extends Feature> getDeclaredFeatures()
 	{
 		return type.getDeclaredFeatures();
 	}
 
 	@Override
-	String getName(final Feature feature)
+	public String getName(final Feature feature)
 	{
 		return feature.getName();
 	}
 
 	@Override
-	void writeGenericParams(
+	public void writeGenericParams(
 		final OutputStreamWriter writer,
 		final String simpleClassName,
 		final String wildcards)
@@ -60,7 +60,7 @@ final class ItemType extends MyType
 	}
 
 	@Override
-	void writeExtends(final OutputStreamWriter writer, final String simpleClassname) throws IOException
+	public void writeExtends(final OutputStreamWriter writer, final String simpleClassname) throws IOException
 	{
 		final Type<?> supertype = type.getSupertype();
 		if(supertype != null)
@@ -95,26 +95,26 @@ final class ItemType extends MyType
 	}
 
 	@Override
-	boolean enableCommonBuilder()
+	public boolean enableCommonBuilder()
 	{
 		return !type.getSubtypes().isEmpty();
 	}
 
 	@Override
-	void writeTypeCast(final OutputStreamWriter writer) throws IOException
+	public void writeTypeCast(final OutputStreamWriter writer) throws IOException
 	{
 		if(!type.getSubtypes().isEmpty())
 			writer.write("(com.exedio.cope.Type<I>)");
 	}
 
 	@Override
-	boolean enableTypePropagationConstructor()
+	public boolean enableTypePropagationConstructor()
 	{
 		return !type.getSubtypes().isEmpty();
 	}
 
 	@Override
-	String getTypeName()
+	public String getTypeName()
 	{
 		return "TYPE";
 	}

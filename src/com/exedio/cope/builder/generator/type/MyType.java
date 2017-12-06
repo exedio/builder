@@ -1,24 +1,24 @@
-package com.exedio.cope.builder.generator;
+package com.exedio.cope.builder.generator.type;
 
 import com.exedio.cope.Feature;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Collection;
 
-abstract class MyType
+public abstract class MyType
 {
-	abstract Class<?> getJavaClass();
+	public abstract Class<?> getJavaClass();
 
-	abstract Collection<? extends Feature> getDeclaredFeatures();
+	public abstract Collection<? extends Feature> getDeclaredFeatures();
 
-	abstract String getName(Feature feature);
+	public abstract String getName(Feature feature);
 
-	abstract void writeExtends(OutputStreamWriter writer, String simpleClassName) throws IOException;
+	public abstract void writeExtends(OutputStreamWriter writer, String simpleClassName) throws IOException;
 
 	/**
 	 * @param wildcards needed by subclasses
 	 */
-	void writeGenericParams(
+	public void writeGenericParams(
 		final OutputStreamWriter writer,
 		final String simpleClassName,
 		final String wildcards)
@@ -30,22 +30,22 @@ abstract class MyType
 	}
 
 	@SuppressWarnings("unused")
-	void writeTypeCast(final OutputStreamWriter writer) throws IOException
+	public void writeTypeCast(final OutputStreamWriter writer) throws IOException
 	{
 		// do nothing
 	}
 
-	boolean enableCommonBuilder()
+	public boolean enableCommonBuilder()
 	{
 		return false;
 	}
 
-	boolean enableTypePropagationConstructor()
+	public boolean enableTypePropagationConstructor()
 	{
 		return false;
 	}
 
-	abstract String getTypeName();
+	public abstract String getTypeName();
 
 	public abstract boolean equals(final Object obj);
 
