@@ -14,22 +14,8 @@ public abstract class MyType<T>
 	MyType(final Class<? extends T> clazz)
 	{
 		this.clazz = clazz;
-		this.wildCards = typeParameterWildCards(clazz);
+		this.wildCards = TypeUtil.typeParameterWildCards(clazz);
 		simpleClassName = clazz.getSimpleName();
-	}
-
-	static String typeParameterWildCards(final Class<?> clazz)
-	{
-		final int typeParameters = clazz.getTypeParameters().length;
-		if(typeParameters == 0)
-			return "";
-
-		final StringBuilder bf = new StringBuilder();
-		bf.append("<?");
-		for(int i = 1; i < typeParameters; i++)
-			bf.append(",?");
-		bf.append('>');
-		return bf.toString();
 	}
 
 	@Nonnull

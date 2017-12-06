@@ -9,7 +9,7 @@ import com.exedio.cope.TypesBound;
 import com.exedio.cope.builder.generator.type.CompositeType;
 import com.exedio.cope.builder.generator.type.ItemType;
 import com.exedio.cope.builder.generator.type.MyType;
-import com.exedio.cope.misc.PrimitiveUtil;
+import com.exedio.cope.builder.generator.type.TypeUtil;
 import com.exedio.cope.pattern.CompositeField;
 import com.exedio.cope.pattern.DynamicModel;
 import com.exedio.cope.pattern.ListField;
@@ -18,14 +18,10 @@ import com.exedio.cope.pattern.MoneyField;
 import com.exedio.cope.pattern.PriceField;
 import com.exedio.cope.pattern.RangeField;
 import com.exedio.cope.pattern.SetField;
-import com.exedio.cope.util.Cast;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.TypeVariable;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class Writer
@@ -145,7 +141,7 @@ public class Writer
 			final String featureName = type.getName(feature);
 			final String featureIdentifier = featureName.replace('-', '_');
 
-			final String setterParameter = toSetterParameterType(feature);
+			final String setterParameter = TypeUtil.toSetterParameterType(feature);
 			if(setterParameter == null)
 			{
 				System.out.println("Skipping setter for " + feature + ". Not implemented yet.");
@@ -160,21 +156,21 @@ public class Writer
 			{
 				writer.write(Settable.class.getName());
 				writer.write('<');
-				writer.write(getCanonicalName(((Settable<?>) feature).getInitialType()));
+				writer.write(TypeUtil.getCanonicalName(((Settable<?>) feature).getInitialType()));
 				writer.write('>');
 			}
 			else if(feature instanceof SetField)
 			{
 				writer.write(SetField.class.getName());
 				writer.write('<');
-				writer.write(getCanonicalName(((SetField<?>) feature).getElement().getValueClass()));
+				writer.write(TypeUtil.getCanonicalName(((SetField<?>) feature).getElement().getValueClass()));
 				writer.write('>');
 			}
 			else if(feature instanceof ListField)
 			{
 				writer.write(ListField.class.getName());
 				writer.write('<');
-				writer.write(getCanonicalName(((ListField<?>) feature).getElement().getValueClass()));
+				writer.write(TypeUtil.getCanonicalName(((ListField<?>) feature).getElement().getValueClass()));
 				writer.write('>');
 			}
 			else if(feature instanceof MapField)
@@ -182,9 +178,9 @@ public class Writer
 				final MapField<?, ?> field = (MapField<?, ?>) feature;
 				writer.write(MapField.class.getName());
 				writer.write('<');
-				writer.write(getCanonicalName(field.getKey().getValueClass()));
+				writer.write(TypeUtil.getCanonicalName(field.getKey().getValueClass()));
 				writer.write(',');
-				writer.write(getCanonicalName(field.getValue().getValueClass()));
+				writer.write(TypeUtil.getCanonicalName(field.getValue().getValueClass()));
 				writer.write('>');
 			}
 			else
@@ -224,7 +220,7 @@ public class Writer
 				writer.write(newLine);
 				final Class<?> elementClass = ((ListField<?>) feature).getElement().getValueClass();
 				writeVarargsSuppressor(writer, elementClass);
-				final String itemClass = getCanonicalName(elementClass);
+				final String itemClass = TypeUtil.getCanonicalName(elementClass);
 				final String parameterList = "final " + itemClass + "... " + featureIdentifier;
 				final String mapping = "java.util.Arrays.asList(" + featureIdentifier + ")";
 				writeRedirectSetter(writer, newLine, featureIdentifier, parameterList, mapping);
@@ -234,7 +230,7 @@ public class Writer
 				writer.write(newLine);
 				final Class<?> elementClass = ((SetField<?>) feature).getElement().getValueClass();
 				writeVarargsSuppressor(writer, elementClass);
-				final String itemClass = getCanonicalName(elementClass);
+				final String itemClass = TypeUtil.getCanonicalName(elementClass);
 				final String parameterList = "final " + itemClass + "... " + featureIdentifier;
 				final String mapping = "new java.util.HashSet<>(java.util.Arrays.asList(" + featureIdentifier + "))";
 				writeRedirectSetter(writer, newLine, featureIdentifier, parameterList, mapping);
@@ -260,11 +256,11 @@ public class Writer
 				final MoneyField<?> field = (MoneyField<?>) feature;
 				writeRedirectSetter(writer, newLine, featureIdentifier,
 					"final double value," +
-						"final " + getCanonicalName(field.getCurrencyClass()) + " currency",
+						"final " + TypeUtil.getCanonicalName(field.getCurrencyClass()) + " currency",
 					"com.exedio.cope.pattern.Money.valueOf(value,currency)");
 				writeRedirectSetter(writer, newLine, featureIdentifier,
 					"final int store," +
-						"final " + getCanonicalName(field.getCurrencyClass()) + " currency",
+						"final " + TypeUtil.getCanonicalName(field.getCurrencyClass()) + " currency",
 					"com.exedio.cope.pattern.Money.storeOf(store,currency)");
 			}
 			else if(feature instanceof ItemField)
@@ -385,111 +381,6 @@ public class Writer
 
 		writer.write("\t}");
 		writer.write(newLine);
-	}
-
-	static String toSetterParameterType(final Feature feature)
-	{
-		if(feature instanceof Settable<?>)
-		{
-			final Settable<?> field = (Settable<?>) feature;
-			final java.lang.reflect.Type valueClass = field.getInitialType();
-			final java.lang.reflect.Type primitiveClass =
-				(valueClass instanceof Class && field.isMandatory())
-					? PrimitiveUtil.toPrimitive((Class<?>) valueClass)
-					: valueClass;
-			return getCanonicalName((primitiveClass != null) ? primitiveClass : valueClass);
-		}
-		else if(feature instanceof SetField<?>)
-		{
-			final SetField<?> field = (SetField<?>) feature;
-			final StringBuilder sb = new StringBuilder();
-			sb.append(Set.class.getName());
-			sb.append('<');
-			sb.append(getCanonicalName(field.getElement().getValueClass()));
-			sb.append('>');
-			return sb.toString();
-		}
-		else if(feature instanceof ListField<?>)
-		{
-			final ListField<?> field = (ListField<?>) feature;
-			final StringBuilder sb = new StringBuilder();
-			sb.append(List.class.getName());
-			sb.append('<');
-			sb.append(getCanonicalName(field.getElement().getValueClass()));
-			sb.append('>');
-			return sb.toString();
-		}
-		else if(feature instanceof MapField<?, ?>)
-		{
-			final MapField<?, ?> field = (MapField<?, ?>) feature;
-			final StringBuilder sb = new StringBuilder();
-			sb.append(Map.class.getName());
-			sb.append('<');
-			sb.append(getCanonicalName(field.getKey().getValueClass()));
-			sb.append(',');
-			sb.append(getCanonicalName(field.getValue().getValueClass()));
-			sb.append('>');
-			return sb.toString();
-		}
-		return null;
-	}
-
-	private static String getCanonicalName(final java.lang.reflect.Type type)
-	{
-		if(type instanceof Class)
-			return getCanonicalName((Class<?>) type);
-		else if(type instanceof ParameterizedType)
-			return getCanonicalName((ParameterizedType) type);
-		else
-			throw new RuntimeException("" + type);
-	}
-
-	private static String getCanonicalName(final Class<?> type)
-	{
-		final String rawName = type.getCanonicalName();
-
-		final TypeVariable<?>[] typeParams = type.getTypeParameters();
-		if(typeParams.length == 0)
-			return rawName;
-
-		final StringBuilder bf = new StringBuilder(rawName);
-		bf.append("<?");
-		for(int i = 1; i < typeParams.length; i++)
-			bf.append(",?");
-		bf.append('>');
-		return bf.toString();
-	}
-
-	private static String getCanonicalName(final ParameterizedType type)
-	{
-		{
-			final java.lang.reflect.Type ownerType = type.getOwnerType();
-			if(ownerType != null)
-				throw new IllegalArgumentException(ownerType.toString());
-		}
-
-		final StringBuilder bf = new StringBuilder();
-
-		bf.append(Cast.verboseCast(Class.class, type.getRawType()).getCanonicalName());
-
-		final java.lang.reflect.Type[] arguments = type.getActualTypeArguments();
-		if(arguments != null && arguments.length > 0)
-		{
-			bf.append('<');
-			boolean first = true;
-			for(final java.lang.reflect.Type argument : arguments)
-			{
-				if(first)
-					first = false;
-				else
-					bf.append(',');
-
-				bf.append(getCanonicalName(argument));
-			}
-			bf.append('>');
-		}
-
-		return bf.toString();
 	}
 
 	static final void writeConcreteBuilder(final MyType<?> type, final String packageName, final String simpleClassName,
