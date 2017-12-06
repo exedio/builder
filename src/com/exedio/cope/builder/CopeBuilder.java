@@ -3,9 +3,11 @@ package com.exedio.cope.builder;
 import com.exedio.cope.Feature;
 import com.exedio.cope.SetValue;
 import com.exedio.cope.Settable;
+import com.exedio.cope.pattern.EnumMapField;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,18 +19,20 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder<?, ?>>
 {
 	protected Map<Settable<?>, SetValue<?>> values = new HashMap<>();
 
-	@SafeVarargs
-	protected static <T> Set<T> toSet(final T... array)
-	{
-		final Set<T> result = new HashSet<>();
-		for(final T t : array)
-			result.add(t);
-		return result;
-	}
-
 	protected final <V> boolean isSet(final Settable<V> settable)
 	{
 		return values.containsKey(settable);
+	}
+
+	//Handle enum map key-vise
+	protected final <K extends Enum<K>> boolean isSet(final EnumMapField<K, ?> enumMapField)
+	{
+		return Arrays.stream(enumMapField.getKeyClass().getEnumConstants()).anyMatch(key -> values.containsKey(enumMapField.getField(key)));
+	}
+
+	protected final <K extends Enum<K>> boolean isSet(final EnumMapField<K, ?> enumMapField, final K key)
+	{
+		return values.containsKey(enumMapField.getField(key));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -39,13 +43,29 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder<?, ?>>
 		return (B) this;
 	}
 
-	@SuppressWarnings("unchecked")
-	protected final <V> B fallback(final Settable<V> settable, final Builder<? extends V> builder)
+	//Handle enum map key-vise
+	protected <K extends Enum<K>, V> void fallback(final EnumMapField<K, V> enumMapField, final EnumMap<K, V> map)
+	{
+		map.forEach((k, v) -> fallback(enumMapField, k, v));
+	}
+
+	protected <K extends Enum<K>, V> void fallback(final EnumMapField<K, V> enumMapField, final K key, final V value)
+	{
+		fallback(enumMapField.getField(key), value);
+	}
+
+	protected final <V> void fallback(final Settable<V> settable, final Builder<? extends V> builder)
 	{
 		if(!isSet(settable))
 			set(settable, builder.build());
-		return (B) this;
 	}
+
+	protected <K extends Enum<K>, V> void fallback(final EnumMapField<K, V> enumMapField, final K key, final Builder<V> builder)
+	{
+		if(!isSet(enumMapField.getField(key)))
+			fallback(enumMapField.getField(key), builder.build());
+	}
+
 
 	@SuppressWarnings("unchecked")
 	protected final <V> B set(final Settable<V> settable, final V value)
@@ -60,6 +80,22 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder<?, ?>>
 		if(!values.containsKey(settable))
 			return null;
 		return (V) values.get(settable).value;
+	}
+
+	//Handle enum map key-vise
+	protected final <K extends Enum<K>, V> V get(final EnumMapField<K, V> enumMapField, final K key)
+	{
+		return get(enumMapField.getField(key));
+	}
+
+	protected final <K extends Enum<K>, V> EnumMap<K, V> get(final EnumMapField<K, V> enumMapField)
+	{
+		final EnumMap<K, V> enumMap = new EnumMap<>(enumMapField.getKeyClass());
+		for(K key : enumMapField.getKeyClass().getEnumConstants())
+		{
+			enumMap.put(key, get(enumMapField, key));
+		}
+		return enumMap;
 	}
 
 	@SafeVarargs
@@ -86,14 +122,21 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder<?, ?>>
 		return map;
 	}
 
-	public CopeBuilder()
+	@SuppressWarnings("varargs")
+	@SafeVarargs
+	protected static <T> Set<T> toSet(final T... array)
 	{
-		super();
+		return new HashSet<>(Arrays.asList(array));
 	}
 
 	protected static <K extends Enum<K>, V> EnumMap<K, V> toEnumMap(final K key, final V value)
 	{
 		return new EnumMap<>(toMap(key, value));
+	}
+
+	public CopeBuilder()
+	{
+		super();
 	}
 
 	protected abstract <F extends Feature> F getFeature(String featureName);

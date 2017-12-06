@@ -28,7 +28,8 @@ final class FieldsItem extends Item
 	static final PriceField price = new PriceField().toFinal();
 	static final MoneyField<Currency> money = MoneyField.exclusive(EnumField.create(Currency.class)).toFinal();
 	static final RangeField<Integer> range = RangeField.create(new IntegerField());
-	static final EnumMapField<TestEnum,String> enumMap = EnumMapField.create(TestEnum.class, new StringField().toFinal());
+	static final EnumMapField<TestEnum,String> enumMap = EnumMapField.create(TestEnum.class, new StringField().toFinal())
+		.defaultTo(TestEnum.three,"default3");
 	static final SetField<String> set = SetField.create(new StringField());
 	static final ListField<String> list = ListField.create(new StringField());
 	static final MapField<String,String> map = MapField.create(new StringField().toFinal(), new StringField().toFinal());

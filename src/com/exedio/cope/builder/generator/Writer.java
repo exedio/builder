@@ -12,6 +12,7 @@ import com.exedio.cope.builder.generator.type.MyType;
 import com.exedio.cope.builder.generator.type.TypeUtil;
 import com.exedio.cope.pattern.CompositeField;
 import com.exedio.cope.pattern.DynamicModel;
+import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
 import com.exedio.cope.pattern.MoneyField;
@@ -20,6 +21,7 @@ import com.exedio.cope.pattern.RangeField;
 import com.exedio.cope.pattern.SetField;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
+import java.util.Locale;
 import java.util.Set;
 
 public class Writer
@@ -96,13 +98,17 @@ public class Writer
 				continue;
 			}
 
-			writer.writeLine();
-			writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
-			writer.writeLine();
-			writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + valueType + " " + featureIdentifier + ")");
-			writer.writeLine("\t{");
-			writer.writeLine("\t\treturn set(this." + featureIdentifier + "," + featureIdentifier + ");");
-			writer.writeLine("\t}");
+			boolean writeGenericSetter = !(feature instanceof EnumMapField); //set enum map by keys and skip common value setter, see below
+			if(writeGenericSetter)
+			{
+				writer.writeLine();
+				writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
+				writer.writeLine();
+				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + valueType + " " + featureIdentifier + ")");
+				writer.writeLine("\t{");
+				writer.writeLine("\t\treturn set(this." + featureIdentifier + "," + featureIdentifier + ");");
+				writer.writeLine("\t}");
+			}
 
 			if(feature instanceof ListField<?>)
 			{
@@ -187,6 +193,41 @@ public class Writer
 				else
 				{
 					System.out.println("Skip external composite lambda builder setter:" + field + " " + myType.getJavaClass());
+				}
+			}
+			else if(feature instanceof EnumMapField)
+			{
+				EnumMapField<?, ?> enumMapField = (EnumMapField<?, ?>) feature;
+				Class<? extends Enum<?>> keyClass = enumMapField.getKeyClass();
+				String enumKeyType = TypeUtil.getCanonicalName(enumMapField.getKeyClass());
+				String enumValueType = TypeUtil.getCanonicalName(enumMapField.getValueClass());
+
+				writer.writeLine();
+				writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
+				writer.writeLine();
+				writer.writeLine("\t@SuppressWarnings(\"unchecked\")");
+				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + valueType + " " + featureIdentifier + ")");
+				writer.writeLine("\t{");
+				writer.writeLine("\t\t" + featureIdentifier + ".forEach(this::" + featureIdentifier + ");");
+				writer.writeLine("\t\treturn (B) this;");
+				writer.writeLine("\t}");
+
+				writer.writeLine();
+				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + enumKeyType + " key, final " + enumValueType + " value)");
+				writer.writeLine("\t{");
+				writer.writeLine("\t\treturn set(this." + featureIdentifier + ".getField(key), value);");
+				writer.writeLine("\t}");
+
+				for(Object e : keyClass.getEnumConstants())
+				{
+					String key = ((Enum<?>) e).name();
+					String methodPart = key.substring(0, 1).toUpperCase(Locale.ENGLISH) + key.substring(1);
+					String variable = key.toLowerCase(Locale.ENGLISH); //TODO improve?
+					writer.writeLine();
+					writer.writeLine("\tpublic final B " + featureIdentifier + methodPart + "(final " + enumValueType + " " + variable + ")");
+					writer.writeLine("\t{");
+					writer.writeLine("\t\treturn " + featureIdentifier + "(" + enumKeyType + "." + key + "," + variable + ");");
+					writer.writeLine("\t}");
 				}
 			}
 		}

@@ -63,9 +63,9 @@ public class FieldsTest extends MainTest
 		assertEquals(Price.storeOf(7777777), i.getPrice());
 		assertEquals(Money.storeOf(8888888, EUR), i.getMoney());
 		assertEquals(Range.valueOf(7777777, 8888888), i.getRange());
-		assertEquals("fallbackEnumMapValueOne", i.getEnumMap(TestEnum.one));
-		assertEquals("fallbackEnumMapValueTwo", i.getEnumMap(TestEnum.two));
-		assertEquals("fallbackEnumMapValueThree", i.getEnumMap(TestEnum.three));
+		assertEquals("keyFallback1", i.getEnumMap(TestEnum.one));
+		assertEquals("mapFallback2", i.getEnumMap(TestEnum.two));
+		assertEquals("default3", i.getEnumMap(TestEnum.three));
 		assertEquals(emptySet(), i.getSet());
 		assertEquals(emptyList(), i.getList());
 		assertEquals(emptyMap(), i.getMapMap());
@@ -90,9 +90,9 @@ public class FieldsTest extends MainTest
 		//fallbacks
 		assertEquals("image/png", i.getMediaContentType());
 		assertEquals(true, i.checkHash("fallbackHashValue"));
-		assertEquals("fallbackEnumMapValueOne", i.getEnumMap(TestEnum.one));
-		assertEquals("fallbackEnumMapValueTwo", i.getEnumMap(TestEnum.two));
-		assertEquals("fallbackEnumMapValueThree", i.getEnumMap(TestEnum.three));
+		assertEquals("keyFallback1", i.getEnumMap(TestEnum.one));
+		assertEquals("mapFallback2", i.getEnumMap(TestEnum.two));
+		assertEquals("default3", i.getEnumMap(TestEnum.three));
 	}
 
 	@Test
@@ -104,5 +104,89 @@ public class FieldsTest extends MainTest
 			build();
 		assertEquals(Price.storeOf(1234), i.getPrice());
 		assertEquals(Money.storeOf(4567, GBP), i.getMoney());
+	}
+
+	@Test
+	public void enumMapValues()
+	{
+		final FieldsItem i = new FieldsItemBuilder().
+			enumMap(TestEnum.one, "one").
+			build();
+
+		assertEquals("one", i.getEnumMap(TestEnum.one));
+		assertEquals("mapFallback2", i.getEnumMap(TestEnum.two));
+		assertEquals("default3", i.getEnumMap(TestEnum.three));
+	}
+
+	@Test
+	public void enumMapSpecificValues()
+	{
+		final FieldsItem i = new FieldsItemBuilder().
+			enumMapTwo("two").
+			build();
+
+		assertEquals("keyFallback1", i.getEnumMap(TestEnum.one));
+		assertEquals("two", i.getEnumMap(TestEnum.two));
+		assertEquals("default3", i.getEnumMap(TestEnum.three));
+	}
+
+	@Test
+	public void enumMapMix()
+	{
+		final FieldsItem i = new FieldsItemBuilder().
+			enumMap(TestEnum.one, "one").
+			enumMapTwo("two").
+			build();
+
+		assertEquals("one", i.getEnumMap(TestEnum.one));
+		assertEquals("two", i.getEnumMap(TestEnum.two));
+		assertEquals("default3", i.getEnumMap(TestEnum.three));
+	}
+
+	@Test
+	public void enumMapRepeat()
+	{
+		final FieldsItem i = new FieldsItemBuilder().
+			enumMap(TestEnum.one, "one").
+			enumMapOne("anotherOne").
+			build();
+
+		assertEquals("anotherOne", i.getEnumMap(TestEnum.one));
+		assertEquals("mapFallback2", i.getEnumMap(TestEnum.two));
+		assertEquals("default3", i.getEnumMap(TestEnum.three));
+	}
+
+	@Test
+	public void enumMapOverwrite1()
+	{
+		final EnumMap<TestEnum, String> enumMap = new EnumMap<>(TestEnum.class);
+		enumMap.put(TestEnum.one, "enumMapValueOne");
+		enumMap.put(TestEnum.two, "enumMapValueTwo");
+		enumMap.put(TestEnum.three, "enumMapValueThree");
+		final FieldsItem i = new FieldsItemBuilder().
+			enumMap(enumMap).
+			enumMapOne("anotherOne").
+			build();
+
+		assertEquals("anotherOne", i.getEnumMap(TestEnum.one));
+		assertEquals("enumMapValueTwo", i.getEnumMap(TestEnum.two));
+		assertEquals("enumMapValueThree", i.getEnumMap(TestEnum.three));
+	}
+
+	@Test
+	public void enumMapOverwrite2()
+	{
+		final EnumMap<TestEnum, String> enumMap = new EnumMap<>(TestEnum.class);
+		enumMap.put(TestEnum.one, "enumMapValueOne");
+		enumMap.put(TestEnum.two, "enumMapValueTwo");
+		enumMap.put(TestEnum.three, "enumMapValueThree");
+		final FieldsItem i = new FieldsItemBuilder().
+			enumMapOne("anotherOne").
+			enumMap(enumMap).
+			build();
+
+		assertEquals("enumMapValueOne", i.getEnumMap(TestEnum.one));
+		assertEquals("enumMapValueTwo", i.getEnumMap(TestEnum.two));
+		assertEquals("enumMapValueThree", i.getEnumMap(TestEnum.three));
 	}
 }

@@ -3,6 +3,7 @@ package com.exedio.cope.builder.generator.type;
 import com.exedio.cope.Feature;
 import com.exedio.cope.Settable;
 import com.exedio.cope.misc.PrimitiveUtil;
+import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
 import com.exedio.cope.pattern.SetField;
@@ -101,6 +102,12 @@ public class TypeUtil
 	{
 		if(feature instanceof Settable)
 		{
+			if(feature instanceof EnumMapField)
+			{
+				final EnumMapField<?, ?> field = (EnumMapField<?, ?>) feature;
+				return EnumMapField.class.getCanonicalName() + '<' + TypeUtil.getCanonicalName(field.getKeyClass()) + ',' +
+					TypeUtil.getCanonicalName(field.getValueClass()) + '>';
+			}
 			return Settable.class.getName() + '<' + TypeUtil.getCanonicalName(((Settable<?>) feature).getInitialType()) + '>';
 		}
 		else if(feature instanceof SetField)
