@@ -66,7 +66,7 @@ public class TypeUtil
 	}
 
 	@Nullable
-	public static String toSetterParameterType(@Nonnull final Feature feature)
+	public static String valueType(@Nonnull final Feature feature)
 	{
 		if(feature instanceof Settable<?>)
 		{
@@ -94,6 +94,30 @@ public class TypeUtil
 				+ '>';
 		}
 		return null;
+	}
+
+	@Nonnull
+	public static String fieldType(@Nonnull final Feature feature)
+	{
+		if(feature instanceof Settable)
+		{
+			return Settable.class.getName() + '<' + TypeUtil.getCanonicalName(((Settable<?>) feature).getInitialType()) + '>';
+		}
+		else if(feature instanceof SetField)
+		{
+			return SetField.class.getName() + '<' + TypeUtil.getCanonicalName(((SetField<?>) feature).getElement().getValueClass()) + '>';
+		}
+		else if(feature instanceof ListField)
+		{
+			return ListField.class.getName() + '<' + TypeUtil.getCanonicalName(((ListField<?>) feature).getElement().getValueClass()) + '>';
+		}
+		else if(feature instanceof MapField)
+		{
+			final MapField<?, ?> field = (MapField<?, ?>) feature;
+			return MapField.class.getName() + '<' + TypeUtil.getCanonicalName(field.getKey().getValueClass()) + ',' +
+				TypeUtil.getCanonicalName(field.getValue().getValueClass()) + '>';
+		}
+		throw new RuntimeException("" + feature.getClass());
 	}
 
 	public static boolean isVisible(final String packageName, final Type type)

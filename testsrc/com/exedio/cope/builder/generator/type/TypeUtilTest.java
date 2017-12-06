@@ -61,20 +61,20 @@ public class TypeUtilTest extends MainTest
 	}
 
 	@Test
-	public void toSetterParameterType()
+	public void valueType()
 	{
-		assertEquals("java.lang.String", TypeUtil.toSetterParameterType(new StringField()));
-		assertEquals("com.exedio.cope.builder.other.SubItem", TypeUtil.toSetterParameterType(ItemField.create(SubItem.class)));
-		assertEquals("int", TypeUtil.toSetterParameterType(SubItem.TYPE.getFeature("subField")));
+		assertEquals("java.lang.String", TypeUtil.valueType(new StringField()));
+		assertEquals("com.exedio.cope.builder.other.SubItem", TypeUtil.valueType(ItemField.create(SubItem.class)));
+		assertEquals("int", TypeUtil.valueType(SubItem.TYPE.getFeature("subField")));
 		String pack = "com.exedio.cope.builder.generator.type.TypeUtilTest";
-		assertEquals(pack + ".WithOneUnboundParam<?>", TypeUtil.toSetterParameterType(ItemField.create(WithOneUnboundParam.class)));
-		assertEquals(pack + ".WithOneMultiboundParam<?>", TypeUtil.toSetterParameterType(ItemField.create(WithOneMultiboundParam.class)));
-		assertEquals(pack + ".WithTwoParams<?,?>", TypeUtil.toSetterParameterType(ItemField.create(WithTwoParams.class)));
+		assertEquals(pack + ".WithOneUnboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneUnboundParam.class)));
+		assertEquals(pack + ".WithOneMultiboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneMultiboundParam.class)));
+		assertEquals(pack + ".WithTwoParams<?,?>", TypeUtil.valueType(ItemField.create(WithTwoParams.class)));
 
-		assertEquals("java.util.Set<java.lang.String>", TypeUtil.toSetterParameterType(SetField.create(new StringField())));
-		assertEquals("java.util.List<java.lang.String>", TypeUtil.toSetterParameterType(ListField.create(new StringField())));
+		assertEquals("java.util.Set<java.lang.String>", TypeUtil.valueType(SetField.create(new StringField())));
+		assertEquals("java.util.List<java.lang.String>", TypeUtil.valueType(ListField.create(new StringField())));
 		assertEquals("java.util.Map<java.lang.String,java.lang.Integer>",
-			TypeUtil.toSetterParameterType(MapField.create(new StringField(), new IntegerField())));
+			TypeUtil.valueType(MapField.create(new StringField(), new IntegerField())));
 	}
 
 	@SuppressWarnings("unused")

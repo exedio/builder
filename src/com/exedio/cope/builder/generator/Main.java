@@ -9,11 +9,7 @@ import com.exedio.cope.builder.generator.type.MyType;
 import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeField;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.charset.CharsetEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -113,7 +109,7 @@ final class Main
 	}
 
 	@Nullable
-	private static final DelayedWriter writeFiles(
+	private static DelayedWriter writeFiles(
 		final Params params,
 		final MyType<?> type,
 		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist,
@@ -163,8 +159,7 @@ final class Main
 		if(ModificationCheck.isNoUpdateRequired(type.getJavaClass(), file))
 			return;
 
-		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
-		try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
+		try (JavaClassWriter writer = new JavaClassWriter(file))
 		{
 			Writer.writeGeneratedBuilder(type, writer, generated);
 		}
@@ -177,8 +172,7 @@ final class Main
 		if(file.exists())
 			return;
 
-		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
-		try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
+		try (JavaClassWriter writer = new JavaClassWriter(file))
 		{
 			Writer.writeConcreteBuilder(type, writer);
 		}

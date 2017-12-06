@@ -8,8 +8,8 @@ import javax.annotation.Nonnull;
 public abstract class MyType<T>
 {
 	protected final Class<? extends T> clazz;
-	protected final String             wildCards;
-	protected final String             simpleClassName;
+	final           String             wildCards;
+	final           String             simpleClassName;
 	private final   String             packageName;
 
 	MyType(final Class<? extends T> clazz)
