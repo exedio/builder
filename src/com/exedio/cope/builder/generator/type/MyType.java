@@ -10,18 +10,31 @@ public abstract class MyType<T>
 	protected final Class<? extends T> clazz;
 	protected final String             wildCards;
 	protected final String             simpleClassName;
+	private final   String             packageName;
 
 	MyType(final Class<? extends T> clazz)
 	{
 		this.clazz = clazz;
 		this.wildCards = TypeUtil.typeParameterWildCards(clazz);
 		simpleClassName = clazz.getSimpleName();
+		packageName = clazz.getPackage().getName();
 	}
 
 	@Nonnull
 	public final Class<? extends T> getJavaClass()
 	{
 		return clazz;
+	}
+
+	@Nonnull
+	public String getPackageName()
+	{
+		return packageName;
+	}
+
+	public String getSimpleClassName()
+	{
+		return simpleClassName;
 	}
 
 	@Nonnull

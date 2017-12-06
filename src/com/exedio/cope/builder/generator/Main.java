@@ -122,8 +122,7 @@ final class Main
 		throws HumanReadableException, IOException
 	{
 		final Class<?> clazz = type.getJavaClass();
-		final String packageName = clazz.getPackage().getName();
-		final String simpleClassName = clazz.getSimpleName();
+		final String packageName = type.getPackageName();
 
 		final File dir = new File(
 			params.getDestdir(),
@@ -133,12 +132,7 @@ final class Main
 		{
 			if(params.getSkipMissingTargetDirectory())
 			{
-				ArrayList<Class<?>> classes = skippedTargetDirectoryDoesNotExist.get(dir);
-				if(classes == null)
-				{
-					classes = new ArrayList<>();
-					skippedTargetDirectoryDoesNotExist.put(dir, classes);
-				}
+				ArrayList<Class<?>> classes = skippedTargetDirectoryDoesNotExist.computeIfAbsent(dir, k -> new ArrayList<>());
 				classes.add(clazz);
 				return null;
 			}
@@ -153,8 +147,8 @@ final class Main
 
 		generated.add(type);
 		return () -> {
-			writeGenerated(type, clazz, packageName, simpleClassName, dir, progress, generated);
-			writeConcrete(type, packageName, simpleClassName, dir);
+			writeGenerated(type, dir, progress, generated);
+			writeConcrete(type, dir);
 		};
 	}
 
@@ -163,42 +157,30 @@ final class Main
 		void write() throws IOException;
 	}
 
-	private static void writeGenerated(
-		final MyType<?> type, final Class<?> clazz,
-		final String packageName, final String simpleClassName,
-		final File dir, final AtomicInteger progress, final Set<MyType<?>> generated)
-		throws IOException
+	private static void writeGenerated(final MyType<?> type, final File dir, final AtomicInteger progress, final Set<MyType<?>> generated) throws IOException
 	{
-		final File file = new File(dir, "Generated" + simpleClassName + "Builder.java");
-
-		if(ModificationCheck.isNoUpdateRequired(clazz, file))
+		final File file = new File(dir, "Generated" + type.getSimpleClassName() + "Builder.java");
+		if(ModificationCheck.isNoUpdateRequired(type.getJavaClass(), file))
 			return;
 
 		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
 		try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
 		{
-			Writer.writeGeneratedBuilder(type, packageName, simpleClassName, writer, generated);
+			Writer.writeGeneratedBuilder(type, writer, generated);
 		}
 		progress.incrementAndGet();
 	}
 
-	private static void writeConcrete(
-		final MyType<?> type,
-		final String packageName,
-		final String simpleClassName,
-		final File dir)
-		throws IOException
+	private static void writeConcrete(final MyType<?> type, final File dir) throws IOException
 	{
-
-		final File file = new File(dir, (type.enableCommonBuilder() ? "Common" : "") + simpleClassName + "Builder.java");
-
+		final File file = new File(dir, (type.enableCommonBuilder() ? "Common" : "") + type.getSimpleClassName() + "Builder.java");
 		if(file.exists())
 			return;
 
 		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
 		try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
 		{
-			Writer.writeConcreteBuilder(type, packageName, simpleClassName, writer);
+			Writer.writeConcreteBuilder(type, writer);
 		}
 	}
 

@@ -25,18 +25,13 @@ import java.util.Set;
 
 public class Writer
 {
-	static final void writeGeneratedBuilder(
-		final MyType<?> type,
-		final String packageName,
-		final String simpleClassName,
-		final OutputStreamWriter writer,
-		final Set<MyType<?>> generated)
-		throws IOException
+	static final void writeGeneratedBuilder(final MyType<?> type, final OutputStreamWriter writer, final Set<MyType<?>> generated) throws IOException
 	{
 		final String newLine = System.lineSeparator();
+		String simpleClassName = type.getSimpleClassName();
 
 		writer.write("package ");
-		writer.write(packageName);
+		writer.write(type.getPackageName());
 		writer.write(';');
 		writer.write(newLine);
 		writer.write(newLine);
@@ -127,7 +122,7 @@ public class Writer
 				continue;
 
 			if(feature instanceof Settable &&
-				!TypeUtil.isVisible(packageName, ((Settable<?>) feature).getInitialType()))
+				!TypeUtil.isVisible(type.getPackageName(), ((Settable<?>) feature).getInitialType()))
 				continue;
 
 			{
@@ -349,14 +344,13 @@ public class Writer
 		writer.write(newLine);
 	}
 
-	static final void writeConcreteBuilder(final MyType<?> type, final String packageName, final String simpleClassName,
-		final OutputStreamWriter writer)
-		throws IOException
+	static final void writeConcreteBuilder(final MyType<?> type, final OutputStreamWriter writer) throws IOException
 	{
 		final String newLine = System.lineSeparator();
+		final String simpleClassName = type.getSimpleClassName();
 
 		writer.write("package ");
-		writer.write(packageName);
+		writer.write(type.getPackageName());
 		writer.write(';');
 		writer.write(newLine);
 		writer.write(newLine);
