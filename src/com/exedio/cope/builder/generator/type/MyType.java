@@ -2,37 +2,65 @@ package com.exedio.cope.builder.generator.type;
 
 import com.exedio.cope.Feature;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.Collection;
+import java.util.List;
+import javax.annotation.Nonnull;
 
-public abstract class MyType
+public abstract class MyType<T>
 {
-	public abstract Class<?> getJavaClass();
+	protected final Class<? extends T> clazz;
+	protected final String             wildCards;
+	protected final String             simpleClassName;
 
-	public abstract Collection<? extends Feature> getDeclaredFeatures();
+	MyType(final Class<? extends T> clazz)
+	{
+		this.clazz = clazz;
+		this.wildCards = typeParameterWildCards(clazz);
+		simpleClassName = clazz.getSimpleName();
+	}
+
+	static String typeParameterWildCards(final Class<?> clazz)
+	{
+		final int typeParameters = clazz.getTypeParameters().length;
+		if(typeParameters == 0)
+			return "";
+
+		final StringBuilder bf = new StringBuilder();
+		bf.append("<?");
+		for(int i = 1; i < typeParameters; i++)
+			bf.append(",?");
+		bf.append('>');
+		return bf.toString();
+	}
+
+	@Nonnull
+	public final Class<? extends T> getJavaClass()
+	{
+		return clazz;
+	}
+
+	@Nonnull
+	public final String getWildCards()
+	{
+		return wildCards;
+	}
+
+	public abstract List<? extends Feature> getDeclaredFeatures();
 
 	public abstract String getName(Feature feature);
 
-	public abstract void writeExtends(OutputStreamWriter writer, String simpleClassName) throws IOException;
+	@Nonnull
+	public abstract String getExtends() throws IOException;
 
-	/**
-	 * @param wildcards needed by subclasses
-	 */
-	public void writeGenericParams(
-		final OutputStreamWriter writer,
-		final String simpleClassName,
-		final String wildcards)
-		throws IOException
+	@Nonnull
+	public String getGenericParams()
 	{
-		writer.write("<B extends Generated");
-		writer.write(simpleClassName);
-		writer.write("Builder<?>>");
+		return "<B extends Generated" + simpleClassName + "Builder<?>>";
 	}
 
-	@SuppressWarnings("unused")
-	public void writeTypeCast(final OutputStreamWriter writer) throws IOException
+	@Nonnull
+	public String getTypeCast()
 	{
-		// do nothing
+		return "";
 	}
 
 	public boolean enableCommonBuilder()
@@ -49,5 +77,6 @@ public abstract class MyType
 
 	public abstract boolean equals(final Object obj);
 
+	@Override
 	public abstract int hashCode();
 }

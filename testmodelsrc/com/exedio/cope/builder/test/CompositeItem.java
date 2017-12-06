@@ -8,9 +8,9 @@ import com.exedio.cope.pattern.CompositeField;
  * @cope.constructor none
  * @cope.generic.constructor none
  */
-final class CompositeItem extends Item
+public final class CompositeItem extends Item
 {
-	static final CompositeField<TestComposite> field = CompositeField.create(TestComposite.class);
+	public static final CompositeField<TestComposite> field = CompositeField.create(TestComposite.class);
 
 	/**
 
@@ -20,7 +20,7 @@ final class CompositeItem extends Item
 	 *       It can be customized with the tag <tt>@cope.get public|package|protected|private|none|non-final</tt> in the comment of the field.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	final TestComposite getField()
+	public final TestComposite getField()
 	{
 		return CompositeItem.field.get(this);
 	}/**
@@ -31,7 +31,7 @@ final class CompositeItem extends Item
 	 *       It can be customized with the tag <tt>@cope.set public|package|protected|private|none|non-final</tt> in the comment of the field.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	final void setField(final TestComposite field)
+	public final void setField(final TestComposite field)
 			throws
 				com.exedio.cope.MandatoryViolationException
 	{
@@ -50,7 +50,7 @@ final class CompositeItem extends Item
 	 *       It can be customized with the tag <tt>@cope.type public|package|protected|private|none</tt> in the class comment.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	static final com.exedio.cope.Type<CompositeItem> TYPE = com.exedio.cope.TypesBound.newType(CompositeItem.class);/**
+	public static final com.exedio.cope.Type<CompositeItem> TYPE = com.exedio.cope.TypesBound.newType(CompositeItem.class);/**
 
 	 **
 	 * Activation constructor. Used for internal purposes only.

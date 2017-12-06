@@ -2,7 +2,7 @@ package com.exedio.cope.builder.test.genericComplex;
 
 import java.util.Collection;
 
-class GenMid<L extends Collection<String>> extends GenSup<Long, L>
+public class GenMid<L extends Collection<String>> extends GenSup<Long, L>
 {
 	static final class classWildcard
 	{
@@ -18,7 +18,7 @@ class GenMid<L extends Collection<String>> extends GenSup<Long, L>
 	 *       It can be customized with the tags <tt>@cope.constructor public|package|protected|private|none</tt> in the class comment and <tt>@cope.initial</tt> in the comment of fields.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	GenMid()
+	public GenMid()
 	{
 		this(new com.exedio.cope.SetValue<?>[]{
 		});
@@ -47,7 +47,7 @@ class GenMid<L extends Collection<String>> extends GenSup<Long, L>
 	 *       It can be customized with the tag <tt>@cope.type public|package|protected|private|none</tt> in the class comment.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	static final com.exedio.cope.Type<GenMid<?>> TYPE = com.exedio.cope.TypesBound.newType(GenMid.classWildcard.value);/**
+	public static final com.exedio.cope.Type<GenMid<?>> TYPE = com.exedio.cope.TypesBound.newType(GenMid.classWildcard.value);/**
 
 	 **
 	 * Activation constructor. Used for internal purposes only.

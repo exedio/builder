@@ -33,7 +33,7 @@ final class Main
 		final ArrayList<Class<?>> skippedPackagePrefix = new ArrayList<>();
 		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist = new HashMap<>();
 		final AtomicInteger progress = new AtomicInteger(0);
-		final HashSet<MyType> generated = new HashSet<>();
+		final HashSet<MyType<?>> generated = new HashSet<>();
 		final List<DelayedWriter> writer = new LinkedList<>();
 		for(final Type<?> type : model.getTypes())
 		{
@@ -70,7 +70,7 @@ final class Main
 				if(!compositeClasses.add(clazz))
 					continue;
 
-				writer.add(writeFiles(params, new CompositeType(clazz, field), skippedTargetDirectoryDoesNotExist, progress, generated));
+				writer.add(writeFiles(params, new CompositeType(field), skippedTargetDirectoryDoesNotExist, progress, generated));
 			}
 		}
 		for(DelayedWriter delayedWriter : writer)
@@ -115,10 +115,10 @@ final class Main
 	@Nullable
 	private static final DelayedWriter writeFiles(
 		final Params params,
-		final MyType type,
+		final MyType<?> type,
 		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist,
 		final AtomicInteger progress,
-		final Set<MyType> generated)
+		final Set<MyType<?>> generated)
 		throws HumanReadableException, IOException
 	{
 		final Class<?> clazz = type.getJavaClass();
@@ -153,9 +153,8 @@ final class Main
 
 		generated.add(type);
 		return () -> {
-			final String wildcards = Writer.typeParameterWildCards(clazz);
-			writeGenerated(type, clazz, packageName, simpleClassName, wildcards, dir, progress, generated);
-			writeConcrete(type, packageName, simpleClassName, wildcards, dir);
+			writeGenerated(type, clazz, packageName, simpleClassName, dir, progress, generated);
+			writeConcrete(type, packageName, simpleClassName, dir);
 		};
 	}
 
@@ -165,9 +164,9 @@ final class Main
 	}
 
 	private static void writeGenerated(
-		final MyType type, final Class<?> clazz,
-		final String packageName, final String simpleClassName, final String wildcards,
-		final File dir, final AtomicInteger progress, final Set<MyType> generated)
+		final MyType<?> type, final Class<?> clazz,
+		final String packageName, final String simpleClassName,
+		final File dir, final AtomicInteger progress, final Set<MyType<?>> generated)
 		throws IOException
 	{
 		final File file = new File(dir, "Generated" + simpleClassName + "Builder.java");
@@ -178,16 +177,15 @@ final class Main
 		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
 		try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
 		{
-			Writer.writeGeneratedBuilder(type, packageName, simpleClassName, wildcards, writer, generated);
+			Writer.writeGeneratedBuilder(type, packageName, simpleClassName, writer, generated);
 		}
 		progress.incrementAndGet();
 	}
 
 	private static void writeConcrete(
-		final MyType type,
+		final MyType<?> type,
 		final String packageName,
 		final String simpleClassName,
-		final String wildcards,
 		final File dir)
 		throws IOException
 	{
@@ -200,7 +198,7 @@ final class Main
 		final CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder(); // TODO customizable
 		try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoder))
 		{
-			Writer.writeConcreteBuilder(type, packageName, simpleClassName, wildcards, writer);
+			Writer.writeConcreteBuilder(type, packageName, simpleClassName, writer);
 		}
 	}
 

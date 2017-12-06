@@ -10,7 +10,6 @@ import com.exedio.cope.builder.generator.type.CompositeType;
 import com.exedio.cope.builder.generator.type.ItemType;
 import com.exedio.cope.builder.generator.type.MyType;
 import com.exedio.cope.misc.PrimitiveUtil;
-import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeField;
 import com.exedio.cope.pattern.DynamicModel;
 import com.exedio.cope.pattern.ListField;
@@ -32,12 +31,11 @@ import java.util.Set;
 public class Writer
 {
 	static final void writeGeneratedBuilder(
-		final MyType type,
+		final MyType<?> type,
 		final String packageName,
 		final String simpleClassName,
-		final String wildcards,
 		final OutputStreamWriter writer,
-		final Set<MyType> generated)
+		final Set<MyType<?>> generated)
 		throws IOException
 	{
 		final String newLine = System.lineSeparator();
@@ -53,10 +51,10 @@ public class Writer
 		writer.write("public abstract class Generated");
 		writer.write(simpleClassName);
 		writer.write("Builder");
-		type.writeGenericParams(writer, simpleClassName, wildcards);
+		writer.write(type.getGenericParams());
 		writer.write(newLine);
 		writer.write("\textends ");
-		type.writeExtends(writer, simpleClassName);
+		writer.write(type.getExtends());
 		writer.write(newLine);
 
 		writer.write("{");
@@ -66,7 +64,7 @@ public class Writer
 		{
 			final String pack = type.getJavaClass().getPackage().getName();
 
-			final String generics = "<" + simpleClassName + wildcards + "," + simpleClassName + "Builder>";
+			final String generics = "<" + simpleClassName + type.getWildCards() + "," + simpleClassName + "Builder>";
 			writer.write("\tpublic static class " + simpleClassName + "Builder extends " + pack + ".Common" + simpleClassName + "Builder" + generics);
 			writer.write(newLine);
 			writer.write("\t{");
@@ -94,7 +92,7 @@ public class Writer
 			writer.write(newLine);
 
 			writer.write("\t\tsuper(");
-			type.writeTypeCast(writer);
+			writer.write(type.getTypeCast());
 			writer.write(simpleClassName);
 			writer.write('.');
 			writer.write(type.getTypeName());
@@ -273,7 +271,7 @@ public class Writer
 			{
 				final ItemField<?> field = (ItemField<?>) feature;
 				final Class<? extends Item> elementClass = field.getValueClass();
-				MyType myType = new ItemType(TypesBound.forClass(elementClass));
+				ItemType myType = new ItemType(TypesBound.forClass(elementClass));
 
 				if(!myType.enableCommonBuilder()) //TODO generate in all children if a common builder exists
 				{
@@ -291,8 +289,7 @@ public class Writer
 			else if(feature instanceof CompositeField)
 			{
 				final CompositeField<?> field = (CompositeField<?>) feature;
-				final Class<? extends Composite> elementClass = field.getValueClass();
-				MyType myType = new CompositeType(elementClass, field);
+				CompositeType myType = new CompositeType(field);
 				if(generated.contains(myType))
 				{
 
@@ -310,7 +307,7 @@ public class Writer
 				}
 				else
 				{
-					System.out.println("Skip external composite lambda builder setter:" + field + " " + elementClass);
+					System.out.println("Skip external composite lambda builder setter:" + field + " " + myType.getJavaClass());
 				}
 			}
 		}
@@ -495,7 +492,7 @@ public class Writer
 		return bf.toString();
 	}
 
-	static final void writeConcreteBuilder(final MyType type, final String packageName, final String simpleClassName, final String wildcards,
+	static final void writeConcreteBuilder(final MyType<?> type, final String packageName, final String simpleClassName,
 		final OutputStreamWriter writer)
 		throws IOException
 	{
@@ -527,7 +524,7 @@ public class Writer
 		if(type.enableCommonBuilder())
 		{
 
-			writer.write("<I extends " + simpleClassName + wildcards + ", B extends Common" + simpleClassName + "Builder<?,?>>");
+			writer.write("<I extends " + simpleClassName + type.getWildCards() + ", B extends Common" + simpleClassName + "Builder<?,?>>");
 			writer.write(newLine);
 			writer.write("\textends ");
 			writer.write("Generated" + simpleClassName + "Builder<I,B>");
@@ -577,19 +574,5 @@ public class Writer
 		writer.write(newLine);
 		writer.write("}");
 		writer.write(newLine);
-	}
-
-	static String typeParameterWildCards(final Class<?> clazz)
-	{
-		final int typeParameters = clazz.getTypeParameters().length;
-		if(typeParameters == 0)
-			return "";
-
-		final StringBuilder bf = new StringBuilder();
-		bf.append("<?");
-		for(int i = 1; i < typeParameters; i++)
-			bf.append(",?");
-		bf.append('>');
-		return bf.toString();
 	}
 }

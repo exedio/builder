@@ -5,29 +5,21 @@ import com.exedio.cope.FunctionField;
 import com.exedio.cope.builder.CompositeBuilder;
 import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeField;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.Collection;
+import java.util.List;
+import javax.annotation.Nonnull;
 
-public final class CompositeType extends MyType
+public final class CompositeType extends MyType<Composite>
 {
-	private final Class<? extends Composite> clazz;
-	private final CompositeField<?>          field;
+	private final CompositeField<?> field;
 
-	public CompositeType(final Class<? extends Composite> clazz, final CompositeField<?> field)
+	public CompositeType(final CompositeField<?> field)
 	{
-		this.clazz = clazz;
+		super(field.getValueClass());
 		this.field = field;
 	}
 
 	@Override
-	public Class<?> getJavaClass()
-	{
-		return clazz;
-	}
-
-	@Override
-	public Collection<? extends Feature> getDeclaredFeatures()
+	public List<? extends Feature> getDeclaredFeatures()
 	{
 		return field.getTemplates();
 	}
@@ -35,16 +27,17 @@ public final class CompositeType extends MyType
 	@Override
 	public String getName(final Feature feature)
 	{
-		return Composite.getTemplateName((FunctionField<?>) feature);
+		if(feature instanceof FunctionField)
+			return Composite.getTemplateName((FunctionField<?>) feature);
+		else
+			throw new RuntimeException("Not implemented");
 	}
 
+	@Nonnull
 	@Override
-	public void writeExtends(final OutputStreamWriter writer, final String simpleClassName) throws IOException
+	public String getExtends()
 	{
-		writer.write(CompositeBuilder.class.getName());
-		writer.write('<');
-		writer.write(clazz.getCanonicalName());
-		writer.write(", B>");
+		return CompositeBuilder.class.getName() + '<' + clazz.getCanonicalName() + ", B>";
 	}
 
 	@Override
@@ -62,6 +55,6 @@ public final class CompositeType extends MyType
 	@Override
 	public int hashCode()
 	{
-		return clazz.hashCode();
+		return 23 * clazz.hashCode();
 	}
 }
