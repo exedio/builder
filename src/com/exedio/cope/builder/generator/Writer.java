@@ -269,7 +269,7 @@ public class Writer
 		{
 			writer.writeLine("public abstract class Common" + simpleClassName + "Builder"
 				+ "<I extends " + simpleClassName + type.getWildCards() + ", B extends Common" + simpleClassName + "Builder<?,?>>");
-			writer.writeLine("\textends +Generated" + simpleClassName + "Builder<I,B>");
+			writer.writeLine("\textends Generated" + simpleClassName + "Builder<I,B>");
 		}
 		else
 		{
