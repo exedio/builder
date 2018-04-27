@@ -125,7 +125,7 @@ public class Writer
 				final boolean safeVarargs = elementClass.getTypeParameters().length != 0;
 				final String itemClass = TypeUtil.getCanonicalName(elementClass);
 				final String parameterList = "final " + itemClass + "... " + featureIdentifier;
-				final String mapping = "new java.util.HashSet<>(java.util.Arrays.asList(" + featureIdentifier + "))";
+				final String mapping = "new java.util.LinkedHashSet<>(java.util.Arrays.asList(" + featureIdentifier + "))";
 				writeRedirectSetter(writer, featureIdentifier, featureIdentifier, parameterList, mapping, safeVarargs);
 			}
 			else if(feature instanceof RangeField<?>)
