@@ -1,11 +1,14 @@
 package com.exedio.cope.builder.test.genericComplex;
 
+import com.exedio.cope.instrument.WrapInterim;
 import java.util.Collection;
 
 public class GenMid<L extends Collection<String>> extends GenSup<Long, L>
 {
+	@WrapInterim
 	static final class classWildcard
 	{
+		@WrapInterim
 		@SuppressWarnings("unchecked")
 		static final Class<GenMid<?>> value = (Class<GenMid<?>>)(Class<?>)GenMid.class;
 	}

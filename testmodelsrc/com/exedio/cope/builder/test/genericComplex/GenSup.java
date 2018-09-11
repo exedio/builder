@@ -1,13 +1,16 @@
 package com.exedio.cope.builder.test.genericComplex;
 
 import com.exedio.cope.Item;
+import com.exedio.cope.instrument.WrapInterim;
 import com.exedio.cope.pattern.Money;
 import java.util.Collection;
 
 class GenSup<N extends Number, L extends Collection<String>> extends Item implements Money.Currency
 {
+	@WrapInterim
 	static final class classWildcard
 	{
+		@WrapInterim
 		@SuppressWarnings("unchecked")
 		static final Class<GenSup<?,?>> value = (Class<GenSup<?,?>>)(Class<?>)GenSup.class;
 	}
