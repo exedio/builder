@@ -29,9 +29,9 @@
 		</dependency>
 		<dependency org="findbugs-x" name="findbugs" rev="3.0.0" conf="build->default" />
 		<dependency org="com.exedio" name="copeutil" rev="483" conf="runtime->runtime; build->runtime,sources,changelog" />
-		<dependency org="com.exedio" name="cope" rev="8919">
+		<dependency org="com.exedio" name="cope" rev="9741">
 			<conf name="runtime" mapped="runtime" />
-			<conf name="build" mapped="hsqldb,sources,changelog" />
+			<conf name="build" mapped="hsqldb,instrument,sources,changelog" />
 			<exclude org="com.exedio" module="copeservletutil" />
 		</dependency>
 	</dependencies>

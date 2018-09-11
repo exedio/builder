@@ -25,7 +25,7 @@ package com.exedio.cope.builder.junit;
 import com.exedio.cope.ConnectProperties;
 import com.exedio.cope.Model;
 import com.exedio.cope.junit.CopeModelTest;
-import com.exedio.cope.util.Properties;
+import com.exedio.cope.util.Sources;
 import org.junit.After;
 import org.junit.Before;
 
@@ -85,7 +85,7 @@ public class CopeModel4Test
 	 */
 	protected ConnectProperties getConnectProperties()
 	{
-		return new ConnectProperties(Properties.SYSTEM_PROPERTY_SOURCE);
+		return ConnectProperties.create(Sources.load(ConnectProperties.getDefaultPropertyFile()));
 	}
 
 	protected boolean doesManageTransactions()

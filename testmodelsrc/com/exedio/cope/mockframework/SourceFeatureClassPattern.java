@@ -4,6 +4,7 @@ import com.exedio.cope.EnumField;
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.Pattern;
 import com.exedio.cope.SetValue;
+import com.exedio.cope.instrument.WrapperIgnore;
 import com.exedio.cope.pattern.Block;
 import com.exedio.cope.pattern.BlockActivationParameters;
 import com.exedio.cope.pattern.BlockField;
@@ -12,6 +13,7 @@ import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeField;
 import com.exedio.cope.pattern.RangeField;
 
+@WrapperIgnore
 public final class SourceFeatureClassPattern extends Pattern
 {
 	public enum EnumPublic { A,B; }
