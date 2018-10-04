@@ -4,9 +4,8 @@ import com.exedio.cope.Item;
 import com.exedio.cope.pattern.Schedule;
 import com.exedio.cope.pattern.Scheduleable;
 import com.exedio.cope.util.JobContext;
+import java.time.ZoneId;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * @cope.constructor none
@@ -14,7 +13,7 @@ import java.util.TimeZone;
  */
 final class SourcePatternItem extends Item implements Scheduleable
 {
-	static final Schedule schedule = new Schedule(TimeZone.getDefault(), Locale.GERMANY);
+	static final Schedule schedule = new Schedule(ZoneId.systemDefault());
 
 	@Override
 	public void run(final Schedule schedule, final Date from, final Date until, final JobContext ctx)

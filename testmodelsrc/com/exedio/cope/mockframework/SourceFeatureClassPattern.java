@@ -52,14 +52,14 @@ public final class SourceFeatureClassPattern extends Pattern
 
 	public SourceFeatureClassPattern()
 	{
-		addSource(EnumField.create(EnumPublic.class).optional(), "enumPublic");
-		addSource(EnumField.create(EnumPackage.class).optional(), "enumPackage");
-		addSource(CompositeField.create(CompositePublic.class).optional(), "compositePublic");
-		addSource(CompositeField.create(CompositePackage.class).optional(), "compositePackage");
-		addSource(BlockField.create(BlockPublic.TYPE), "blockPublic");
-		addSource(BlockField.create(BlockPackage.TYPE), "blockPackage");
-		addSource(RangeField.create(EnumField.create(EnumPublic.class).optional()), "rangeEnumPublic");
-		addSource(RangeField.create(EnumField.create(EnumPackage.class).optional()), "rangeEnumPackage");
+		addSourceFeature(EnumField.create(EnumPublic.class).optional(), "enumPublic");
+		addSourceFeature(EnumField.create(EnumPackage.class).optional(), "enumPackage");
+		addSourceFeature(CompositeField.create(CompositePublic.class).optional(), "compositePublic");
+		addSourceFeature(CompositeField.create(CompositePackage.class).optional(), "compositePackage");
+		addSourceFeature(BlockField.create(BlockPublic.TYPE), "blockPublic");
+		addSourceFeature(BlockField.create(BlockPackage.TYPE), "blockPackage");
+		addSourceFeature(RangeField.create(EnumField.create(EnumPublic.class).optional()), "rangeEnumPublic");
+		addSourceFeature(RangeField.create(EnumField.create(EnumPackage.class).optional()), "rangeEnumPackage");
 	}
 
 
