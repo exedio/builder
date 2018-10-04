@@ -76,7 +76,7 @@
             <compilation-unit>
                 <package-root>testsrc</package-root>
                 <unit-tests/>
-                <classpath mode="compile">${libraries}:src:testmodelsrc:lib/cpsuite.jar:lib/exedio-cope-junit.jar:lib/junit.jar</classpath>
+                <classpath mode="compile">${libraries}:src:testmodelsrc:lib/cpsuite.jar:lib/junit.jar</classpath>
                 <source-level>1.7</source-level>
             </compilation-unit>
         </java-data>

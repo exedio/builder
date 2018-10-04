@@ -118,7 +118,6 @@
 				<pathelement location="build/testmodeljarsrc.jar" />
 				<pathelement location="build/classes/testmodelsrc" />
 				<pathelement location="lib/exedio-cope.jar" />
-				<pathelement location="lib/exedio-cope-junit.jar" />
 				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
 				<pathelement location="lib/junit.jar" />
 				<pathelement location="lib/cpsuite.jar" />
@@ -144,7 +143,6 @@
 				<pathelement location="lib/junit.jar" />
 				<pathelement location="lib/cpsuite.jar" />
 				<pathelement location="lib/exedio-cope.jar" />
-				<pathelement location="lib/exedio-cope-junit.jar" />
 				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
 			</classpath>
