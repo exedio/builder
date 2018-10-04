@@ -45,7 +45,6 @@
 				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
 			<disableWrap>com.exedio.cope.pattern.ListField#removeAll(com.exedio.cope.Item,java.lang.Object)</disableWrap>
-			<generateDeprecated>com.exedio.cope.pattern.Schedule#run(java.lang.Class,com.exedio.cope.util.Interrupter)</generateDeprecated>
 		</instrument>
 	</target>
 

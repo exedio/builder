@@ -46,13 +46,6 @@ final class SourcePatternItem extends Item implements Scheduleable
 	}
 
 	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="run")
-	@java.lang.Deprecated
-	static final int runSchedule(final com.exedio.cope.util.Interrupter interrupter)
-	{
-		return SourcePatternItem.schedule.run(SourcePatternItem.class,interrupter);
-	}
-
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="run")
 	static final void runSchedule(final com.exedio.cope.util.JobContext ctx)
 	{
 		SourcePatternItem.schedule.run(SourcePatternItem.class,ctx);
