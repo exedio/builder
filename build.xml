@@ -34,7 +34,6 @@
 	<target name="testmodelsrc.instrument" unless="skip.instrument">
 		<instrument
 				dir="testmodeljarsrc:testmodelsrc"
-				hintFormat="forTags"
 				configByTags="support"
 				verify="${instrument.verify}"
 				verbose="false">
