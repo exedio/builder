@@ -36,7 +36,6 @@
 				dir="testmodeljarsrc:testmodelsrc"
 				hintFormat="forTags"
 				configByTags="support"
-				differentSerialVersionUIDForAbstract="false"
 				parenthesesOnEmptyMemberAnnotations="true"
 				verify="${instrument.verify}"
 				verbose="false">
