@@ -36,7 +36,6 @@
 				dir="testmodeljarsrc:testmodelsrc"
 				hintFormat="forTags"
 				configByTags="support"
-				parenthesesOnEmptyMemberAnnotations="true"
 				verify="${instrument.verify}"
 				verbose="false">
 			<classpath>

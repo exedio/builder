@@ -68,7 +68,7 @@ final class SourcePatternItem extends Item implements Scheduleable
 	 *       It can be customized with the tag <tt>@cope.run public|package|protected|private|none|non-final</tt> in the comment of the field.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument")
-	@java.lang.Deprecated()
+	@java.lang.Deprecated
 	static final int runSchedule(final com.exedio.cope.util.Interrupter interrupter)
 	{
 		return SourcePatternItem.schedule.run(SourcePatternItem.class,interrupter);
