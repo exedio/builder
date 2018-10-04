@@ -44,7 +44,6 @@
 				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
-			<disableWrap>com.exedio.cope.pattern.ListField#removeAll(com.exedio.cope.Item,java.lang.Object)</disableWrap>
 		</instrument>
 	</target>
 

@@ -450,6 +450,16 @@ final class GenSource extends Item
 	}
 
 	/**
+	 * Removes all occurrences of {@code element} from {@link #listSup}.
+	 * @return {@code true} if the field set changed as a result of the call.
+	 */
+	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="removeAllFrom")
+	final boolean removeAllFromListSup(final GenSup<?,?> listSup)
+	{
+		return GenSource.listSup.removeAll(this,listSup);
+	}
+
+	/**
 	 * Sets a new value for {@link #listSup}.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
@@ -510,6 +520,16 @@ final class GenSource extends Item
 	}
 
 	/**
+	 * Removes all occurrences of {@code element} from {@link #listMid}.
+	 * @return {@code true} if the field set changed as a result of the call.
+	 */
+	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="removeAllFrom")
+	final boolean removeAllFromListMid(final GenMid<?> listMid)
+	{
+		return GenSource.listMid.removeAll(this,listMid);
+	}
+
+	/**
 	 * Sets a new value for {@link #listMid}.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
@@ -567,6 +587,16 @@ final class GenSource extends Item
 				java.lang.ClassCastException
 	{
 		GenSource.listSub.add(this,listSub);
+	}
+
+	/**
+	 * Removes all occurrences of {@code element} from {@link #listSub}.
+	 * @return {@code true} if the field set changed as a result of the call.
+	 */
+	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="removeAllFrom")
+	final boolean removeAllFromListSub(final GenSub listSub)
+	{
+		return GenSource.listSub.removeAll(this,listSub);
 	}
 
 	/**
