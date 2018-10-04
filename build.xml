@@ -234,7 +234,6 @@
 			<auxclasspath>
 				<pathelement location="${basedir}/lib/ant.jar" />
 				<pathelement location="${basedir}/lib/exedio-cope.jar" />
-				<pathelement location="${basedir}/lib/exedio-cope-junit.jar" />
 				<pathelement location="${basedir}/lib/junit.jar" />
 				<pathelement location="${basedir}/lib/slf4j-api.jar" />
 			</auxclasspath>

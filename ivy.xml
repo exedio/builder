@@ -24,14 +24,14 @@
 	<dependencies>
 	 	<dependency org="ant" name="ant" rev="1.7.0" conf="build->default"/>
 		<dependency org="cpsuite" name="cpsuite" rev="1.2.7.1" conf="build->default"/>
-		<dependency org="junit" name="junit" rev="4.9" conf="build->default">
+		<dependency org="junit" name="junit" rev="4.10" conf="build->default">
 			<exclude org="org.hamcrest" module="hamcrest-core" />
 		</dependency>
 		<dependency org="findbugs-x" name="findbugs" rev="3.0.0" conf="build->default" />
 		<dependency org="com.exedio" name="copeutil" rev="483" conf="runtime->runtime; build->runtime,sources,changelog" />
 		<dependency org="com.exedio" name="cope" rev="8919">
 			<conf name="runtime" mapped="runtime" />
-			<conf name="build" mapped="hsqldb,junit,sources,changelog" />
+			<conf name="build" mapped="hsqldb,sources,changelog" />
 			<exclude org="com.exedio" module="copeservletutil" />
 		</dependency>
 	</dependencies>
