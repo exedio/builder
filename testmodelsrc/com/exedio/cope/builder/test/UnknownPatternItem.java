@@ -1,14 +1,14 @@
 package com.exedio.cope.builder.test;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.Item;
 import com.exedio.cope.ItemField;
+import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.PartOf;
 
-/**
- * @cope.constructor none
- * @cope.generic.constructor none
- */
+@WrapperType(constructor=NONE, genericConstructor=NONE)
 final class UnknownPatternItem extends Item
 {
 	static final ItemField<SimpleItem> parent = ItemField.create(SimpleItem.class).toFinal();

@@ -1,16 +1,16 @@
 package com.exedio.cope.builder.test;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+
 import com.exedio.cope.Item;
+import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.Schedule;
 import com.exedio.cope.pattern.Scheduleable;
 import com.exedio.cope.util.JobContext;
 import java.time.ZoneId;
 import java.util.Date;
 
-/**
- * @cope.constructor none
- * @cope.generic.constructor none
- */
+@WrapperType(constructor=NONE, genericConstructor=NONE)
 final class SourcePatternItem extends Item implements Scheduleable
 {
 	static final Schedule schedule = new Schedule(ZoneId.systemDefault());

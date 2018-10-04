@@ -1,17 +1,17 @@
 package com.exedio.cope.builder.other;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+import static com.exedio.cope.instrument.Visibility.PUBLIC;
+
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.builder.test.AbstractItem;
+import com.exedio.cope.instrument.Wrapper;
+import com.exedio.cope.instrument.WrapperType;
 
-/**
- * @cope.constructor none
- * @cope.generic.constructor none
- */
+@WrapperType(constructor=NONE, genericConstructor=NONE)
 public final class ConcreteItem extends AbstractItem
 {
-	/**
-	 * @cope.get public
-	 */
+	@Wrapper(wrap="get", visibility=PUBLIC)
 	private static final IntegerField concreteField = new IntegerField().toFinal();
 
 	/**

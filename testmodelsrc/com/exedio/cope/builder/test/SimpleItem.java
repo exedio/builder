@@ -1,22 +1,22 @@
 package com.exedio.cope.builder.test;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+import static com.exedio.cope.instrument.Visibility.PACKAGE;
+
 import com.exedio.cope.EnumField;
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.Item;
 import com.exedio.cope.StringField;
 import com.exedio.cope.builder.other.OuterClass.TestEnum;
+import com.exedio.cope.instrument.Wrapper;
+import com.exedio.cope.instrument.WrapperType;
 
-/**
- * @cope.constructor none
- * @cope.generic.constructor none
- */
+@WrapperType(constructor=NONE, genericConstructor=NONE)
 final class SimpleItem extends Item
 {
 	static final IntegerField integerMandatory = new IntegerField().toFinal();
 
-	/**
-	 * @cope.get package
-	 */
+	@Wrapper(wrap="get", visibility=PACKAGE)
 	private static final IntegerField integerOptional = new IntegerField().toFinal().optional();
 
 	static final StringField stringOptional = new StringField().toFinal().optional();

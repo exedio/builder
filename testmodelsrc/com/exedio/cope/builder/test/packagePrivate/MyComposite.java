@@ -1,13 +1,14 @@
 package com.exedio.cope.builder.test.packagePrivate;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+
 import com.exedio.cope.EnumField;
 import com.exedio.cope.ItemField;
 import com.exedio.cope.StringField;
+import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.Composite;
 
-/**
- * @cope.constructor none
- */
+@WrapperType(constructor=NONE)
 final class MyComposite extends Composite
 {
 	static final StringField string = new StringField();

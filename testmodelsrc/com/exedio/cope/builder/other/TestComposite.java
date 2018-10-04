@@ -1,22 +1,21 @@
 package com.exedio.cope.builder.other;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+import static com.exedio.cope.instrument.Visibility.PUBLIC;
+
 import com.exedio.cope.IntegerField;
+import com.exedio.cope.instrument.Wrapper;
+import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.Composite;
 
-/**
- * @cope.constructor none
- */
+@WrapperType(constructor=NONE)
 public final class TestComposite extends Composite
 {
-	/**
-	 * @cope.get public
-	 */
+	@Wrapper(wrap="get", visibility=PUBLIC)
 	static final IntegerField integerMandatory = new IntegerField();
 
-	/**
-	 * @cope.get public
-	 * @cope.set none
-	 */
+	@Wrapper(wrap="get", visibility=PUBLIC)
+	@Wrapper(wrap="set", visibility=NONE)
 	private static final IntegerField integerOptional = new IntegerField().optional();
 
 	/**

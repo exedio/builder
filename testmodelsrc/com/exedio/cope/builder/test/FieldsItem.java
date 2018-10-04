@@ -1,10 +1,13 @@
 package com.exedio.cope.builder.test;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+
 import com.exedio.cope.EnumField;
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.Item;
 import com.exedio.cope.StringField;
 import com.exedio.cope.builder.other.OuterClass.TestEnum;
+import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.Hash;
 import com.exedio.cope.pattern.ListField;
@@ -17,10 +20,7 @@ import com.exedio.cope.pattern.PriceField;
 import com.exedio.cope.pattern.RangeField;
 import com.exedio.cope.pattern.SetField;
 
-/**
- * @cope.constructor none
- * @cope.generic.constructor none
- */
+@WrapperType(constructor=NONE, genericConstructor=NONE)
 final class FieldsItem extends Item
 {
 	static final Media media = new Media().toFinal();

@@ -1,13 +1,13 @@
 package com.exedio.cope.builder.test;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+
 import com.exedio.cope.Item;
 import com.exedio.cope.builder.other.TestComposite;
+import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.CompositeField;
 
-/**
- * @cope.constructor none
- * @cope.generic.constructor none
- */
+@WrapperType(constructor=NONE, genericConstructor=NONE)
 public final class CompositeItem extends Item
 {
 	public static final CompositeField<TestComposite> field = CompositeField.create(TestComposite.class);

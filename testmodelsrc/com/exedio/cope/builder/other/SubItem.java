@@ -1,17 +1,17 @@
 package com.exedio.cope.builder.other;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+import static com.exedio.cope.instrument.Visibility.PUBLIC;
+
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.builder.test.SuperItem;
+import com.exedio.cope.instrument.Wrapper;
+import com.exedio.cope.instrument.WrapperType;
 
-/**
- * @cope.constructor none
- * @cope.generic.constructor none
- */
+@WrapperType(constructor=NONE, genericConstructor=NONE)
 public final class SubItem extends SuperItem
 {
-	/**
-	 * @cope.get public
-	 */
+	@Wrapper(wrap="get", visibility=PUBLIC)
 	static final IntegerField subField = new IntegerField().toFinal();
 
 	/**

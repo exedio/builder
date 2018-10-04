@@ -34,7 +34,7 @@
 	<target name="testmodelsrc.instrument" unless="skip.instrument">
 		<instrument
 				dir="testmodeljarsrc:testmodelsrc"
-				configByTags="support"
+				configByTags="error"
 				verify="${instrument.verify}"
 				verbose="false">
 			<classpath>

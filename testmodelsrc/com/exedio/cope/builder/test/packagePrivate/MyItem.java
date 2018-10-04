@@ -1,17 +1,17 @@
 package com.exedio.cope.builder.test.packagePrivate;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+
 import com.exedio.cope.EnumField;
 import com.exedio.cope.Item;
 import com.exedio.cope.ItemField;
+import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.CompositeField;
 import com.exedio.cope.pattern.Money;
 import com.exedio.cope.pattern.MoneyField;
 import com.exedio.cope.pattern.RangeField;
 
-/**
- * @cope.constructor none
- * @cope.generic.constructor none
- */
+@WrapperType(constructor=NONE, genericConstructor=NONE)
 final class MyItem extends Item implements Money.Currency
 {
 	static final EnumField<MyEnum> enumF = EnumField.create(MyEnum.class).optional();

@@ -1,13 +1,13 @@
 package com.exedio.cope.builder.test;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+
 import com.exedio.cope.Item;
 import com.exedio.cope.ItemField;
+import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.DynamicModel;
 
-/**
- * @cope.constructor none
- * @cope.generic.constructor none
- */
+@WrapperType(constructor=NONE, genericConstructor=NONE)
 final class DynamicModelItem extends Item
 {
 	static final DynamicModel<SimpleItem> features = DynamicModel.create(ItemField.create(SimpleItem.class));

@@ -1,16 +1,16 @@
 package com.exedio.cope.builder.test;
 
-import com.exedio.cope.IntegerField;
+import static com.exedio.cope.instrument.Visibility.NONE;
+import static com.exedio.cope.instrument.Visibility.PUBLIC;
 
-/**
- * @cope.constructor none
- * @cope.generic.constructor none
- */
+import com.exedio.cope.IntegerField;
+import com.exedio.cope.instrument.Wrapper;
+import com.exedio.cope.instrument.WrapperType;
+
+@WrapperType(constructor=NONE, genericConstructor=NONE)
 public class MixedLevel2Item extends AbstractLevel1Item
 {
-	/**
-	 * @cope.get public
-	 */
+	@Wrapper(wrap="get", visibility=PUBLIC)
 	static final IntegerField l2 = new IntegerField().toFinal();
 
 	/**
