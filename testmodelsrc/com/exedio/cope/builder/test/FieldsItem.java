@@ -220,25 +220,10 @@ final class FieldsItem extends Item
 		return FieldsItem.enumMap.get(this,k);
 	}
 
-	/**
-	 * Associates <tt>k</tt> to a new value in the field map {@link #enumMap}.
-	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
-	final void setEnumMap(final TestEnum k,final String enumMap)
-	{
-		FieldsItem.enumMap.set(this,k,enumMap);
-	}
-
 	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getMap")
 	final java.util.Map<TestEnum,String> getEnumMapMap()
 	{
 		return FieldsItem.enumMap.getMap(this);
-	}
-
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setMap")
-	final void setEnumMapMap(final java.util.Map<? extends TestEnum,? extends String> enumMap)
-	{
-		FieldsItem.enumMap.setMap(this,enumMap);
 	}
 
 	/**
