@@ -7,8 +7,6 @@ import com.exedio.cope.pattern.Composite;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedList;
-import java.util.List;
 
 public abstract class CompositeBuilder<C extends Composite, B extends CompositeBuilder<?, ?>> extends CopeBuilder<C, B>
 {
@@ -58,13 +56,12 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 	@Override
 	public C build()
 	{
-		final List<SetValue<?>> allValues = new LinkedList<>(values.values());
+		final SetValue<?>[] vs = values.values().toArray(new SetValue<?>[values.size()]);
 		try
 		{
 			// TODO use some framework function for this
 			final Constructor<? extends C> constructor = targetClazz.getDeclaredConstructor(SetValue[].class);
 			constructor.setAccessible(true);
-			final SetValue<?>[] vs = allValues.toArray(new SetValue<?>[allValues.size()]);
 			return constructor.newInstance(new Object[] {vs});
 		}
 		catch(final InstantiationException e)
