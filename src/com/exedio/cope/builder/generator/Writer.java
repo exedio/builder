@@ -104,6 +104,7 @@ public class Writer
 				writer.writeLine();
 				writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
 				writer.writeLine();
+				writer.writeSetterAnnotation();
 				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + valueType + " " + featureIdentifier + ")");
 				writer.writeLine("\t{");
 				writer.writeLine("\t\treturn set(this." + featureIdentifier + "," + featureIdentifier + ");");
@@ -205,6 +206,7 @@ public class Writer
 				writer.writeLine();
 				writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
 				writer.writeLine();
+				writer.writeSetterAnnotation();
 				writer.writeLine("\t@SuppressWarnings(\"unchecked\")");
 				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + valueType + " " + featureIdentifier + ")");
 				writer.writeLine("\t{");
@@ -213,6 +215,7 @@ public class Writer
 				writer.writeLine("\t}");
 
 				writer.writeLine();
+				writer.writeSetterAnnotation();
 				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + enumKeyType + " key, final " + enumValueType + " value)");
 				writer.writeLine("\t{");
 				writer.writeLine("\t\treturn set(this." + featureIdentifier + ".getField(key), value);");
@@ -224,6 +227,7 @@ public class Writer
 					String methodPart = key.substring(0, 1).toUpperCase(Locale.ENGLISH) + key.substring(1);
 					String variable = key.toLowerCase(Locale.ENGLISH); //TODO improve?
 					writer.writeLine();
+					writer.writeSetterAnnotation();
 					writer.writeLine("\tpublic final B " + featureIdentifier + methodPart + "(final " + enumValueType + " " + variable + ")");
 					writer.writeLine("\t{");
 					writer.writeLine("\t\treturn " + featureIdentifier + "(" + enumKeyType + "." + key + "," + variable + ");");
@@ -245,6 +249,7 @@ public class Writer
 		final String parameterList, final String mapping, final boolean safeVarargs) throws IOException
 	{
 		writer.writeLine();
+		writer.writeSetterAnnotation();
 		if(safeVarargs)
 			writer.writeLine("\t@SafeVarargs @SuppressWarnings(\"varargs\")");
 		writer.writeLine("\tpublic final B " + methodName + "(" + parameterList + ")");
