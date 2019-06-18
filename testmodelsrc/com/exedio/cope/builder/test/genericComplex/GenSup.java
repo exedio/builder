@@ -1,20 +1,11 @@
 package com.exedio.cope.builder.test.genericComplex;
 
 import com.exedio.cope.Item;
-import com.exedio.cope.instrument.WrapInterim;
 import com.exedio.cope.pattern.Money;
 import java.util.Collection;
 
 class GenSup<N extends Number, L extends Collection<String>> extends Item implements Money.Currency
 {
-	@WrapInterim
-	static final class classWildcard
-	{
-		@WrapInterim
-		@SuppressWarnings("unchecked")
-		static final Class<GenSup<?,?>> value = (Class<GenSup<?,?>>)(Class<?>)GenSup.class;
-	}
-
 	/**
 	 * Creates a new GenSup with all the fields initially needed.
 	 */
@@ -36,6 +27,12 @@ class GenSup<N extends Number, L extends Collection<String>> extends Item implem
 
 	@javax.annotation.Generated("com.exedio.cope.instrument")
 	private static final long serialVersionUID = 1l;
+
+	/**
+	 * Use GenSup.classWildcard.value instead of GenSup.class to avoid rawtypes warnings.
+	 */
+	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(wildcardClass=...)
+	static final class classWildcard { public static final java.lang.Class<GenSup<?,?>> value = com.exedio.cope.ItemWildcardCast.cast(GenSup.class); private classWildcard(){} }
 
 	/**
 	 * The persistent type information for genSup.

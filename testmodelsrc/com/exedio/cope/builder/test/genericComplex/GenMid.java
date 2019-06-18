@@ -1,18 +1,9 @@
 package com.exedio.cope.builder.test.genericComplex;
 
-import com.exedio.cope.instrument.WrapInterim;
 import java.util.Collection;
 
 public class GenMid<L extends Collection<String>> extends GenSup<Long, L>
 {
-	@WrapInterim
-	static final class classWildcard
-	{
-		@WrapInterim
-		@SuppressWarnings("unchecked")
-		static final Class<GenMid<?>> value = (Class<GenMid<?>>)(Class<?>)GenMid.class;
-	}
-
 	/**
 	 * Creates a new GenMid with all the fields initially needed.
 	 */
@@ -34,6 +25,12 @@ public class GenMid<L extends Collection<String>> extends GenSup<Long, L>
 
 	@javax.annotation.Generated("com.exedio.cope.instrument")
 	private static final long serialVersionUID = 1l;
+
+	/**
+	 * Use GenMid.classWildcard.value instead of GenMid.class to avoid rawtypes warnings.
+	 */
+	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(wildcardClass=...)
+	public static final class classWildcard { public static final java.lang.Class<GenMid<?>> value = com.exedio.cope.ItemWildcardCast.cast(GenMid.class); private classWildcard(){} }
 
 	/**
 	 * The persistent type information for genMid.
