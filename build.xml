@@ -34,7 +34,6 @@
 	<target name="testmodelsrc.instrument" unless="skip.instrument">
 		<instrument
 				dir="testmodeljarsrc:testmodelsrc"
-				wildcardClassFullyQualified="true"
 				verify="${instrument.verify}"
 				verbose="false">
 			<classpath>

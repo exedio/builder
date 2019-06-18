@@ -38,7 +38,7 @@ class GenSup<N extends Number, L extends Collection<String>> extends Item implem
 	 * The persistent type information for genSup.
 	 */
 	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(type=...)
-	static final com.exedio.cope.Type<GenSup<?,?>> TYPE = com.exedio.cope.TypesBound.newType(GenSup.classWildcard.value);
+	static final com.exedio.cope.Type<GenSup<?,?>> TYPE = com.exedio.cope.TypesBound.newType(classWildcard.value);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.
