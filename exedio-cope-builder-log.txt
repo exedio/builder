@@ -7,6 +7,8 @@ omit bug fixes.
 The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
+* @com.exedio.cope.builder.Generated added and used instead of @javax.annotation.Generated
+	Prepares jdk 11 where the latter has been removed.
 * generate key-value setter/fallback for EnumMapField
 	MIGRATION If you have already created them manually in the past, the compiler MIGHT tell you and you have to delete them in your builders.
 			  Open all concrete Builders for Items using an EnumMapField and delete transient EnumMaps

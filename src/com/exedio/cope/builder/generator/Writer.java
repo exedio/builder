@@ -32,7 +32,7 @@ public final class Writer
 
 		writer.writePackage(type.getPackageName());
 
-		writer.writeLine("@javax.annotation.Generated(\"com.exedio.cope.builder\")");
+		writer.writeLine("@com.exedio.cope.builder.Generated");
 		writer.writeLine("public abstract class Generated" + simpleClassName + "Builder" + type.getGenericParams());
 		writer.writeLine("\textends " + type.getExtends());
 
