@@ -61,7 +61,7 @@ public final class Builders
 
 	abstract public static class AutoIncrementBuilder<T> implements Builder<T>
 	{
-		private static Map<Object, AtomicInteger> nextValues = new HashMap<>();
+		private static final Map<Object, AtomicInteger> nextValues = new HashMap<>();
 
 		protected final Object object;
 		protected final int    start;
