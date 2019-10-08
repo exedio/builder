@@ -95,7 +95,7 @@ public class GenericComplexTest extends MainTest
 			GenSourceBuilder.class.getMethod("subMandatoryNull");
 			fail("Null-Setter generated for mandatory");
 		}
-		catch(NoSuchMethodException e)
+		catch(final NoSuchMethodException e)
 		{
 			assertEquals("com.exedio.cope.builder.test.genericComplex.GenSourceBuilder.subMandatoryNull()", e.getMessage());
 		}
@@ -111,7 +111,7 @@ public class GenericComplexTest extends MainTest
 			GenSourceBuilder.class.getMethod("midNull");
 			fail("Lambda-Setter generated for inherited");
 		}
-		catch(NoSuchMethodException e)
+		catch(final NoSuchMethodException e)
 		{
 			assertEquals("com.exedio.cope.builder.test.genericComplex.GenSourceBuilder.midNull()", e.getMessage());
 		}
@@ -121,7 +121,7 @@ public class GenericComplexTest extends MainTest
 			GenSourceBuilder.class.getMethod("mid", Function.class);
 			fail("Null-Setter generated for inherited");
 		}
-		catch(NoSuchMethodException e)
+		catch(final NoSuchMethodException e)
 		{
 			assertEquals("com.exedio.cope.builder.test.genericComplex.GenSourceBuilder.mid(java.util.function.Function)", e.getMessage());
 		}

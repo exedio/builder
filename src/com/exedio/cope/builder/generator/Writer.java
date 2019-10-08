@@ -28,7 +28,7 @@ public final class Writer
 {
 	static void writeGeneratedBuilder(final MyType<?> type, final JavaClassWriter writer, final Set<MyType<?>> generated) throws IOException
 	{
-		String simpleClassName = type.getSimpleClassName();
+		final String simpleClassName = type.getSimpleClassName();
 
 		writer.writePackage(type.getPackageName());
 
@@ -98,7 +98,7 @@ public final class Writer
 				continue;
 			}
 
-			boolean writeGenericSetter = !(feature instanceof EnumMapField); //set enum map by keys and skip common value setter, see below
+			final boolean writeGenericSetter = !(feature instanceof EnumMapField); //set enum map by keys and skip common value setter, see below
 			if(writeGenericSetter)
 			{
 				writer.writeLine();
@@ -148,7 +148,7 @@ public final class Writer
 			else if(feature instanceof MoneyField)
 			{
 				final MoneyField<?> field = (MoneyField<?>) feature;
-				String currencyClass = TypeUtil.getCanonicalName(field.getCurrencyClass());
+				final String currencyClass = TypeUtil.getCanonicalName(field.getCurrencyClass());
 				writeRedirectSetter(writer, featureIdentifier, "final double value," + "final " + currencyClass + " currency",
 					"com.exedio.cope.pattern.Money.valueOf(value,currency)");
 				writeRedirectSetter(writer, featureIdentifier, "final int store," + "final " + currencyClass + " currency",
@@ -158,7 +158,7 @@ public final class Writer
 			{
 				final ItemField<?> field = (ItemField<?>) feature;
 				final Class<? extends Item> elementClass = field.getValueClass();
-				ItemType myType = new ItemType(TypesBound.forClass(elementClass));
+				final ItemType myType = new ItemType(TypesBound.forClass(elementClass));
 
 				if(!myType.enableCommonBuilder()) //TODO generate in all children if a common builder exists
 				{
@@ -176,7 +176,7 @@ public final class Writer
 			else if(feature instanceof CompositeField)
 			{
 				final CompositeField<?> field = (CompositeField<?>) feature;
-				CompositeType myType = new CompositeType(field);
+				final CompositeType myType = new CompositeType(field);
 				if(generated.contains(myType))
 				{
 					final String compositeClass = myType.getJavaClass().getCanonicalName();
@@ -198,10 +198,10 @@ public final class Writer
 			}
 			else if(feature instanceof EnumMapField)
 			{
-				EnumMapField<?, ?> enumMapField = (EnumMapField<?, ?>) feature;
-				Class<? extends Enum<?>> keyClass = enumMapField.getKeyClass();
-				String enumKeyType = TypeUtil.getCanonicalName(enumMapField.getKeyClass());
-				String enumValueType = TypeUtil.getCanonicalName(enumMapField.getValueClass());
+				final EnumMapField<?, ?> enumMapField = (EnumMapField<?, ?>) feature;
+				final Class<? extends Enum<?>> keyClass = enumMapField.getKeyClass();
+				final String enumKeyType = TypeUtil.getCanonicalName(enumMapField.getKeyClass());
+				final String enumValueType = TypeUtil.getCanonicalName(enumMapField.getValueClass());
 
 				writer.writeLine();
 				writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
@@ -221,11 +221,11 @@ public final class Writer
 				writer.writeLine("\t\treturn set(this." + featureIdentifier + ".getField(key), value);");
 				writer.writeLine("\t}");
 
-				for(Object e : keyClass.getEnumConstants())
+				for(final Object e : keyClass.getEnumConstants())
 				{
-					String key = ((Enum<?>) e).name();
-					String methodPart = key.substring(0, 1).toUpperCase(Locale.ENGLISH) + key.substring(1);
-					String variable = key.toLowerCase(Locale.ENGLISH); //TODO improve?
+					final String key = ((Enum<?>) e).name();
+					final String methodPart = key.substring(0, 1).toUpperCase(Locale.ENGLISH) + key.substring(1);
+					final String variable = key.toLowerCase(Locale.ENGLISH); //TODO improve?
 					writer.writeLine();
 					writer.writeSetterAnnotation();
 					writer.writeLine("\tpublic final B " + featureIdentifier + methodPart + "(final " + enumValueType + " " + variable + ")");
@@ -263,7 +263,7 @@ public final class Writer
 		final String simpleClassName = type.getSimpleClassName();
 		writer.writePackage(type.getPackageName());
 
-		boolean common = type.enableCommonBuilder();
+		final boolean common = type.enableCommonBuilder();
 		if(common)
 		{
 			writer.writeImport("com.exedio.cope.Type");

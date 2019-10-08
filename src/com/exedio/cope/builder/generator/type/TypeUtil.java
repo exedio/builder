@@ -60,7 +60,7 @@ public final class TypeUtil
 		if(ownerType != null)
 			throw new IllegalArgumentException("ParameterizedType without owner:" + ownerType.toString());
 
-		String name = (Cast.verboseCast(Class.class, type.getRawType()).getCanonicalName());
+		final String name = (Cast.verboseCast(Class.class, type.getRawType()).getCanonicalName());
 		if(type.getActualTypeArguments().length == 0) // TODO possible? add a test case
 			return name;
 		return name + "<" + Arrays.stream(type.getActualTypeArguments()).map(TypeUtil::getCanonicalName).collect(Collectors.joining(",")) + ">";

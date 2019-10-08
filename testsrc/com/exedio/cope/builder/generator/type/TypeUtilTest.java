@@ -66,7 +66,7 @@ public class TypeUtilTest extends MainTest
 		assertEquals("java.lang.String", TypeUtil.valueType(new StringField()));
 		assertEquals("com.exedio.cope.builder.other.SubItem", TypeUtil.valueType(ItemField.create(SubItem.class)));
 		assertEquals("int", TypeUtil.valueType(SubItem.TYPE.getFeature("subField")));
-		String pack = "com.exedio.cope.builder.generator.type.TypeUtilTest";
+		final String pack = "com.exedio.cope.builder.generator.type.TypeUtilTest";
 		assertEquals(pack + ".WithOneUnboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneUnboundParam.class)));
 		assertEquals(pack + ".WithOneMultiboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneMultiboundParam.class)));
 		assertEquals(pack + ".WithTwoParams<?,?>", TypeUtil.valueType(ItemField.create(WithTwoParams.class)));

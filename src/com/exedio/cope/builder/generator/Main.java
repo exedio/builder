@@ -69,7 +69,7 @@ final class Main
 				writer.add(writeFiles(params, new CompositeType(field), skippedTargetDirectoryDoesNotExist, progress, generated));
 			}
 		}
-		for(DelayedWriter delayedWriter : writer)
+		for(final DelayedWriter delayedWriter : writer)
 		{
 			if(delayedWriter == null)
 				continue;
@@ -80,7 +80,7 @@ final class Main
 	}
 
 	private static void printSummary(final Params params, final Model model, final ArrayList<Class<?>> skippedPackagePrefix,
-		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist, int generatedBuilders)
+		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist, final int generatedBuilders)
 	{
 		switch(skippedPackagePrefix.size())
 		{
@@ -128,7 +128,7 @@ final class Main
 		{
 			if(params.getSkipMissingTargetDirectory())
 			{
-				ArrayList<Class<?>> classes = skippedTargetDirectoryDoesNotExist.computeIfAbsent(dir, k -> new ArrayList<>());
+				final ArrayList<Class<?>> classes = skippedTargetDirectoryDoesNotExist.computeIfAbsent(dir, k -> new ArrayList<>());
 				classes.add(clazz);
 				return null;
 			}

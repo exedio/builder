@@ -46,7 +46,7 @@ public final class ItemType extends MyType<Item>
 		final Type<?> supertype = type.getSupertype();
 		if(supertype != null)
 		{
-			Class<?> superClass = supertype.getJavaClass();
+			final Class<?> superClass = supertype.getJavaClass();
 			return superClass.getPackage().getName() + ".Common" + superClass.getSimpleName() + "Builder<" + className + ", B>";
 		}
 

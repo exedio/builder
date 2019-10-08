@@ -83,7 +83,7 @@ public class SimpleTest extends MainTest
 			new SimpleItemBuilder().integerMandatory(1).getOrBuild();
 			fail();
 		}
-		catch(IllegalArgumentException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertTrue(e.getMessage().startsWith("expected result of size one or less, but was "));
 		}

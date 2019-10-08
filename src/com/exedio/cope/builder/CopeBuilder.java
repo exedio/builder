@@ -90,7 +90,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder<?, ?>>
 	protected final <K extends Enum<K>, V> EnumMap<K, V> get(final EnumMapField<K, V> enumMapField)
 	{
 		final EnumMap<K, V> enumMap = new EnumMap<>(enumMapField.getKeyClass());
-		for(K key : enumMapField.getKeyClass().getEnumConstants())
+		for(final K key : enumMapField.getKeyClass().getEnumConstants())
 		{
 			enumMap.put(key, get(enumMapField, key));
 		}
