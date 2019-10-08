@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class CopeBuilder<O extends Object, B extends CopeBuilder<?, ?>> implements Builder<O>
+public abstract class CopeBuilder<O, B extends CopeBuilder<?, ?>> implements Builder<O>
 {
 	protected Map<Settable<?>, SetValue<?>> values = new HashMap<>();
 
