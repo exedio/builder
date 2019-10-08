@@ -83,8 +83,7 @@ public final class Writer
 
 			{
 				final Pattern pattern = feature.getPattern();
-				if((pattern != null) &&
-					(pattern instanceof Settable<?> || pattern instanceof DynamicModel<?>))
+				if((pattern instanceof Settable<?> || pattern instanceof DynamicModel<?>))
 					continue;
 			}
 
