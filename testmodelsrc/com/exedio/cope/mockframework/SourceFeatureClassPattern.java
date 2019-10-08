@@ -16,8 +16,8 @@ import com.exedio.cope.pattern.RangeField;
 @WrapperIgnore
 public final class SourceFeatureClassPattern extends Pattern
 {
-	public enum EnumPublic { A,B; }
-	enum EnumPackage { A,B; }
+	public enum EnumPublic { A,B }
+	enum EnumPackage { A,B }
 
 
 	public static final class CompositePublic extends Composite
