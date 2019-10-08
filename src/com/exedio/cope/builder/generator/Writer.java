@@ -26,7 +26,7 @@ import java.util.Set;
 
 public final class Writer
 {
-	static final void writeGeneratedBuilder(final MyType<?> type, final JavaClassWriter writer, final Set<MyType<?>> generated) throws IOException
+	static void writeGeneratedBuilder(final MyType<?> type, final JavaClassWriter writer, final Set<MyType<?>> generated) throws IOException
 	{
 		String simpleClassName = type.getSimpleClassName();
 
@@ -258,7 +258,7 @@ public final class Writer
 		writer.writeLine("\t}");
 	}
 
-	static final void writeConcreteBuilder(final MyType<?> type, final JavaClassWriter writer) throws IOException
+	static void writeConcreteBuilder(final MyType<?> type, final JavaClassWriter writer) throws IOException
 	{
 		final String simpleClassName = type.getSimpleClassName();
 		writer.writePackage(type.getPackageName());

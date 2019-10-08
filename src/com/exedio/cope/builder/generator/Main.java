@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 
 final class Main
 {
-	static final void main(final Params params) throws HumanReadableException, IOException
+	static void main(final Params params) throws HumanReadableException, IOException
 	{
 		final Model model = params.getModel();
 
