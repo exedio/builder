@@ -59,7 +59,7 @@ public final class Builders
 		return () -> enumBuilder.build().name();
 	}
 
-	abstract public static class AutoIncrementBuilder<T> implements Builder<T>
+	public abstract static class AutoIncrementBuilder<T> implements Builder<T>
 	{
 		private static final Map<Object, AtomicInteger> nextValues = new HashMap<>();
 
