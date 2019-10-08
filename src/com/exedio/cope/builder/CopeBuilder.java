@@ -5,7 +5,6 @@ import com.exedio.cope.SetValue;
 import com.exedio.cope.Settable;
 import com.exedio.cope.pattern.EnumMapField;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -151,19 +150,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder<?, ?>>
 			copy.values = new HashMap<>(values);
 			return copy;
 		}
-		catch(final InstantiationException e)
-		{
-			throw new RuntimeException("Failed to copy builder: " + getClass().getName(), e);
-		}
-		catch(final IllegalAccessException e)
-		{
-			throw new RuntimeException("Failed to copy builder: " + getClass().getName(), e);
-		}
-		catch(final InvocationTargetException e)
-		{
-			throw new RuntimeException("Failed to copy builder: " + getClass().getName(), e);
-		}
-		catch(final NoSuchMethodException e)
+		catch(final ReflectiveOperationException e)
 		{
 			throw new RuntimeException("Failed to copy builder: " + getClass().getName(), e);
 		}
