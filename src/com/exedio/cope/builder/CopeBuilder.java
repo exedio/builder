@@ -34,7 +34,7 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<?, ?>> implements Bui
 		return values.containsKey(enumMapField.getField(key));
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "UnusedReturnValue"})
 	protected final <V> B fallback(final Settable<V> settable, final V value)
 	{
 		if(!isSet(settable))
@@ -101,7 +101,9 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<?, ?>> implements Bui
 	protected static <T> List<T> toList(final T... array)
 	{
 		final List<T> result = new ArrayList<>();
+		//noinspection ManualArrayToCollectionCopy
 		for(final T t : array)
+			//noinspection UseBulkOperation
 			result.add(t);
 		return result;
 	}

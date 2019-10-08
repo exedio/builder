@@ -10,6 +10,7 @@ public class SourceFeatureClassTest extends MainTest
 	 * This tests checks, that methods used do exist.
 	 */
 	@Test
+	@SuppressWarnings("RedundantCast")
 	public void methodsExist()
 	{
 		new SourceFeatureClassItemBuilder().

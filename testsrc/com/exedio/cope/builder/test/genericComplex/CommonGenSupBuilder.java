@@ -11,6 +11,7 @@ public abstract class CommonGenSupBuilder<I extends GenSup<?, ?>, B extends Comm
 	}
 
 	@Override
+	@SuppressWarnings("EmptyMethod")
 	public I build()
 	{
 		return super.build();

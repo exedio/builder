@@ -11,6 +11,7 @@ public abstract class CommonAbstractLevel1ItemBuilder<I extends AbstractLevel1It
 	}
 
 	@Override
+	@SuppressWarnings("EmptyMethod")
 	public I build()
 	{
 		return super.build();

@@ -84,6 +84,7 @@ public class GenericComplexTest extends MainTest
 	}
 
 	@Test
+	@SuppressWarnings("JavaReflectionMemberAccess")
 	public void setNull() throws NoSuchMethodException
 	{
 		assertNull(new GenSourceBuilder().subFallbackNull().build().getSubFallback());
@@ -102,6 +103,7 @@ public class GenericComplexTest extends MainTest
 	}
 
 	@Test
+	@SuppressWarnings("JavaReflectionMemberAccess")
 	public void setLambda() throws NoSuchMethodException
 	{
 		assertNotNull(new GenSourceBuilder().sub(s -> s).build().getSubFallback());

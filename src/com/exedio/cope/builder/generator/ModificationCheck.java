@@ -58,6 +58,7 @@ final class ModificationCheck
 					throw new IllegalArgumentException("" + uri, e);
 				}
 
+				//noinspection TailRecursion
 				return getFileContaining(jar);
 			}
 			default:

@@ -5,6 +5,7 @@ import com.exedio.cope.SetValue;
 import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeType;
 
+@SuppressWarnings("AbstractClassWithoutAbstractMethods")
 public abstract class CompositeBuilder<C extends Composite, B extends CompositeBuilder<?, ?>> extends CopeBuilder<C, B>
 {
 	private final CompositeType<C> type;

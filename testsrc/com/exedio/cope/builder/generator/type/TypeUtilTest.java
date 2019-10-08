@@ -77,7 +77,7 @@ public class TypeUtilTest extends MainTest
 			TypeUtil.valueType(MapField.create(new StringField(), new IntegerField())));
 	}
 
-	@SuppressWarnings("unused")
+	@SuppressWarnings({"unused", "EmptyClass"})
 	private static class PrivateClass<A, B>
 	{
 

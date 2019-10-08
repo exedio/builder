@@ -38,7 +38,6 @@ public class JavaClassWriter extends OutputStreamWriter
 		writeLine("\t@com.exedio.cope.builder.Setter");
 	}
 
-	@SuppressWarnings("deprecation")
 	public void writeLine(@Nonnull final String line) throws IOException
 	{
 		write(line);

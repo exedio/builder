@@ -24,6 +24,7 @@ import java.util.Set;
  * @param <I> the resulting item class
  * @param <B> the actual sub-class of this base class
  */
+@SuppressWarnings("AbstractClassWithoutAbstractMethods")
 public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> extends CopeBuilder<I, B>
 {
 
@@ -190,6 +191,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 			final Query<I> query = builder.type.newQuery();
 			for(final Map.Entry<Settable<?>, SetValue<?>> key : builder.values.entrySet())
 			{
+				@SuppressWarnings("RawTypeCanBeGeneric")
 				final Settable field = key.getKey();
 				for(final SetValue setValue : field.execute(key.getValue().value, null))
 				{
