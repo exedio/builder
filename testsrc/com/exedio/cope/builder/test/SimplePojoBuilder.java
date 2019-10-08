@@ -9,7 +9,7 @@ public class SimplePojoBuilder extends PojoBuilder<SimplePojo>
 
 	static class IntegerAutoBuilder implements Builder<Integer>
 	{
-		static AtomicInteger i = new AtomicInteger(11);
+		static final AtomicInteger i = new AtomicInteger(11);
 
 		@Override
 		public Integer build()
