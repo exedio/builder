@@ -58,7 +58,7 @@ public final class TypeUtil
 	{
 		final Type ownerType = type.getOwnerType();
 		if(ownerType != null)
-			throw new IllegalArgumentException("ParameterizedType without owner:" + ownerType.toString());
+			throw new IllegalArgumentException("ParameterizedType without owner:" + ownerType);
 
 		final String name = (Cast.verboseCast(Class.class, type.getRawType()).getCanonicalName());
 		if(type.getActualTypeArguments().length == 0) // TODO possible? add a test case
