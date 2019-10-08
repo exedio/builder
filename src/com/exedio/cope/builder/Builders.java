@@ -56,14 +56,7 @@ public final class Builders
 	 */
 	public static <E extends Enum<E>> Builder<String> enumToStringBuilder(final Builder<E> enumBuilder)
 	{
-		return new Builder<String>()
-		{
-			@Override
-			public String build()
-			{
-				return enumBuilder.build().name();
-			}
-		};
+		return () -> enumBuilder.build().name();
 	}
 
 	abstract public static class AutoIncrementBuilder<T> implements Builder<T>
