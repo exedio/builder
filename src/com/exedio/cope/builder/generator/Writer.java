@@ -307,4 +307,9 @@ public final class Writer
 
 		writer.writeLine("}");
 	}
+
+	private Writer()
+	{
+		// prevent instantiation
+	}
 }

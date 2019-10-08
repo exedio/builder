@@ -159,4 +159,9 @@ public final class TypeUtil
 
 		return packageName.equals(clazz.getPackage().getName());
 	}
+
+	private TypeUtil()
+	{
+		// prevent instantiation
+	}
 }

@@ -34,4 +34,9 @@ public final class TestMain
 	{
 		model.enableSerialization(TestMain.class, "model");
 	}
+
+	private TestMain()
+	{
+		// prevent instantiation
+	}
 }

@@ -64,4 +64,9 @@ final class ModificationCheck
 				throw new IllegalArgumentException("scheme " + scheme + " unsupported in " + uri);
 		}
 	}
+
+	private ModificationCheck()
+	{
+		// prevent instantiation
+	}
 }
