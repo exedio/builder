@@ -18,7 +18,7 @@ public class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuil
 		fallback(money, Money.storeOf(8888888, FieldsItem.Currency.EUR));
 		fallback(range, Range.valueOf(7777777, 8888888));
 
-		fallback(this.enumMap, TestEnum.one, "keyFallback1");
+		fallback(enumMap, TestEnum.one, "keyFallback1");
 		final EnumMap<TestEnum, String> enumMap = new EnumMap<>(TestEnum.class);
 		enumMap.put(TestEnum.one, "mapFallback1");//ignored
 		enumMap.put(TestEnum.two, "mapFallback2");

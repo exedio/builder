@@ -52,10 +52,10 @@ final class Params
 			throw new IllegalArgumentException(
 				"packagePrefix \"" + packagePrefix + "\" must not end with dot.");
 
-		this.packagePrefixesMatch.add(packagePrefix + '.');
-		if(this.packagePrefixesDisplay.length() > 0)
-			this.packagePrefixesDisplay.append(',');
-		this.packagePrefixesDisplay.append(packagePrefix);
+		packagePrefixesMatch.add(packagePrefix + '.');
+		if(packagePrefixesDisplay.length() > 0)
+			packagePrefixesDisplay.append(',');
+		packagePrefixesDisplay.append(packagePrefix);
 	}
 
 	boolean matchesPackagePrefixes(final Class<?> clazz)

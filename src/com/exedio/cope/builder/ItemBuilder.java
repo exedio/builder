@@ -127,7 +127,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 	@Override
 	protected final <F extends Feature> F getFeature(final String featureName)
 	{
-		final Feature feature = this.type.getFeature(featureName);
+		final Feature feature = type.getFeature(featureName);
 		if(feature == null)
 			throw new NullPointerException(featureName);
 		@SuppressWarnings("unchecked")
