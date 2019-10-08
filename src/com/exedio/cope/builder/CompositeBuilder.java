@@ -36,7 +36,6 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 	@Override
 	public C build()
 	{
-		final SetValue<?>[] vs = values.values().toArray(new SetValue<?>[values.size()]);
-		return type.newValue(vs);
+		return type.newValue(values.values().toArray(new SetValue<?>[0]));
 	}
 }
