@@ -135,7 +135,6 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<?, ?>> implements Bui
 
 	protected CopeBuilder()
 	{
-		super();
 	}
 
 	protected abstract <F extends Feature> F getFeature(String featureName);
