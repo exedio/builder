@@ -66,7 +66,7 @@ public final class Builders
 		protected final Object object;
 		protected final int    start;
 
-		public AutoIncrementBuilder(final Object object, final int start)
+		protected AutoIncrementBuilder(final Object object, final int start)
 		{
 			this.object = Objects.requireNonNull(object, "object");
 			this.start = start;

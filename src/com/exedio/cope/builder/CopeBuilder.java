@@ -133,7 +133,7 @@ public abstract class CopeBuilder<O extends Object, B extends CopeBuilder<?, ?>>
 		return new EnumMap<>(toMap(key, value));
 	}
 
-	public CopeBuilder()
+	protected CopeBuilder()
 	{
 		super();
 	}
