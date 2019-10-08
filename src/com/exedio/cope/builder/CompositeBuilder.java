@@ -2,7 +2,6 @@ package com.exedio.cope.builder;
 
 import com.exedio.cope.Feature;
 import com.exedio.cope.SetValue;
-import com.exedio.cope.Settable;
 import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeType;
 
@@ -27,10 +26,9 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 	 * @deprecated Use fields filled by {@link #getFeature(String)} instead.
 	 */
 	@Deprecated
-	@SuppressWarnings("unchecked")
 	protected final B set(final String featureName, final Object value)
 	{
-		return set((Settable<Object>) getFeature(featureName), value);
+		return set(getFeature(featureName), value);
 	}
 
 	@Override
