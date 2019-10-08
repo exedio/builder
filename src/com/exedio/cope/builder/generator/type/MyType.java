@@ -74,6 +74,7 @@ public abstract class MyType<T>
 
 	public abstract String getTypeName();
 
+	@Override
 	public abstract boolean equals(final Object obj);
 
 	@Override
