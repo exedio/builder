@@ -5,7 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-class ModificationCheck
+final class ModificationCheck
 {
 	static boolean isNoUpdateRequired(final Class<?> sourceClass, final File targetFile)
 	{

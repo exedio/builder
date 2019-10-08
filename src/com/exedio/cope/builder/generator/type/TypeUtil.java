@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TypeUtil
+public final class TypeUtil
 {
 	@Nonnull
 	static String typeParameterWildCards(@Nonnull final Class<?> clazz)

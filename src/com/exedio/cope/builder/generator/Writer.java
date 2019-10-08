@@ -24,7 +24,7 @@ import java.lang.reflect.Modifier;
 import java.util.Locale;
 import java.util.Set;
 
-public class Writer
+public final class Writer
 {
 	static final void writeGeneratedBuilder(final MyType<?> type, final JavaClassWriter writer, final Set<MyType<?>> generated) throws IOException
 	{
