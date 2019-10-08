@@ -70,7 +70,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		return (B) this;
 	}
 
-	@SuppressWarnings({"unchecked"})
+	@SuppressWarnings("unchecked")
 	protected final <V> Set<V> get(final SetField<V> field)
 	{
 		if(!setValues.containsKey(field))
