@@ -1,7 +1,6 @@
 package com.exedio.cope.builder.generator.type;
 
 import com.exedio.cope.Feature;
-import java.io.IOException;
 import java.util.List;
 import javax.annotation.Nonnull;
 
@@ -48,7 +47,7 @@ public abstract class MyType<T>
 	public abstract String getName(Feature feature);
 
 	@Nonnull
-	public abstract String getExtends() throws IOException;
+	public abstract String getExtends();
 
 	@Nonnull
 	public String getGenericParams()
