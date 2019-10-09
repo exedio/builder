@@ -23,7 +23,7 @@
 		<artifact name="exedio-cope-builder" conf="changelog" type="log" ext="txt" />
 	</publications>
 	<dependencies>
-	 	<dependency org="ant" name="ant" rev="1.7.0" conf="build->default"/>
+		<dependency org="ant" name="ant" rev="1.7.0" conf="build->default"/>
 		<dependency org="cpsuite" name="cpsuite" rev="1.2.7.1" conf="build->default"/>
 		<dependency org="junit" name="junit" rev="4.10" conf="build->default">
 			<exclude org="org.hamcrest" module="hamcrest-core" />
