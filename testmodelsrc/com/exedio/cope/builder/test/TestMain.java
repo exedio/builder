@@ -27,6 +27,7 @@ public final class TestMain
 			SkippedBecauseNotInPackagePrefixItem.TYPE,
 			SecondPackageItem.TYPE,
 			JarItem.TYPE,
+			NonBoundTypeItem.TYPE,
 			AbstractLevel1Item.TYPE, MixedLevel2Item.TYPE, ConcreteLevel3Item.TYPE).
 		build();
 
