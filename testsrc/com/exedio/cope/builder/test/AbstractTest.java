@@ -1,11 +1,11 @@
 package com.exedio.cope.builder.test;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.exedio.cope.builder.other.ConcreteItem;
 import com.exedio.cope.builder.other.ConcreteItemBuilder;
-import com.exedio.cope.builder.test.GeneratedAbstractLevel1ItemBuilder.AbstractLevel1ItemBuilder;
 import com.exedio.cope.builder.test.GeneratedMixedLevel2ItemBuilder.MixedLevel2ItemBuilder;
 import java.lang.reflect.Modifier;
 import org.junit.Test;
@@ -35,6 +35,6 @@ public class AbstractTest extends MainTest
 	public void commonAbstract() throws NoSuchMethodException
 	{
 		assertTrue(Modifier.isPublic(MixedLevel2ItemBuilder.class.getDeclaredConstructor().getModifiers()));
-		assertTrue(Modifier.isPrivate(AbstractLevel1ItemBuilder.class.getDeclaredConstructor().getModifiers()));
+		assertEquals(asList(), asList(GeneratedAbstractLevel1ItemBuilder.class.getDeclaredClasses()));
 	}
 }

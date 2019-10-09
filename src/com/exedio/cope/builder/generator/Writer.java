@@ -38,25 +38,27 @@ public final class Writer
 
 		writer.writeLine("{");
 
-		if(type.enableCommonBuilder())
+		if(!Modifier.isAbstract(type.getJavaClass().getModifiers()))
 		{
-			final String generics = "<" + simpleClassName + type.getWildCards() + "," + simpleClassName + "Builder>";
-			writer.writeLine(
-				"\tpublic static class " + simpleClassName + "Builder extends " + type.getPackageName() + ".Common" + simpleClassName + "Builder" + generics);
-			writer.writeLine("\t{");
-			final String visibility = Modifier.isAbstract(type.getJavaClass().getModifiers()) ? "private" : "public";
-			writer.writeLine("\t\t" + visibility + " " + simpleClassName + "Builder( )");
-			writer.writeLine("\t\t{");
-			writer.writeLine("\t\t\tsuper( " + simpleClassName + ".TYPE );");
-			writer.writeLine("\t\t}");
-			writer.writeLine("\t}");
-		}
-		else
-		{
-			writer.writeLine("\tprotected Generated" + simpleClassName + "Builder()");
-			writer.writeLine("\t{");
-			writer.writeLine("\t\tsuper(" + type.getTypeCast() + simpleClassName + '.' + type.getTypeName() + ");");
-			writer.writeLine("\t}");
+			if(type.enableCommonBuilder())
+			{
+				final String generics = "<" + simpleClassName + type.getWildCards() + "," + simpleClassName + "Builder>";
+				writer.writeLine(
+					"\tpublic static class " + simpleClassName + "Builder extends " + type.getPackageName() + ".Common" + simpleClassName + "Builder" + generics);
+				writer.writeLine("\t{");
+				writer.writeLine("\t\tpublic " + simpleClassName + "Builder( )");
+				writer.writeLine("\t\t{");
+				writer.writeLine("\t\t\tsuper( " + simpleClassName + ".TYPE );");
+				writer.writeLine("\t\t}");
+				writer.writeLine("\t}");
+			}
+			else
+			{
+				writer.writeLine("\tprotected Generated" + simpleClassName + "Builder()");
+				writer.writeLine("\t{");
+				writer.writeLine("\t\tsuper(" + type.getTypeCast() + simpleClassName + '.' + type.getTypeName() + ");");
+				writer.writeLine("\t}");
+			}
 		}
 
 		if(type.enableTypePropagationConstructor())
