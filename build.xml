@@ -17,6 +17,8 @@
 			<pathelement location="lib/exedio-cope-instrument.jar" />
 			<pathelement location="lib/javax.servlet-api.jar" />
 			<pathelement location="lib/slf4j-api.jar" />
+			<pathelement location="lib/micrometer-core.jar" />
+			<pathelement location="lib/LatencyUtils.jar" />
 		</classpath>
 	</taskdef>
 
@@ -36,6 +38,9 @@
 		<instrument
 				dir="testmodeljarsrc:testmodelsrc"
 				verify="${instrument.verify}"
+				javaxAnnotationGenerated="true"
+				genericConstructorOneline="false"
+				convertTT2Code="false"
 				verbose="false">
 			<classpath>
 				<pathelement location="lib/ant.jar" />
@@ -44,6 +49,7 @@
 				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
+			<disableWrap>com.exedio.cope.pattern.Media#getBody(com.exedio.cope.Item,java.nio.file.Path)</disableWrap>
 		</instrument>
 	</target>
 
@@ -92,6 +98,8 @@
 				<pathelement location="lib/exedio-cope.jar" />
 				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
+				<pathelement location="lib/micrometer-core.jar" />
+				<pathelement location="lib/LatencyUtils.jar" />
 			</classpath>
 		</taskdef>
 	</target>
@@ -143,6 +151,8 @@
 				<pathelement location="lib/exedio-cope-hsqldb.jar" />
 				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
+				<pathelement location="lib/micrometer-core.jar" />
+				<pathelement location="lib/LatencyUtils.jar" />
 			</classpath>
 			<test name="${test}" todir="build/testresults" outfile="copebuilder" />
 			<sysproperty key="java.io.tmpdir" value="${basedir}/build/testtmpdir" />
