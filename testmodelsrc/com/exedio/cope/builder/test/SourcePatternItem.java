@@ -3,20 +3,21 @@ package com.exedio.cope.builder.test;
 import static com.exedio.cope.instrument.Visibility.NONE;
 
 import com.exedio.cope.Item;
+import com.exedio.cope.instrument.WrapInterim;
 import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.Schedule;
-import com.exedio.cope.pattern.Scheduleable;
 import com.exedio.cope.util.JobContext;
 import java.time.ZoneId;
 import java.util.Date;
 
 @WrapperType(constructor=NONE, genericConstructor=NONE)
-final class SourcePatternItem extends Item implements Scheduleable
+final class SourcePatternItem extends Item
 {
-	static final Schedule schedule = new Schedule(ZoneId.systemDefault());
+	static final Schedule schedule = Schedule.create(ZoneId.systemDefault(), SourcePatternItem::run);
 
-	@Override
-	public void run(final Schedule schedule, final Date from, final Date until, final JobContext ctx)
+	@WrapInterim(methodBody=false)
+	@SuppressWarnings("MethodMayBeStatic") // OK: just a dummy
+	private void run(final Date from, final Date until, final JobContext ctx)
 	{
 		throw new RuntimeException();
 	}

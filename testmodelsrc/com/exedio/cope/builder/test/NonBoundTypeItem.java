@@ -5,23 +5,24 @@ import static com.exedio.cope.instrument.Visibility.NONE;
 import com.exedio.cope.Item;
 import com.exedio.cope.ItemField;
 import com.exedio.cope.ItemField.DeletePolicy;
+import com.exedio.cope.instrument.WrapInterim;
 import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.Schedule;
 import com.exedio.cope.pattern.Schedule.Run;
-import com.exedio.cope.pattern.Scheduleable;
 import com.exedio.cope.util.JobContext;
 import java.time.ZoneId;
 import java.util.Date;
 
 @WrapperType(constructor=NONE, genericConstructor=NONE)
-final class NonBoundTypeItem extends Item implements Scheduleable
+final class NonBoundTypeItem extends Item
 {
-	private static final Schedule schedule = new Schedule(ZoneId.of("Europe/Berlin"));
+	private static final Schedule schedule = Schedule.create(ZoneId.of("Europe/Berlin"), NonBoundTypeItem::run);
 
 	private static final ItemField<Run> token = ItemField.create(Run.class, schedule::getRunType, DeletePolicy.CASCADE);
 
-	@Override
-	public void run(final Schedule schedule, final Date from, final Date until, final JobContext ctx)
+	@WrapInterim(methodBody=false)
+	@SuppressWarnings("EmptyMethod") // OK: just a dummy
+	private void run(final Date from, final Date until, final JobContext ctx)
 	{
 	}
 
