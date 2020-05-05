@@ -28,7 +28,8 @@ final class MyItem extends Item implements Money.Currency
 	/**
 	 * Returns the value of {@link #enumF}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final MyEnum getEnumF()
 	{
 		return MyItem.enumF.get(this);
@@ -37,7 +38,8 @@ final class MyItem extends Item implements Money.Currency
 	/**
 	 * Sets a new value for {@link #enumF}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setEnumF(final MyEnum enumF)
 	{
 		MyItem.enumF.set(this,enumF);
@@ -46,7 +48,8 @@ final class MyItem extends Item implements Money.Currency
 	/**
 	 * Returns the value of {@link #item}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final MyItem getItem()
 	{
 		return MyItem.item.get(this);
@@ -55,7 +58,8 @@ final class MyItem extends Item implements Money.Currency
 	/**
 	 * Sets a new value for {@link #item}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setItem(final MyItem item)
 	{
 		MyItem.item.set(this,item);
@@ -64,7 +68,8 @@ final class MyItem extends Item implements Money.Currency
 	/**
 	 * Returns the value of {@link #composite}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final MyComposite getComposite()
 	{
 		return MyItem.composite.get(this);
@@ -73,49 +78,57 @@ final class MyItem extends Item implements Money.Currency
 	/**
 	 * Sets a new value for {@link #composite}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setComposite(final MyComposite composite)
 	{
 		MyItem.composite.set(this,composite);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.Range<MyEnum> getRangeEnum()
 	{
 		return MyItem.rangeEnum.get(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setRangeEnum(final com.exedio.cope.pattern.Range<? extends MyEnum> rangeEnum)
 	{
 		MyItem.rangeEnum.set(this,rangeEnum);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final MyEnum getRangeEnumFrom()
 	{
 		return MyItem.rangeEnum.getFrom(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final MyEnum getRangeEnumTo()
 	{
 		return MyItem.rangeEnum.getTo(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setRangeEnumFrom(final MyEnum rangeEnum)
 	{
 		MyItem.rangeEnum.setFrom(this,rangeEnum);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setRangeEnumTo(final MyEnum rangeEnum)
 	{
 		MyItem.rangeEnum.setTo(this,rangeEnum);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="doesContain")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="doesContain")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean doesRangeEnumContain(final MyEnum rangeEnum)
 	{
 		return MyItem.rangeEnum.doesContain(this,rangeEnum);
@@ -124,7 +137,8 @@ final class MyItem extends Item implements Money.Currency
 	/**
 	 * Returns the value of {@link #moneyEnum}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.Money<MyEnum> getMoneyEnum()
 	{
 		return MyItem.moneyEnum.get(this);
@@ -133,7 +147,8 @@ final class MyItem extends Item implements Money.Currency
 	/**
 	 * Sets a new value for {@link #moneyEnum}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMoneyEnum(final com.exedio.cope.pattern.Money<MyEnum> moneyEnum)
 	{
 		MyItem.moneyEnum.set(this,moneyEnum);
@@ -142,7 +157,8 @@ final class MyItem extends Item implements Money.Currency
 	/**
 	 * Returns the value of {@link #moneyItem}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.Money<MyItem> getMoneyItem()
 	{
 		return MyItem.moneyItem.get(this);
@@ -151,25 +167,26 @@ final class MyItem extends Item implements Money.Currency
 	/**
 	 * Sets a new value for {@link #moneyItem}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMoneyItem(final com.exedio.cope.pattern.Money<MyItem> moneyItem)
 	{
 		MyItem.moneyItem.set(this,moneyItem);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private static final long serialVersionUID = 1l;
 
 	/**
 	 * The persistent type information for myItem.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(type=...)
+	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
 	static final com.exedio.cope.Type<MyItem> TYPE = com.exedio.cope.TypesBound.newType(MyItem.class);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.
 	 * @see com.exedio.cope.Item#Item(com.exedio.cope.ActivationParameters)
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private MyItem(final com.exedio.cope.ActivationParameters ap){super(ap);}
 }

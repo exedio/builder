@@ -38,9 +38,6 @@
 		<instrument
 				dir="testmodeljarsrc:testmodelsrc"
 				verify="${instrument.verify}"
-				javaxAnnotationGenerated="true"
-				genericConstructorOneline="false"
-				convertTT2Code="false"
 				verbose="false">
 			<classpath>
 				<pathelement location="lib/ant.jar" />
@@ -49,7 +46,12 @@
 				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
-			<disableWrap>com.exedio.cope.pattern.Media#getBody(com.exedio.cope.Item,java.nio.file.Path)</disableWrap>
+			<suppressWarnings>
+				<wrapper>FinalMethodInFinalClass</wrapper>
+				<wrapper>RedundantSuppression</wrapper>
+				<wrapper>TypeParameterExtendsFinalClass</wrapper>
+				<wrapper>UnnecessarilyQualifiedStaticUsage</wrapper>
+			</suppressWarnings>
 		</instrument>
 	</target>
 

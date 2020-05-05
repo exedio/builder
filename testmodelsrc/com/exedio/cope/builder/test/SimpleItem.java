@@ -25,7 +25,8 @@ final class SimpleItem extends Item
 	/**
 	 * Returns the value of {@link #integerMandatory}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final int getIntegerMandatory()
 	{
 		return SimpleItem.integerMandatory.getMandatory(this);
@@ -34,7 +35,8 @@ final class SimpleItem extends Item
 	/**
 	 * Returns the value of {@link #integerOptional}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.lang.Integer getIntegerOptional()
 	{
 		return SimpleItem.integerOptional.get(this);
@@ -43,7 +45,8 @@ final class SimpleItem extends Item
 	/**
 	 * Returns the value of {@link #stringOptional}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.lang.String getStringOptional()
 	{
 		return SimpleItem.stringOptional.get(this);
@@ -52,7 +55,8 @@ final class SimpleItem extends Item
 	/**
 	 * Returns the value of {@link #enumField}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final TestEnum getEnumField()
 	{
 		return SimpleItem.enumField.get(this);
@@ -61,7 +65,8 @@ final class SimpleItem extends Item
 	/**
 	 * Sets a new value for {@link #enumField}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setEnumField(final TestEnum enumField)
 			throws
 				com.exedio.cope.MandatoryViolationException
@@ -69,19 +74,19 @@ final class SimpleItem extends Item
 		SimpleItem.enumField.set(this,enumField);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private static final long serialVersionUID = 1l;
 
 	/**
 	 * The persistent type information for simpleItem.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(type=...)
+	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
 	static final com.exedio.cope.Type<SimpleItem> TYPE = com.exedio.cope.TypesBound.newType(SimpleItem.class);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.
 	 * @see com.exedio.cope.Item#Item(com.exedio.cope.ActivationParameters)
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private SimpleItem(final com.exedio.cope.ActivationParameters ap){super(ap);}
 }

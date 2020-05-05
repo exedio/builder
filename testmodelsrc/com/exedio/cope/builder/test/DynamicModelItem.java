@@ -15,7 +15,8 @@ final class DynamicModelItem extends Item
 	/**
 	 * Returns the dynamic type of this item in the model {@link #features}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getType")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getType")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.DynamicModel.Type<SimpleItem> getFeaturesType()
 	{
 		return DynamicModelItem.features.getType(this);
@@ -24,43 +25,46 @@ final class DynamicModelItem extends Item
 	/**
 	 * Sets the dynamic type of this item in the model {@link #features}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setType")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setType")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setFeaturesType(final com.exedio.cope.pattern.DynamicModel.Type<SimpleItem> type)
 	{
 		DynamicModelItem.features.setType(this,type);
 	}
 
 	/**
-	 * Returns the value of <tt>field</tt> for this item in the model {@link #features}.
+	 * Returns the value of {@code field} for this item in the model {@link #features}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.lang.Object getFeatures(final com.exedio.cope.pattern.DynamicModel.Field<SimpleItem> field)
 	{
 		return DynamicModelItem.features.get(this,field);
 	}
 
 	/**
-	 * Sets the value of <tt>field</tt> for this item in the model {@link #features}.
+	 * Sets the value of {@code field} for this item in the model {@link #features}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setFeatures(final com.exedio.cope.pattern.DynamicModel.Field<SimpleItem> field,final java.lang.Object value)
 	{
 		DynamicModelItem.features.set(this,field,value);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private static final long serialVersionUID = 1l;
 
 	/**
 	 * The persistent type information for dynamicModelItem.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(type=...)
+	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
 	static final com.exedio.cope.Type<DynamicModelItem> TYPE = com.exedio.cope.TypesBound.newType(DynamicModelItem.class);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.
 	 * @see com.exedio.cope.Item#Item(com.exedio.cope.ActivationParameters)
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private DynamicModelItem(final com.exedio.cope.ActivationParameters ap){super(ap);}
 }

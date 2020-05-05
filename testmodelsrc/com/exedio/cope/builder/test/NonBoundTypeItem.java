@@ -26,31 +26,36 @@ final class NonBoundTypeItem extends Item
 	{
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="isEnabled")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="isEnabled")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	private boolean isScheduleEnabled()
 	{
 		return NonBoundTypeItem.schedule.isEnabled(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setEnabled")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setEnabled")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	private void setScheduleEnabled(final boolean enabled)
 	{
 		NonBoundTypeItem.schedule.setEnabled(this,enabled);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getInterval")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getInterval")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	private com.exedio.cope.pattern.Schedule.Interval getScheduleInterval()
 	{
 		return NonBoundTypeItem.schedule.getInterval(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setInterval")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setInterval")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	private void setScheduleInterval(final com.exedio.cope.pattern.Schedule.Interval interval)
 	{
 		NonBoundTypeItem.schedule.setInterval(this,interval);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="run")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="run")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	private static void runSchedule(final com.exedio.cope.util.JobContext ctx)
 	{
 		NonBoundTypeItem.schedule.run(NonBoundTypeItem.class,ctx);
@@ -59,7 +64,8 @@ final class NonBoundTypeItem extends Item
 	/**
 	 * Returns the parent field of the run type of {@link #schedule}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="RunParent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="RunParent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	private static com.exedio.cope.ItemField<NonBoundTypeItem> scheduleRunParent()
 	{
 		return NonBoundTypeItem.schedule.getRunParent(NonBoundTypeItem.class);
@@ -68,7 +74,8 @@ final class NonBoundTypeItem extends Item
 	/**
 	 * Returns the value of {@link #token}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	private Run getToken()
 	{
 		return NonBoundTypeItem.token.get(this);
@@ -77,7 +84,8 @@ final class NonBoundTypeItem extends Item
 	/**
 	 * Sets a new value for {@link #token}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	private void setToken(final Run token)
 			throws
 				com.exedio.cope.MandatoryViolationException
@@ -85,19 +93,19 @@ final class NonBoundTypeItem extends Item
 		NonBoundTypeItem.token.set(this,token);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private static final long serialVersionUID = 1l;
 
 	/**
 	 * The persistent type information for nonBoundTypeItem.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(type=...)
+	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
 	static final com.exedio.cope.Type<NonBoundTypeItem> TYPE = com.exedio.cope.TypesBound.newType(NonBoundTypeItem.class);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.
 	 * @see com.exedio.cope.Item#Item(com.exedio.cope.ActivationParameters)
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private NonBoundTypeItem(final com.exedio.cope.ActivationParameters ap){super(ap);}
 }

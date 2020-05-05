@@ -40,7 +40,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns a URL the content of {@link #media} is available under.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getURL")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getURL")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.lang.String getMediaURL()
 	{
 		return FieldsItem.media.getURL(this);
@@ -49,7 +50,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns a Locator the content of {@link #media} is available under.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getLocator")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getLocator")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.MediaPath.Locator getMediaLocator()
 	{
 		return FieldsItem.media.getLocator(this);
@@ -58,7 +60,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the content type of the media {@link #media}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getContentType")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getContentType")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.lang.String getMediaContentType()
 	{
 		return FieldsItem.media.getContentType(this);
@@ -67,7 +70,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the last modification date of media {@link #media}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getLastModified")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getLastModified")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.Date getMediaLastModified()
 	{
 		return FieldsItem.media.getLastModified(this);
@@ -76,7 +80,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the body length of the media {@link #media}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getLength")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getLength")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final long getMediaLength()
 	{
 		return FieldsItem.media.getLength(this);
@@ -85,7 +90,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the body of the media {@link #media}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getBody")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getBody")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final byte[] getMediaBody()
 	{
 		return FieldsItem.media.getBody(this);
@@ -94,9 +100,10 @@ final class FieldsItem extends Item
 	/**
 	 * Writes the body of media {@link #media} into the given stream.
 	 * Does nothing, if the media is null.
-	 * @throws java.io.IOException if accessing <tt>body</tt> throws an IOException.
+	 * @throws java.io.IOException if accessing {@code body} throws an IOException.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getBody")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getBody")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void getMediaBody(final java.io.OutputStream body)
 			throws
 				java.io.IOException
@@ -107,9 +114,24 @@ final class FieldsItem extends Item
 	/**
 	 * Writes the body of media {@link #media} into the given file.
 	 * Does nothing, if the media is null.
-	 * @throws java.io.IOException if accessing <tt>body</tt> throws an IOException.
+	 * @throws java.io.IOException if accessing {@code body} throws an IOException.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getBody")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getBody")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
+	final void getMediaBody(final java.nio.file.Path body)
+			throws
+				java.io.IOException
+	{
+		FieldsItem.media.getBody(this,body);
+	}
+
+	/**
+	 * Writes the body of media {@link #media} into the given file.
+	 * Does nothing, if the media is null.
+	 * @throws java.io.IOException if accessing {@code body} throws an IOException.
+	 */
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getBody")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void getMediaBody(final java.io.File body)
 			throws
 				java.io.IOException
@@ -120,17 +142,19 @@ final class FieldsItem extends Item
 	/**
 	 * Returns whether the given value corresponds to the hash in {@link #hash}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="check")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="check")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean checkHash(final java.lang.String hash)
 	{
 		return FieldsItem.hash.check(this,hash);
 	}
 
 	/**
-	 * Wastes (almost) as much cpu cycles, as a call to <tt>checkHash</tt> would have needed.
+	 * Wastes (almost) as much cpu cycles, as a call to {@code checkHash} would have needed.
 	 * Needed to prevent Timing Attacks.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="blind")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="blind")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final void blindHash(final java.lang.String hash)
 	{
 		FieldsItem.hash.blind(hash);
@@ -139,7 +163,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the encoded hash value for hash {@link #hash}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getMD5")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getMD5")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.lang.String getHashMD5()
 	{
 		return FieldsItem.hash.getHash(this);
@@ -148,7 +173,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the value of {@link #price}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.Price getPrice()
 	{
 		return FieldsItem.price.get(this);
@@ -157,19 +183,22 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the value of {@link #money}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.Money<Currency> getMoney()
 	{
 		return FieldsItem.money.get(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.Range<Integer> getRange()
 	{
 		return FieldsItem.range.get(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setRange(final com.exedio.cope.pattern.Range<? extends Integer> range)
 			throws
 				com.exedio.cope.MandatoryViolationException
@@ -177,19 +206,22 @@ final class FieldsItem extends Item
 		FieldsItem.range.set(this,range);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final Integer getRangeFrom()
 	{
 		return FieldsItem.range.getFrom(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final Integer getRangeTo()
 	{
 		return FieldsItem.range.getTo(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setRangeFrom(final Integer range)
 			throws
 				com.exedio.cope.MandatoryViolationException
@@ -197,7 +229,8 @@ final class FieldsItem extends Item
 		FieldsItem.range.setFrom(this,range);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setRangeTo(final Integer range)
 			throws
 				com.exedio.cope.MandatoryViolationException
@@ -205,22 +238,25 @@ final class FieldsItem extends Item
 		FieldsItem.range.setTo(this,range);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="doesContain")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="doesContain")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean doesRangeContain(final Integer range)
 	{
 		return FieldsItem.range.doesContain(this,range);
 	}
 
 	/**
-	 * Returns the value mapped to <tt>k</tt> by the field map {@link #enumMap}.
+	 * Returns the value mapped to {@code k} by the field map {@link #enumMap}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final String getEnumMap(final TestEnum k)
 	{
 		return FieldsItem.enumMap.get(this,k);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getMap")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getMap")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.Map<TestEnum,String> getEnumMapMap()
 	{
 		return FieldsItem.enumMap.getMap(this);
@@ -229,7 +265,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the value of {@link #set}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.Set<String> getSet()
 	{
 		return FieldsItem.set.get(this);
@@ -238,7 +275,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns a query for the value of {@link #set}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getQuery")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getQuery")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.Query<String> getSetQuery()
 	{
 		return FieldsItem.set.getQuery(this);
@@ -247,7 +285,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the items, for which field set {@link #set} contains the given element.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getParentsOf")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getParentsOf")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final java.util.List<FieldsItem> getParentsOfSet(final String element)
 	{
 		return FieldsItem.set.getParents(FieldsItem.class,element);
@@ -256,7 +295,8 @@ final class FieldsItem extends Item
 	/**
 	 * Sets a new value for {@link #set}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setSet(final java.util.Collection<? extends String> set)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -268,9 +308,10 @@ final class FieldsItem extends Item
 
 	/**
 	 * Adds a new element to {@link #set}.
-	 * @return <tt>true</tt> if the field set changed as a result of the call.
+	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="addTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="addTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean addToSet(final String element)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -282,9 +323,10 @@ final class FieldsItem extends Item
 
 	/**
 	 * Removes an element from {@link #set}.
-	 * @return <tt>true</tt> if the field set changed as a result of the call.
+	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="removeFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="removeFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean removeFromSet(final String element)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -297,7 +339,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the parent field of the type of {@link #set}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<FieldsItem> setParent()
 	{
 		return FieldsItem.set.getParent(FieldsItem.class);
@@ -306,7 +349,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the value of {@link #list}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.List<String> getList()
 	{
 		return FieldsItem.list.get(this);
@@ -315,7 +359,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns a query for the value of {@link #list}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getQuery")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getQuery")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.Query<String> getListQuery()
 	{
 		return FieldsItem.list.getQuery(this);
@@ -324,7 +369,8 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the items, for which field list {@link #list} contains the given element.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getDistinctParentsOf")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getDistinctParentsOf")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final java.util.List<FieldsItem> getDistinctParentsOfList(final String element)
 	{
 		return FieldsItem.list.getDistinctParents(FieldsItem.class,element);
@@ -333,7 +379,8 @@ final class FieldsItem extends Item
 	/**
 	 * Adds a new value for {@link #list}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="addTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="addTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void addToList(final String list)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -347,7 +394,8 @@ final class FieldsItem extends Item
 	 * Removes all occurrences of {@code element} from {@link #list}.
 	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="removeAllFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="removeAllFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean removeAllFromList(final String list)
 	{
 		return FieldsItem.list.removeAll(this,list);
@@ -356,7 +404,8 @@ final class FieldsItem extends Item
 	/**
 	 * Sets a new value for {@link #list}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setList(final java.util.Collection<? extends String> list)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -369,37 +418,42 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the parent field of the type of {@link #list}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<FieldsItem> listParent()
 	{
 		return FieldsItem.list.getParent(FieldsItem.class);
 	}
 
 	/**
-	 * Returns the value mapped to <tt>k</tt> by the field map {@link #map}.
+	 * Returns the value mapped to {@code k} by the field map {@link #map}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final String getMap(final String k)
 	{
 		return FieldsItem.map.get(this,k);
 	}
 
 	/**
-	 * Associates <tt>k</tt> to a new value in the field map {@link #map}.
+	 * Associates {@code k} to a new value in the field map {@link #map}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMap(final String k,final String map)
 	{
 		FieldsItem.map.set(this,k,map);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getMap")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getMap")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.Map<String,String> getMapMap()
 	{
 		return FieldsItem.map.getMap(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setMap")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setMap")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMapMap(final java.util.Map<? extends String,? extends String> map)
 	{
 		FieldsItem.map.setMap(this,map);
@@ -408,25 +462,26 @@ final class FieldsItem extends Item
 	/**
 	 * Returns the parent field of the type of {@link #map}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<FieldsItem> mapParent()
 	{
 		return FieldsItem.map.getParent(FieldsItem.class);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private static final long serialVersionUID = 1l;
 
 	/**
 	 * The persistent type information for fieldsItem.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(type=...)
+	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
 	static final com.exedio.cope.Type<FieldsItem> TYPE = com.exedio.cope.TypesBound.newType(FieldsItem.class);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.
 	 * @see com.exedio.cope.Item#Item(com.exedio.cope.ActivationParameters)
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private FieldsItem(final com.exedio.cope.ActivationParameters ap){super(ap);}
 }

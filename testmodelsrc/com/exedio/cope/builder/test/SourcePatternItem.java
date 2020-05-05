@@ -22,31 +22,36 @@ final class SourcePatternItem extends Item
 		throw new RuntimeException();
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="isEnabled")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="isEnabled")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean isScheduleEnabled()
 	{
 		return SourcePatternItem.schedule.isEnabled(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setEnabled")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setEnabled")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setScheduleEnabled(final boolean enabled)
 	{
 		SourcePatternItem.schedule.setEnabled(this,enabled);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getInterval")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getInterval")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.Schedule.Interval getScheduleInterval()
 	{
 		return SourcePatternItem.schedule.getInterval(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setInterval")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setInterval")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setScheduleInterval(final com.exedio.cope.pattern.Schedule.Interval interval)
 	{
 		SourcePatternItem.schedule.setInterval(this,interval);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="run")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="run")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final void runSchedule(final com.exedio.cope.util.JobContext ctx)
 	{
 		SourcePatternItem.schedule.run(SourcePatternItem.class,ctx);
@@ -55,25 +60,26 @@ final class SourcePatternItem extends Item
 	/**
 	 * Returns the parent field of the run type of {@link #schedule}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="RunParent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="RunParent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<SourcePatternItem> scheduleRunParent()
 	{
 		return SourcePatternItem.schedule.getRunParent(SourcePatternItem.class);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private static final long serialVersionUID = 1l;
 
 	/**
 	 * The persistent type information for sourcePatternItem.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(type=...)
+	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
 	static final com.exedio.cope.Type<SourcePatternItem> TYPE = com.exedio.cope.TypesBound.newType(SourcePatternItem.class);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.
 	 * @see com.exedio.cope.Item#Item(com.exedio.cope.ActivationParameters)
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private SourcePatternItem(final com.exedio.cope.ActivationParameters ap){super(ap);}
 }

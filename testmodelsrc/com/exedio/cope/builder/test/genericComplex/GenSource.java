@@ -38,7 +38,7 @@ final class GenSource extends Item
 	 * @param subMandatory the initial value for field {@link #subMandatory}.
 	 * @throws com.exedio.cope.MandatoryViolationException if subMandatory is null.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(constructor=...) and @WrapperInitial
+	@com.exedio.cope.instrument.Generated // customize with @WrapperType(constructor=...) and @WrapperInitial
 	GenSource(
 				final GenSub subMandatory)
 			throws
@@ -52,16 +52,14 @@ final class GenSource extends Item
 	/**
 	 * Creates a new GenSource and sets the given fields initially.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(genericConstructor=...)
-	private GenSource(final com.exedio.cope.SetValue<?>... setValues)
-	{
-		super(setValues);
-	}
+	@com.exedio.cope.instrument.Generated // customize with @WrapperType(genericConstructor=...)
+	private GenSource(final com.exedio.cope.SetValue<?>... setValues){super(setValues);}
 
 	/**
 	 * Returns the value of {@link #sup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final GenSup<?,?> getSup()
 	{
 		return GenSource.sup.get(this);
@@ -70,7 +68,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #sup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setSup(final GenSup<?,?> sup)
 	{
 		GenSource.sup.set(this,sup);
@@ -79,7 +78,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #mid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final GenMid<?> getMid()
 	{
 		return GenSource.mid.get(this);
@@ -88,7 +88,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #mid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMid(final GenMid<?> mid)
 	{
 		GenSource.mid.set(this,mid);
@@ -97,7 +98,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #sub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final GenSub getSub()
 	{
 		return GenSource.sub.get(this);
@@ -106,7 +108,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #sub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setSub(final GenSub sub)
 	{
 		GenSource.sub.set(this,sub);
@@ -115,7 +118,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #moneySup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.Money<GenSup<?,?>> getMoneySup()
 	{
 		return GenSource.moneySup.get(this);
@@ -124,7 +128,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #moneySup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMoneySup(final com.exedio.cope.pattern.Money<GenSup<?,?>> moneySup)
 	{
 		GenSource.moneySup.set(this,moneySup);
@@ -133,7 +138,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #moneyMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.Money<GenMid<?>> getMoneyMid()
 	{
 		return GenSource.moneyMid.get(this);
@@ -142,7 +148,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #moneyMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMoneyMid(final com.exedio.cope.pattern.Money<GenMid<?>> moneyMid)
 	{
 		GenSource.moneyMid.set(this,moneyMid);
@@ -151,7 +158,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #moneySub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.pattern.Money<GenSub> getMoneySub()
 	{
 		return GenSource.moneySub.get(this);
@@ -160,7 +168,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #moneySub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMoneySub(final com.exedio.cope.pattern.Money<GenSub> moneySub)
 	{
 		GenSource.moneySub.set(this,moneySub);
@@ -169,7 +178,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #setSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.Set<GenSup<?,?>> getSetSup()
 	{
 		return GenSource.setSup.get(this);
@@ -178,7 +188,8 @@ final class GenSource extends Item
 	/**
 	 * Returns a query for the value of {@link #setSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getQuery")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getQuery")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.Query<GenSup<?,?>> getSetSupQuery()
 	{
 		return GenSource.setSup.getQuery(this);
@@ -187,7 +198,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the items, for which field set {@link #setSup} contains the given element.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getParentsOf")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getParentsOf")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final java.util.List<GenSource> getParentsOfSetSup(final GenSup<?,?> element)
 	{
 		return GenSource.setSup.getParents(GenSource.class,element);
@@ -196,7 +208,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #setSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setSetSup(final java.util.Collection<? extends GenSup<?,?>> setSup)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -207,9 +220,10 @@ final class GenSource extends Item
 
 	/**
 	 * Adds a new element to {@link #setSup}.
-	 * @return <tt>true</tt> if the field set changed as a result of the call.
+	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="addTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="addTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean addToSetSup(final GenSup<?,?> element)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -220,9 +234,10 @@ final class GenSource extends Item
 
 	/**
 	 * Removes an element from {@link #setSup}.
-	 * @return <tt>true</tt> if the field set changed as a result of the call.
+	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="removeFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="removeFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean removeFromSetSup(final GenSup<?,?> element)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -234,7 +249,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the parent field of the type of {@link #setSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<GenSource> setSupParent()
 	{
 		return GenSource.setSup.getParent(GenSource.class);
@@ -243,7 +259,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #setMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.Set<GenMid<?>> getSetMid()
 	{
 		return GenSource.setMid.get(this);
@@ -252,7 +269,8 @@ final class GenSource extends Item
 	/**
 	 * Returns a query for the value of {@link #setMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getQuery")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getQuery")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.Query<GenMid<?>> getSetMidQuery()
 	{
 		return GenSource.setMid.getQuery(this);
@@ -261,7 +279,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the items, for which field set {@link #setMid} contains the given element.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getParentsOf")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getParentsOf")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final java.util.List<GenSource> getParentsOfSetMid(final GenMid<?> element)
 	{
 		return GenSource.setMid.getParents(GenSource.class,element);
@@ -270,7 +289,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #setMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setSetMid(final java.util.Collection<? extends GenMid<?>> setMid)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -281,9 +301,10 @@ final class GenSource extends Item
 
 	/**
 	 * Adds a new element to {@link #setMid}.
-	 * @return <tt>true</tt> if the field set changed as a result of the call.
+	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="addTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="addTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean addToSetMid(final GenMid<?> element)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -294,9 +315,10 @@ final class GenSource extends Item
 
 	/**
 	 * Removes an element from {@link #setMid}.
-	 * @return <tt>true</tt> if the field set changed as a result of the call.
+	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="removeFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="removeFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean removeFromSetMid(final GenMid<?> element)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -308,7 +330,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the parent field of the type of {@link #setMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<GenSource> setMidParent()
 	{
 		return GenSource.setMid.getParent(GenSource.class);
@@ -317,7 +340,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #setSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.Set<GenSub> getSetSub()
 	{
 		return GenSource.setSub.get(this);
@@ -326,7 +350,8 @@ final class GenSource extends Item
 	/**
 	 * Returns a query for the value of {@link #setSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getQuery")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getQuery")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.Query<GenSub> getSetSubQuery()
 	{
 		return GenSource.setSub.getQuery(this);
@@ -335,7 +360,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the items, for which field set {@link #setSub} contains the given element.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getParentsOf")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getParentsOf")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final java.util.List<GenSource> getParentsOfSetSub(final GenSub element)
 	{
 		return GenSource.setSub.getParents(GenSource.class,element);
@@ -344,7 +370,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #setSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setSetSub(final java.util.Collection<? extends GenSub> setSub)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -355,9 +382,10 @@ final class GenSource extends Item
 
 	/**
 	 * Adds a new element to {@link #setSub}.
-	 * @return <tt>true</tt> if the field set changed as a result of the call.
+	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="addTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="addTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean addToSetSub(final GenSub element)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -368,9 +396,10 @@ final class GenSource extends Item
 
 	/**
 	 * Removes an element from {@link #setSub}.
-	 * @return <tt>true</tt> if the field set changed as a result of the call.
+	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="removeFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="removeFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean removeFromSetSub(final GenSub element)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -382,7 +411,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the parent field of the type of {@link #setSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<GenSource> setSubParent()
 	{
 		return GenSource.setSub.getParent(GenSource.class);
@@ -391,7 +421,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #listSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.List<GenSup<?,?>> getListSup()
 	{
 		return GenSource.listSup.get(this);
@@ -400,7 +431,8 @@ final class GenSource extends Item
 	/**
 	 * Returns a query for the value of {@link #listSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getQuery")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getQuery")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.Query<GenSup<?,?>> getListSupQuery()
 	{
 		return GenSource.listSup.getQuery(this);
@@ -409,7 +441,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the items, for which field list {@link #listSup} contains the given element.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getDistinctParentsOf")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getDistinctParentsOf")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final java.util.List<GenSource> getDistinctParentsOfListSup(final GenSup<?,?> element)
 	{
 		return GenSource.listSup.getDistinctParents(GenSource.class,element);
@@ -418,7 +451,8 @@ final class GenSource extends Item
 	/**
 	 * Adds a new value for {@link #listSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="addTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="addTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void addToListSup(final GenSup<?,?> listSup)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -431,7 +465,8 @@ final class GenSource extends Item
 	 * Removes all occurrences of {@code element} from {@link #listSup}.
 	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="removeAllFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="removeAllFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean removeAllFromListSup(final GenSup<?,?> listSup)
 	{
 		return GenSource.listSup.removeAll(this,listSup);
@@ -440,7 +475,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #listSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setListSup(final java.util.Collection<? extends GenSup<?,?>> listSup)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -452,7 +488,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the parent field of the type of {@link #listSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<GenSource> listSupParent()
 	{
 		return GenSource.listSup.getParent(GenSource.class);
@@ -461,7 +498,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #listMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.List<GenMid<?>> getListMid()
 	{
 		return GenSource.listMid.get(this);
@@ -470,7 +508,8 @@ final class GenSource extends Item
 	/**
 	 * Returns a query for the value of {@link #listMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getQuery")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getQuery")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.Query<GenMid<?>> getListMidQuery()
 	{
 		return GenSource.listMid.getQuery(this);
@@ -479,7 +518,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the items, for which field list {@link #listMid} contains the given element.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getDistinctParentsOf")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getDistinctParentsOf")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final java.util.List<GenSource> getDistinctParentsOfListMid(final GenMid<?> element)
 	{
 		return GenSource.listMid.getDistinctParents(GenSource.class,element);
@@ -488,7 +528,8 @@ final class GenSource extends Item
 	/**
 	 * Adds a new value for {@link #listMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="addTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="addTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void addToListMid(final GenMid<?> listMid)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -501,7 +542,8 @@ final class GenSource extends Item
 	 * Removes all occurrences of {@code element} from {@link #listMid}.
 	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="removeAllFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="removeAllFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean removeAllFromListMid(final GenMid<?> listMid)
 	{
 		return GenSource.listMid.removeAll(this,listMid);
@@ -510,7 +552,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #listMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setListMid(final java.util.Collection<? extends GenMid<?>> listMid)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -522,7 +565,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the parent field of the type of {@link #listMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<GenSource> listMidParent()
 	{
 		return GenSource.listMid.getParent(GenSource.class);
@@ -531,7 +575,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #listSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.List<GenSub> getListSub()
 	{
 		return GenSource.listSub.get(this);
@@ -540,7 +585,8 @@ final class GenSource extends Item
 	/**
 	 * Returns a query for the value of {@link #listSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getQuery")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getQuery")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final com.exedio.cope.Query<GenSub> getListSubQuery()
 	{
 		return GenSource.listSub.getQuery(this);
@@ -549,7 +595,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the items, for which field list {@link #listSub} contains the given element.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getDistinctParentsOf")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getDistinctParentsOf")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final java.util.List<GenSource> getDistinctParentsOfListSub(final GenSub element)
 	{
 		return GenSource.listSub.getDistinctParents(GenSource.class,element);
@@ -558,7 +605,8 @@ final class GenSource extends Item
 	/**
 	 * Adds a new value for {@link #listSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="addTo")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="addTo")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void addToListSub(final GenSub listSub)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -571,7 +619,8 @@ final class GenSource extends Item
 	 * Removes all occurrences of {@code element} from {@link #listSub}.
 	 * @return {@code true} if the field set changed as a result of the call.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="removeAllFrom")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="removeAllFrom")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final boolean removeAllFromListSub(final GenSub listSub)
 	{
 		return GenSource.listSub.removeAll(this,listSub);
@@ -580,7 +629,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #listSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setListSub(final java.util.Collection<? extends GenSub> listSub)
 			throws
 				com.exedio.cope.MandatoryViolationException,
@@ -592,7 +642,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the parent field of the type of {@link #listSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<GenSource> listSubParent()
 	{
 		return GenSource.listSub.getParent(GenSource.class);
@@ -601,7 +652,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #subFallback}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final GenSub getSubFallback()
 	{
 		return GenSource.subFallback.get(this);
@@ -610,7 +662,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #subFallback}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setSubFallback(final GenSub subFallback)
 	{
 		GenSource.subFallback.set(this,subFallback);
@@ -619,7 +672,8 @@ final class GenSource extends Item
 	/**
 	 * Returns the value of {@link #subMandatory}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final GenSub getSubMandatory()
 	{
 		return GenSource.subMandatory.get(this);
@@ -628,7 +682,8 @@ final class GenSource extends Item
 	/**
 	 * Sets a new value for {@link #subMandatory}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setSubMandatory(final GenSub subMandatory)
 			throws
 				com.exedio.cope.MandatoryViolationException
@@ -637,30 +692,34 @@ final class GenSource extends Item
 	}
 
 	/**
-	 * Returns the value mapped to <tt>k</tt> by the field map {@link #mapSup}.
+	 * Returns the value mapped to {@code k} by the field map {@link #mapSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final GenSup<?,?> getMapSup(final GenSup<?,?> k)
 	{
 		return GenSource.mapSup.get(this,k);
 	}
 
 	/**
-	 * Associates <tt>k</tt> to a new value in the field map {@link #mapSup}.
+	 * Associates {@code k} to a new value in the field map {@link #mapSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMapSup(final GenSup<?,?> k,final GenSup<?,?> mapSup)
 	{
 		GenSource.mapSup.set(this,k,mapSup);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getMap")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getMap")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.Map<GenSup<?,?>,GenSup<?,?>> getMapSupMap()
 	{
 		return GenSource.mapSup.getMap(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setMap")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setMap")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMapSupMap(final java.util.Map<? extends GenSup<?,?>,? extends GenSup<?,?>> mapSup)
 	{
 		GenSource.mapSup.setMap(this,mapSup);
@@ -669,37 +728,42 @@ final class GenSource extends Item
 	/**
 	 * Returns the parent field of the type of {@link #mapSup}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<GenSource> mapSupParent()
 	{
 		return GenSource.mapSup.getParent(GenSource.class);
 	}
 
 	/**
-	 * Returns the value mapped to <tt>k</tt> by the field map {@link #mapMid}.
+	 * Returns the value mapped to {@code k} by the field map {@link #mapMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final GenMid<?> getMapMid(final GenMid<?> k)
 	{
 		return GenSource.mapMid.get(this,k);
 	}
 
 	/**
-	 * Associates <tt>k</tt> to a new value in the field map {@link #mapMid}.
+	 * Associates {@code k} to a new value in the field map {@link #mapMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMapMid(final GenMid<?> k,final GenMid<?> mapMid)
 	{
 		GenSource.mapMid.set(this,k,mapMid);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getMap")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getMap")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.Map<GenMid<?>,GenMid<?>> getMapMidMap()
 	{
 		return GenSource.mapMid.getMap(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setMap")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setMap")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMapMidMap(final java.util.Map<? extends GenMid<?>,? extends GenMid<?>> mapMid)
 	{
 		GenSource.mapMid.setMap(this,mapMid);
@@ -708,37 +772,42 @@ final class GenSource extends Item
 	/**
 	 * Returns the parent field of the type of {@link #mapMid}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<GenSource> mapMidParent()
 	{
 		return GenSource.mapMid.getParent(GenSource.class);
 	}
 
 	/**
-	 * Returns the value mapped to <tt>k</tt> by the field map {@link #mapSub}.
+	 * Returns the value mapped to {@code k} by the field map {@link #mapSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="get")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final GenSub getMapSub(final GenSub k)
 	{
 		return GenSource.mapSub.get(this,k);
 	}
 
 	/**
-	 * Associates <tt>k</tt> to a new value in the field map {@link #mapSub}.
+	 * Associates {@code k} to a new value in the field map {@link #mapSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="set")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMapSub(final GenSub k,final GenSub mapSub)
 	{
 		GenSource.mapSub.set(this,k,mapSub);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="getMap")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getMap")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final java.util.Map<GenSub,GenSub> getMapSubMap()
 	{
 		return GenSource.mapSub.getMap(this);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="setMap")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="setMap")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setMapSubMap(final java.util.Map<? extends GenSub,? extends GenSub> mapSub)
 	{
 		GenSource.mapSub.setMap(this,mapSub);
@@ -747,25 +816,26 @@ final class GenSource extends Item
 	/**
 	 * Returns the parent field of the type of {@link #mapSub}.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @Wrapper(wrap="Parent")
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="Parent")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	static final com.exedio.cope.ItemField<GenSource> mapSubParent()
 	{
 		return GenSource.mapSub.getParent(GenSource.class);
 	}
 
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private static final long serialVersionUID = 1l;
 
 	/**
 	 * The persistent type information for genSource.
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument") // customize with @WrapperType(type=...)
+	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
 	static final com.exedio.cope.Type<GenSource> TYPE = com.exedio.cope.TypesBound.newType(GenSource.class);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.
 	 * @see com.exedio.cope.Item#Item(com.exedio.cope.ActivationParameters)
 	 */
-	@javax.annotation.Generated("com.exedio.cope.instrument")
+	@com.exedio.cope.instrument.Generated
 	private GenSource(final com.exedio.cope.ActivationParameters ap){super(ap);}
 }
