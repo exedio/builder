@@ -34,6 +34,7 @@ timestamps
 						' -Dskip.instrument=true'
 
 				sh "rm -rf " + env.HOME  + "/.Idea*"
+				sh "rm -rf " + env.HOME  + "/.cache/JetBrains"
 				sh "rm -rf " + env.HOME  + "/.config/JetBrains"
 				sh "${antHome}/bin/ant -noinput -f conf/idea" +
 						' -Dconfig.home=' + env.HOME + '/' + confighome +
