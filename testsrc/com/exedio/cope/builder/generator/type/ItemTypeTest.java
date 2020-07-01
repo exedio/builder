@@ -15,7 +15,7 @@ public class ItemTypeTest extends MainTest
 	{
 		final ItemType type = new ItemType(ConcreteItem.TYPE);
 		assertEquals(ConcreteItem.class, type.getJavaClass());
-		assertEquals(type.getDeclaredFeatures().toString(), 2, type.getDeclaredFeatures().size());
+		assertEquals(type.getDeclaredFeatures().toString(), 4, type.getDeclaredFeatures().size());
 		assertEquals("TYPE", type.getTypeName());
 		assertEquals("", type.getWildCards());
 		assertEquals(false, type.enableTypePropagationConstructor());

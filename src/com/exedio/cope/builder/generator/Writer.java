@@ -20,6 +20,7 @@ import com.exedio.cope.pattern.MoneyField;
 import com.exedio.cope.pattern.PriceField;
 import com.exedio.cope.pattern.RangeField;
 import com.exedio.cope.pattern.SetField;
+import com.exedio.cope.reflect.TypeField;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.util.Locale;
@@ -78,6 +79,10 @@ public final class Writer
 					feature instanceof SetField<?> ||
 					feature instanceof ListField<?> ||
 					feature instanceof MapField<?, ?>))
+				continue;
+
+			//TODO should be handled later, will need changes in isVisible and getCanonicalName for WildcardType
+			if (feature instanceof TypeField<?>)
 				continue;
 
 			if(feature instanceof Settable &&
