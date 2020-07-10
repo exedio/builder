@@ -20,9 +20,9 @@ timestamps
 				env.GIT_TREE = readFile('GIT_TREE').trim()
 
 				env.BUILD_TIMESTAMP = new Date().format("yyyy-MM-dd_HH-mm-ss");
-				env.JAVA_HOME = tool jdk
+				env.JAVA_HOME = tool type: 'jdk', name: jdk
 				env.PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
-				def antHome = tool 'Ant version 1.9.3'
+				def antHome = tool type: 'ant', name: 'Ant version 1.9.3'
 
 				sh "java -version"
 				sh "${antHome}/bin/ant -version"

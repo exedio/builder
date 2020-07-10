@@ -26,9 +26,9 @@ timestamps
 
 				checkout scm
 
-				env.JAVA_HOME = tool jdk
+				env.JAVA_HOME = tool type: 'jdk', name: jdk
 				env.PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
-				def antHome = tool 'Ant version 1.9.3'
+				def antHome = tool type: 'ant', name: 'Ant version 1.9.3'
 
 				sh "${antHome}/bin/ant -noinput src" +
 						' -Dskip.instrument=true'
