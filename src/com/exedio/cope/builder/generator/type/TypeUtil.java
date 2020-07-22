@@ -76,6 +76,7 @@ public final class TypeUtil
 			final Type primitiveClass = (valueClass instanceof Class && field.isMandatory())
 				? PrimitiveUtil.toPrimitive((Class<?>) valueClass)
 				: valueClass;
+			//noinspection ConstantConditions
 			return getCanonicalName((primitiveClass != null) ? primitiveClass : valueClass);
 		}
 		else if(feature instanceof SetField<?>)
