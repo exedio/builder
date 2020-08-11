@@ -5,8 +5,11 @@ import static com.exedio.cope.instrument.Visibility.NONE;
 import com.exedio.cope.EnumField;
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.Item;
+import com.exedio.cope.ItemField;
 import com.exedio.cope.StringField;
 import com.exedio.cope.builder.other.OuterClass.TestEnum;
+import com.exedio.cope.builder.skipped.SkippedBecauseTargetDirectoryDoesNotExistsItem;
+import com.exedio.cope.builderSkipped.SkippedBecauseNotInPackagePrefixItem;
 import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.Hash;
@@ -33,6 +36,10 @@ final class FieldsItem extends Item
 	static final SetField<String> set = SetField.create(new StringField());
 	static final ListField<String> list = ListField.create(new StringField());
 	static final MapField<String,String> map = MapField.create(new StringField().toFinal(), new StringField().toFinal());
+	static final ItemField<SkippedBecauseTargetDirectoryDoesNotExistsItem> skippedMissing=
+		ItemField.create(SkippedBecauseTargetDirectoryDoesNotExistsItem.class).optional();
+	static final ItemField<SkippedBecauseNotInPackagePrefixItem> skippedExcluded=
+		ItemField.create(SkippedBecauseNotInPackagePrefixItem.class).optional();
 
 	enum Currency implements Money.Currency { EUR, GBP }
 
@@ -467,6 +474,46 @@ final class FieldsItem extends Item
 	static final com.exedio.cope.ItemField<FieldsItem> mapParent()
 	{
 		return FieldsItem.map.getParent(FieldsItem.class);
+	}
+
+	/**
+	 * Returns the value of {@link #skippedMissing}.
+	 */
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
+	final SkippedBecauseTargetDirectoryDoesNotExistsItem getSkippedMissing()
+	{
+		return FieldsItem.skippedMissing.get(this);
+	}
+
+	/**
+	 * Sets a new value for {@link #skippedMissing}.
+	 */
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
+	final void setSkippedMissing(final SkippedBecauseTargetDirectoryDoesNotExistsItem skippedMissing)
+	{
+		FieldsItem.skippedMissing.set(this,skippedMissing);
+	}
+
+	/**
+	 * Returns the value of {@link #skippedExcluded}.
+	 */
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
+	final SkippedBecauseNotInPackagePrefixItem getSkippedExcluded()
+	{
+		return FieldsItem.skippedExcluded.get(this);
+	}
+
+	/**
+	 * Sets a new value for {@link #skippedExcluded}.
+	 */
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
+	final void setSkippedExcluded(final SkippedBecauseNotInPackagePrefixItem skippedExcluded)
+	{
+		FieldsItem.skippedExcluded.set(this,skippedExcluded);
 	}
 
 	@com.exedio.cope.instrument.Generated

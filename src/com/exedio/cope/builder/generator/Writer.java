@@ -178,17 +178,24 @@ public final class Writer
 				{
 					final ItemType myType = new ItemType(elementType);
 
-					if(!myType.enableCommonBuilder()) //TODO generate in all children if a common builder exists
+					if(generated.contains(myType))
 					{
-						final String itemClass = myType.getJavaClass().getCanonicalName();
-						final String itemClassBuilder = itemClass + "Builder";
-						writeRedirectSetter(writer, featureIdentifier,
-							"final java.util.function.Function<" + itemClassBuilder + ", " + itemClassBuilder + "> " + featureIdentifier + "BuilderConsumer",
-							featureIdentifier + "BuilderConsumer.apply( new " + itemClassBuilder + "() ).build()");
-						if(!field.isMandatory())
+						if(!myType.enableCommonBuilder()) //TODO generate in all children if a common builder exists
 						{
-							writeRedirectSetter(writer, featureIdentifier + "Null", featureIdentifier, "", "(" + itemClass + ") null", false);
+							final String itemClass = myType.getJavaClass().getCanonicalName();
+							final String itemClassBuilder = itemClass + "Builder";
+							writeRedirectSetter(writer, featureIdentifier,
+								"final java.util.function.Function<" + itemClassBuilder + ", " + itemClassBuilder + "> " + featureIdentifier
+									+ "BuilderConsumer",
+								featureIdentifier + "BuilderConsumer.apply( new " + itemClassBuilder + "() ).build()");
+							if(!field.isMandatory())
+							{
+								writeRedirectSetter(writer, featureIdentifier + "Null", featureIdentifier, "", "(" + itemClass + ") null", false);
+							}
 						}
+					}
+					else{
+						System.out.println("Skipping builder wrapper for " + feature + " of non-generated type " + myType.getTypeName());
 					}
 				}
 			}
