@@ -7,6 +7,9 @@ omit bug fixes.
 The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
+* add specific generics to builder inheritence and self() in builders to remove some SuppressWarnings
+    MIGRATION fix compiler errors in common builder by replacing *Builder<?, ?> by *Builder<I, B> (there might be some useless @SuppressWarnings("unchecked") now)
+	OPTIONAL MIGRATION replace return (B)this; by return self(); and remove @SuppressWarnings("unchecked")
 * @com.exedio.cope.builder.Generated added and used instead of @javax.annotation.Generated
 	Prepares jdk 11 where the latter has been removed.
 * generate key-value setter/fallback for EnumMapField

@@ -25,7 +25,7 @@ import java.util.Set;
  * @param <B> the actual sub-class of this base class
  */
 @SuppressWarnings("AbstractClassWithoutAbstractMethods")
-public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> extends CopeBuilder<I, B>
+public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<I, B>> extends CopeBuilder<I, B>
 {
 
 	private final Type<I> type;
@@ -56,19 +56,17 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		return setValues.containsKey(field);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected final <V> B fallback(final SetField<V> field, final Set<V> value)
 	{
 		if(!isSet(field))
 			set(field, value);
-		return (B) this;
+		return self();
 	}
 
-	@SuppressWarnings("unchecked")
 	protected final <V> B set(final SetField<V> field, final Set<V> value)
 	{
 		setValues.put(field, value);
-		return (B) this;
+		return self();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -79,19 +77,17 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		return (Set<V>) setValues.get(field);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected final <V> B fallback(final ListField<V> field, final List<V> value)
 	{
 		if(!isSet(field))
 			set(field, value);
-		return (B) this;
+		return self();
 	}
 
-	@SuppressWarnings("unchecked")
 	protected final <V> B set(final ListField<V> field, final List<V> value)
 	{
 		listValues.put(field, value);
-		return (B) this;
+		return self();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -102,19 +98,17 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 		return (List<V>) listValues.get(field);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected final <K, V> B fallback(final MapField<K, V> field, final Map<K, V> value)
 	{
 		if(!isSet(field))
 			set(field, value);
-		return (B) this;
+		return self();
 	}
 
-	@SuppressWarnings("unchecked")
 	protected final <K, V> B set(final MapField<K, V> field, final Map<K, V> value)
 	{
 		mapValues.put(field, value);
-		return (B) this;
+		return self();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -202,7 +196,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<?, ?>> e
 			I value = query.searchSingleton();
 			if(value == null || !value.existsCopeItem())
 			{
-				value = (I) builder.copy().build();
+				value = builder.copy().build();
 			}
 			return value;
 		}

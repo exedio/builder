@@ -6,7 +6,7 @@ import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeType;
 
 @SuppressWarnings("AbstractClassWithoutAbstractMethods")
-public abstract class CompositeBuilder<C extends Composite, B extends CompositeBuilder<?, ?>> extends CopeBuilder<C, B>
+public abstract class CompositeBuilder<C extends Composite, B extends CompositeBuilder<C, B>> extends CopeBuilder<C, B>
 {
 	private final CompositeType<C> type;
 

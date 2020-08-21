@@ -21,7 +21,7 @@ public class ItemTypeTest extends MainTest
 		assertEquals(false, type.enableTypePropagationConstructor());
 		assertEquals(false, type.enableCommonBuilder());
 		assertEquals("", type.getTypeCast());
-		assertEquals("<B extends GeneratedConcreteItemBuilder<?>>", type.getGenericParams());
+		assertEquals("<B extends GeneratedConcreteItemBuilder<B>>", type.getGenericParams());
 		assertEquals("com.exedio.cope.builder.test.CommonAbstractItemBuilder<com.exedio.cope.builder.other.ConcreteItem, B>", type.getExtends());
 	}
 
@@ -36,7 +36,7 @@ public class ItemTypeTest extends MainTest
 		assertEquals(true, type.enableTypePropagationConstructor());
 		assertEquals(true, type.enableCommonBuilder());
 		assertEquals("(com.exedio.cope.Type<I>)", type.getTypeCast());
-		assertEquals("<I extends AbstractItem, B extends GeneratedAbstractItemBuilder <?,?>>", type.getGenericParams());
+		assertEquals("<I extends AbstractItem, B extends GeneratedAbstractItemBuilder <I,B>>", type.getGenericParams());
 		assertEquals("com.exedio.cope.builder.ItemBuilder<I, B>", type.getExtends());
 	}
 
@@ -51,7 +51,7 @@ public class ItemTypeTest extends MainTest
 		assertEquals(true, type.enableTypePropagationConstructor());
 		assertEquals(true, type.enableCommonBuilder());
 		assertEquals("(com.exedio.cope.Type<I>)", type.getTypeCast());
-		assertEquals("<I extends GenMid<?>, B extends GeneratedGenMidBuilder <?,?>>", type.getGenericParams());
+		assertEquals("<I extends GenMid<?>, B extends GeneratedGenMidBuilder <I,B>>", type.getGenericParams());
 		assertEquals("com.exedio.cope.builder.test.genericComplex.CommonGenSupBuilder<I, B>", type.getExtends());
 	}
 }

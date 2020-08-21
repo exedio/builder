@@ -20,7 +20,7 @@ public class CompositeTypeTest extends MainTest
 		assertEquals(false, type.enableTypePropagationConstructor());
 		assertEquals(false, type.enableCommonBuilder());
 		assertEquals("", type.getTypeCast());
-		assertEquals("<B extends GeneratedTestCompositeBuilder<?>>", type.getGenericParams());
+		assertEquals("<B extends GeneratedTestCompositeBuilder<B>>", type.getGenericParams());
 		assertEquals("com.exedio.cope.builder.CompositeBuilder<com.exedio.cope.builder.other.TestComposite, B>", type.getExtends());
 	}
 }

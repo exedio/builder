@@ -52,7 +52,7 @@ public abstract class MyType<T>
 	@Nonnull
 	public String getGenericParams()
 	{
-		return "<B extends Generated" + simpleClassName + "Builder<?>>";
+		return "<B extends Generated" + simpleClassName + "Builder<B>>";
 	}
 
 	@Nonnull

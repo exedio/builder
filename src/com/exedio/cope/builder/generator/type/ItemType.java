@@ -35,7 +35,7 @@ public final class ItemType extends MyType<Item>
 	{
 		if(!hasSubTypes())
 			return super.getGenericParams();
-		return "<I extends " + simpleClassName + wildCards + ", " + "B extends Generated" + simpleClassName + "Builder <?,?>>";
+		return "<I extends " + simpleClassName + wildCards + ", " + "B extends Generated" + simpleClassName + "Builder <I,B>>";
 	}
 
 	@Nonnull

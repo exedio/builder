@@ -233,11 +233,10 @@ public final class Writer
 				writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
 				writer.writeLine();
 				writer.writeSetterAnnotation();
-				writer.writeLine("\t@SuppressWarnings(\"unchecked\")");
 				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + valueType + " " + featureIdentifier + ")");
 				writer.writeLine("\t{");
 				writer.writeLine("\t\t" + featureIdentifier + ".forEach(this::" + featureIdentifier + ");");
-				writer.writeLine("\t\treturn (B) this;");
+				writer.writeLine("\t\treturn self();");
 				writer.writeLine("\t}");
 
 				writer.writeLine();
@@ -299,7 +298,7 @@ public final class Writer
 		if(common)
 		{
 			writer.writeLine("public abstract class Common" + simpleClassName + "Builder"
-				+ "<I extends " + simpleClassName + type.getWildCards() + ", B extends Common" + simpleClassName + "Builder<?,?>>");
+				+ "<I extends " + simpleClassName + type.getWildCards() + ", B extends Common" + simpleClassName + "Builder<I,B>>");
 			writer.writeLine("\textends Generated" + simpleClassName + "Builder<I,B>");
 		}
 		else

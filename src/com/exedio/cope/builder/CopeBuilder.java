@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class CopeBuilder<O, B extends CopeBuilder<?, ?>> implements Builder<O>
+public abstract class CopeBuilder<O, B extends CopeBuilder<O, B>> implements Builder<O>
 {
 	protected Map<Settable<?>, SetValue<?>> values = new HashMap<>();
 
@@ -34,12 +34,12 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<?, ?>> implements Bui
 		return values.containsKey(enumMapField.getField(key));
 	}
 
-	@SuppressWarnings({"unchecked", "UnusedReturnValue"})
+	@SuppressWarnings("UnusedReturnValue")
 	protected final <V> B fallback(final Settable<V> settable, final V value)
 	{
 		if(!isSet(settable))
 			set(settable, value);
-		return (B) this;
+		return self();
 	}
 
 	//Handle enum map key-vise
@@ -65,12 +65,16 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<?, ?>> implements Bui
 			fallback(enumMapField.getField(key), builder.build());
 	}
 
-
 	@SuppressWarnings("unchecked")
+	protected final B self()
+	{
+		return (B) this;
+	}
+
 	protected final <V> B set(final Settable<V> settable, final V value)
 	{
 		values.put(settable, settable.map(value));
-		return (B) this;
+		return self();
 	}
 
 	@SuppressWarnings("unchecked")

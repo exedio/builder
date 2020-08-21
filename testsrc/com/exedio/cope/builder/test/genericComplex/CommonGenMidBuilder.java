@@ -2,7 +2,7 @@ package com.exedio.cope.builder.test.genericComplex;
 
 import com.exedio.cope.Type;
 
-public abstract class CommonGenMidBuilder<I extends GenMid<?>, B extends CommonGenMidBuilder<?, ?>>
+public abstract class CommonGenMidBuilder<I extends GenMid<?>, B extends CommonGenMidBuilder<I, B>>
 	extends GeneratedGenMidBuilder<I, B>
 {
 	protected CommonGenMidBuilder(final Type<I> type)
