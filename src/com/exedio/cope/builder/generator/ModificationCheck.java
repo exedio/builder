@@ -1,5 +1,7 @@
 package com.exedio.cope.builder.generator;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,7 +15,7 @@ final class ModificationCheck
 		if(targetLastModified == 0)
 			return false;
 
-		final URL url = sourceClass.getResource(sourceClass.getSimpleName() + ".class");
+		final URL url = requireNonNull(sourceClass.getResource(sourceClass.getSimpleName() + ".class"));
 		final URI uri;
 		try
 		{
