@@ -5,7 +5,7 @@
         <general-data xmlns="http://www.netbeans.org/ns/freeform-project/1">
             <name>copebuilder</name>
             <properties>
-					<property name="libraries">lib/ant.jar;lib/exedio-cope.jar;lib/exedio-cope-src.zip;lib/exedio-cope-util.jar;lib/exedio-cope-util-src.zip;lib/findbugs-annotations.jar</property>
+					<property name="libraries">lib/ant.jar;lib/exedio-cope.jar;lib/exedio-cope-src.zip;lib/exedio-cope-util.jar;lib/exedio-cope-util-src.zip</property>
 				</properties>
             <folders>
                 <source-folder>
