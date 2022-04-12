@@ -12,7 +12,7 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 
 	protected CompositeBuilder(final Class<C> targetClazz)
 	{
-		this.type = CompositeType.get(targetClazz);
+		this.type = CompositeType.forClass(targetClazz);
 	}
 
 	@Override

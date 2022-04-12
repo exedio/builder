@@ -42,7 +42,7 @@
 		<dependency org="com.google.code.findbugs" name="jsr305" rev="3.0.2" conf="jsr305->default" />
 
 		<dependency org="com.exedio" name="copeutil" rev="483" conf="runtime->runtime; ide->sources,changelog" />
-		<dependency org="com.exedio" name="cope" rev="10337" conf="runtime->runtime; test->hsqldb; instrument->instrument; ide->sources,changelog" >
+		<dependency org="com.exedio" name="cope" rev="10529" conf="runtime->runtime; test->hsqldb; instrument->instrument; ide->sources,changelog" >
 			<exclude org="com.exedio" module="copeservletutil" />
 		</dependency>
 
