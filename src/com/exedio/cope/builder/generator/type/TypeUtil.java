@@ -7,7 +7,6 @@ import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
 import com.exedio.cope.pattern.SetField;
-import com.exedio.cope.util.Cast;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -60,7 +59,7 @@ public final class TypeUtil
 		if(ownerType != null)
 			throw new IllegalArgumentException("ParameterizedType without owner:" + ownerType);
 
-		final String name = (Cast.verboseCast(Class.class, type.getRawType()).getCanonicalName());
+		final String name = ((Class<?>)type.getRawType()).getCanonicalName();
 		if(type.getActualTypeArguments().length == 0) // TODO possible? add a test case
 			return name;
 		return name + "<" + Arrays.stream(type.getActualTypeArguments()).map(TypeUtil::getCanonicalName).collect(Collectors.joining(",")) + ">";
