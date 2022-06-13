@@ -42,6 +42,15 @@ public final class Builders
 
 	/**
 	 * Generates per-field unique values every time {@link Builder#build()} is called.
+	 * The result value is counting up from the given start value.
+	 */
+	public static Builder<Long> autoIncrement(final Settable<Long> field, final long start)
+	{
+		return new LongAutoIncrementBuilder(field, start);
+	}
+
+	/**
+	 * Generates per-field unique values every time {@link Builder#build()} is called.
 	 * The result value is counting up using the internal ordinal value of the enum constants from the given start value.
 	 * Using rotate = false will throw an IllegalStateException if end of the constants set is reached.
 	 * Using rotate = true will not fail if end of the constants set is reached but will not provide uniqueness in this case.
@@ -97,6 +106,20 @@ public final class Builders
 		public Integer build()
 		{
 			return nextIntValue();
+		}
+	}
+
+	private static class LongAutoIncrementBuilder extends AutoIncrementBuilder<Long>
+	{
+		LongAutoIncrementBuilder(final Settable<Long> field, final long start)
+		{
+			super(field, start);
+		}
+
+		@Override
+		public Long build()
+		{
+			return nextValue();
 		}
 	}
 

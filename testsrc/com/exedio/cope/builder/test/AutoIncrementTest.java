@@ -38,6 +38,16 @@ public class AutoIncrementTest extends MainTest
 	}
 
 	@Test
+	public void long_()
+	{
+		final Builder<Long> b = Builders.autoIncrement(SimpleItem.longOptional, 2147483654L);
+		assertEquals(Long.valueOf(2147483654L), b.build());
+		assertEquals(Long.valueOf(2147483655L), b.build());
+		assertEquals(Long.valueOf(2147483656L), b.build());
+		assertEquals(Long.valueOf(2147483657L), b.build());
+	}
+
+	@Test
 	public void string()
 	{
 		final Builder<String> b = Builders.autoIncrement(SimpleItem.stringOptional, "foo-%d", 29);
