@@ -26,15 +26,15 @@ public class SimpleTest extends MainTest
 	@Test
 	public void optionalExplicit()
 	{
-		final SimpleItem i = new SimpleItemBuilder().integerOptional(88).build();
-		assertEquals(Integer.valueOf(88), i.getIntegerOptional());
+		final SimpleItem i = new SimpleItemBuilder().longOptional(88L).build();
+		assertEquals(Long.valueOf(88), i.getLongOptional());
 	}
 
 	@Test
 	public void optionalFallback()
 	{
 		final SimpleItem i = new SimpleItemBuilder().build();
-		assertEquals(null, i.getIntegerOptional());
+		assertEquals(null, i.getLongOptional());
 	}
 
 	@Test

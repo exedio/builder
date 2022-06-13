@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import com.exedio.cope.builder.Builder;
 import com.exedio.cope.builder.Builders;
 import com.exedio.cope.builder.other.OuterClass.TestEnum;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,6 +26,25 @@ public class AutoIncrementTest extends MainTest
 		assertEquals(Integer.valueOf(8), b.build());
 		assertEquals(Integer.valueOf(9), b.build());
 		assertEquals(Integer.valueOf(10), b.build());
+	}
+
+	@Test
+	public void integer_overflow()
+	{
+		final Builder<Integer> b = Builders.autoIncrement(SimpleItem.integerMandatory, Integer.MAX_VALUE);
+		assertEquals(Integer.valueOf(Integer.MAX_VALUE), b.build());
+		final ArithmeticException e = Assert.assertThrows(ArithmeticException.class, b::build);
+		assertEquals("integer overflow", e.getMessage());
+	}
+
+	@Test
+	public void long_()
+	{
+		final Builder<Long> b = Builders.autoIncrement(SimpleItem.longOptional, 2147483654L);
+		assertEquals(Long.valueOf(2147483654L), b.build());
+		assertEquals(Long.valueOf(2147483655L), b.build());
+		assertEquals(Long.valueOf(2147483656L), b.build());
+		assertEquals(Long.valueOf(2147483657L), b.build());
 	}
 
 	@Test

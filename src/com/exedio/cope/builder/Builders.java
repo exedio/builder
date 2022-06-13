@@ -4,7 +4,7 @@ import com.exedio.cope.Settable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * A collection of common builders re-usable in projects.
@@ -42,6 +42,15 @@ public final class Builders
 
 	/**
 	 * Generates per-field unique values every time {@link Builder#build()} is called.
+	 * The result value is counting up from the given start value.
+	 */
+	public static Builder<Long> autoIncrement(final Settable<Long> field, final long start)
+	{
+		return new LongAutoIncrementBuilder(field, start);
+	}
+
+	/**
+	 * Generates per-field unique values every time {@link Builder#build()} is called.
 	 * The result value is counting up using the internal ordinal value of the enum constants from the given start value.
 	 * Using rotate = false will throw an IllegalStateException if end of the constants set is reached.
 	 * Using rotate = true will not fail if end of the constants set is reached but will not provide uniqueness in this case.
@@ -61,23 +70,28 @@ public final class Builders
 
 	public abstract static class AutoIncrementBuilder<T> implements Builder<T>
 	{
-		private static final Map<Object, AtomicInteger> nextValues = new HashMap<>();
+		private static final Map<Object, AtomicLong> nextValues = new HashMap<>();
 
 		protected final Object object;
-		protected final int    start;
+		protected final long   start;
 
-		protected AutoIncrementBuilder(final Object object, final int start)
+		protected AutoIncrementBuilder(final Object object, final long start)
 		{
 			this.object = Objects.requireNonNull(object, "object");
 			this.start = start;
 		}
 
-		protected final int nextValue()
+		protected final long nextValue()
 		{
 			if(!nextValues.containsKey(object))
-				nextValues.put(object, new AtomicInteger(start));
-			final AtomicInteger mutable = nextValues.get(object);
+				nextValues.put(object, new AtomicLong(start));
+			final AtomicLong mutable = nextValues.get(object);
 			return mutable.getAndIncrement();
+		}
+
+		protected final int nextIntValue()
+		{
+			return Math.toIntExact(nextValue());
 		}
 	}
 
@@ -90,6 +104,20 @@ public final class Builders
 
 		@Override
 		public Integer build()
+		{
+			return nextIntValue();
+		}
+	}
+
+	private static class LongAutoIncrementBuilder extends AutoIncrementBuilder<Long>
+	{
+		LongAutoIncrementBuilder(final Settable<Long> field, final long start)
+		{
+			super(field, start);
+		}
+
+		@Override
+		public Long build()
 		{
 			return nextValue();
 		}
@@ -130,7 +158,7 @@ public final class Builders
 		@SuppressWarnings("unchecked")
 		public E build()
 		{
-			int nextIndex = nextValue();
+			int nextIndex = nextIntValue();
 			final Enum<E>[] constants = startValue.getClass().getEnumConstants();
 			if(nextIndex >= constants.length)
 			{

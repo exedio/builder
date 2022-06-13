@@ -6,6 +6,7 @@ import static com.exedio.cope.instrument.Visibility.PACKAGE;
 import com.exedio.cope.EnumField;
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.Item;
+import com.exedio.cope.LongField;
 import com.exedio.cope.StringField;
 import com.exedio.cope.builder.other.OuterClass.TestEnum;
 import com.exedio.cope.instrument.Wrapper;
@@ -17,7 +18,7 @@ final class SimpleItem extends Item
 	static final IntegerField integerMandatory = new IntegerField().toFinal();
 
 	@Wrapper(wrap="get", visibility=PACKAGE)
-	private static final IntegerField integerOptional = new IntegerField().toFinal().optional();
+	static final LongField longOptional = new LongField().toFinal().optional();
 
 	static final StringField stringOptional = new StringField().toFinal().optional();
 	static final EnumField<TestEnum> enumField = EnumField.create(TestEnum.class);
@@ -33,13 +34,13 @@ final class SimpleItem extends Item
 	}
 
 	/**
-	 * Returns the value of {@link #integerOptional}.
+	 * Returns the value of {@link #longOptional}.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
 	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
-	final java.lang.Integer getIntegerOptional()
+	final java.lang.Long getLongOptional()
 	{
-		return SimpleItem.integerOptional.get(this);
+		return SimpleItem.longOptional.get(this);
 	}
 
 	/**
