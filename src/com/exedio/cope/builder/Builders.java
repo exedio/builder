@@ -4,7 +4,7 @@ import com.exedio.cope.Settable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * A collection of common builders re-usable in projects.
@@ -61,23 +61,28 @@ public final class Builders
 
 	public abstract static class AutoIncrementBuilder<T> implements Builder<T>
 	{
-		private static final Map<Object, AtomicInteger> nextValues = new HashMap<>();
+		private static final Map<Object, AtomicLong> nextValues = new HashMap<>();
 
 		protected final Object object;
-		protected final int    start;
+		protected final long   start;
 
-		protected AutoIncrementBuilder(final Object object, final int start)
+		protected AutoIncrementBuilder(final Object object, final long start)
 		{
 			this.object = Objects.requireNonNull(object, "object");
 			this.start = start;
 		}
 
-		protected final int nextValue()
+		protected final long nextValue()
 		{
 			if(!nextValues.containsKey(object))
-				nextValues.put(object, new AtomicInteger(start));
-			final AtomicInteger mutable = nextValues.get(object);
+				nextValues.put(object, new AtomicLong(start));
+			final AtomicLong mutable = nextValues.get(object);
 			return mutable.getAndIncrement();
+		}
+
+		protected final int nextIntValue()
+		{
+			return Math.toIntExact(nextValue());
 		}
 	}
 
@@ -91,7 +96,7 @@ public final class Builders
 		@Override
 		public Integer build()
 		{
-			return nextValue();
+			return nextIntValue();
 		}
 	}
 
@@ -130,7 +135,7 @@ public final class Builders
 		@SuppressWarnings("unchecked")
 		public E build()
 		{
-			int nextIndex = nextValue();
+			int nextIndex = nextIntValue();
 			final Enum<E>[] constants = startValue.getClass().getEnumConstants();
 			if(nextIndex >= constants.length)
 			{
