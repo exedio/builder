@@ -58,6 +58,16 @@ public class AutoIncrementTest extends MainTest
 	}
 
 	@Test
+	public void string_character()
+	{
+		final Builder<String> b = Builders.autoIncrement(SimpleItem.stringOptional, "bar-%c", 'a');
+		assertEquals("bar-a", b.build());
+		assertEquals("bar-b", b.build());
+		assertEquals("bar-c", b.build());
+		assertEquals("bar-d", b.build());
+	}
+
+	@Test
 	public void enumRotate()
 	{
 		final Builder<TestEnum> b = Builders.autoIncrement(SimpleItem.enumField, TestEnum.one, true);
