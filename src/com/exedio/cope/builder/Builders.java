@@ -136,7 +136,10 @@ public final class Builders
 		@Override
 		public String build()
 		{
-			return String.format(pattern, nextValue());
+			final long longValue = nextValue();
+			if(longValue < Integer.MAX_VALUE)
+				return String.format(pattern, (int) longValue);
+			return String.format(pattern, longValue);
 		}
 	}
 
