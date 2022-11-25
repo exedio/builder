@@ -170,7 +170,6 @@
 				<attribute name="Implementation-Title" value="exedio cope builder" />
 				<attribute name="Implementation-Version" value="${build.tag}" />
 				<attribute name="Implementation-Vendor" value="exedio GmbH" />
-				<attribute name="Class-Path" value="exedio-cope.jar" />
 			</manifest>
 		</jar>
 	</target>
