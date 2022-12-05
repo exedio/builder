@@ -9,7 +9,7 @@ RUN \
 	(echo "${IDEA_SHA256}  /tmp/ideaIC.tar.gz" | sha256sum -c -)
 
 
-FROM debian:stretch-20210511
+FROM debian:buster-20210511
 
 ARG JDK
 RUN \
