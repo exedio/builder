@@ -45,7 +45,7 @@ final class GenSource extends Item
 				com.exedio.cope.MandatoryViolationException
 	{
 		this(new com.exedio.cope.SetValue<?>[]{
-			GenSource.subMandatory.map(subMandatory),
+			com.exedio.cope.SetValue.map(GenSource.subMandatory,subMandatory),
 		});
 	}
 

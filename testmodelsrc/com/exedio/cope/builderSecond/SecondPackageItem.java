@@ -17,7 +17,7 @@ public final class SecondPackageItem extends Item
 				final int field)
 	{
 		this(new com.exedio.cope.SetValue<?>[]{
-			SecondPackageItem.field.map(field),
+			com.exedio.cope.SetValue.map(SecondPackageItem.field,field),
 		});
 	}
 
