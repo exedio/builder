@@ -17,7 +17,7 @@ public final class SkippedBecauseTargetDirectoryDoesNotExistsItem extends Item
 				final int field)
 	{
 		this(new com.exedio.cope.SetValue<?>[]{
-			SkippedBecauseTargetDirectoryDoesNotExistsItem.field.map(field),
+			com.exedio.cope.SetValue.map(SkippedBecauseTargetDirectoryDoesNotExistsItem.field,field),
 		});
 	}
 

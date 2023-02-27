@@ -17,7 +17,7 @@ public final class JarItem extends Item
 				final int field)
 	{
 		this(new com.exedio.cope.SetValue<?>[]{
-			JarItem.field.map(field),
+			com.exedio.cope.SetValue.map(JarItem.field,field),
 		});
 	}
 

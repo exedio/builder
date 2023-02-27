@@ -17,7 +17,7 @@ public final class SkippedBecauseNotInPackagePrefixItem extends Item
 				final int field)
 	{
 		this(new com.exedio.cope.SetValue<?>[]{
-			SkippedBecauseNotInPackagePrefixItem.field.map(field),
+			com.exedio.cope.SetValue.map(SkippedBecauseNotInPackagePrefixItem.field,field),
 		});
 	}
 
