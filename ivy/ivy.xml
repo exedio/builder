@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+	<info
+			organisation="com.exedio"
+			module="copebuilder"
+			revision="@BUILD_REVISION@"
+			status="@BUILD_STATUS@">
+		<license
+				name="GNU Lesser General Public License, Version 2.1"
+				url="https://opensource.org/licenses/lgpl-license.html" />
+	</info>
+	<configurations>
+		<!-- There should be an assertIvyExtends in Jenkinsfile for each <conf name="abc" extends="def" /> here. -->
+		<conf name="runtime" />
+		<conf name="sources" />
+		<conf name="changelog" />
+		<conf visibility="private" name="ant" />
+		<conf visibility="private" name="instrument" />
+		<conf visibility="private" name="test" extends="runtime" />
+		<conf visibility="private" name="jsr305" />
+		<conf visibility="private" name="jenkins" />
+		<conf visibility="private" name="ide" extends="runtime,test,jsr305,ant,instrument"
+			  description="classpath for IDEs such as Eclipse and IntelliJ, includes java sources and changelogs" />
+	</configurations>
+	<publications>
+		<artifact name="exedio-cope-builder" conf="runtime"   type="jar" ext="jar" />
+		<artifact name="exedio-cope-builder" conf="sources"   type="src" ext="zip" />
+		<artifact name="exedio-cope-builder" conf="changelog" type="log" ext="txt" />
+	</publications>
+	<dependencies>
+		<dependency org="org.apache.ant" name="ant" rev="1.7.0" conf="ant->default">
+			<exclude org="org.apache.ant" module="ant-launcher" />
+		</dependency>
+
+		<dependency org="cpsuite" name="cpsuite" rev="1.2.7.1" conf="test->default"/>
+		<dependency org="junit" name="junit" rev="4.13" conf="test->default" />
+
+		<dependency org="com.google.code.findbugs" name="jsr305" rev="3.0.2" conf="jsr305->default" />
+
+		<dependency org="com.exedio" name="copeutil" rev="483" conf="runtime->runtime; ide->sources,changelog" />
+		<dependency org="com.exedio" name="cope" rev="10337" conf="runtime->runtime; test->hsqldb; instrument->instrument; ide->sources,changelog" >
+			<exclude org="com.exedio" module="copeservletutil" />
+		</dependency>
+
+		<dependency org="com.exedio" name="pipeline-gdsl" rev="24" conf="jenkins->runtime,plugin; ide->changelog" />
+	</dependencies>
+</ivy-module>
