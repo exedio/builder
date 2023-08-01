@@ -187,19 +187,11 @@
 
 	<target name="clean">
 		<delete>
-			<fileset dir="src"><!-- not created anymore -->
-				<include name="**/*_Jspm.java" />
-			</fileset>
-		</delete>
-		<delete>
 			<fileset dir="testsrc">
 				<include name="**/Generated*Builder.java" />
 			</fileset>
 		</delete>
 		<delete dir="build" />
-		<delete dir="webtestweb/WEB-INF/classes" /><!-- not created anymore -->
-		<delete dir="webtestweb/WEB-INF/lib" /><!-- not created anymore -->
-		<delete dir="tomcat" /><!-- not created anymore -->
 	</target>
 
 	<target name="instrument" depends="testmodelsrc.instrument" />
@@ -273,6 +265,7 @@
 	<target name="src"
 			depends="testbuilder"
 			description="creates all sources, so the IDE does not complain" />
+
 	<target name="build"
 			depends="compile, test, jar, api" />
 
@@ -284,7 +277,7 @@
 			<fileset file="${basedir}/build/exedio-cope-builder-src.zip" />
 			<fileset file="${basedir}/exedio-cope-builder-log.txt" />
 		</copy>
-		<copy file="ivy/ivy.xml" tofile="build/success/ivy.xml" overwrite="true">
+		<copy file="ivy/ivy.xml" todir="build/success" overwrite="true">
 			<filterset>
 				<filter token="BUILD_REVISION" value="${build.revision}" />
 				<filter token="BUILD_STATUS"   value="${build.status}" />

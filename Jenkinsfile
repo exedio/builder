@@ -151,6 +151,8 @@ try
 			assertIvyExtends("ide", "runtime")
 			assertIvyExtends("ide", "test")
 			assertIvyExtends("ide", "jsr305")
+			assertIvyExtends("ide", "ant")
+			assertIvyExtends("ide", "instrument")
 		}
 	}
 
