@@ -2,7 +2,7 @@ package com.exedio.cope.builder.test;
 
 import com.exedio.cope.builder.other.OuterClass.TestEnum;
 
-public class SimpleItemBuilder extends GeneratedSimpleItemBuilder<SimpleItemBuilder>
+class SimpleItemBuilder extends GeneratedSimpleItemBuilder<SimpleItemBuilder>
 {
 	@Override
 	public SimpleItem build()

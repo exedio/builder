@@ -10,6 +10,7 @@ public class MainTest
 {
 	@Disabled("for debugging")
 	@Test
+	@SuppressWarnings("ClassEscapesDefinedScope")
 	public void testMain() throws HumanReadableException, IOException
 	{
 		final Params params = new Params();

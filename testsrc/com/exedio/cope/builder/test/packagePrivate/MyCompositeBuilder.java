@@ -1,6 +1,6 @@
 package com.exedio.cope.builder.test.packagePrivate;
 
-public class MyCompositeBuilder extends GeneratedMyCompositeBuilder<MyCompositeBuilder>
+class MyCompositeBuilder extends GeneratedMyCompositeBuilder<MyCompositeBuilder>
 {
 	@Override
 	public MyComposite build()
