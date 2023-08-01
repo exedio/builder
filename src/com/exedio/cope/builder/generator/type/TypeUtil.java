@@ -27,12 +27,7 @@ public final class TypeUtil
 		if(typeParameters == 0)
 			return "";
 
-		final StringBuilder bf = new StringBuilder();
-		bf.append("<?");
-		for(int i = 1; i < typeParameters; i++)
-			bf.append(",?");
-		bf.append('>');
-		return bf.toString();
+		return "<?" + ",?".repeat(typeParameters - 1) + '>';
 	}
 
 	@Nonnull
