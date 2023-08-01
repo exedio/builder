@@ -14,22 +14,16 @@
 
 	<taskdef resource="com/exedio/cope/instrument/ant.properties">
 		<classpath>
-			<pathelement location="lib/exedio-cope-instrument.jar" />
-			<pathelement location="lib/javax.servlet-api.jar" />
-			<pathelement location="lib/slf4j-api.jar" />
-			<pathelement location="lib/micrometer-core.jar" />
-			<pathelement location="lib/LatencyUtils.jar" />
+			<fileset dir="lib/instrument" />
 		</classpath>
 	</taskdef>
 
 	<target name="src.compile">
 		<compile srcdir="src">
 			<classpath>
-				<pathelement location="lib/ant.jar" />
-				<pathelement location="lib/exedio-cope.jar" />
-				<pathelement location="lib/slf4j-api.jar" />
-				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
-				<pathelement location="lib/jsr305.jar" />
+				<fileset dir="lib/runtime" />
+				<fileset dir="lib/ant" />
+				<fileset dir="lib/jsr305" />
 			</classpath>
 		</compile>
 	</target>
@@ -41,10 +35,7 @@
 				verify="${instrument.verify}"
 				verbose="false">
 			<classpath>
-				<pathelement location="lib/ant.jar" />
-				<pathelement location="lib/exedio-cope.jar" />
-				<pathelement location="lib/slf4j-api.jar" />
-				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
+				<fileset dir="lib/runtime" />
 			</classpath>
 			<suppressWarnings>
 				<wrapper>FinalMethodInFinalClass</wrapper>
@@ -58,9 +49,8 @@
 	<target name="testmodeljarsrc.compile" depends="testmodelsrc.instrument">
 		<compile srcdir="testmodeljarsrc">
 			<classpath>
-				<pathelement location="lib/exedio-cope.jar" />
-				<pathelement location="lib/slf4j-api.jar" />
-				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
+				<fileset dir="lib/runtime" />
+				<fileset file="lib/instrument/exedio-cope-instrument-annotations.jar" />
 			</classpath>
 		</compile>
 	</target>
@@ -83,8 +73,8 @@
 		<compile srcdir="testmodelsrc">
 			<classpath>
 				<pathelement location="build/testmodeljarsrc.jar" />
-				<pathelement location="lib/exedio-cope.jar" />
-				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
+				<fileset dir="lib/runtime" />
+				<fileset file="lib/instrument/exedio-cope-instrument-annotations.jar" />
 			</classpath>
 		</compile>
 	</target>
@@ -95,11 +85,7 @@
 				<path path="build/classes/src"/>
 				<path path="build/testmodeljarsrc.jar" />
 				<path path="build/classes/testmodelsrc"/>
-				<pathelement location="lib/exedio-cope.jar" />
-				<pathelement location="lib/javax.servlet-api.jar" />
-				<pathelement location="lib/slf4j-api.jar" />
-				<pathelement location="lib/micrometer-core.jar" />
-				<pathelement location="lib/LatencyUtils.jar" />
+				<fileset dir="lib/runtime" />
 			</classpath>
 		</taskdef>
 	</target>
@@ -122,10 +108,8 @@
 				<pathelement location="build/classes/src" />
 				<pathelement location="build/testmodeljarsrc.jar" />
 				<pathelement location="build/classes/testmodelsrc" />
-				<pathelement location="lib/exedio-cope.jar" />
-				<pathelement location="lib/exedio-cope-instrument-annotations.jar" />
-				<pathelement location="lib/junit.jar" />
-				<pathelement location="lib/cpsuite.jar" />
+				<fileset file="lib/instrument/exedio-cope-instrument-annotations.jar" />
+				<fileset dir="lib/test" />
 			</classpath>
 		</compile>
 	</target>
@@ -143,16 +127,7 @@
 				<pathelement location="build/testmodeljarsrc.jar" />
 				<pathelement location="build/classes/testmodelsrc" />
 				<pathelement location="build/classes/testsrc" />
-				<pathelement location="lib/hsqldb.jar" />
-				<pathelement location="lib/junit.jar" />
-				<pathelement location="lib/hamcrest-core.jar" />
-				<pathelement location="lib/cpsuite.jar" />
-				<pathelement location="lib/exedio-cope.jar" />
-				<pathelement location="lib/exedio-cope-hsqldb.jar" />
-				<pathelement location="lib/javax.servlet-api.jar" />
-				<pathelement location="lib/slf4j-api.jar" />
-				<pathelement location="lib/micrometer-core.jar" />
-				<pathelement location="lib/LatencyUtils.jar" />
+				<fileset dir="lib/test" />
 			</classpath>
 			<test name="${test}" todir="build/testresults" outfile="copebuilder" />
 			<sysproperty key="java.io.tmpdir" value="${basedir}/build/testtmpdir" />
@@ -209,8 +184,8 @@
 				<fileset file="src/com" includes="**/*.java" />
 			</src>
 			<myClasspath>
-				<pathelement location="lib/exedio-cope.jar" />
-				<pathelement location="lib/jsr305.jar" />
+				<fileset dir="lib/runtime" />
+				<fileset dir="lib/jsr305" />
 				<pathelement location="${ant.core.lib}" />
 			</myClasspath>
 		</api>
