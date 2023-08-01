@@ -3,7 +3,7 @@
 <project name="copebuilder" default="build" basedir="."
 			xmlns:if="ant:if"
 			xmlns:unless="ant:unless"
->
+			xmlns:jacoco="antlib:org.jacoco.ant">
 
 	<target name="checkAntIfUnless">
 		<property name="antSupportsGenericIfUnless" value="true"/>
@@ -214,19 +214,69 @@
 			<myClasspath>
 				<fileset dir="lib/runtime" />
 				<fileset dir="lib/jsr305" />
-				<pathelement location="${ant.core.lib}" />
+				<fileset dir="lib/ant" />
 			</myClasspath>
 		</api>
+	</target>
+
+	<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml" onerror="failall">
+		<classpath>
+			<fileset dir="lib/jacoco" />
+		</classpath>
+	</taskdef>
+
+	<target name="jacoco" depends="testsrc.compile, checkAntIfUnless" unless="skip.jacoco">
+		<mkdir dir="build/jacocotestresults" />
+		<mkdir dir="build/jacocotesttmpdir" />
+		<jacoco:coverage destfile="build/jacoco.exec">
+			<java taskname="jacoco" fork="yes" dir="${basedir}"
+				  failonerror="true"
+				  classname="org.junit.platform.console.ConsoleLauncher">
+				<arg line="--details ${test-details}" />
+				<arg line="--disable-ansi-colors" if:set="disable-ansi-colors" />
+				<classpath>
+					<pathelement location="build/classes/src" />
+					<pathelement location="build/classes/servletsrc" />
+					<pathelement location="build/classes/testmodelsrc" />
+					<pathelement location="build/classes/testmodeljarsrc" />
+					<pathelement location="build/classes/testsrc" />
+					<fileset dir="lib/ant" />
+					<fileset dir="lib/test" />
+				</classpath>
+				<sysproperty key="java.io.tmpdir" value="${basedir}/build/jacocotesttmpdir" />
+				<arg line="--fail-if-no-tests" />
+				<arg line="--scan-class-path build/classes/testsrc" unless:set="test" />
+				<arg line="--exclude-tag nondeterministic" unless:set="test" if:set="test.deterministicOnly" />
+				<arg line="--select-class ${test}" if:set="test" unless:set="method" />
+				<arg line="--select-method ${test}#${method}" if:set="method" />
+				<arg line="--reports-dir build/jacocotestresults" />
+				<assertions><enable/></assertions>
+			</java>
+		</jacoco:coverage>
+		<jacoco:report>
+			<executiondata>
+				<file file="build/jacoco.exec" />
+			</executiondata>
+			<structure name="CopeBuilder">
+				<classfiles>
+					<fileset dir="build/classes/src" />
+				</classfiles>
+				<sourcefiles encoding="UTF-8">
+					<fileset dir="src" />
+				</sourcefiles>
+			</structure>
+			<html destdir="build/html" />
+			<xml destfile="build/report.xml" />
+		</jacoco:report>
 	</target>
 
 	<target name="src"
 			depends="testbuilder"
 			description="creates all sources, so the IDE does not complain" />
 	<target name="build"
-			depends="compile, test, jar" />
+			depends="compile, test, jar, api" />
 
-
-	<target name="all" depends="build, jar.src, api" />
+	<target name="all" depends="build, jar.src, jacoco" />
 
 	<target name="jenkins" depends="all">
 		<copy todir="${basedir}/build/success">

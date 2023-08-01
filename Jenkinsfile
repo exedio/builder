@@ -58,7 +58,6 @@ try
 				testResults: 'build/testresults/**/*.xml',
 				skipPublishingChecks: true
 			)
-			/*
 			recordCoverage(
 				id: 'coverage-java',
 				name: 'Coverage Java',
@@ -67,7 +66,6 @@ try
 				skipPublishingChecks: true,
 				sourceDirectories: [[path: 'src']]
 			)
-			 */
 			if (isRelease || env.BRANCH_NAME.contains("archiveSuccessArtifacts"))
 				archiveArtifacts fingerprint: true, artifacts: 'build/success/*'
 			plot(
