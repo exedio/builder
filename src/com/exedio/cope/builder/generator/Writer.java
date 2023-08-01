@@ -246,9 +246,9 @@ public final class Writer
 				writer.writeLine("\t\treturn set(this." + featureIdentifier + ".getField(key), value);");
 				writer.writeLine("\t}");
 
-				for(final Object e : keyClass.getEnumConstants())
+				for(final Enum<?> e : keyClass.getEnumConstants())
 				{
-					final String key = ((Enum<?>) e).name();
+					final String key = e.name();
 					final String methodPart = key.substring(0, 1).toUpperCase(Locale.ENGLISH) + key.substring(1);
 					final String variable = key.toLowerCase(Locale.ENGLISH); //TODO improve?
 					writer.writeLine();
