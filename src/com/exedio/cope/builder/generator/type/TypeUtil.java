@@ -13,6 +13,7 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
@@ -70,8 +71,7 @@ public final class TypeUtil
 			final Type primitiveClass = (valueClass instanceof Class && field.isMandatory())
 				? PrimitiveUtil.toPrimitive((Class<?>) valueClass)
 				: valueClass;
-			//noinspection ConstantConditions
-			return getCanonicalName((primitiveClass != null) ? primitiveClass : valueClass);
+			return getCanonicalName((primitiveClass != null) ? primitiveClass : Objects.requireNonNull(valueClass));
 		}
 		else if(feature instanceof SetField<?>)
 		{
