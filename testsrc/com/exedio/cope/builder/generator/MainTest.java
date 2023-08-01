@@ -3,12 +3,12 @@ package com.exedio.cope.builder.generator;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class MainTest
 {
-	@Ignore("for debugging")
+	@Disabled("for debugging")
 	@Test
 	public void testMain() throws HumanReadableException, IOException
 	{

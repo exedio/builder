@@ -26,8 +26,8 @@ import com.exedio.cope.ConnectProperties;
 import com.exedio.cope.Model;
 import com.exedio.cope.junit.CopeModelTest;
 import com.exedio.cope.util.Sources;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class CopeModel4Test
 {
@@ -95,13 +95,13 @@ public class CopeModel4Test
 		return true;
 	}
 
-	@Before
+	@BeforeEach
 	public final void setUpModel() throws Exception
 	{
 		test.setUp();
 	}
 
-	@After
+	@AfterEach
 	public final void tearDownModel() throws Exception
 	{
 		test.tearDown();

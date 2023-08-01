@@ -1,12 +1,12 @@
 package com.exedio.cope.builder.generator.type;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.exedio.cope.builder.other.ConcreteItem;
 import com.exedio.cope.builder.test.AbstractItem;
 import com.exedio.cope.builder.test.MainTest;
 import com.exedio.cope.builder.test.genericComplex.GenMid;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ItemTypeTest extends MainTest
 {
@@ -15,7 +15,7 @@ public class ItemTypeTest extends MainTest
 	{
 		final ItemType type = new ItemType(ConcreteItem.TYPE);
 		assertEquals(ConcreteItem.class, type.getJavaClass());
-		assertEquals(type.getDeclaredFeatures().toString(), 4, type.getDeclaredFeatures().size());
+		assertEquals(4, type.getDeclaredFeatures().size(), type.getDeclaredFeatures().toString());
 		assertEquals("TYPE", type.getTypeName());
 		assertEquals("", type.getWildCards());
 		assertEquals(false, type.enableTypePropagationConstructor());
@@ -30,7 +30,7 @@ public class ItemTypeTest extends MainTest
 	{
 		final ItemType type = new ItemType(AbstractItem.TYPE);
 		assertEquals(AbstractItem.class, type.getJavaClass());
-		assertEquals(type.getDeclaredFeatures().toString(), 2, type.getDeclaredFeatures().size());
+		assertEquals(2, type.getDeclaredFeatures().size(), type.getDeclaredFeatures().toString());
 		assertEquals("TYPE", type.getTypeName());
 		assertEquals("", type.getWildCards());
 		assertEquals(true, type.enableTypePropagationConstructor());
@@ -45,7 +45,7 @@ public class ItemTypeTest extends MainTest
 	{
 		final ItemType type = new ItemType(GenMid.TYPE);
 		assertEquals(GenMid.class, type.getJavaClass());
-		assertEquals(type.getDeclaredFeatures().toString(), 1, type.getDeclaredFeatures().size());
+		assertEquals(1, type.getDeclaredFeatures().size(), type.getDeclaredFeatures().toString());
 		assertEquals("TYPE", type.getTypeName());
 		assertEquals("<?>", type.getWildCards());
 		assertEquals(true, type.enableTypePropagationConstructor());

@@ -1,11 +1,11 @@
 package com.exedio.cope.builder.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.exedio.cope.builder.other.SubItem;
 import com.exedio.cope.builder.other.SubItemBuilder;
 import com.exedio.cope.builder.test.GeneratedSuperItemBuilder.SuperItemBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class HierarchyTest extends MainTest
 {

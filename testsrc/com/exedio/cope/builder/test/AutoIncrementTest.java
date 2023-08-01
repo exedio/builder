@@ -1,18 +1,18 @@
 package com.exedio.cope.builder.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.exedio.cope.builder.Builder;
 import com.exedio.cope.builder.Builders;
 import com.exedio.cope.builder.other.OuterClass.TestEnum;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AutoIncrementTest extends MainTest
 {
-	@Before
+	@BeforeEach
 	public void resetBuilder()
 	{
 		Builders.reset();

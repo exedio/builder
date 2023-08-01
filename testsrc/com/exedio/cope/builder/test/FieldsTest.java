@@ -6,7 +6,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.emptySet;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.exedio.cope.builder.MediaBuilder;
 import com.exedio.cope.builder.other.OuterClass.TestEnum;
@@ -16,7 +16,7 @@ import com.exedio.cope.pattern.Range;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FieldsTest extends MainTest
 {

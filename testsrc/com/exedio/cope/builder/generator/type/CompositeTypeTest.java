@@ -1,11 +1,11 @@
 package com.exedio.cope.builder.generator.type;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.exedio.cope.builder.other.TestComposite;
 import com.exedio.cope.builder.test.CompositeItem;
 import com.exedio.cope.builder.test.MainTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CompositeTypeTest extends MainTest
 {
@@ -14,7 +14,7 @@ public class CompositeTypeTest extends MainTest
 	{
 		final CompositeType type = new CompositeType(CompositeItem.field);
 		assertEquals(TestComposite.class, type.getJavaClass());
-		assertEquals(type.getDeclaredFeatures().toString(), 2, type.getDeclaredFeatures().size());
+		assertEquals(2, type.getDeclaredFeatures().size(), type.getDeclaredFeatures().toString());
 		assertEquals("class", type.getTypeName());
 		assertEquals("", type.getWildCards());
 		assertEquals(false, type.enableTypePropagationConstructor());
