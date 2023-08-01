@@ -20,10 +20,11 @@ package com.exedio.cope.junit;
 
 import com.exedio.cope.ConnectProperties;
 import com.exedio.cope.Model;
+import com.exedio.dsmf.Node;
 
 final class ModelConnector implements Runnable
 {
-	private static Model createdSchema = null;
+	private static Model connectedSchema = null;
 	private static boolean registeredDropSchemaHook = false;
 	private static final Object lock = new Object();
 
@@ -34,25 +35,33 @@ final class ModelConnector implements Runnable
 
 	static void connectAndCreate(final Model model, final ConnectProperties properties)
 	{
-		synchronized(lock)
+		synchronized (lock)
 		{
-			if(createdSchema!=model)
+			if (connectedSchema != model)
 			{
-				dropAndDisconnectIfNeeded();
+				disconnectIfNeeded();
 				model.connect(properties);
-				model.createSchema();
-				createdSchema = model;
+				if (model.getVerifiedSchema().getCumulativeColor() == Node.Color.ERROR)
+				{
+					model.tearDownSchema();
+					model.createSchema();
+				}
+				else
+				{
+					model.deleteSchemaForTest();
+				}
+				connectedSchema = model;
 			}
 			else
 				model.getConnectProperties().ensureEquality(properties);
 		}
 	}
 
-	static void dropAndDisconnect()
+	static void disconnect()
 	{
-		synchronized(lock)
+		synchronized (lock)
 		{
-			if(!registeredDropSchemaHook)
+			if (!registeredDropSchemaHook)
 			{
 				Runtime.getRuntime().addShutdownHook(new Thread(new ModelConnector()));
 				registeredDropSchemaHook = true;
@@ -60,15 +69,14 @@ final class ModelConnector implements Runnable
 		}
 	}
 
-	private static void dropAndDisconnectIfNeeded()
+	private static void disconnectIfNeeded()
 	{
-		synchronized(lock)
+		synchronized (lock)
 		{
-			if(createdSchema!=null)
+			if (connectedSchema != null)
 			{
-				createdSchema.dropSchema();
-				createdSchema.disconnect();
-				createdSchema = null;
+				connectedSchema.disconnect();
+				connectedSchema = null;
 			}
 		}
 	}
@@ -76,6 +84,6 @@ final class ModelConnector implements Runnable
 	@Override
 	public void run()
 	{
-		dropAndDisconnectIfNeeded();
+		disconnectIfNeeded();
 	}
 }

@@ -6,17 +6,17 @@ import static java.util.Collections.emptySet;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.exedio.cope.builder.test.MainTest;
 import com.exedio.cope.builder.test.genericComplex.GeneratedGenMidBuilder.GenMidBuilder;
 import com.exedio.cope.builder.test.genericComplex.GeneratedGenSupBuilder.GenSupBuilder;
 import com.exedio.cope.pattern.Money;
 import java.util.function.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class GenericComplexTest extends MainTest
 {

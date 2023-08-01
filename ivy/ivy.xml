@@ -16,10 +16,11 @@
 		<conf name="runtime" />
 		<conf name="sources" />
 		<conf name="changelog" />
-		<conf visibility="private" name="ant" />
-		<conf visibility="private" name="instrument" />
 		<conf visibility="private" name="test" extends="runtime" />
+		<conf visibility="private" name="jacoco" />
+		<conf visibility="private" name="ant" />
 		<conf visibility="private" name="jsr305" />
+		<conf visibility="private" name="instrument" />
 		<conf visibility="private" name="jenkins" />
 		<conf visibility="private" name="ide" extends="runtime,test,jsr305,ant,instrument"
 			  description="classpath for IDEs such as Eclipse and IntelliJ, includes java sources and changelogs" />
@@ -30,12 +31,13 @@
 		<artifact name="exedio-cope-builder" conf="changelog" type="log" ext="txt" />
 	</publications>
 	<dependencies>
-		<dependency org="org.apache.ant" name="ant" rev="1.7.0" conf="ant->default">
-			<exclude org="org.apache.ant" module="ant-launcher" />
-		</dependency>
+		<dependency org="org.apache.ant" name="ant" rev="1.9.7" conf="ant->default"/>
 
-		<dependency org="cpsuite" name="cpsuite" rev="1.2.7.1" conf="test->default"/>
-		<dependency org="junit" name="junit" rev="4.13" conf="test->default" />
+		<dependency org="org.junit.jupiter"  name="junit-jupiter-api"      rev="5.3.2" conf="test->default; ide->sources" />
+		<dependency org="org.junit.jupiter"  name="junit-jupiter-engine"   rev="5.3.2" conf="test->default" />
+		<dependency org="org.junit.platform" name="junit-platform-console" rev="1.3.2" conf="test->default" />
+
+		<dependency org="org.jacoco" name="org.jacoco.ant" rev="0.8.5" conf="jacoco->default" />
 
 		<dependency org="com.google.code.findbugs" name="jsr305" rev="3.0.2" conf="jsr305->default" />
 

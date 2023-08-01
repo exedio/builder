@@ -40,9 +40,6 @@ try
 			def buildTag = makeBuildTag(scmResult)
 
 			mainImage(imageName("Main")).inside(dockerRunDefaults()) {
-				shSilent "java -version"
-				shSilent "ant -version"
-
 				ant 'clean jenkins' +
 				    ' "-Dbuild.revision=${BUILD_NUMBER}"' +
 				    ' "-Dbuild.tag=' + buildTag + '"' +
@@ -61,7 +58,6 @@ try
 				testResults: 'build/testresults/**/*.xml',
 				skipPublishingChecks: true
 			)
-			/*
 			recordCoverage(
 				id: 'coverage-java',
 				name: 'Coverage Java',
@@ -70,7 +66,6 @@ try
 				skipPublishingChecks: true,
 				sourceDirectories: [[path: 'src']]
 			)
-			 */
 			if (isRelease || env.BRANCH_NAME.contains("archiveSuccessArtifacts"))
 				archiveArtifacts fingerprint: true, artifacts: 'build/success/*'
 			plot(
@@ -156,6 +151,8 @@ try
 			assertIvyExtends("ide", "runtime")
 			assertIvyExtends("ide", "test")
 			assertIvyExtends("ide", "jsr305")
+			assertIvyExtends("ide", "ant")
+			assertIvyExtends("ide", "instrument")
 		}
 	}
 
@@ -296,7 +293,7 @@ String shStdout(String script)
 
 void ant(String script)
 {
-	shSilent 'ant -noinput ' + script
+	shSilent 'java -jar lib/ant/ant-launcher.jar -noinput ' + script
 }
 
 void assertGitUnchanged()

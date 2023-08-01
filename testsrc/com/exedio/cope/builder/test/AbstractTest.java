@@ -1,14 +1,14 @@
 package com.exedio.cope.builder.test;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.exedio.cope.builder.other.ConcreteItem;
 import com.exedio.cope.builder.other.ConcreteItemBuilder;
 import com.exedio.cope.builder.test.GeneratedMixedLevel2ItemBuilder.MixedLevel2ItemBuilder;
 import java.lang.reflect.Modifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AbstractTest extends MainTest
 {

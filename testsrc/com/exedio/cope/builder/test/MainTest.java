@@ -1,11 +1,23 @@
 package com.exedio.cope.builder.test;
 
-import com.exedio.cope.builder.junit.CopeModel4Test;
+import com.exedio.cope.ConnectProperties;
+import com.exedio.cope.Model;
+import com.exedio.cope.junit.CopeRule;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-public class MainTest extends CopeModel4Test
+@ExtendWith(CopeRule.class)
+
+public class MainTest implements CopeRule.Config
 {
-	public MainTest()
+	@Override
+	public final Model getModel()
 	{
-		super(TestMain.model);
+		return TestMain.model;
+	}
+
+	@Override
+	public final ConnectProperties getConnectProperties()
+	{
+		return new ConnectProperties(ConnectProperties.getDefaultPropertyFile());
 	}
 }

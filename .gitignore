@@ -3,8 +3,4 @@
 
 /build
 
-/testsrc/com/exedio/cope/builder/test/Generated*Builder.java
-/testsrc/com/exedio/cope/builder/test/genericComplex/Generated*Builder.java
-/testsrc/com/exedio/cope/builder/test/packagePrivate/Generated*Builder.java
-/testsrc/com/exedio/cope/builder/other/Generated*Builder.java
-/testsrc/com/exedio/cope/builderSecond/Generated*Builder.java
+/testsrc/**/Generated*Builder.java

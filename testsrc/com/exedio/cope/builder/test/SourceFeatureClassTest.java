@@ -2,7 +2,7 @@ package com.exedio.cope.builder.test;
 
 import com.exedio.cope.mockframework.SourceFeatureClassPattern;
 import com.exedio.cope.pattern.Range;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SourceFeatureClassTest extends MainTest
 {

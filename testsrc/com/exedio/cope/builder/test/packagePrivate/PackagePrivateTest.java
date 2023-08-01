@@ -1,11 +1,11 @@
 package com.exedio.cope.builder.test.packagePrivate;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.exedio.cope.builder.test.MainTest;
 import com.exedio.cope.pattern.Money;
 import com.exedio.cope.pattern.Range;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PackagePrivateTest extends MainTest
 {
