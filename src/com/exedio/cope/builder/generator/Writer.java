@@ -34,6 +34,7 @@ public final class Writer
 
 		writer.writePackage(type.getPackageName());
 
+		writer.writeLine("@SuppressWarnings({\"ClassEscapesDefinedScope\", \"RedundantSuppression\"})");
 		writer.writeLine("@com.exedio.cope.builder.Generated");
 		writer.writeLine("public abstract class Generated" + simpleClassName + "Builder" + type.getGenericParams());
 		writer.writeLine("\textends " + type.getExtends());
