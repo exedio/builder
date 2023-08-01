@@ -34,8 +34,12 @@
 			<exclude org="org.apache.ant" module="ant-launcher" />
 		</dependency>
 
-		<dependency org="cpsuite" name="cpsuite" rev="1.2.7.1" conf="test->default"/>
 		<dependency org="junit" name="junit" rev="4.13" conf="test->default" />
+		<dependency org="org.junit.vintage" name="junit-vintage-engine" rev="5.3.2" conf="test->default" />
+
+		<dependency org="org.junit.jupiter"  name="junit-jupiter-api"      rev="5.3.2" conf="test->default; ide->sources" />
+		<dependency org="org.junit.jupiter"  name="junit-jupiter-engine"   rev="5.3.2" conf="test->default" />
+		<dependency org="org.junit.platform" name="junit-platform-console" rev="1.3.2" conf="test->default" />
 
 		<dependency org="com.google.code.findbugs" name="jsr305" rev="3.0.2" conf="jsr305->default" />
 

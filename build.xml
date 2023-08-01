@@ -1,7 +1,17 @@
 <?xml version="1.0"?>
 
-<project name="copebuilder" default="build" basedir=".">
+<project name="copebuilder" default="build" basedir="."
+			xmlns:if="ant:if"
+			xmlns:unless="ant:unless"
+>
 
+	<target name="checkAntIfUnless">
+		<property name="antSupportsGenericIfUnless" value="true"/>
+		<fail message="ant 1.9.1 required: https://ant.apache.org/manual/ifunless.html" unless:set="antSupportsGenericIfUnless"/>
+	</target>
+
+	<echo taskname="which ant" message="${ant.version}" />
+	<echo taskname="which java" message="${java.vm.name} ${java.version}" />
 	<!--suppress AntMissingPropertiesFileInspection -->
 	<property file="local.properties" />
 	<property file="project.properties" />
@@ -114,27 +124,43 @@
 		</compile>
 	</target>
 
-	<target name="test" depends="testsrc.compile">
-		<mkdir dir="build/testresults" />
-		<mkdir dir="build/testtmpdir" />
-		<junit fork="yes" dir="${basedir}"
-				 haltonerror="true" haltonfailure="true"
-				 showoutput="true" printsummary="true">
-			<formatter type="brief" usefile="false" />
-			<formatter type="xml" />
-			<classpath>
-				<pathelement location="build/classes/src" />
-				<pathelement location="build/testmodeljarsrc.jar" />
-				<pathelement location="build/classes/testmodelsrc" />
-				<pathelement location="build/classes/testsrc" />
-				<fileset dir="lib/test" />
-			</classpath>
-			<test name="${test}" todir="build/testresults" outfile="copebuilder" />
-			<sysproperty key="java.io.tmpdir" value="${basedir}/build/testtmpdir" />
-			<sysproperty key="java.awt.headless" value="true" />
-			<assertions><enable/></assertions>
-		</junit>
+	<target name="test.run" depends="testsrc.compile, checkAntIfUnless">
+		<runtest name="copebuilder"/>
 	</target>
+
+	<macrodef name="runtest">
+		<attribute name="name" />
+		<sequential>
+			<echo message="(@{name})" />
+			<mkdir dir="build/testresults" />
+			<mkdir dir="build/testtmpdir" />
+			<java taskname="junit" fork="yes" dir="${basedir}"
+				  failonerror="true"
+				  classname="org.junit.platform.console.ConsoleLauncher">
+				<jvmarg value="-agentlib:jdwp=transport=dt_socket,server=y,address=8000" if:set="test.debug"/>
+				<arg line="--details ${test-details}" />
+				<arg line="--disable-ansi-colors" if:set="disable-ansi-colors" />
+				<classpath>
+					<pathelement location="build/classes/src" />
+					<pathelement location="build/classes/testmodelsrc" />
+					<pathelement location="build/classes/testmodeljarsrc" />
+					<pathelement location="build/classes/testsrc" />
+					<fileset dir="lib/test" />
+				</classpath>
+				<arg line="--fail-if-no-tests" />
+				<arg line="--scan-class-path build/classes/testsrc" unless:set="test" />
+				<arg line="--exclude-tag nondeterministic" unless:set="test" if:set="test.deterministicOnly" />
+				<arg line="--select-class ${test}" if:set="test" unless:set="method" />
+				<arg line="--select-method ${test}#${method}" if:set="method" />
+				<arg line="--reports-dir build/testresults/@{name}" />
+				<sysproperty key="java.io.tmpdir" value="${basedir}/build/testtmpdir" />
+				<assertions><enable/></assertions>
+				<!--jvmarg value="-Xcomp" /--><!-- for performance tests -->
+			</java>
+		</sequential>
+	</macrodef>
+
+	<target name="test" depends="test.run" />
 
 	<target name="jar" depends="src.compile">
 		<jar jarfile="build/exedio-cope-builder.jar" filesonly="true" duplicate="fail" strict="fail" level="9">
