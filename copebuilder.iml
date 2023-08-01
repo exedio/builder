@@ -30,5 +30,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="library" name="ide" level="project" />
+    <orderEntry type="library" name="jenkins" level="project" />
   </component>
 </module>

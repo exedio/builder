@@ -20,6 +20,7 @@
 		<conf visibility="private" name="instrument" />
 		<conf visibility="private" name="test" extends="runtime" />
 		<conf visibility="private" name="jsr305" />
+		<conf visibility="private" name="jenkins" />
 		<conf visibility="private" name="ide" extends="runtime,test,jsr305,ant,instrument"
 			  description="classpath for IDEs such as Eclipse and IntelliJ, includes java sources and changelogs" />
 	</configurations>
@@ -42,5 +43,7 @@
 		<dependency org="com.exedio" name="cope" rev="10337" conf="runtime->runtime; test->hsqldb; instrument->instrument; ide->sources,changelog" >
 			<exclude org="com.exedio" module="copeservletutil" />
 		</dependency>
+
+		<dependency org="com.exedio" name="pipeline-gdsl" rev="24" conf="jenkins->runtime,plugin; ide->changelog" />
 	</dependencies>
 </ivy-module>
