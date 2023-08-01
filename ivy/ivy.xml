@@ -30,7 +30,7 @@
 		<artifact name="exedio-cope-builder" conf="changelog" type="log" ext="txt" />
 	</publications>
 	<dependencies>
-		<dependency org="org.apache.ant" name="ant" rev="1.7.0" conf="ant->default">
+		<dependency org="org.apache.ant" name="ant" rev="1.9.7" conf="ant->default">
 			<exclude org="org.apache.ant" module="ant-launcher" />
 		</dependency>
 
