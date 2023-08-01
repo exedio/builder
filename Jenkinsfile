@@ -73,7 +73,6 @@ try
 			 */
 			if (isRelease || env.BRANCH_NAME.contains("archiveSuccessArtifacts"))
 				archiveArtifacts fingerprint: true, artifacts: 'build/success/*'
-			/*
 			plot(
 				csvFileName: 'plots.csv',
 				exclZero: false,
@@ -88,7 +87,6 @@ try
 					[ file: 'build/exedio-cope-builder-src.zip-plot.properties', label: 'exedio-cope-builder-src.zip' ],
 				],
 			)
-			*/
 		}
 	}
 
