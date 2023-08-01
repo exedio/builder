@@ -1,12 +1,12 @@
 package com.exedio.cope.builder.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import com.exedio.cope.builder.Builder;
 import com.exedio.cope.builder.Builders;
 import com.exedio.cope.builder.other.OuterClass.TestEnum;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +33,7 @@ public class AutoIncrementTest extends MainTest
 	{
 		final Builder<Integer> b = Builders.autoIncrement(SimpleItem.integerMandatory, Integer.MAX_VALUE);
 		assertEquals(Integer.valueOf(Integer.MAX_VALUE), b.build());
-		final ArithmeticException e = Assert.assertThrows(ArithmeticException.class, b::build);
+		final ArithmeticException e = assertThrows(ArithmeticException.class, b::build);
 		assertEquals("integer overflow", e.getMessage());
 	}
 
