@@ -1,11 +1,12 @@
 /.eclipse-output
+/nbproject/private/
+
 /build
+
 /ivy/artifacts
+
 /testsrc/com/exedio/cope/builder/test/Generated*Builder.java
 /testsrc/com/exedio/cope/builder/test/genericComplex/Generated*Builder.java
 /testsrc/com/exedio/cope/builder/test/packagePrivate/Generated*Builder.java
 /testsrc/com/exedio/cope/builder/other/Generated*Builder.java
 /testsrc/com/exedio/cope/builderSecond/Generated*Builder.java
-/nbproject/private/
-/.idea/workspace.xml
-/.idea/scopes/scope_settings.xml
