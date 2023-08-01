@@ -19,6 +19,6 @@ public class MainTest
 		final File maintest = Files.createTempDirectory("maintest").toFile();
 		System.out.println(maintest);
 		params.setDestdir(maintest);
-		Main.main(params);
+		Main.run(params);
 	}
 }
