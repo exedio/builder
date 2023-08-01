@@ -40,9 +40,6 @@ try
 			def buildTag = makeBuildTag(scmResult)
 
 			mainImage(imageName("Main")).inside(dockerRunDefaults()) {
-				shSilent "java -version"
-				shSilent "ant -version"
-
 				ant 'clean jenkins' +
 				    ' "-Dbuild.revision=${BUILD_NUMBER}"' +
 				    ' "-Dbuild.tag=' + buildTag + '"' +
@@ -296,7 +293,7 @@ String shStdout(String script)
 
 void ant(String script)
 {
-	shSilent 'ant -noinput ' + script
+	shSilent 'java -jar lib/ant/ant-launcher.jar -noinput ' + script
 }
 
 void assertGitUnchanged()

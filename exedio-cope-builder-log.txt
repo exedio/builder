@@ -7,6 +7,7 @@ omit bug fixes.
 The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
+* ant 1.9.7 required
 * JDK 11 required
 * Class-Path removed from jar manifest:
 	- exedio-cope-builder.jar drops "Class-Path: exedio-cope.jar"
