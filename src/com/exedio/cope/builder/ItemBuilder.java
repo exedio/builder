@@ -225,7 +225,8 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<I, B>> e
 	{
 		try
 		{
-			final Constructor<?> constructor = getClass().getConstructor();
+			final Constructor<?> constructor = getClass().getDeclaredConstructor();
+			constructor.setAccessible(true);
 			final B copy = (B) constructor.newInstance();
 			copy.values = new HashMap<>(values);
 			copy.listValues = new HashMap<>(listValues);

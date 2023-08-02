@@ -10,6 +10,7 @@ public class MainTest
 {
 	@Disabled("for debugging")
 	@Test
+	@SuppressWarnings("ClassEscapesDefinedScope")
 	public void testMain() throws HumanReadableException, IOException
 	{
 		final Params params = new Params();
@@ -19,6 +20,6 @@ public class MainTest
 		final File maintest = Files.createTempDirectory("maintest").toFile();
 		System.out.println(maintest);
 		params.setDestdir(maintest);
-		Main.main(params);
+		Main.run(params);
 	}
 }

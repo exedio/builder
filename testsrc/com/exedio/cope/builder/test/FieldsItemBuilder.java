@@ -7,7 +7,7 @@ import com.exedio.cope.pattern.Price;
 import com.exedio.cope.pattern.Range;
 import java.util.EnumMap;
 
-public class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuilder>
+class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuilder>
 {
 	@Override
 	public FieldsItem build()
