@@ -28,7 +28,8 @@ public final class TestMain
 			SecondPackageItem.TYPE,
 			JarItem.TYPE,
 			NonBoundTypeItem.TYPE,
-			AbstractLevel1Item.TYPE, MixedLevel2Item.TYPE, ConcreteLevel3Item.TYPE).
+			AbstractLevel1Item.TYPE, MixedLevel2Item.TYPE, ConcreteLevel3Item.TYPE,
+			PackageNameConflictItem.TYPE).
 		build();
 
 	static

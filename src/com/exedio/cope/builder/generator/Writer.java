@@ -251,7 +251,9 @@ public final class Writer
 				{
 					final String key = e.name();
 					final String methodPart = key.substring(0, 1).toUpperCase(Locale.ENGLISH) + key.substring(1);
-					final String variable = key.toLowerCase(Locale.ENGLISH); //TODO improve?
+					final String rootPackage = keyClass.getPackageName().split("\\.", 2)[0];
+					final String name = key.toLowerCase(Locale.ENGLISH);
+					final String variable = name.equals(rootPackage) ? "_" + name : name;
 					writer.writeLine();
 					writer.writeSetterAnnotation();
 					writer.writeLine("\tpublic final B " + featureIdentifier + methodPart + "(final " + enumValueType + " " + variable + ")");
