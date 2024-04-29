@@ -42,8 +42,8 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<O, B>> implements Bui
 		return self();
 	}
 
-	//Handle enum map key-vise
-	protected <K extends Enum<K>, V> void fallback(final EnumMapField<K, V> enumMapField, final EnumMap<K, V> map)
+	//Handle enum map key-wise
+	protected <K extends Enum<K>, V> void fallback(final EnumMapField<K, V> enumMapField, final Map<K, V> map)
 	{
 		map.forEach((k, v) -> fallback(enumMapField, k, v));
 	}

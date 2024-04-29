@@ -6,6 +6,7 @@ import com.exedio.cope.pattern.Money;
 import com.exedio.cope.pattern.Price;
 import com.exedio.cope.pattern.Range;
 import java.util.EnumMap;
+import java.util.Map;
 
 class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuilder>
 {
@@ -19,7 +20,7 @@ class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuilder>
 		fallback(range, Range.valueOf(7777777, 8888888));
 
 		fallback(enumMap, TestEnum.one, "keyFallback1");
-		final EnumMap<TestEnum, String> enumMap = new EnumMap<>(TestEnum.class);
+		final Map<TestEnum, String> enumMap = new EnumMap<>(TestEnum.class);
 		enumMap.put(TestEnum.one, "mapFallback1");//ignored
 		enumMap.put(TestEnum.two, "mapFallback2");
 		//enumMap.put(TestEnum.three, "mapFallback3"); skip to use default
