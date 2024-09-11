@@ -39,6 +39,7 @@ final class ModificationCheck
 		if(scheme == null)
 			throw new IllegalArgumentException("scheme null in " + uri);
 
+		//noinspection EnhancedSwitchMigration
 		switch(scheme)
 		{
 			case "file":

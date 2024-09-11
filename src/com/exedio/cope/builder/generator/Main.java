@@ -80,6 +80,7 @@ final class Main
 	private static void printSummary(final Params params, final Model model, final ArrayList<Class<?>> skippedPackagePrefix,
 		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist, final int generatedBuilders)
 	{
+		//noinspection EnhancedSwitchMigration
 		switch(skippedPackagePrefix.size())
 		{
 			case 0: // nothing
