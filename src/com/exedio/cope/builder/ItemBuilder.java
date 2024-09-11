@@ -202,7 +202,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<I, B>> e
 		}
 
 		@SuppressWarnings("unchecked")
-		private <T> Condition equalCondition(final FunctionField<?> key, final SetValue<?> value)
+		private static <T> Condition equalCondition(final FunctionField<?> key, final SetValue<?> value)
 		{
 			//noinspection RedundantCast
 			return ((FunctionField<T>) key).equal(((SetValue<T>) value).value);
