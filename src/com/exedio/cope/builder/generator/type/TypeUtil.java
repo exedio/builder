@@ -64,28 +64,24 @@ public final class TypeUtil
 	@Nullable
 	public static String valueType(@Nonnull final Feature feature)
 	{
-		if(feature instanceof Settable<?>)
+		if(feature instanceof final Settable<?> field)
 		{
-			final Settable<?> field = (Settable<?>) feature;
 			final Type valueClass = field.getInitialType();
 			final Type primitiveClass = (valueClass instanceof Class && field.isMandatory())
 				? PrimitiveUtil.toPrimitive((Class<?>) valueClass)
 				: valueClass;
 			return getCanonicalName((primitiveClass != null) ? primitiveClass : Objects.requireNonNull(valueClass));
 		}
-		else if(feature instanceof SetField<?>)
+		else if(feature instanceof final SetField<?> field)
 		{
-			final SetField<?> field = (SetField<?>) feature;
 			return Set.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass()) + '>';
 		}
-		else if(feature instanceof ListField<?>)
+		else if(feature instanceof final ListField<?> field)
 		{
-			final ListField<?> field = (ListField<?>) feature;
 			return List.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass()) + '>';
 		}
-		else if(feature instanceof MapField<?, ?>)
+		else if(feature instanceof final MapField<?, ?> field)
 		{
-			final MapField<?, ?> field = (MapField<?, ?>) feature;
 			return Map.class.getName() + '<' + getCanonicalName(field.getKey().getValueClass()) + ',' + getCanonicalName(field.getValue().getValueClass())
 				+ '>';
 		}
@@ -97,9 +93,8 @@ public final class TypeUtil
 	{
 		if(feature instanceof Settable)
 		{
-			if(feature instanceof EnumMapField)
+			if(feature instanceof final EnumMapField<?, ?> field)
 			{
-				final EnumMapField<?, ?> field = (EnumMapField<?, ?>) feature;
 				return EnumMapField.class.getCanonicalName() + '<' + getCanonicalName(field.getKeyClass()) + ',' +
 					getCanonicalName(field.getValueClass()) + '>';
 			}
@@ -113,9 +108,8 @@ public final class TypeUtil
 		{
 			return ListField.class.getName() + '<' + getCanonicalName(((ListField<?>) feature).getElement().getValueClass()) + '>';
 		}
-		else if(feature instanceof MapField)
+		else if(feature instanceof final MapField<?, ?> field)
 		{
-			final MapField<?, ?> field = (MapField<?, ?>) feature;
 			return MapField.class.getName() + '<' + getCanonicalName(field.getKey().getValueClass()) + ',' +
 				getCanonicalName(field.getValue().getValueClass()) + '>';
 		}

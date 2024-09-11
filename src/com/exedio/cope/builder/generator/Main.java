@@ -51,10 +51,8 @@ final class Main
 		{
 			for(final Feature feature : type.getDeclaredFeatures())
 			{
-				if(!(feature instanceof CompositeField<?>))
+				if(!(feature instanceof final CompositeField<?> field))
 					continue;
-
-				final CompositeField<?> field = (CompositeField<?>) feature;
 
 				final Class<? extends Composite> clazz = field.getValueClass();
 				if(!params.matchesPackagePrefixes(clazz))
