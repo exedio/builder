@@ -1,11 +1,11 @@
 package com.exedio.cope.builder.test;
 
+import static com.exedio.cope.instrument.Visibility.NONE;
+
 import com.exedio.cope.Item;
 import com.exedio.cope.StringField;
 import com.exedio.cope.instrument.WrapperType;
 import com.exedio.cope.pattern.EnumMapField;
-
-import static com.exedio.cope.instrument.Visibility.NONE;
 
 @WrapperType(constructor = NONE, genericConstructor = NONE)
 final class PackageNameConflictItem extends Item {
