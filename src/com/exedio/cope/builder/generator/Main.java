@@ -51,10 +51,8 @@ final class Main
 		{
 			for(final Feature feature : type.getDeclaredFeatures())
 			{
-				if(!(feature instanceof CompositeField<?>))
+				if(!(feature instanceof final CompositeField<?> field))
 					continue;
-
-				final CompositeField<?> field = (CompositeField<?>) feature;
 
 				final Class<? extends Composite> clazz = field.getValueClass();
 				if(!params.matchesPackagePrefixes(clazz))
@@ -82,6 +80,7 @@ final class Main
 	private static void printSummary(final Params params, final Model model, final ArrayList<Class<?>> skippedPackagePrefix,
 		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist, final int generatedBuilders)
 	{
+		//noinspection EnhancedSwitchMigration
 		switch(skippedPackagePrefix.size())
 		{
 			case 0: // nothing

@@ -153,18 +153,16 @@ public final class Writer
 					"final int store",
 					"com.exedio.cope.pattern.Price.storeOf(store)");
 			}
-			else if(feature instanceof MoneyField)
+			else if(feature instanceof final MoneyField<?> field)
 			{
-				final MoneyField<?> field = (MoneyField<?>) feature;
 				final String currencyClass = TypeUtil.getCanonicalName(field.getCurrencyClass());
 				writeRedirectSetter(writer, featureIdentifier, "final double value," + "final " + currencyClass + " currency",
 					"com.exedio.cope.pattern.Money.valueOf(value,currency)");
 				writeRedirectSetter(writer, featureIdentifier, "final int store," + "final " + currencyClass + " currency",
 					"com.exedio.cope.pattern.Money.storeOf(store,currency)");
 			}
-			else if(feature instanceof ItemField)
+			else if(feature instanceof final ItemField<?> field)
 			{
-				final ItemField<?> field = (ItemField<?>) feature;
 				final Class<? extends Item> elementClass = field.getValueClass();
 				Type<?> elementType = null;
 				try
@@ -200,9 +198,8 @@ public final class Writer
 					}
 				}
 			}
-			else if(feature instanceof CompositeField)
+			else if(feature instanceof final CompositeField<?> field)
 			{
-				final CompositeField<?> field = (CompositeField<?>) feature;
 				final CompositeType myType = new CompositeType(field);
 				if(generated.contains(myType))
 				{
@@ -223,9 +220,8 @@ public final class Writer
 					System.out.println("Skip external composite lambda builder setter:" + field + " " + myType.getJavaClass());
 				}
 			}
-			else if(feature instanceof EnumMapField)
+			else if(feature instanceof final EnumMapField<?, ?> enumMapField)
 			{
-				final EnumMapField<?, ?> enumMapField = (EnumMapField<?, ?>) feature;
 				final Class<? extends Enum<?>> keyClass = enumMapField.getKeyClass();
 				final String enumKeyType = TypeUtil.getCanonicalName(enumMapField.getKeyClass());
 				final String enumValueType = TypeUtil.getCanonicalName(enumMapField.getValueClass());

@@ -53,7 +53,7 @@ final class Params
 				"packagePrefix \"" + packagePrefix + "\" must not end with dot.");
 
 		packagePrefixesMatch.add(packagePrefix + '.');
-		if(packagePrefixesDisplay.length() > 0)
+		if(!packagePrefixesDisplay.isEmpty())
 			packagePrefixesDisplay.append(',');
 		packagePrefixesDisplay.append(packagePrefix);
 	}

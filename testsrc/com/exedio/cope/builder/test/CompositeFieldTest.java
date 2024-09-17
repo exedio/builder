@@ -26,7 +26,6 @@ public class CompositeFieldTest extends MainTest
 	}
 
 	@Test
-	@SuppressWarnings("MisorderedAssertEqualsArguments") // OK: bug in idea
 	public void getOrBuild()
 	{
 		assertEquals(asList(), CompositeItem.TYPE.search());
