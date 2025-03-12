@@ -37,4 +37,21 @@ public class AbstractTest extends MainTest
 		assertTrue(Modifier.isPublic(MixedLevel2ItemBuilder.class.getDeclaredConstructor().getModifiers()));
 		assertEquals(asList(), asList(GeneratedAbstractLevel1ItemBuilder.class.getDeclaredClasses()));
 	}
+
+	@Test
+	public void typeFieldExplicit()
+	{
+		final ConcreteItem i = new ConcreteItemBuilder().
+			typeField(AbstractItem.TYPE).
+			build();
+		assertEquals(AbstractItem.TYPE, i.getTypeField());
+	}
+
+	@Test
+	public void typeFieldFallback()
+	{
+		final ConcreteItem i = new ConcreteItemBuilder().
+			build();
+		assertEquals(null, i.getTypeField());
+	}
 }

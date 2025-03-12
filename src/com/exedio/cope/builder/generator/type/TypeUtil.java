@@ -10,6 +10,7 @@ import com.exedio.cope.pattern.SetField;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.WildcardType;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,8 @@ public final class TypeUtil
 			return getCanonicalName((Class<?>) type);
 		else if(type instanceof ParameterizedType)
 			return getCanonicalName((ParameterizedType) type);
+		else if(type instanceof WildcardType)
+			return getCanonicalName((WildcardType) type);
 		else
 			throw new RuntimeException("Unhandled type " + type + " -- " + type.getClass());
 	}
@@ -46,6 +49,32 @@ public final class TypeUtil
 	private static String getCanonicalName(@Nonnull final Class<?> clazz)
 	{
 		return clazz.getCanonicalName() + typeParameterWildCards(clazz);
+	}
+
+	@Nonnull
+	private static String getCanonicalName(@Nonnull final WildcardType type)
+	{
+		final Type[] upper = type.getUpperBounds();
+		if(upper.length==1)
+		{
+			if(type.getLowerBounds().length!=0)
+				throw new RuntimeException(Arrays.toString(type.getLowerBounds()));
+
+			if(Object.class.equals(upper[0]))
+				return "?";
+
+			return "? extends " + getCanonicalName(upper[0]);
+		}
+
+		final Type[] lower = type.getLowerBounds();
+		if(lower.length==1)
+		{
+			if(upper.length!=0)
+				throw new RuntimeException(Arrays.toString(upper));
+			return "? super " + getCanonicalName(lower[0]);
+		}
+
+		throw new RuntimeException(Arrays.asList(upper).toString() + Arrays.asList(lower));
 	}
 
 	@Nonnull
@@ -122,6 +151,8 @@ public final class TypeUtil
 			return isVisible(packageName, (Class<?>) type);
 		else if(type instanceof ParameterizedType)
 			return isVisible(packageName, (ParameterizedType) type);
+		else if(type instanceof WildcardType)
+			return isVisible(packageName, (WildcardType) type);
 		else
 			throw new RuntimeException(type.getTypeName() + ' ' + type.getClass());
 	}
@@ -147,6 +178,19 @@ public final class TypeUtil
 			return false;
 
 		return packageName.equals(clazz.getPackage().getName());
+	}
+
+	private static boolean isVisible(final String packageName, final WildcardType type)
+	{
+		for(final Type argument : type.getUpperBounds())
+			if(!isVisible(packageName, argument))
+				return false;
+
+		for(final Type argument : type.getLowerBounds())
+			if(!isVisible(packageName, argument))
+				return false;
+
+		return true;
 	}
 
 	private TypeUtil()
