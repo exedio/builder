@@ -15,7 +15,9 @@ public final class ConcreteItem extends AbstractItem
 	@Wrapper(wrap="get", visibility=PUBLIC)
 	private static final IntegerField concreteField = new IntegerField().toFinal();
 
+	@Wrapper(wrap="get", visibility=PUBLIC)
 	private static final TypeField<AbstractItem> typeField = TypeField.create(AbstractItem.class).optional();
+
 	/**
 	 * Returns the value of {@link #concreteField}.
 	 */
@@ -31,7 +33,7 @@ public final class ConcreteItem extends AbstractItem
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
 	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
-	private com.exedio.cope.Type<? extends AbstractItem> getTypeField()
+	public final com.exedio.cope.Type<? extends AbstractItem> getTypeField()
 	{
 		return ConcreteItem.typeField.get(this);
 	}
