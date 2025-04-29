@@ -45,6 +45,7 @@ public final class Writer
 			if(type.enableCommonBuilder())
 			{
 				final String generics = "<" + simpleClassName + type.getWildCards() + "," + simpleClassName + "Builder>";
+				writer.writeLine("\t@com.exedio.cope.builder.Generated");
 				writer.writeLine(
 					"\tpublic static class " + simpleClassName + "Builder extends " + type.getPackageName() + ".Common" + simpleClassName + "Builder" + generics);
 				writer.writeLine("\t{");
