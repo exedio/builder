@@ -118,20 +118,18 @@ public final class Writer
 			if(feature instanceof ListField<?>)
 			{
 				final Class<?> elementClass = ((ListField<?>) feature).getElement().getValueClass();
-				final boolean safeVarargs = elementClass.getTypeParameters().length != 0;
 				final String itemClass = TypeUtil.getCanonicalName(elementClass);
 				final String parameterList = "final " + itemClass + "... " + featureIdentifier;
 				final String mapping = "java.util.Arrays.asList(" + featureIdentifier + ")";
-				writeRedirectSetter(writer, featureIdentifier, featureIdentifier, parameterList, mapping, safeVarargs);
+				writeRedirectSetter(writer, featureIdentifier, featureIdentifier, parameterList, mapping);
 			}
 			else if(feature instanceof SetField<?>)
 			{
 				final Class<?> elementClass = ((SetField<?>) feature).getElement().getValueClass();
-				final boolean safeVarargs = elementClass.getTypeParameters().length != 0;
 				final String itemClass = TypeUtil.getCanonicalName(elementClass);
 				final String parameterList = "final " + itemClass + "... " + featureIdentifier;
 				final String mapping = "new java.util.LinkedHashSet<>(java.util.Arrays.asList(" + featureIdentifier + "))";
-				writeRedirectSetter(writer, featureIdentifier, featureIdentifier, parameterList, mapping, safeVarargs);
+				writeRedirectSetter(writer, featureIdentifier, featureIdentifier, parameterList, mapping);
 			}
 			else if(feature instanceof RangeField<?>)
 			{
@@ -185,7 +183,7 @@ public final class Writer
 								featureIdentifier + "BuilderConsumer.apply( new " + itemClassBuilder + "() ).build()");
 							if(!field.isMandatory())
 							{
-								writeRedirectSetter(writer, featureIdentifier + "Null", featureIdentifier, "", "(" + itemClass + ") null", false);
+								writeRedirectSetter(writer, featureIdentifier + "Null", featureIdentifier, "", "(" + itemClass + ") null");
 							}
 						}
 					}
@@ -208,7 +206,7 @@ public final class Writer
 						featureIdentifier + "BuilderConsumer.apply( new " + compositeClassBuilder + "() ).build()");
 					if(!field.isMandatory())
 					{
-						writeRedirectSetter(writer, featureIdentifier + "Null", featureIdentifier, "", "(" + compositeClass + ") null", false);
+						writeRedirectSetter(writer, featureIdentifier + "Null", featureIdentifier, "", "(" + compositeClass + ") null");
 					}
 				}
 				else
@@ -262,16 +260,14 @@ public final class Writer
 	private static void writeRedirectSetter(final JavaClassWriter writer, final String featureIdentifier, final String parameterList, final String mapping
 	) throws IOException
 	{
-		writeRedirectSetter(writer, featureIdentifier, featureIdentifier, parameterList, mapping, false);
+		writeRedirectSetter(writer, featureIdentifier, featureIdentifier, parameterList, mapping);
 	}
 
 	private static void writeRedirectSetter(final JavaClassWriter writer, final String methodName, final String featureIdentifier,
-		final String parameterList, final String mapping, final boolean safeVarargs) throws IOException
+		final String parameterList, final String mapping) throws IOException
 	{
 		writer.writeLine();
 		writer.writeSetterAnnotation();
-		if(safeVarargs)
-			writer.writeLine("\t@SafeVarargs @SuppressWarnings(\"varargs\")");
 		writer.writeLine("\tpublic final B " + methodName + "(" + parameterList + ")");
 		writer.writeLine("\t{");
 		writer.writeLine("\t\treturn " + featureIdentifier + "(" + mapping + ");");
