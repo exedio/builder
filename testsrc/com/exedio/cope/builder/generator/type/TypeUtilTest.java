@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.exedio.cope.EnumField;
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.Item;
 import com.exedio.cope.ItemField;
@@ -145,5 +146,21 @@ public class TypeUtilTest extends MainTest
 			() -> assertEquals("Unhandled feature type: com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapKVZ<K,V,Z>", assertThrows(UnsupportedOperationException.class,
 				() -> TypeUtil.fieldType(new CustomMapKVZ<>(String.class, Long.class))).getMessage())
 		);
+	}
+
+	@Test
+	public void isEnumMapFieldLike()
+	{
+		// no enum
+		assertFalse(TypeUtil.isEnumMapFieldLike(new StringField()), "StringField");
+		assertFalse(TypeUtil.isEnumMapFieldLike(MapField.create(new StringField(), new LongField())), "MapField without Enum");
+		assertFalse(TypeUtil.isEnumMapFieldLike(new CustomMapXY<>(String.class, Long.class)), "CustomMap without Enum");
+
+		// no getField()
+		assertFalse(TypeUtil.isEnumMapFieldLike(MapField.create(EnumField.create(TestEnum.class), new LongField())), "MapField with Enum");
+
+		// ok
+		assertTrue(TypeUtil.isEnumMapFieldLike(EnumMapField.create(TestEnum.class, new LongField())), "EnumMapField");
+		assertTrue(TypeUtil.isEnumMapFieldLike(new CustomMapXY<>(TestEnum.class, Long.class)), "CustomMap with Enum");
 	}
 }

@@ -220,6 +220,25 @@ public final class TypeUtil
 		return true;
 	}
 
+	public static boolean isEnumMapFieldLike(final Feature feature)
+	{
+		if(!(feature instanceof final MapFieldInterface<?, ?> mapField))
+			return false;
+		final Class<?> key = mapField.getKeyClass();
+		if(!key.isEnum())
+			return false;
+
+		final boolean found = Arrays.stream(feature.getClass().getMethods())
+			.anyMatch(m -> "getField".equals(m.getName()) // TODO via interface
+				&& m.getParameterCount() == 1
+				&& (m.getParameterTypes()[0] == key || m.getParameterTypes()[0] == Enum.class || m.getParameterTypes()[0] == Object.class));
+		if(found)
+			return true;
+
+		System.out.println("Feature " + feature + " is missing a getField(K|Enum|Object key) method to generate key specific setter");
+		return false;
+	}
+
 	private TypeUtil()
 	{
 		// prevent instantiation

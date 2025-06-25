@@ -18,6 +18,11 @@ class DummyMapFeature<K, V> extends Feature implements MapFieldInterface<K, V>
 		this.value = value;
 	}
 
+	public Object getField(final K key)
+	{
+		return null;
+	}
+
 	@Override
 	public Class<K> getKeyClass()
 	{

@@ -13,9 +13,9 @@ import com.exedio.cope.builder.generator.type.MyType;
 import com.exedio.cope.builder.generator.type.TypeUtil;
 import com.exedio.cope.pattern.CompositeField;
 import com.exedio.cope.pattern.DynamicModel;
-import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
+import com.exedio.cope.pattern.MapFieldInterface;
 import com.exedio.cope.pattern.MoneyField;
 import com.exedio.cope.pattern.PriceField;
 import com.exedio.cope.pattern.RangeField;
@@ -102,7 +102,8 @@ public final class Writer
 				continue;
 			}
 
-			final boolean writeGenericSetter = !(feature instanceof EnumMapField); //set enum map by keys and skip common value setter, see below
+			final boolean isEnumMapFieldLike = TypeUtil.isEnumMapFieldLike(feature);
+			final boolean writeGenericSetter = !isEnumMapFieldLike; //set enum map by keys and skip common value setter, see below
 			if(writeGenericSetter)
 			{
 				writer.writeLine();
@@ -214,11 +215,13 @@ public final class Writer
 					System.out.println("Skip external composite lambda builder setter:" + field + " " + myType.getJavaClass());
 				}
 			}
-			else if(feature instanceof final EnumMapField<?, ?> enumMapField)
+			else if(isEnumMapFieldLike)
 			{
-				final Class<? extends Enum<?>> keyClass = enumMapField.getKeyClass();
-				final String enumKeyType = TypeUtil.getCanonicalName(enumMapField.getKeyClass());
-				final String enumValueType = TypeUtil.getCanonicalName(enumMapField.getValueClass());
+				final MapFieldInterface<?,?> mapField= (MapFieldInterface<?,?>)feature;
+				@SuppressWarnings("unchecked") // enforced by isEnumMapFieldLike
+				final Class<? extends Enum<?>> keyClass = (Class<? extends Enum<?>> ) mapField.getKeyClass();
+				final String enumKeyType = TypeUtil.getCanonicalName(mapField.getKeyClass());
+				final String enumValueType = TypeUtil.getCanonicalName(mapField.getValueClass());
 
 				writer.writeLine();
 				writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
@@ -234,7 +237,7 @@ public final class Writer
 				writer.writeSetterAnnotation();
 				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + enumKeyType + " key, final " + enumValueType + " value)");
 				writer.writeLine("\t{");
-				writer.writeLine("\t\treturn set(this." + featureIdentifier + ".getField(key), value);");
+				writer.writeLine("\t\treturn set(this." + featureIdentifier + ".getField(key), value);"); //TODO getField via an interface
 				writer.writeLine("\t}");
 
 				for(final Enum<?> e : keyClass.getEnumConstants())
