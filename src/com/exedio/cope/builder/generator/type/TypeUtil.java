@@ -142,7 +142,7 @@ public final class TypeUtil
 			return MapField.class.getName() + '<' + getCanonicalName(field.getKey().getValueClass()) + ',' +
 				getCanonicalName(field.getValue().getValueClass()) + '>';
 		}
-		throw new RuntimeException("" + feature.getClass());
+		throw new UnsupportedOperationException("Unhandled feature type: " + feature.getClass());
 	}
 
 	public static boolean isVisible(final String packageName, final Type type)
