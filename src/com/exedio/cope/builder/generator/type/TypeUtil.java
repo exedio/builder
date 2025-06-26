@@ -3,13 +3,14 @@ package com.exedio.cope.builder.generator.type;
 import com.exedio.cope.Feature;
 import com.exedio.cope.Settable;
 import com.exedio.cope.misc.PrimitiveUtil;
-import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
+import com.exedio.cope.pattern.MapFieldInterface;
 import com.exedio.cope.pattern.SetField;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.Arrays;
 import java.util.List;
@@ -120,13 +121,44 @@ public final class TypeUtil
 	@Nonnull
 	public static String fieldType(@Nonnull final Feature feature)
 	{
-		if(feature instanceof Settable)
+		if(feature instanceof final MapFieldInterface<?, ?> field)
 		{
-			if(feature instanceof final EnumMapField<?, ?> field)
+			final String featureClassName = field.getClass().getCanonicalName();
+			final TypeVariable<?>[] typeParams = field.getClass().getTypeParameters();
+			if(typeParams.length == 2)
 			{
-				return EnumMapField.class.getCanonicalName() + '<' + getCanonicalName(field.getKeyClass()) + ',' +
+				return featureClassName + '<' + getCanonicalName(field.getKeyClass()) + ',' +
 					getCanonicalName(field.getValueClass()) + '>';
 			}
+			else if(typeParams.length == 0)
+			{
+				return featureClassName;
+			}
+			else if(typeParams.length == 1)
+			{
+				//just a more than optimistic hack to guess the mapping
+				if("K".equals(typeParams[0].getName()))
+				{
+					return featureClassName + '<' + getCanonicalName(field.getKeyClass()) + '>';
+				}
+				else if("V".equals(typeParams[0].getName()))
+				{
+					return featureClassName + '<' + getCanonicalName(field.getValueClass()) + '>';
+				}
+				else
+				{
+					throw new UnsupportedOperationException(
+						"Unhandled feature type: " + featureClassName + "<" + typeParams[0] + ">");
+				}
+			}
+			else
+			{
+				throw new UnsupportedOperationException("Unhandled feature type: " + featureClassName +
+					"<" + Arrays.stream(typeParams).map(Type::getTypeName).collect(Collectors.joining(",")) + ">");
+			}
+		}
+		else if(feature instanceof Settable)
+		{
 			return Settable.class.getName() + '<' + getCanonicalName(((Settable<?>) feature).getInitialType()) + '>';
 		}
 		else if(feature instanceof SetField)
@@ -137,12 +169,7 @@ public final class TypeUtil
 		{
 			return ListField.class.getName() + '<' + getCanonicalName(((ListField<?>) feature).getElement().getValueClass()) + '>';
 		}
-		else if(feature instanceof final MapField<?, ?> field)
-		{
-			return MapField.class.getName() + '<' + getCanonicalName(field.getKey().getValueClass()) + ',' +
-				getCanonicalName(field.getValue().getValueClass()) + '>';
-		}
-		throw new UnsupportedOperationException("Unhandled feature type: " + feature.getClass());
+		throw new UnsupportedOperationException("Unhandled feature type: " + feature.getClass().getCanonicalName());
 	}
 
 	public static boolean isVisible(final String packageName, final Type type)
