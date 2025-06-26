@@ -1,16 +1,22 @@
 package com.exedio.cope.builder.generator.type;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.exedio.cope.IntegerField;
 import com.exedio.cope.Item;
 import com.exedio.cope.ItemField;
+import com.exedio.cope.LongField;
+import com.exedio.cope.Sequence;
 import com.exedio.cope.StringField;
+import com.exedio.cope.builder.other.OuterClass.TestEnum;
 import com.exedio.cope.builder.other.SubItem;
 import com.exedio.cope.builder.test.MainTest;
 import com.exedio.cope.misc.ReflectionTypes;
+import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
 import com.exedio.cope.pattern.SetField;
@@ -99,5 +105,24 @@ public class TypeUtilTest extends MainTest
 		assertFalse(TypeUtil.isVisible("any", ReflectionTypes.parameterized(Function.class, packageProtected, Function.class)));
 		assertTrue(
 			TypeUtil.isVisible("com.exedio.cope.builder.test.genericComplex", ReflectionTypes.parameterized(Function.class, packageProtected, Function.class)));
+	}
+
+	@Test
+	public void fieldType()
+	{
+		assertAll(
+			() -> assertEquals("com.exedio.cope.Settable<java.lang.String>",
+				TypeUtil.fieldType(new StringField())),
+			() -> assertEquals("com.exedio.cope.pattern.SetField<java.lang.String>",
+				TypeUtil.fieldType(SetField.create(new StringField()))),
+			() -> assertEquals("com.exedio.cope.pattern.ListField<java.lang.String>",
+				TypeUtil.fieldType(ListField.create(new StringField()))),
+			() -> assertEquals("com.exedio.cope.pattern.MapField<java.lang.String,java.lang.Long>",
+				TypeUtil.fieldType(MapField.create(new StringField(), new LongField()))),
+			() -> assertEquals("com.exedio.cope.pattern.EnumMapField<com.exedio.cope.builder.other.OuterClass.TestEnum,java.lang.String>",
+				TypeUtil.fieldType(EnumMapField.create(TestEnum.class, new StringField()))),
+			() -> assertEquals("Unhandled feature type: class com.exedio.cope.Sequence",
+				assertThrows(UnsupportedOperationException.class, () -> TypeUtil.fieldType(new Sequence(0))).getMessage())
+		);
 	}
 }
