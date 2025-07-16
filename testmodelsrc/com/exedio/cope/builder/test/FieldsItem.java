@@ -1,7 +1,6 @@
 package com.exedio.cope.builder.test;
 
 import static com.exedio.cope.instrument.Visibility.NONE;
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.exedio.cope.EnumField;
 import com.exedio.cope.IntegerField;
@@ -28,7 +27,7 @@ import com.exedio.cope.pattern.SetField;
 final class FieldsItem extends Item
 {
 	static final Media media = new Media().toFinal();
-	static final Hash hash = new Hash(MessageDigestHashAlgorithm.create(UTF_8, "MD5", 0, null, 1)).toFinal();
+	static final Hash hash = new Hash(MessageDigestHashAlgorithm.create("MD5", 0, null, 1)).toFinal();
 	static final PriceField price = new PriceField().toFinal();
 	static final MoneyField<Currency> money = MoneyField.exclusive(EnumField.create(Currency.class)).toFinal();
 	static final RangeField<Integer> range = RangeField.create(new IntegerField());
@@ -127,20 +126,6 @@ final class FieldsItem extends Item
 	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getBody")
 	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void getMediaBody(final java.nio.file.Path body)
-			throws
-				java.io.IOException
-	{
-		FieldsItem.media.getBody(this,body);
-	}
-
-	/**
-	 * Writes the body of media {@link #media} into the given file.
-	 * Does nothing, if the media is null.
-	 * @throws java.io.IOException if accessing {@code body} throws an IOException.
-	 */
-	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="getBody")
-	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
-	final void getMediaBody(final java.io.File body)
 			throws
 				java.io.IOException
 	{
