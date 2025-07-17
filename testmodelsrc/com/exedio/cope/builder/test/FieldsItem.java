@@ -1,6 +1,7 @@
 package com.exedio.cope.builder.test;
 
 import static com.exedio.cope.instrument.Visibility.NONE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.exedio.cope.EnumField;
 import com.exedio.cope.IntegerField;
@@ -16,7 +17,7 @@ import com.exedio.cope.pattern.Hash;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
 import com.exedio.cope.pattern.Media;
-import com.exedio.cope.pattern.MessageDigestAlgorithm;
+import com.exedio.cope.pattern.MessageDigestHashAlgorithm;
 import com.exedio.cope.pattern.Money;
 import com.exedio.cope.pattern.MoneyField;
 import com.exedio.cope.pattern.PriceField;
@@ -27,7 +28,7 @@ import com.exedio.cope.pattern.SetField;
 final class FieldsItem extends Item
 {
 	static final Media media = new Media().toFinal();
-	static final Hash hash = new Hash(new MessageDigestAlgorithm("MD5", 0, 1)).toFinal();
+	static final Hash hash = new Hash(MessageDigestHashAlgorithm.create(UTF_8, "MD5", 0, null, 1)).toFinal();
 	static final PriceField price = new PriceField().toFinal();
 	static final MoneyField<Currency> money = MoneyField.exclusive(EnumField.create(Currency.class)).toFinal();
 	static final RangeField<Integer> range = RangeField.create(new IntegerField());
