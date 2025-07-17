@@ -10,8 +10,7 @@ public class GenMid<L extends Collection<String>> extends GenSup<Long, L>
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(constructor=...) and @WrapperInitial
 	public GenMid()
 	{
-		this(new com.exedio.cope.SetValue<?>[]{
-		});
+		this(com.exedio.cope.SetValue.EMPTY_ARRAY);
 	}
 
 	/**
@@ -33,7 +32,7 @@ public class GenMid<L extends Collection<String>> extends GenSup<Long, L>
 	 * The persistent type information for genMid.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	public static final com.exedio.cope.Type<GenMid<?>> TYPE = com.exedio.cope.TypesBound.newType(classWildcard.value);
+	public static final com.exedio.cope.Type<GenMid<?>> TYPE = com.exedio.cope.TypesBound.newType(classWildcard.value,GenMid::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

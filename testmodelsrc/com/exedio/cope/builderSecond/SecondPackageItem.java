@@ -44,7 +44,7 @@ public final class SecondPackageItem extends Item
 	 * The persistent type information for secondPackageItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	public static final com.exedio.cope.Type<SecondPackageItem> TYPE = com.exedio.cope.TypesBound.newType(SecondPackageItem.class);
+	public static final com.exedio.cope.Type<SecondPackageItem> TYPE = com.exedio.cope.TypesBound.newType(SecondPackageItem.class,SecondPackageItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

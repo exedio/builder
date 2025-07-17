@@ -830,7 +830,7 @@ final class GenSource extends Item
 	 * The persistent type information for genSource.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	static final com.exedio.cope.Type<GenSource> TYPE = com.exedio.cope.TypesBound.newType(GenSource.class);
+	static final com.exedio.cope.Type<GenSource> TYPE = com.exedio.cope.TypesBound.newType(GenSource.class,GenSource::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

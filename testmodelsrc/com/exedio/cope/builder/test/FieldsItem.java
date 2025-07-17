@@ -523,7 +523,7 @@ final class FieldsItem extends Item
 	 * The persistent type information for fieldsItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	static final com.exedio.cope.Type<FieldsItem> TYPE = com.exedio.cope.TypesBound.newType(FieldsItem.class);
+	static final com.exedio.cope.Type<FieldsItem> TYPE = com.exedio.cope.TypesBound.newType(FieldsItem.class,FieldsItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

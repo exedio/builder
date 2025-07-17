@@ -72,7 +72,7 @@ final class UnknownPatternItem extends Item
 	 * The persistent type information for unknownPatternItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	static final com.exedio.cope.Type<UnknownPatternItem> TYPE = com.exedio.cope.TypesBound.newType(UnknownPatternItem.class);
+	static final com.exedio.cope.Type<UnknownPatternItem> TYPE = com.exedio.cope.TypesBound.newType(UnknownPatternItem.class,UnknownPatternItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

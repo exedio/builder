@@ -44,7 +44,7 @@ public final class SkippedBecauseNotInPackagePrefixItem extends Item
 	 * The persistent type information for skippedBecauseNotInPackagePrefixItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	public static final com.exedio.cope.Type<SkippedBecauseNotInPackagePrefixItem> TYPE = com.exedio.cope.TypesBound.newType(SkippedBecauseNotInPackagePrefixItem.class);
+	public static final com.exedio.cope.Type<SkippedBecauseNotInPackagePrefixItem> TYPE = com.exedio.cope.TypesBound.newType(SkippedBecauseNotInPackagePrefixItem.class,SkippedBecauseNotInPackagePrefixItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

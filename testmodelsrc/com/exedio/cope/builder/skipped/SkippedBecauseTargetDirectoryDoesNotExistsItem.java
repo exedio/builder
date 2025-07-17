@@ -44,7 +44,7 @@ public final class SkippedBecauseTargetDirectoryDoesNotExistsItem extends Item
 	 * The persistent type information for skippedBecauseTargetDirectoryDoesNotExistsItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	public static final com.exedio.cope.Type<SkippedBecauseTargetDirectoryDoesNotExistsItem> TYPE = com.exedio.cope.TypesBound.newType(SkippedBecauseTargetDirectoryDoesNotExistsItem.class);
+	public static final com.exedio.cope.Type<SkippedBecauseTargetDirectoryDoesNotExistsItem> TYPE = com.exedio.cope.TypesBound.newType(SkippedBecauseTargetDirectoryDoesNotExistsItem.class,SkippedBecauseTargetDirectoryDoesNotExistsItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.
