@@ -12,8 +12,7 @@ class GenSup<N extends Number, L extends Collection<String>> extends Item implem
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(constructor=...) and @WrapperInitial
 	GenSup()
 	{
-		this(new com.exedio.cope.SetValue<?>[]{
-		});
+		this(com.exedio.cope.SetValue.EMPTY_ARRAY);
 	}
 
 	/**
@@ -35,7 +34,7 @@ class GenSup<N extends Number, L extends Collection<String>> extends Item implem
 	 * The persistent type information for genSup.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	static final com.exedio.cope.Type<GenSup<?,?>> TYPE = com.exedio.cope.TypesBound.newType(classWildcard.value);
+	static final com.exedio.cope.Type<GenSup<?,?>> TYPE = com.exedio.cope.TypesBound.newType(classWildcard.value,GenSup::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

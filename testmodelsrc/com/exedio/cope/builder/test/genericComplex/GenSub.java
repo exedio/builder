@@ -10,8 +10,7 @@ final class GenSub extends GenMid<List<String>>
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(constructor=...) and @WrapperInitial
 	GenSub()
 	{
-		this(new com.exedio.cope.SetValue<?>[]{
-		});
+		this(com.exedio.cope.SetValue.EMPTY_ARRAY);
 	}
 
 	/**
@@ -27,7 +26,7 @@ final class GenSub extends GenMid<List<String>>
 	 * The persistent type information for genSub.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	static final com.exedio.cope.Type<GenSub> TYPE = com.exedio.cope.TypesBound.newType(GenSub.class);
+	static final com.exedio.cope.Type<GenSub> TYPE = com.exedio.cope.TypesBound.newType(GenSub.class,GenSub::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

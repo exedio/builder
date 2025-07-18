@@ -74,7 +74,7 @@ final class SourcePatternItem extends Item
 	 * The persistent type information for sourcePatternItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	static final com.exedio.cope.Type<SourcePatternItem> TYPE = com.exedio.cope.TypesBound.newType(SourcePatternItem.class);
+	static final com.exedio.cope.Type<SourcePatternItem> TYPE = com.exedio.cope.TypesBound.newType(SourcePatternItem.class,SourcePatternItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

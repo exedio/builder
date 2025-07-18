@@ -14,8 +14,7 @@ final class SourceFeatureClassItem extends Item
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(constructor=...) and @WrapperInitial
 	SourceFeatureClassItem()
 	{
-		this(new com.exedio.cope.SetValue<?>[]{
-		});
+		this(com.exedio.cope.SetValue.EMPTY_ARRAY);
 	}
 
 	/**
@@ -31,7 +30,7 @@ final class SourceFeatureClassItem extends Item
 	 * The persistent type information for sourceFeatureClassItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	static final com.exedio.cope.Type<SourceFeatureClassItem> TYPE = com.exedio.cope.TypesBound.newType(SourceFeatureClassItem.class);
+	static final com.exedio.cope.Type<SourceFeatureClassItem> TYPE = com.exedio.cope.TypesBound.newType(SourceFeatureClassItem.class,SourceFeatureClassItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

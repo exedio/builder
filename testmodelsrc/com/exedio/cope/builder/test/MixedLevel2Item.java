@@ -30,7 +30,7 @@ public class MixedLevel2Item extends AbstractLevel1Item
 	 * The persistent type information for mixedLevel2Item.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	public static final com.exedio.cope.Type<MixedLevel2Item> TYPE = com.exedio.cope.TypesBound.newType(MixedLevel2Item.class);
+	public static final com.exedio.cope.Type<MixedLevel2Item> TYPE = com.exedio.cope.TypesBound.newType(MixedLevel2Item.class,MixedLevel2Item::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

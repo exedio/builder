@@ -73,7 +73,7 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<O, B>> implements Bui
 
 	protected final <V> B set(final Settable<V> settable, final V value)
 	{
-		values.put(settable, settable.map(value));
+		values.put(settable, SetValue.mapAndCastToFeature(settable, value));
 		return self();
 	}
 

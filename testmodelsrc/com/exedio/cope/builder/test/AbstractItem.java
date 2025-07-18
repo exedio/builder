@@ -31,7 +31,7 @@ public abstract class AbstractItem extends Item
 	 * The persistent type information for abstractItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	public static final com.exedio.cope.Type<AbstractItem> TYPE = com.exedio.cope.TypesBound.newType(AbstractItem.class);
+	public static final com.exedio.cope.Type<AbstractItem> TYPE = com.exedio.cope.TypesBound.newTypeAbstract(AbstractItem.class);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

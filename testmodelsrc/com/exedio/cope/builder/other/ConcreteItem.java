@@ -57,7 +57,7 @@ public final class ConcreteItem extends AbstractItem
 	 * The persistent type information for concreteItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	public static final com.exedio.cope.Type<ConcreteItem> TYPE = com.exedio.cope.TypesBound.newType(ConcreteItem.class);
+	public static final com.exedio.cope.Type<ConcreteItem> TYPE = com.exedio.cope.TypesBound.newType(ConcreteItem.class,ConcreteItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

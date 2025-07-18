@@ -95,6 +95,8 @@ final class MyItem extends Item implements Money.Currency
 	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
 	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setRangeEnum(final com.exedio.cope.pattern.Range<? extends MyEnum> rangeEnum)
+			throws
+				com.exedio.cope.MandatoryViolationException
 	{
 		MyItem.rangeEnum.set(this,rangeEnum);
 	}
@@ -181,7 +183,7 @@ final class MyItem extends Item implements Money.Currency
 	 * The persistent type information for myItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	static final com.exedio.cope.Type<MyItem> TYPE = com.exedio.cope.TypesBound.newType(MyItem.class);
+	static final com.exedio.cope.Type<MyItem> TYPE = com.exedio.cope.TypesBound.newType(MyItem.class,MyItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

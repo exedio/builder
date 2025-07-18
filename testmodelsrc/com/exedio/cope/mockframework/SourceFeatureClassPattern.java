@@ -38,14 +38,14 @@ public final class SourceFeatureClassPattern extends Pattern
 	{
 		static final IntegerField integer = new IntegerField().optional();
 		BlockPublic(final BlockActivationParameters ap) { super(ap); }
-		static final BlockType<BlockPublic> TYPE = BlockType.newType(BlockPublic.class);
+		static final BlockType<BlockPublic> TYPE = BlockType.newType(BlockPublic.class, BlockPublic::new);
 		private static final long serialVersionUID = 1l;
 	}
 	static final class BlockPackage extends Block
 	{
 		static final IntegerField integer = new IntegerField().optional();
 		BlockPackage(final BlockActivationParameters ap) { super(ap); }
-		static final BlockType<BlockPackage> TYPE = BlockType.newType(BlockPackage.class);
+		static final BlockType<BlockPackage> TYPE = BlockType.newType(BlockPackage.class, BlockPackage::new);
 		private static final long serialVersionUID = 1l;
 	}
 

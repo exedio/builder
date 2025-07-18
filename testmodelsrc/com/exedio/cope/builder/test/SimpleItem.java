@@ -82,7 +82,7 @@ final class SimpleItem extends Item
 	 * The persistent type information for simpleItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	static final com.exedio.cope.Type<SimpleItem> TYPE = com.exedio.cope.TypesBound.newType(SimpleItem.class);
+	static final com.exedio.cope.Type<SimpleItem> TYPE = com.exedio.cope.TypesBound.newType(SimpleItem.class,SimpleItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

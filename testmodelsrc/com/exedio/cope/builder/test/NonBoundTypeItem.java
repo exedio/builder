@@ -100,7 +100,7 @@ final class NonBoundTypeItem extends Item
 	 * The persistent type information for nonBoundTypeItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	static final com.exedio.cope.Type<NonBoundTypeItem> TYPE = com.exedio.cope.TypesBound.newType(NonBoundTypeItem.class);
+	static final com.exedio.cope.Type<NonBoundTypeItem> TYPE = com.exedio.cope.TypesBound.newType(NonBoundTypeItem.class,NonBoundTypeItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

@@ -30,7 +30,7 @@ public class ConcreteLevel3Item extends MixedLevel2Item
 	 * The persistent type information for concreteLevel3Item.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	public static final com.exedio.cope.Type<ConcreteLevel3Item> TYPE = com.exedio.cope.TypesBound.newType(ConcreteLevel3Item.class);
+	public static final com.exedio.cope.Type<ConcreteLevel3Item> TYPE = com.exedio.cope.TypesBound.newType(ConcreteLevel3Item.class,ConcreteLevel3Item::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.

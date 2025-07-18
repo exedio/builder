@@ -31,7 +31,7 @@ public final class SubItem extends SuperItem
 	 * The persistent type information for subItem.
 	 */
 	@com.exedio.cope.instrument.Generated // customize with @WrapperType(type=...)
-	public static final com.exedio.cope.Type<SubItem> TYPE = com.exedio.cope.TypesBound.newType(SubItem.class);
+	public static final com.exedio.cope.Type<SubItem> TYPE = com.exedio.cope.TypesBound.newType(SubItem.class,SubItem::new);
 
 	/**
 	 * Activation constructor. Used for internal purposes only.
