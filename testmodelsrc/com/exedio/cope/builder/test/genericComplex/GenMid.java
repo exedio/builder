@@ -20,6 +20,7 @@ public class GenMid<L extends Collection<String>> extends GenSup<Long, L>
 	protected GenMid(final com.exedio.cope.SetValue<?>... setValues){super(setValues);}
 
 	@com.exedio.cope.instrument.Generated
+	@java.io.Serial
 	private static final long serialVersionUID = 1l;
 
 	/**

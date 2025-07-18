@@ -177,6 +177,7 @@ final class MyItem extends Item implements Money.Currency
 	}
 
 	@com.exedio.cope.instrument.Generated
+	@java.io.Serial
 	private static final long serialVersionUID = 1l;
 
 	/**

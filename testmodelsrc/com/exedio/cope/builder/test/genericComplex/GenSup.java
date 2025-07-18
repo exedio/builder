@@ -22,6 +22,7 @@ class GenSup<N extends Number, L extends Collection<String>> extends Item implem
 	protected GenSup(final com.exedio.cope.SetValue<?>... setValues){super(setValues);}
 
 	@com.exedio.cope.instrument.Generated
+	@java.io.Serial
 	private static final long serialVersionUID = 1l;
 
 	/**
