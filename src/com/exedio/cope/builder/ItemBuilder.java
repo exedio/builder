@@ -131,26 +131,6 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<I, B>> e
 	}
 
 	/**
-	 * @deprecated Use fields filled by {@link #getFeature(String)} instead.
-	 */
-	@Deprecated
-	@SuppressWarnings("unchecked")
-	protected final B set(final String featureName, final Object value)
-	{
-		final Feature feature = getFeature(featureName);
-		if(feature instanceof Settable<?>)
-			return set((Settable<Object>) feature, value);
-		else if(feature instanceof SetField<?>)
-			return set((SetField<Object>) feature, (Set<Object>) value); // TODO kaputt
-		else if(feature instanceof ListField<?>)
-			return set((ListField<Object>) feature, (List<Object>) value); // TODO kaputt
-		else if(feature instanceof MapField<?, ?>)
-			return set((MapField<Object, Object>) feature, (Map<Object, Object>) value); // TODO kaputt
-		else
-			throw new IllegalArgumentException(featureName);
-	}
-
-	/**
 	 * Build the resulting item.
 	 *
 	 * @return the created item

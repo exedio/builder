@@ -23,15 +23,6 @@ public abstract class CompositeBuilder<C extends Composite, B extends CompositeB
 		return result;
 	}
 
-	/**
-	 * @deprecated Use fields filled by {@link #getFeature(String)} instead.
-	 */
-	@Deprecated
-	protected final B set(final String featureName, final Object value)
-	{
-		return set(getFeature(featureName), value);
-	}
-
 	@Override
 	public C build()
 	{
