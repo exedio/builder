@@ -42,9 +42,7 @@
 		<dependency org="com.google.code.findbugs" name="jsr305" rev="3.0.2" conf="jsr305->default" />
 
 		<dependency org="com.exedio" name="copeutil" rev="483" conf="runtime->runtime; ide->sources,changelog" />
-		<dependency org="com.exedio" name="cope" rev="11740" conf="runtime->runtime; test->hsqldb; instrument->instrument,servlet; ide->sources,changelog" >
-			<exclude org="com.exedio" module="copeservletutil" />
-		</dependency>
+		<dependency org="com.exedio" name="cope" rev="11740" conf="runtime->runtime; test->hsqldb; instrument->instrument,servlet; ide->sources,changelog" />
 
 		<dependency org="com.exedio" name="pipeline-gdsl" rev="24" conf="jenkins->runtime,plugin; ide->changelog" />
 	</dependencies>
