@@ -1,11 +1,11 @@
 package com.exedio.cope.builder.generator.type;
 
-import com.exedio.cope.Feature;
 import com.exedio.cope.Item;
+import com.exedio.cope.Pattern;
 import com.exedio.cope.pattern.MapFieldInterface;
 import java.util.Map;
 
-class DummyMapFeature<K, V> extends Feature implements MapFieldInterface<K, V>
+class DummyMapFeature<K, V> extends Pattern implements MapFieldInterface<K, V>
 {
 	private static final long serialVersionUID = 1L;
 
