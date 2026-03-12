@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public final class TypeUtil
 {
@@ -85,8 +85,7 @@ public final class TypeUtil
 		return name + "<" + Arrays.stream(type.getActualTypeArguments()).map(TypeUtil::getCanonicalName).collect(Collectors.joining(",")) + ">";
 	}
 
-	@Nullable
-	public static String valueType(final Feature feature)
+	public static @Nullable String valueType(final Feature feature)
 	{
 		if(feature instanceof final Settable<?> field)
 		{
