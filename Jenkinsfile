@@ -159,7 +159,7 @@ try
 			assertIvyExtends("test", "runtime")
 			assertIvyExtends("ide", "runtime")
 			assertIvyExtends("ide", "test")
-			assertIvyExtends("ide", "jsr305")
+			assertIvyExtends("ide", "jspecify")
 			assertIvyExtends("ide", "ant")
 			assertIvyExtends("ide", "instrument")
 		}
