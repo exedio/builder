@@ -2,7 +2,6 @@ package com.exedio.cope.builder.generator.type;
 
 import com.exedio.cope.Feature;
 import java.util.List;
-import javax.annotation.Nonnull;
 
 public abstract class MyType<T>
 {
@@ -19,13 +18,11 @@ public abstract class MyType<T>
 		packageName = clazz.getPackage().getName();
 	}
 
-	@Nonnull
 	public final Class<? extends T> getJavaClass()
 	{
 		return clazz;
 	}
 
-	@Nonnull
 	public String getPackageName()
 	{
 		return packageName;
@@ -36,7 +33,6 @@ public abstract class MyType<T>
 		return simpleClassName;
 	}
 
-	@Nonnull
 	public final String getWildCards()
 	{
 		return wildCards;
@@ -46,16 +42,13 @@ public abstract class MyType<T>
 
 	public abstract String getName(Feature feature);
 
-	@Nonnull
 	public abstract String getExtends();
 
-	@Nonnull
 	public String getGenericParams()
 	{
 		return "<B extends Generated" + simpleClassName + "Builder<B>>";
 	}
 
-	@Nonnull
 	public String getTypeCast()
 	{
 		return "";

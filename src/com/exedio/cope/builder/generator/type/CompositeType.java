@@ -6,7 +6,6 @@ import com.exedio.cope.builder.CompositeBuilder;
 import com.exedio.cope.pattern.Composite;
 import com.exedio.cope.pattern.CompositeField;
 import java.util.List;
-import javax.annotation.Nonnull;
 
 public final class CompositeType extends MyType<Composite>
 {
@@ -33,7 +32,6 @@ public final class CompositeType extends MyType<Composite>
 			throw new RuntimeException("Not implemented");
 	}
 
-	@Nonnull
 	@Override
 	public String getExtends()
 	{
