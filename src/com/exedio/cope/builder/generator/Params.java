@@ -16,8 +16,10 @@ final class Params
 		this.model = ModelByString.get(model);
 	}
 
-	Model getModel()
+	Model getModel() throws HumanReadableException
 	{
+		if(model == null)
+			throw new HumanReadableException("attribute model is mandatory");
 		return model;
 	}
 

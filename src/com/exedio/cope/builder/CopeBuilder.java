@@ -98,7 +98,9 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<O, B>> implements Bui
 		final EnumMap<K, V> enumMap = new EnumMap<>(enumMapField.getKeyClass());
 		for(final K key : enumMapField.getKeyClass().getEnumConstants())
 		{
-			enumMap.put(key, get(enumMapField, key));
+			final V value = get(enumMapField, key);
+			if(value != null)
+				enumMap.put(key, value);
 		}
 		return enumMap;
 	}
