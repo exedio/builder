@@ -30,7 +30,7 @@ final class Main
 		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist = new HashMap<>();
 		final AtomicInteger progress = new AtomicInteger(0);
 		final HashSet<MyType<?>> generated = new HashSet<>();
-		final List<DelayedWriter> writer = new LinkedList<>();
+		final List<@Nullable DelayedWriter> writer = new LinkedList<>();
 		for(final Type<?> type : model.getTypes())
 		{
 			if(!type.isBound())
