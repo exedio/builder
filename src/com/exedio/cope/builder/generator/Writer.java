@@ -57,6 +57,7 @@ public final class Writer
 			}
 			else
 			{
+				writer.writeLine("\t@SuppressWarnings(\"unused\")");
 				writer.writeLine("\tprotected Generated" + simpleClassName + "Builder()");
 				writer.writeLine("\t{");
 				writer.writeLine("\t\tsuper(" + type.getTypeCast() + simpleClassName + '.' + type.getTypeName() + ");");
