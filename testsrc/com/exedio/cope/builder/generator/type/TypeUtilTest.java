@@ -166,36 +166,108 @@ public class TypeUtilTest extends MainTest
 			TypeUtil.isVisible("com.exedio.cope.builder.test.genericComplex", ReflectionTypes.parameterized(Function.class, packageProtected, Function.class)));
 	}
 
+	@SuppressWarnings("ConstantValue")
 	@Test
 	public void fieldType()
 	{
+		final String nullableAnnotation = null;
 		assertAll(
 			() -> assertEquals("com.exedio.cope.Settable<java.lang.String>",
-				TypeUtil.fieldType(new StringField())),
+				TypeUtil.fieldType(new StringField(), nullableAnnotation)),
 			() -> assertEquals("com.exedio.cope.pattern.SetField<java.lang.String>",
-				TypeUtil.fieldType(SetField.create(new StringField()))),
+				TypeUtil.fieldType(SetField.create(new StringField()), nullableAnnotation)),
 			() -> assertEquals("com.exedio.cope.pattern.ListField<java.lang.String>",
-				TypeUtil.fieldType(ListField.create(new StringField()))),
+				TypeUtil.fieldType(ListField.create(new StringField()), nullableAnnotation)),
 			() -> assertEquals("com.exedio.cope.pattern.MapField<java.lang.String,java.lang.Long>",
-				TypeUtil.fieldType(MapField.create(new StringField(), new LongField()))),
+				TypeUtil.fieldType(MapField.create(new StringField(), new LongField()), nullableAnnotation)),
 			() -> assertEquals("com.exedio.cope.pattern.EnumMapField<com.exedio.cope.builder.other.OuterClass.TestEnum,java.lang.String>",
-				TypeUtil.fieldType(EnumMapField.create(TestEnum.class, new StringField()))),
+				TypeUtil.fieldType(EnumMapField.create(TestEnum.class, new StringField()), nullableAnnotation)),
 			() -> assertEquals("Unhandled feature type: com.exedio.cope.Sequence",
-				assertThrows(UnsupportedOperationException.class, () -> TypeUtil.fieldType(new Sequence(0))).getMessage()),
+				assertThrows(UnsupportedOperationException.class, () -> TypeUtil.fieldType(new Sequence(0), nullableAnnotation)).getMessage()),
 
 			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapK<java.lang.String>",
-				TypeUtil.fieldType(new CustomMapK<>(String.class))),
+				TypeUtil.fieldType(new CustomMapK<>(String.class), nullableAnnotation)),
 			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapV<java.lang.Long>",
-				TypeUtil.fieldType(new CustomMapV<>(Long.class))),
+				TypeUtil.fieldType(new CustomMapV<>(Long.class), nullableAnnotation)),
 			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapKV<java.lang.String,java.lang.Long>",
-				TypeUtil.fieldType(new CustomMapKV<>(String.class, Long.class))),
+				TypeUtil.fieldType(new CustomMapKV<>(String.class, Long.class), nullableAnnotation)),
 			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapXY<java.lang.String,java.lang.Long>",
-				TypeUtil.fieldType(new CustomMapXY<>(String.class, Long.class))),
-			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMap", TypeUtil.fieldType(new CustomMap())),
+				TypeUtil.fieldType(new CustomMapXY<>(String.class, Long.class), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMap", TypeUtil.fieldType(new CustomMap(), nullableAnnotation)),
 			() -> assertEquals("Unhandled feature type: com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapX<X>", assertThrows(UnsupportedOperationException.class,
-				() -> TypeUtil.fieldType(new CustomMapX<>(String.class))).getMessage()),
+				() -> TypeUtil.fieldType(new CustomMapX<>(String.class), nullableAnnotation)).getMessage()),
 			() -> assertEquals("Unhandled feature type: com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapKVZ<K,V,Z>", assertThrows(UnsupportedOperationException.class,
-				() -> TypeUtil.fieldType(new CustomMapKVZ<>(String.class, Long.class))).getMessage())
+				() -> TypeUtil.fieldType(new CustomMapKVZ<>(String.class, Long.class), nullableAnnotation)).getMessage())
+		);
+	}
+
+	@Test
+	public void fieldType_withAnnotation()
+	{
+		final String nullableAnnotation = "org.jspecify.annotations.Nullable";
+		assertAll(
+			() -> assertEquals("com.exedio.cope.Settable<java.lang.String>",
+				TypeUtil.fieldType(new StringField(), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.pattern.SetField<java.lang.String>",
+				TypeUtil.fieldType(SetField.create(new StringField()), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.pattern.ListField<java.lang.String>",
+				TypeUtil.fieldType(ListField.create(new StringField()), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.pattern.MapField<java.lang.String,java.lang.Long>",
+				TypeUtil.fieldType(MapField.create(new StringField(), new LongField()), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.pattern.EnumMapField<com.exedio.cope.builder.other.OuterClass.TestEnum,java.lang.String>",
+				TypeUtil.fieldType(EnumMapField.create(TestEnum.class, new StringField()), nullableAnnotation)),
+			() -> assertEquals("Unhandled feature type: com.exedio.cope.Sequence",
+				assertThrows(UnsupportedOperationException.class, () -> TypeUtil.fieldType(new Sequence(0), nullableAnnotation)).getMessage()),
+
+			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapK<java.lang.String>",
+				TypeUtil.fieldType(new CustomMapK<>(String.class), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapV<java.lang.Long>",
+				TypeUtil.fieldType(new CustomMapV<>(Long.class), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapKV<java.lang.String,java.lang.Long>",
+				TypeUtil.fieldType(new CustomMapKV<>(String.class, Long.class), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapXY<java.lang.String,java.lang.Long>",
+				TypeUtil.fieldType(new CustomMapXY<>(String.class, Long.class), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMap", TypeUtil.fieldType(new CustomMap(), nullableAnnotation)),
+			() -> assertEquals("Unhandled feature type: com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapX<X>", assertThrows(UnsupportedOperationException.class,
+				() -> TypeUtil.fieldType(new CustomMapX<>(String.class), nullableAnnotation)).getMessage()),
+			() -> assertEquals("Unhandled feature type: com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapKVZ<K,V,Z>", assertThrows(UnsupportedOperationException.class,
+				() -> TypeUtil.fieldType(new CustomMapKVZ<>(String.class, Long.class), nullableAnnotation)).getMessage())
+		);
+	}
+
+	@Test
+	public void fieldType_withAnnotation_optional()
+	{
+		final String nullableAnnotation = "org.jspecify.annotations.Nullable";
+		assertAll(
+			() -> assertEquals("com.exedio.cope.Settable<java.lang.@org.jspecify.annotations.Nullable String>",
+				TypeUtil.fieldType(new StringField().optional(), nullableAnnotation)),
+			//always mandatory
+			() -> assertEquals("com.exedio.cope.pattern.SetField<java.lang.String>",
+				TypeUtil.fieldType(SetField.create(new StringField()), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.pattern.ListField<java.lang.@org.jspecify.annotations.Nullable String>",
+				TypeUtil.fieldType(ListField.create(new StringField().optional()), nullableAnnotation)),
+			//always mandatory
+			() -> assertEquals("com.exedio.cope.pattern.MapField<java.lang.String,java.lang.Long>",
+				TypeUtil.fieldType(MapField.create(new StringField(), new LongField()), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.pattern.EnumMapField<com.exedio.cope.builder.other.OuterClass.TestEnum,java.lang.@org.jspecify.annotations.Nullable String>",
+				TypeUtil.fieldType(EnumMapField.create(TestEnum.class, new StringField().optional()), nullableAnnotation)),
+			() -> assertEquals("Unhandled feature type: com.exedio.cope.Sequence",
+				assertThrows(UnsupportedOperationException.class, () -> TypeUtil.fieldType(new Sequence(0), nullableAnnotation)).getMessage()),
+
+			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapK<java.lang.String>",
+				TypeUtil.fieldType(new CustomMapK<>(String.class), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapV<java.lang.Long>",
+				TypeUtil.fieldType(new CustomMapV<>(Long.class), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapKV<java.lang.String,java.lang.Long>",
+				TypeUtil.fieldType(new CustomMapKV<>(String.class, Long.class), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapXY<java.lang.String,java.lang.Long>",
+				TypeUtil.fieldType(new CustomMapXY<>(String.class, Long.class), nullableAnnotation)),
+			() -> assertEquals("com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMap", TypeUtil.fieldType(new CustomMap(), nullableAnnotation)),
+			() -> assertEquals("Unhandled feature type: com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapX<X>", assertThrows(UnsupportedOperationException.class,
+				() -> TypeUtil.fieldType(new CustomMapX<>(String.class), nullableAnnotation)).getMessage()),
+			() -> assertEquals("Unhandled feature type: com.exedio.cope.builder.generator.type.DummyMapFeature.CustomMapKVZ<K,V,Z>", assertThrows(UnsupportedOperationException.class,
+				() -> TypeUtil.fieldType(new CustomMapKVZ<>(String.class, Long.class), nullableAnnotation)).getMessage())
 		);
 	}
 

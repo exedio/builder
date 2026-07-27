@@ -19,7 +19,7 @@ public abstract class GeneratedSimpleItemBuilder<B extends GeneratedSimpleItemBu
 		return set(this.integerMandatory,integerMandatory);
 	}
 
-	protected final com.exedio.cope.Settable<java.lang.Long> longOptional = getFeature("longOptional");
+	protected final com.exedio.cope.Settable<java.lang.@org.jspecify.annotations.Nullable Long> longOptional = getFeature("longOptional");
 
 	@com.exedio.cope.builder.Setter
 	public final B longOptional(final java.lang.@org.jspecify.annotations.Nullable Long longOptional)
@@ -27,7 +27,7 @@ public abstract class GeneratedSimpleItemBuilder<B extends GeneratedSimpleItemBu
 		return set(this.longOptional,longOptional);
 	}
 
-	protected final com.exedio.cope.Settable<java.lang.String> stringOptional = getFeature("stringOptional");
+	protected final com.exedio.cope.Settable<java.lang.@org.jspecify.annotations.Nullable String> stringOptional = getFeature("stringOptional");
 
 	@com.exedio.cope.builder.Setter
 	public final B stringOptional(final java.lang.@org.jspecify.annotations.Nullable String stringOptional)

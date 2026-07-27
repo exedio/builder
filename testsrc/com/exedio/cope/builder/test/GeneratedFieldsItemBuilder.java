@@ -164,7 +164,7 @@ public abstract class GeneratedFieldsItemBuilder<B extends GeneratedFieldsItemBu
 		return item(itemBuilderConsumer.apply( new com.exedio.cope.builder.test.SimpleItemBuilder() ).build());
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.builder.skipped.SkippedBecauseTargetDirectoryDoesNotExistsItem> skippedMissing = getFeature("skippedMissing");
+	protected final com.exedio.cope.Settable<com.exedio.cope.builder.skipped.@org.jspecify.annotations.Nullable SkippedBecauseTargetDirectoryDoesNotExistsItem> skippedMissing = getFeature("skippedMissing");
 
 	@com.exedio.cope.builder.Setter
 	public final B skippedMissing(final com.exedio.cope.builder.skipped.@org.jspecify.annotations.Nullable SkippedBecauseTargetDirectoryDoesNotExistsItem skippedMissing)
@@ -172,7 +172,7 @@ public abstract class GeneratedFieldsItemBuilder<B extends GeneratedFieldsItemBu
 		return set(this.skippedMissing,skippedMissing);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.builderSkipped.SkippedBecauseNotInPackagePrefixItem> skippedExcluded = getFeature("skippedExcluded");
+	protected final com.exedio.cope.Settable<com.exedio.cope.builderSkipped.@org.jspecify.annotations.Nullable SkippedBecauseNotInPackagePrefixItem> skippedExcluded = getFeature("skippedExcluded");
 
 	@com.exedio.cope.builder.Setter
 	public final B skippedExcluded(final com.exedio.cope.builderSkipped.@org.jspecify.annotations.Nullable SkippedBecauseNotInPackagePrefixItem skippedExcluded)

@@ -106,10 +106,11 @@ public final class Writer
 
 			final boolean isEnumMapFieldLike = TypeUtil.isEnumMapFieldLike(feature);
 			final boolean writeGenericSetter = !isEnumMapFieldLike; //set enum map by keys and skip common value setter, see below
+			final String fieldType = TypeUtil.fieldType(feature, params.getNullableAnnotation());
 			if(writeGenericSetter)
 			{
 				writer.writeLine();
-				writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
+				writer.writeLine("\tprotected final " + fieldType + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
 				writer.writeLine();
 				writer.writeSetterAnnotation();
 				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + valueType + " " + featureIdentifier + ")");
@@ -226,7 +227,7 @@ public final class Writer
 				final String enumValueType = TypeUtil.getCanonicalName(mapField.getValueClass());
 
 				writer.writeLine();
-				writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
+				writer.writeLine("\tprotected final " + fieldType + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
 				writer.writeLine();
 				writer.writeSetterAnnotation();
 				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + valueType + " " + featureIdentifier + ")");

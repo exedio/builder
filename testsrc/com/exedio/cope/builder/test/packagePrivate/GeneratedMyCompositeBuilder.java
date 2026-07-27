@@ -19,7 +19,7 @@ public abstract class GeneratedMyCompositeBuilder<B extends GeneratedMyComposite
 		return set(this.string,string);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.packagePrivate.MyEnum> enumF = getFeature("enumF");
+	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyEnum> enumF = getFeature("enumF");
 
 	@com.exedio.cope.builder.Setter
 	public final B enumF(final com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyEnum enumF)
@@ -27,7 +27,7 @@ public abstract class GeneratedMyCompositeBuilder<B extends GeneratedMyComposite
 		return set(this.enumF,enumF);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.packagePrivate.MyItem> item = getFeature("item");
+	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyItem> item = getFeature("item");
 
 	@com.exedio.cope.builder.Setter
 	public final B item(final com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyItem item)

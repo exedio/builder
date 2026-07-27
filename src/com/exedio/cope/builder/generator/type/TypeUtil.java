@@ -3,6 +3,7 @@ package com.exedio.cope.builder.generator.type;
 import com.exedio.cope.Feature;
 import com.exedio.cope.Settable;
 import com.exedio.cope.misc.PrimitiveUtil;
+import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
 import com.exedio.cope.pattern.MapFieldInterface;
@@ -137,16 +138,28 @@ public final class TypeUtil
 		return null;
 	}
 
-	public static String fieldType(final Feature feature)
+	public static String fieldType(final Feature feature, final @Nullable String nullableAnnotation)
 	{
 		if(feature instanceof final MapFieldInterface<?, ?> field)
 		{
 			final String featureClassName = field.getClass().getCanonicalName();
 			final TypeVariable<?>[] typeParams = field.getClass().getTypeParameters();
+			final String keyNullable = null; /*always mandatory*/
+			final String valueNullable;
+			if(field instanceof final EnumMapField<?, ?> enumMapField)
+			{
+				valueNullable = enumMapField.getValueTemplate().isMandatory() ? null : nullableAnnotation;
+			}
+			else
+			{
+				valueNullable = null; //MapField value is always mandatory; TODO handle other cases as needed
+			}
+
 			if(typeParams.length == 2)
 			{
-				return featureClassName + '<' + getCanonicalName(field.getKeyClass()) + ',' +
-					getCanonicalName(field.getValueClass()) + '>';
+				//noinspection ConstantValue
+				return featureClassName + '<' + getCanonicalName(field.getKeyClass(), keyNullable) + ',' +
+					getCanonicalName(field.getValueClass(), valueNullable) + '>';
 			}
 			else if(typeParams.length == 0)
 			{
@@ -157,11 +170,12 @@ public final class TypeUtil
 				//just a more than optimistic hack to guess the mapping
 				if("K".equals(typeParams[0].getName()))
 				{
-					return featureClassName + '<' + getCanonicalName(field.getKeyClass()) + '>';
+					//noinspection ConstantValue
+					return featureClassName + '<' + getCanonicalName(field.getKeyClass(), keyNullable) + '>';
 				}
 				else if("V".equals(typeParams[0].getName()))
 				{
-					return featureClassName + '<' + getCanonicalName(field.getValueClass()) + '>';
+					return featureClassName + '<' + getCanonicalName(field.getValueClass(), valueNullable) + '>';
 				}
 				else
 				{
@@ -175,17 +189,19 @@ public final class TypeUtil
 					"<" + Arrays.stream(typeParams).map(Type::getTypeName).collect(Collectors.joining(",")) + ">");
 			}
 		}
-		else if(feature instanceof Settable)
+		else if(feature instanceof final Settable<?> settable)
 		{
-			return Settable.class.getName() + '<' + getCanonicalName(((Settable<?>) feature).getInitialType()) + '>';
+			return Settable.class.getName() + '<' +
+				getCanonicalName(settable.getInitialType(), findNullableAnnotation(settable, nullableAnnotation)) + '>';
 		}
-		else if(feature instanceof SetField)
+		else if(feature instanceof final SetField<?> field)
 		{
-			return SetField.class.getName() + '<' + getCanonicalName(((SetField<?>) feature).getElement().getValueClass()) + '>';
+			return SetField.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass(), null /*always mandatory*/) + '>';
 		}
-		else if(feature instanceof ListField)
+		else if(feature instanceof final ListField<?> field)
 		{
-			return ListField.class.getName() + '<' + getCanonicalName(((ListField<?>) feature).getElement().getValueClass()) + '>';
+			return ListField.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass(),
+				findNullableAnnotation(field.getElement(), nullableAnnotation)) + '>';
 		}
 		throw new UnsupportedOperationException("Unhandled feature type: " + feature.getClass().getCanonicalName());
 	}
