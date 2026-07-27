@@ -16,6 +16,7 @@ public final class TestMain
 		add(
 			SimpleItem.TYPE,
 			FieldsItem.TYPE,
+			OptionalFieldsItem.TYPE,
 			SuperItem.TYPE, SubItem.TYPE,
 			AbstractItem.TYPE, ConcreteItem.TYPE,
 			CompositeItem.TYPE,

@@ -27,6 +27,8 @@ class FieldsItemBuilder extends GeneratedFieldsItemBuilder<FieldsItemBuilder>
 		fallback(this.enumMap, enumMap);
 		fallback(this.enumMap, TestEnum.two, "keyFallback2");//ignored
 
+		fallback(this.item, new SimpleItemBuilder());
+
 		return super.build();
 	}
 }

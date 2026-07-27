@@ -36,6 +36,8 @@ final class FieldsItem extends Item
 	static final SetField<String> set = SetField.create(new StringField());
 	static final ListField<String> list = ListField.create(new StringField());
 	static final MapField<String,String> map = MapField.create(new StringField().toFinal(), new StringField().toFinal());
+	static final ItemField<SimpleItem> item = ItemField.create(SimpleItem.class);
+
 	static final ItemField<SkippedBecauseTargetDirectoryDoesNotExistsItem> skippedMissing=
 		ItemField.create(SkippedBecauseTargetDirectoryDoesNotExistsItem.class).optional();
 	static final ItemField<SkippedBecauseNotInPackagePrefixItem> skippedExcluded=
@@ -43,6 +45,7 @@ final class FieldsItem extends Item
 
 	enum Currency implements Money.Currency { EUR, GBP }
 
+	// Add new fields also to OptionalFieldsItems
 
 	/**
 	 * Returns a URL the content of {@link #media} is available under.
@@ -460,6 +463,28 @@ final class FieldsItem extends Item
 	static final com.exedio.cope.ItemField<FieldsItem> mapParent()
 	{
 		return FieldsItem.map.getParent(FieldsItem.class);
+	}
+
+	/**
+	 * Returns the value of {@link #item}.
+	 */
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="get")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
+	final SimpleItem getItem()
+	{
+		return FieldsItem.item.get(this);
+	}
+
+	/**
+	 * Sets a new value for {@link #item}.
+	 */
+	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
+	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
+	final void setItem(final SimpleItem item)
+			throws
+				com.exedio.cope.MandatoryViolationException
+	{
+		FieldsItem.item.set(this,item);
 	}
 
 	/**

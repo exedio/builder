@@ -150,6 +150,20 @@ public abstract class GeneratedFieldsItemBuilder<B extends GeneratedFieldsItemBu
 		return set(this.map,map);
 	}
 
+	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.SimpleItem> item = getFeature("item");
+
+	@com.exedio.cope.builder.Setter
+	public final B item(final com.exedio.cope.builder.test.SimpleItem item)
+	{
+		return set(this.item,item);
+	}
+
+	@com.exedio.cope.builder.Setter
+	public final B item(final java.util.function.Function<com.exedio.cope.builder.test.SimpleItemBuilder, com.exedio.cope.builder.test.SimpleItemBuilder> itemBuilderConsumer)
+	{
+		return item(itemBuilderConsumer.apply( new com.exedio.cope.builder.test.SimpleItemBuilder() ).build());
+	}
+
 	protected final com.exedio.cope.Settable<com.exedio.cope.builder.skipped.SkippedBecauseTargetDirectoryDoesNotExistsItem> skippedMissing = getFeature("skippedMissing");
 
 	@com.exedio.cope.builder.Setter
