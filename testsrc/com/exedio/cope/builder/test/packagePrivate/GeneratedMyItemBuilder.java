@@ -14,7 +14,7 @@ public abstract class GeneratedMyItemBuilder<B extends GeneratedMyItemBuilder<B>
 	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.packagePrivate.MyEnum> enumF = getFeature("enumF");
 
 	@com.exedio.cope.builder.Setter
-	public final B enumF(final com.exedio.cope.builder.test.packagePrivate.MyEnum enumF)
+	public final B enumF(final com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyEnum enumF)
 	{
 		return set(this.enumF,enumF);
 	}
@@ -22,7 +22,7 @@ public abstract class GeneratedMyItemBuilder<B extends GeneratedMyItemBuilder<B>
 	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.packagePrivate.MyItem> item = getFeature("item");
 
 	@com.exedio.cope.builder.Setter
-	public final B item(final com.exedio.cope.builder.test.packagePrivate.MyItem item)
+	public final B item(final com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyItem item)
 	{
 		return set(this.item,item);
 	}
@@ -42,7 +42,7 @@ public abstract class GeneratedMyItemBuilder<B extends GeneratedMyItemBuilder<B>
 	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.packagePrivate.MyComposite> composite = getFeature("composite");
 
 	@com.exedio.cope.builder.Setter
-	public final B composite(final com.exedio.cope.builder.test.packagePrivate.MyComposite composite)
+	public final B composite(final com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyComposite composite)
 	{
 		return set(this.composite,composite);
 	}
@@ -76,7 +76,7 @@ public abstract class GeneratedMyItemBuilder<B extends GeneratedMyItemBuilder<B>
 	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.packagePrivate.MyEnum>> moneyEnum = getFeature("moneyEnum");
 
 	@com.exedio.cope.builder.Setter
-	public final B moneyEnum(final com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.packagePrivate.MyEnum> moneyEnum)
+	public final B moneyEnum(final com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Money<com.exedio.cope.builder.test.packagePrivate.MyEnum> moneyEnum)
 	{
 		return set(this.moneyEnum,moneyEnum);
 	}
@@ -96,7 +96,7 @@ public abstract class GeneratedMyItemBuilder<B extends GeneratedMyItemBuilder<B>
 	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.packagePrivate.MyItem>> moneyItem = getFeature("moneyItem");
 
 	@com.exedio.cope.builder.Setter
-	public final B moneyItem(final com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.packagePrivate.MyItem> moneyItem)
+	public final B moneyItem(final com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Money<com.exedio.cope.builder.test.packagePrivate.MyItem> moneyItem)
 	{
 		return set(this.moneyItem,moneyItem);
 	}

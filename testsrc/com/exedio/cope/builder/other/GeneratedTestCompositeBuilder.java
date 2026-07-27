@@ -22,7 +22,7 @@ public abstract class GeneratedTestCompositeBuilder<B extends GeneratedTestCompo
 	protected final com.exedio.cope.Settable<java.lang.Integer> integerOptional = getFeature("integerOptional");
 
 	@com.exedio.cope.builder.Setter
-	public final B integerOptional(final java.lang.Integer integerOptional)
+	public final B integerOptional(final java.lang.@org.jspecify.annotations.Nullable Integer integerOptional)
 	{
 		return set(this.integerOptional,integerOptional);
 	}

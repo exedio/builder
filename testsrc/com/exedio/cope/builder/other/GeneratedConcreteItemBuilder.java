@@ -22,7 +22,7 @@ public abstract class GeneratedConcreteItemBuilder<B extends GeneratedConcreteIt
 	protected final com.exedio.cope.Settable<com.exedio.cope.Type<? extends com.exedio.cope.builder.test.AbstractItem>> typeField = getFeature("typeField");
 
 	@com.exedio.cope.builder.Setter
-	public final B typeField(final com.exedio.cope.Type<? extends com.exedio.cope.builder.test.AbstractItem> typeField)
+	public final B typeField(final com.exedio.cope.@org.jspecify.annotations.Nullable Type<? extends com.exedio.cope.builder.test.AbstractItem> typeField)
 	{
 		return set(this.typeField,typeField);
 	}

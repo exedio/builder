@@ -22,7 +22,7 @@ public abstract class GeneratedMyCompositeBuilder<B extends GeneratedMyComposite
 	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.packagePrivate.MyEnum> enumF = getFeature("enumF");
 
 	@com.exedio.cope.builder.Setter
-	public final B enumF(final com.exedio.cope.builder.test.packagePrivate.MyEnum enumF)
+	public final B enumF(final com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyEnum enumF)
 	{
 		return set(this.enumF,enumF);
 	}
@@ -30,7 +30,7 @@ public abstract class GeneratedMyCompositeBuilder<B extends GeneratedMyComposite
 	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.packagePrivate.MyItem> item = getFeature("item");
 
 	@com.exedio.cope.builder.Setter
-	public final B item(final com.exedio.cope.builder.test.packagePrivate.MyItem item)
+	public final B item(final com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyItem item)
 	{
 		return set(this.item,item);
 	}

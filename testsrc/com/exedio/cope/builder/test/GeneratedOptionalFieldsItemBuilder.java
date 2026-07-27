@@ -14,7 +14,7 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Media.Value> media = getFeature("media");
 
 	@com.exedio.cope.builder.Setter
-	public final B media(final com.exedio.cope.pattern.Media.Value media)
+	public final B media(final com.exedio.cope.pattern.Media.@org.jspecify.annotations.Nullable Value media)
 	{
 		return set(this.media,media);
 	}
@@ -22,7 +22,7 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 	protected final com.exedio.cope.Settable<java.lang.String> hash = getFeature("hash");
 
 	@com.exedio.cope.builder.Setter
-	public final B hash(final java.lang.String hash)
+	public final B hash(final java.lang.@org.jspecify.annotations.Nullable String hash)
 	{
 		return set(this.hash,hash);
 	}
@@ -30,7 +30,7 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Price> price = getFeature("price");
 
 	@com.exedio.cope.builder.Setter
-	public final B price(final com.exedio.cope.pattern.Price price)
+	public final B price(final com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Price price)
 	{
 		return set(this.price,price);
 	}
@@ -50,7 +50,7 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.OptionalFieldsItem.Currency>> money = getFeature("money");
 
 	@com.exedio.cope.builder.Setter
-	public final B money(final com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.OptionalFieldsItem.Currency> money)
+	public final B money(final com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Money<com.exedio.cope.builder.test.OptionalFieldsItem.Currency> money)
 	{
 		return set(this.money,money);
 	}
@@ -117,7 +117,7 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 	protected final com.exedio.cope.pattern.ListField<java.lang.String> list = getFeature("list");
 
 	@com.exedio.cope.builder.Setter
-	public final B list(final java.util.List<java.lang.String> list)
+	public final B list(final java.util.List<java.lang.@org.jspecify.annotations.Nullable String> list)
 	{
 		return set(this.list,list);
 	}
@@ -131,7 +131,7 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.SimpleItem> item = getFeature("item");
 
 	@com.exedio.cope.builder.Setter
-	public final B item(final com.exedio.cope.builder.test.SimpleItem item)
+	public final B item(final com.exedio.cope.builder.test.@org.jspecify.annotations.Nullable SimpleItem item)
 	{
 		return set(this.item,item);
 	}

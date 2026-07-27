@@ -103,12 +103,16 @@
 		<generateCopeBuilder
 				model="com.exedio.cope.builder.test.TestMain#model"
 				packagePrefix="com.exedio.cope.builder,com.exedio.cope.builderSecond"
-				destdir="testsrc" />
+				destdir="testsrc"
+				nullableAnnotation="org.jspecify.annotations.Nullable"
+		/>
 		<echo message="do it twice to test modification detection" />
 		<generateCopeBuilder
 				model="com.exedio.cope.builder.test.TestMain#model"
 				packagePrefix="com.exedio.cope.builder,com.exedio.cope.builderSecond"
-				destdir="testsrc" />
+				destdir="testsrc"
+				nullableAnnotation="org.jspecify.annotations.Nullable"
+		/>
 	</target>
 
 	<target name="testsrc.compile" depends="src.compile, testmodelsrc.compile, testbuilder">
@@ -118,6 +122,7 @@
 				<pathelement location="build/testmodeljarsrc.jar" />
 				<pathelement location="build/classes/testmodelsrc" />
 				<fileset file="lib/instrument/exedio-cope-instrument-annotations.jar" />
+				<fileset dir="lib/jspecify" />
 				<fileset dir="lib/test" />
 			</classpath>
 		</compile>

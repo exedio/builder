@@ -97,7 +97,7 @@ public final class Writer
 			final String featureName = type.getName(feature);
 			final String featureIdentifier = featureName.replace('-', '_');
 
-			final String valueType = TypeUtil.valueType(feature);
+			final String valueType = TypeUtil.valueType(feature, params.getNullableAnnotation());
 			if(valueType == null)
 			{
 				System.out.println("Skipping setter for " + feature + ". Not implemented yet.");

@@ -102,27 +102,36 @@ public final class TypeUtil
 			+ ">";
 	}
 
-	public static @Nullable String valueType(final Feature feature)
+	private static @Nullable String findNullableAnnotation(final Settable<?> field, final @Nullable String nullableAnnotation)
+	{
+		return field.isMandatory() ? null : nullableAnnotation;
+	}
+
+	public static @Nullable String valueType(final Feature feature, final @Nullable String nullableAnnotation)
 	{
 		if(feature instanceof final Settable<?> field)
 		{
 			final Type valueClass = field.getInitialType();
 			final Type primitiveClass = (valueClass instanceof Class && field.isMandatory())
 				? PrimitiveUtil.toPrimitive((Class<?>) valueClass)
-				: valueClass;
-			return getCanonicalName((primitiveClass != null) ? primitiveClass : Objects.requireNonNull(valueClass));
+				: null;
+			if(primitiveClass != null)
+				return getCanonicalName(primitiveClass, null);
+			return getCanonicalName(Objects.requireNonNull(valueClass), findNullableAnnotation(field, nullableAnnotation));
 		}
 		else if(feature instanceof final SetField<?> field)
 		{
-			return Set.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass()) + '>';
+			return Set.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass(), null /*always mandatory*/) + '>';
 		}
 		else if(feature instanceof final ListField<?> field)
 		{
-			return List.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass()) + '>';
+			return List.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass(), findNullableAnnotation(field.getElement(), nullableAnnotation)) + '>';
 		}
 		else if(feature instanceof final MapField<?, ?> field)
 		{
-			return Map.class.getName() + '<' + getCanonicalName(field.getKey().getValueClass()) + ',' + getCanonicalName(field.getValue().getValueClass())
+			return Map.class.getName() + '<' +
+				getCanonicalName(field.getKey().getValueClass(), null /*always mandatory*/) + ',' +
+				getCanonicalName(field.getValue().getValueClass(), findNullableAnnotation(field.getValue(), nullableAnnotation))
 				+ '>';
 		}
 		return null;

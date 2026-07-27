@@ -85,21 +85,61 @@ public class TypeUtilTest extends MainTest
 		private static final long serialVersionUID = 1L;
 	}
 
+	@SuppressWarnings("ConstantValue")
 	@Test
 	public void valueType()
 	{
-		assertEquals("java.lang.String", TypeUtil.valueType(new StringField()));
-		assertEquals("com.exedio.cope.builder.other.SubItem", TypeUtil.valueType(ItemField.create(SubItem.class)));
-		assertEquals("int", TypeUtil.valueType(SubItem.TYPE.getFeature("subField")));
+		final String nullableAnnotation = null;
+		assertEquals("java.lang.String", TypeUtil.valueType(new StringField(), nullableAnnotation));
+		assertEquals("com.exedio.cope.builder.other.SubItem", TypeUtil.valueType(ItemField.create(SubItem.class), nullableAnnotation));
+		assertEquals("int", TypeUtil.valueType(new IntegerField(), nullableAnnotation));
 		final String pack = "com.exedio.cope.builder.generator.type.TypeUtilTest";
-		assertEquals(pack + ".WithOneUnboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneUnboundParam.class)));
-		assertEquals(pack + ".WithOneMultiboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneMultiboundParam.class)));
-		assertEquals(pack + ".WithTwoParams<?,?>", TypeUtil.valueType(ItemField.create(WithTwoParams.class)));
+		assertEquals(pack + ".WithOneUnboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneUnboundParam.class), nullableAnnotation));
+		assertEquals(pack + ".WithOneMultiboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneMultiboundParam.class), nullableAnnotation));
+		assertEquals(pack + ".WithTwoParams<?,?>", TypeUtil.valueType(ItemField.create(WithTwoParams.class), nullableAnnotation));
 
-		assertEquals("java.util.Set<java.lang.String>", TypeUtil.valueType(SetField.create(new StringField())));
-		assertEquals("java.util.List<java.lang.String>", TypeUtil.valueType(ListField.create(new StringField())));
+		assertEquals("java.util.Set<java.lang.String>", TypeUtil.valueType(SetField.create(new StringField()), nullableAnnotation));
+		assertEquals("java.util.List<java.lang.String>", TypeUtil.valueType(ListField.create(new StringField()), nullableAnnotation));
 		assertEquals("java.util.Map<java.lang.String,java.lang.Integer>",
-			TypeUtil.valueType(MapField.create(new StringField(), new IntegerField())));
+			TypeUtil.valueType(MapField.create(new StringField(), new IntegerField()), nullableAnnotation));
+	}
+
+	@Test
+	public void valueType_withAnnotation()
+	{
+		final String nullableAnnotation = "org.jspecify.annotations.Nullable";
+		assertEquals("java.lang.String", TypeUtil.valueType(new StringField(), nullableAnnotation));
+		assertEquals("com.exedio.cope.builder.other.SubItem", TypeUtil.valueType(ItemField.create(SubItem.class), nullableAnnotation));
+		assertEquals("int", TypeUtil.valueType(new IntegerField(), nullableAnnotation));
+		final String pack = "com.exedio.cope.builder.generator.type.TypeUtilTest";
+		assertEquals(pack + ".WithOneUnboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneUnboundParam.class), nullableAnnotation));
+		assertEquals(pack + ".WithOneMultiboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneMultiboundParam.class), nullableAnnotation));
+		assertEquals(pack + ".WithTwoParams<?,?>", TypeUtil.valueType(ItemField.create(WithTwoParams.class), nullableAnnotation));
+
+		assertEquals("java.util.Set<java.lang.String>", TypeUtil.valueType(SetField.create(new StringField()), nullableAnnotation));
+		assertEquals("java.util.List<java.lang.String>", TypeUtil.valueType(ListField.create(new StringField()), nullableAnnotation));
+		assertEquals("java.util.Map<java.lang.String,java.lang.Integer>",
+			TypeUtil.valueType(MapField.create(new StringField(), new IntegerField()), nullableAnnotation));
+	}
+
+	@Test
+	public void valueType_withAnnotation_optional()
+	{
+		final String nullableAnnotation = "org.jspecify.annotations.Nullable";
+		assertEquals("java.lang.@org.jspecify.annotations.Nullable String", TypeUtil.valueType(new StringField().optional(), nullableAnnotation));
+		assertEquals("com.exedio.cope.builder.other.@org.jspecify.annotations.Nullable SubItem", TypeUtil.valueType(ItemField.create(SubItem.class).optional(), nullableAnnotation));
+		assertEquals("java.lang.@org.jspecify.annotations.Nullable Integer", TypeUtil.valueType(new IntegerField().optional(), nullableAnnotation));
+		final String pack = "com.exedio.cope.builder.generator.type.TypeUtilTest";
+		assertEquals(pack + ".@org.jspecify.annotations.Nullable WithOneUnboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneUnboundParam.class).optional(), nullableAnnotation));
+		assertEquals(pack + ".@org.jspecify.annotations.Nullable WithOneMultiboundParam<?>", TypeUtil.valueType(ItemField.create(WithOneMultiboundParam.class).optional(), nullableAnnotation));
+		assertEquals(pack + ".@org.jspecify.annotations.Nullable WithTwoParams<?,?>", TypeUtil.valueType(ItemField.create(WithTwoParams.class).optional(), nullableAnnotation));
+
+		//always mandatory
+		assertEquals("java.util.Set<java.lang.String>", TypeUtil.valueType(SetField.create(new StringField()), nullableAnnotation));
+		assertEquals("java.util.List<java.lang.@org.jspecify.annotations.Nullable String>", TypeUtil.valueType(ListField.create(new StringField().optional()), nullableAnnotation));
+		//always mandatory
+		assertEquals("java.util.Map<java.lang.String,java.lang.Integer>",
+			TypeUtil.valueType(MapField.create(new StringField(), new IntegerField()), nullableAnnotation));
 	}
 
 	@SuppressWarnings({"unused", "EmptyClass"})
