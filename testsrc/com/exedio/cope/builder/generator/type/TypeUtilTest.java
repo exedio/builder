@@ -56,6 +56,17 @@ public class TypeUtilTest extends MainTest
 			TypeUtil.getCanonicalName(type));
 	}
 
+	@Test
+	public void getCanonicalName_annotation()
+	{
+		final String typeUse = "org.jspecify.annotations.Nullable";
+		assertEquals("java.lang.@org.jspecify.annotations.Nullable Object", TypeUtil.getCanonicalName(Object.class, typeUse));
+		assertEquals("java.util.function.@org.jspecify.annotations.Nullable BiFunction<?,?,?>", TypeUtil.getCanonicalName(BiFunction.class, typeUse));
+		final ParameterizedType type = ReflectionTypes.parameterized(BiFunction.class, Object.class, Function.class, Consumer.class);
+		assertEquals("java.util.function.@org.jspecify.annotations.Nullable BiFunction<java.lang.Object,java.util.function.Function<?,?>,java.util.function.Consumer<?>>",
+			TypeUtil.getCanonicalName(type, typeUse)); //TODO add custom type system if nested annotations are needed
+	}
+
 	@SuppressWarnings("unused")
 	private static class WithOneUnboundParam<X> extends Item
 	{

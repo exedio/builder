@@ -33,22 +33,37 @@ public final class TypeUtil
 
 	public static String getCanonicalName(final Type type)
 	{
+		return getCanonicalName(type, null);
+	}
+
+	public static String getCanonicalName(final Type type, final @Nullable String typeUseAnnotation)
+	{
 		if(type instanceof Class)
-			return getCanonicalName((Class<?>) type);
+			return getCanonicalName((Class<?>) type, typeUseAnnotation);
 		else if(type instanceof ParameterizedType)
-			return getCanonicalName((ParameterizedType) type);
+			return getCanonicalName((ParameterizedType) type, typeUseAnnotation);
 		else if(type instanceof WildcardType)
-			return getCanonicalName((WildcardType) type);
+			return getCanonicalName((WildcardType) type, typeUseAnnotation);
 		else
 			throw new RuntimeException("Unhandled type " + type + " -- " + type.getClass());
 	}
 
-	private static String getCanonicalName(final Class<?> clazz)
+	private static String canonicalNameWithTypeUseAnnotation(final Class<?> clazz, final @Nullable String typeUseAnnotation)
 	{
-		return clazz.getCanonicalName() + typeParameterWildCards(clazz);
+		final String name = clazz.getCanonicalName();
+		if(clazz.isPrimitive())
+			return name;
+		final int splitAt = name.lastIndexOf(".") + 1;
+		final String infix = typeUseAnnotation == null ? "" : "@" + typeUseAnnotation + " ";
+		return name.substring(0, splitAt) + infix + name.substring(splitAt);
 	}
 
-	private static String getCanonicalName(final WildcardType type)
+	private static String getCanonicalName(final Class<?> clazz, final @Nullable String typeUseAnnotation)
+	{
+		return canonicalNameWithTypeUseAnnotation(clazz, typeUseAnnotation) + typeParameterWildCards(clazz);
+	}
+
+	private static String getCanonicalName(final WildcardType type, final @Nullable String typeUseAnnotation)
 	{
 		final Type[] upper = type.getUpperBounds();
 		if(upper.length==1)
@@ -73,16 +88,18 @@ public final class TypeUtil
 		throw new RuntimeException(Arrays.asList(upper).toString() + Arrays.asList(lower));
 	}
 
-	private static String getCanonicalName(final ParameterizedType type)
+	private static String getCanonicalName(final ParameterizedType type, final @Nullable String typeUseAnnotation)
 	{
 		final Type ownerType = type.getOwnerType();
 		if(ownerType != null)
 			throw new IllegalArgumentException("ParameterizedType without owner:" + ownerType);
 
-		final String name = ((Class<?>)type.getRawType()).getCanonicalName();
+		final String name = canonicalNameWithTypeUseAnnotation((Class<?>) type.getRawType(), typeUseAnnotation);
 		if(type.getActualTypeArguments().length == 0) // TODO possible? add a test case
 			return name;
-		return name + "<" + Arrays.stream(type.getActualTypeArguments()).map(TypeUtil::getCanonicalName).collect(Collectors.joining(",")) + ">";
+		return name + "<" + Arrays.stream(type.getActualTypeArguments())
+			.map(TypeUtil::getCanonicalName).collect(Collectors.joining(","))
+			+ ">";
 	}
 
 	public static @Nullable String valueType(final Feature feature)
