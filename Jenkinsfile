@@ -6,11 +6,15 @@ import groovy.transform.stc.SimpleType
 @Field
 String projectNamePattern = "^exedio/([a-z]*)/.*" // depends on location of multibranch pipeline in jenkins
 @Field
+String debianRelease = 'bullseye' // NOTE: Affects the development system only
+@Field
+String debianSnapshot = '20220418' // NOTE: Affects the development system only
+@Field
 String jdk = 'openjdk-17'
 @Field
-String idea = '2023.2'
+String idea = '2026.2-PATCHED'
 @Field
-String ideaSHA256 = 'b1a5c267ca86850764b0541bee0c27af7d2082e55516e95a0c8d30539571735c'
+String ideaSHA256 = '3b273e8aee94c28975da8ba8ecb057ae5006e03f13e62e93ef22a0693dd24954'
 
 boolean isRelease = env.BRANCH_NAME=="master"
 
@@ -115,6 +119,8 @@ try
 		nodeCheckoutAndDelete {
 			def ideaImage = docker.build(
 				imageName('Idea'),
+				'--build-arg DEBIAN_RELEASE=' + debianRelease + ' ' +
+				'--build-arg DEBIAN_SNAPSHOT=' + debianSnapshot + ' ' +
 				'--build-arg JDK=' + jdk + ' ' +
 				'--build-arg IDEA=' + idea + ' ' +
 				'--build-arg IDEA_SHA256=' + ideaSHA256 + ' ' +
@@ -122,8 +128,10 @@ try
 			ideaImage.inside(dockerRunDefaults()) {
 				ant "src -Dskip.instrument=true"
 				shSilent "/opt/idea/bin/inspect.sh " + env.WORKSPACE + " 'Project Default' idea-inspection-output"
+				shSilent 'cp /tmp/idea/.cache/JetBrains/*/log/idea.log .'
 			}
-			archiveArtifacts 'idea-inspection-output/**'
+			archiveArtifacts 'idea-inspection-output/**,idea.log'
+			shSilent "rm idea-inspection-output/GrazieStyle.xml" // Grammar
 			// replace project dir to prevent UnsupportedOperationException - will not be exposed in artifacts
 			shSilent "find idea-inspection-output -name '*.xml' | " +
 			         "xargs --no-run-if-empty sed --in-place -- 's=\\\$PROJECT_DIR\\\$=" + env.WORKSPACE + "=g'"
