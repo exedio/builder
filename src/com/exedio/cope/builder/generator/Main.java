@@ -141,7 +141,7 @@ final class Main
 
 		generated.add(type);
 		return () -> {
-			writeGenerated(type, dir, progress, generated);
+			writeGenerated(params, type, dir, progress, generated);
 			writeConcrete(type, dir);
 		};
 	}
@@ -151,7 +151,7 @@ final class Main
 		void write() throws IOException;
 	}
 
-	private static void writeGenerated(final MyType<?> type, final File dir, final AtomicInteger progress, final Set<MyType<?>> generated) throws IOException
+	private static void writeGenerated(final Params params, final MyType<?> type, final File dir, final AtomicInteger progress, final Set<MyType<?>> generated) throws IOException
 	{
 		final File file = new File(dir, "Generated" + type.getSimpleClassName() + "Builder.java");
 		if(ModificationCheck.isNoUpdateRequired(type.getJavaClass(), file))
@@ -159,7 +159,7 @@ final class Main
 
 		try (JavaClassWriter writer = new JavaClassWriter(file))
 		{
-			Writer.writeGeneratedBuilder(type, writer, generated);
+			Writer.writeGeneratedBuilder(params, type, writer, generated);
 		}
 		progress.incrementAndGet();
 	}

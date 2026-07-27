@@ -27,7 +27,8 @@ import java.util.Set;
 
 public final class Writer
 {
-	static void writeGeneratedBuilder(final MyType<?> type, final JavaClassWriter writer, final Set<MyType<?>> generated) throws IOException
+	static void writeGeneratedBuilder(final Params params, final MyType<?> type, final JavaClassWriter writer, final Set<MyType<?>> generated)
+		throws IOException
 	{
 		final String simpleClassName = type.getSimpleClassName();
 
