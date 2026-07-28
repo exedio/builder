@@ -21,7 +21,7 @@ public class GenMid<L extends Collection<String>> extends GenSup<Long, L>
 
 	@com.exedio.cope.instrument.Generated
 	@java.io.Serial
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Use GenMid.classWildcard.value instead of GenMid.class to avoid rawtypes warnings.

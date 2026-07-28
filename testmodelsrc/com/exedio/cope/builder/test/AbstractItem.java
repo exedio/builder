@@ -26,7 +26,7 @@ public abstract class AbstractItem extends Item
 
 	@com.exedio.cope.instrument.Generated
 	@java.io.Serial
-	private static final long serialVersionUID = 2l;
+	private static final long serialVersionUID = 2L;
 
 	/**
 	 * The persistent type information for abstractItem.

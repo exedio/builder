@@ -23,7 +23,7 @@ class GenSup<N extends Number, L extends Collection<String>> extends Item implem
 
 	@com.exedio.cope.instrument.Generated
 	@java.io.Serial
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Use GenSup.classWildcard.value instead of GenSup.class to avoid rawtypes warnings.

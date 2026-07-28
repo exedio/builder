@@ -87,5 +87,5 @@ final class MyComposite extends Composite
 
 	@com.exedio.cope.instrument.Generated
 	@java.io.Serial
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1L;
 }
