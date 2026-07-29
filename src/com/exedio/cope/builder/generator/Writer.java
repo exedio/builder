@@ -119,26 +119,26 @@ public final class Writer
 				writer.writeLine("\t}");
 			}
 
-			if(feature instanceof ListField<?>)
+			if(feature instanceof final ListField<?> field)
 			{
-				final Class<?> elementClass = ((ListField<?>) feature).getElement().getValueClass();
-				final String itemClass = TypeUtil.getCanonicalName(elementClass);
+				final Class<?> elementClass = field.getElement().getValueClass();
+				final String itemClass = TypeUtil.valueType(field.getElement(), params.getNullableAnnotation());
 				final String parameterList = "final " + itemClass + "... " + featureIdentifier;
 				final String mapping = "java.util.Arrays.asList(" + featureIdentifier + ")";
 				writeRedirectSetter(writer, featureIdentifier, featureIdentifier, parameterList, mapping);
 			}
-			else if(feature instanceof SetField<?>)
+			else if(feature instanceof final SetField<?> field)
 			{
-				final Class<?> elementClass = ((SetField<?>) feature).getElement().getValueClass();
-				final String itemClass = TypeUtil.getCanonicalName(elementClass);
+				final Class<?> elementClass = field.getElement().getValueClass();
+				final String itemClass = TypeUtil.valueType(field.getElement(), params.getNullableAnnotation());
 				final String parameterList = "final " + itemClass + "... " + featureIdentifier;
 				final String mapping = "new java.util.LinkedHashSet<>(java.util.Arrays.asList(" + featureIdentifier + "))";
 				writeRedirectSetter(writer, featureIdentifier, featureIdentifier, parameterList, mapping);
 			}
-			else if(feature instanceof RangeField<?>)
+			else if(feature instanceof final RangeField<?> field)
 			{
-				final String fromClass = ((RangeField<?>) feature).getFrom().getValueClass().getCanonicalName();
-				final String toClass = ((RangeField<?>) feature).getTo().getValueClass().getCanonicalName();
+				final String fromClass = TypeUtil.valueType(field.getFrom(), params.getNullableAnnotation());
+				final String toClass = TypeUtil.valueType(field.getTo(), params.getNullableAnnotation());
 				final String parameterList = "final " + fromClass + " from, final " + toClass + " to";
 				writeRedirectSetter(writer, featureIdentifier, parameterList, "com.exedio.cope.pattern.Range.valueOf(from, to)");
 			}

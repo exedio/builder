@@ -59,16 +59,16 @@ public abstract class GeneratedMyItemBuilder<B extends GeneratedMyItemBuilder<B>
 		return composite((com.exedio.cope.builder.test.packagePrivate.MyComposite) null);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Range<com.exedio.cope.builder.test.packagePrivate.MyEnum>> rangeEnum = getFeature("rangeEnum");
+	protected final com.exedio.cope.pattern.RangeField<com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyEnum> rangeEnum = getFeature("rangeEnum");
 
 	@com.exedio.cope.builder.Setter
-	public final B rangeEnum(final com.exedio.cope.pattern.Range<com.exedio.cope.builder.test.packagePrivate.MyEnum> rangeEnum)
+	public final B rangeEnum(final com.exedio.cope.pattern.Range<com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyEnum> rangeEnum)
 	{
 		return set(this.rangeEnum,rangeEnum);
 	}
 
 	@com.exedio.cope.builder.Setter
-	public final B rangeEnum(final com.exedio.cope.builder.test.packagePrivate.MyEnum from, final com.exedio.cope.builder.test.packagePrivate.MyEnum to)
+	public final B rangeEnum(final com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyEnum from, final com.exedio.cope.builder.test.packagePrivate.@org.jspecify.annotations.Nullable MyEnum to)
 	{
 		return rangeEnum(com.exedio.cope.pattern.Range.valueOf(from, to));
 	}

@@ -67,16 +67,16 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 		return money(com.exedio.cope.pattern.Money.storeOf(store,currency));
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Range<java.lang.Integer>> range = getFeature("range");
+	protected final com.exedio.cope.pattern.RangeField<java.lang.@org.jspecify.annotations.Nullable Integer> range = getFeature("range");
 
 	@com.exedio.cope.builder.Setter
-	public final B range(final com.exedio.cope.pattern.Range<java.lang.Integer> range)
+	public final B range(final com.exedio.cope.pattern.Range<java.lang.@org.jspecify.annotations.Nullable Integer> range)
 	{
 		return set(this.range,range);
 	}
 
 	@com.exedio.cope.builder.Setter
-	public final B range(final java.lang.Integer from, final java.lang.Integer to)
+	public final B range(final java.lang.@org.jspecify.annotations.Nullable Integer from, final java.lang.@org.jspecify.annotations.Nullable Integer to)
 	{
 		return range(com.exedio.cope.pattern.Range.valueOf(from, to));
 	}
@@ -123,7 +123,7 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 	}
 
 	@com.exedio.cope.builder.Setter
-	public final B list(final java.lang.String... list)
+	public final B list(final java.lang.@org.jspecify.annotations.Nullable String... list)
 	{
 		return list(java.util.Arrays.asList(list));
 	}

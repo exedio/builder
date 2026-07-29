@@ -7,6 +7,8 @@ import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
 import com.exedio.cope.pattern.MapFieldInterface;
+import com.exedio.cope.pattern.Range;
+import com.exedio.cope.pattern.RangeField;
 import com.exedio.cope.pattern.SetField;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -110,7 +112,14 @@ public final class TypeUtil
 
 	public static @Nullable String valueType(final Feature feature, final @Nullable String nullableAnnotation)
 	{
-		if(feature instanceof final Settable<?> field)
+		if(feature instanceof final RangeField<?> field)
+		{
+			//TODO two different nullabilities
+			return Range.class.getName() + '<' +
+				getCanonicalName(field.getFrom().getValueClass(), findNullableAnnotation(field.getFrom(), nullableAnnotation))
+				+ '>';
+		}
+		else if(feature instanceof final Settable<?> field)
 		{
 			final Type valueClass = field.getInitialType();
 			final Type primitiveClass = (valueClass instanceof Class && field.isMandatory())
@@ -188,6 +197,13 @@ public final class TypeUtil
 				throw new UnsupportedOperationException("Unhandled feature type: " + featureClassName +
 					"<" + Arrays.stream(typeParams).map(Type::getTypeName).collect(Collectors.joining(",")) + ">");
 			}
+		}
+		else if(feature instanceof final RangeField<?> field)
+		{
+			//TODO two different nullabilities
+			return RangeField.class.getName() + '<' +
+				getCanonicalName(field.getFrom().getValueClass(), findNullableAnnotation(field.getFrom(), nullableAnnotation))
+				+ '>';
 		}
 		else if(feature instanceof final Settable<?> settable)
 		{

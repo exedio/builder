@@ -43,16 +43,16 @@ public abstract class GeneratedSourceFeatureClassItemBuilder<B extends Generated
 		return set(this.pattern_blockPackage_integer,pattern_blockPackage_integer);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Range<com.exedio.cope.mockframework.SourceFeatureClassPattern.EnumPublic>> pattern_rangeEnumPublic = getFeature("pattern-rangeEnumPublic");
+	protected final com.exedio.cope.pattern.RangeField<com.exedio.cope.mockframework.SourceFeatureClassPattern.@org.jspecify.annotations.Nullable EnumPublic> pattern_rangeEnumPublic = getFeature("pattern-rangeEnumPublic");
 
 	@com.exedio.cope.builder.Setter
-	public final B pattern_rangeEnumPublic(final com.exedio.cope.pattern.Range<com.exedio.cope.mockframework.SourceFeatureClassPattern.EnumPublic> pattern_rangeEnumPublic)
+	public final B pattern_rangeEnumPublic(final com.exedio.cope.pattern.Range<com.exedio.cope.mockframework.SourceFeatureClassPattern.@org.jspecify.annotations.Nullable EnumPublic> pattern_rangeEnumPublic)
 	{
 		return set(this.pattern_rangeEnumPublic,pattern_rangeEnumPublic);
 	}
 
 	@com.exedio.cope.builder.Setter
-	public final B pattern_rangeEnumPublic(final com.exedio.cope.mockframework.SourceFeatureClassPattern.EnumPublic from, final com.exedio.cope.mockframework.SourceFeatureClassPattern.EnumPublic to)
+	public final B pattern_rangeEnumPublic(final com.exedio.cope.mockframework.SourceFeatureClassPattern.@org.jspecify.annotations.Nullable EnumPublic from, final com.exedio.cope.mockframework.SourceFeatureClassPattern.@org.jspecify.annotations.Nullable EnumPublic to)
 	{
 		return pattern_rangeEnumPublic(com.exedio.cope.pattern.Range.valueOf(from, to));
 	}

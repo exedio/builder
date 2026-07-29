@@ -67,7 +67,7 @@ public abstract class GeneratedFieldsItemBuilder<B extends GeneratedFieldsItemBu
 		return money(com.exedio.cope.pattern.Money.storeOf(store,currency));
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Range<java.lang.Integer>> range = getFeature("range");
+	protected final com.exedio.cope.pattern.RangeField<java.lang.Integer> range = getFeature("range");
 
 	@com.exedio.cope.builder.Setter
 	public final B range(final com.exedio.cope.pattern.Range<java.lang.Integer> range)
@@ -76,7 +76,7 @@ public abstract class GeneratedFieldsItemBuilder<B extends GeneratedFieldsItemBu
 	}
 
 	@com.exedio.cope.builder.Setter
-	public final B range(final java.lang.Integer from, final java.lang.Integer to)
+	public final B range(final int from, final int to)
 	{
 		return range(com.exedio.cope.pattern.Range.valueOf(from, to));
 	}
