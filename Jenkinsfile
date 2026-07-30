@@ -6,9 +6,9 @@ import groovy.transform.stc.SimpleType
 @Field
 String projectNamePattern = "^exedio/([a-z]*)/.*" // depends on location of multibranch pipeline in jenkins
 @Field
-String debianRelease = 'bullseye' // NOTE: Affects the development system only
+String debianRelease = 'bullseye'
 @Field
-String debianSnapshot = '20220418' // NOTE: Affects the development system only
+String debianSnapshot = '20240904'
 @Field
 String jdk = 'openjdk-17'
 @Field
@@ -49,7 +49,8 @@ try
 				    ' "-Dbuild.revision=${BUILD_NUMBER}"' +
 				    ' "-Dbuild.tag=' + buildTag + '"' +
 				    ' -Dbuild.status=' + (isRelease?'release':'integration') +
-				    ' -Dinstrument.verify=true'
+				    ' -Dinstrument.verify=true' +
+				    ' -Ddisable-ansi-colors=true'
 			}
 
 			recordIssues(
@@ -144,12 +145,13 @@ try
 
 	parallelBranches["Ivy"] = {
 		def cache = 'jenkins-build-survivor-' + projectName() + "-Ivy"
-		lockNodeCheckoutAndDelete(cache) {
+		lockNodeCheckoutAndDelete(cache, "jenkins-build-survivor") {
 			mainImage(imageName('Ivy')).inside(
 				dockerRunDefaults('bridge') +
 				"--mount type=volume,src=" + cache + ",target=/var/jenkins-build-survivor") {
 				ant "-buildfile ivy" +
-				    " -Divy.user.home=/var/jenkins-build-survivor"
+				    " -Divy.user.home=/var/jenkins-build-survivor",
+				    "-Divy.xml.allow-doctype-processing=true -Divy.xml.external-resources=PROHIBIT"
 			}
 			archiveArtifacts 'ivy/artifacts/report/**'
 
@@ -191,7 +193,6 @@ finally
 String projectName()
 {
 	String jobName = env.JOB_NAME
-	//noinspection UnnecessaryQualifiedReference
 	java.util.regex.Matcher m = java.util.regex.Pattern.compile(projectNamePattern).
 			matcher(jobName)
 	if(!m.matches())
@@ -202,16 +203,18 @@ String projectName()
 	return result
 }
 
-void lockNodeCheckoutAndDelete(String resource, Closure body)
+void lockNodeCheckoutAndDelete(String resource, String additionalLabel = '', Closure body)
 {
 	lock(resource) {
-		nodeCheckoutAndDelete(body)
+		nodeCheckoutAndDelete(additionalLabel, body)
 	}
 }
 
-void nodeCheckoutAndDelete(@ClosureParams(value = SimpleType, options = ["Map<String, String>"]) Closure body)
+void nodeCheckoutAndDelete(
+	String additionalLabel = '',
+	@ClosureParams(value = SimpleType, options = ["Map<String, String>"]) Closure body)
 {
-	node('GitCloneExedio && docker') {
+	node('GitCloneExedio && docker' + (additionalLabel.isEmpty() ? '' : " && " + additionalLabel)) {
 		env.JENKINS_OWNER = shStdout("id --user") + ':' + shStdout("id --group")
 		try
 		{
@@ -238,6 +241,8 @@ def mainImage(String imageName)
 {
 	return docker.build(
 		imageName,
+		'--build-arg DEBIAN_RELEASE=' + debianRelease + ' ' +
+		'--build-arg DEBIAN_SNAPSHOT=' + debianSnapshot + ' ' +
 		'--build-arg JDK=' + jdk + ' ' +
 		'--build-arg JENKINS_OWNER=' + env.JENKINS_OWNER + ' ' +
 		'conf/main')
@@ -247,7 +252,7 @@ String imageName(String pipelineBranch, String subImage = '')
 {
 	String isoToday = new Date().format("yyyyMMdd")
 	String name = 'exedio-jenkins:' + jobNameAndBuildNumber() + '-' + pipelineBranch + '-' + isoToday
-	if (!subImage.isBlank()) name += '-' + subImage
+	if (!subImage.isEmpty()) name += '-' + subImage
 	return name
 }
 
@@ -279,7 +284,7 @@ void assertIvyExtends(String extendingConf, String parentConf)
 		" diff --recursive lib/" + parentConf + " lib/" + extendingConf +
 		" | grep --invert-match '^Only in lib/" + extendingConf + ": '" +
 		" > ivy/artifacts/ivyExtends" + extendingConf + ".txt")
-	if (status != 0 && status != 1) // https://www.man7.org/linux/man-pages/man1/diff.1.html
+	if (status!=0 && status!=1) // https://www.man7.org/linux/man-pages/man1/diff.1.html
 	{
 		error 'FAILURE because diff had trouble'
 	}
@@ -313,9 +318,9 @@ String shStdout(String script)
 	return ((String) sh(script: script, returnStdout: true)).trim()
 }
 
-void ant(String script)
+void ant(String script, String jvmargs = '')
 {
-	shSilent 'java -jar lib/ant/ant-launcher.jar -noinput ' + script
+	shSilent 'java ' + jvmargs + ' -jar lib/ant/ant-launcher.jar -noinput ' + script
 }
 
 void assertGitUnchanged()
