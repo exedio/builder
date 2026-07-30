@@ -1,5 +1,4 @@
-# Any ARG before the first FROM can be used in all FROM instruction of the Dockerfile.
-# https://docs.docker.com/reference/dockerfile/#understand-how-arg-and-from-interact
+# check=error=true;skip=InvalidDefaultArgInFrom
 ARG DEBIAN_RELEASE
 ARG DEBIAN_SNAPSHOT
 FROM debian:${DEBIAN_RELEASE}-${DEBIAN_SNAPSHOT}
@@ -28,9 +27,3 @@ EOF
 
 # keeping idea files  out of workspace, where they are scanned by idea inspections
 RUN echo "-Duser.home=/tmp/idea" >> /opt/idea/bin/idea64.vmoptions
-
-ARG IDEA
-LABEL purpose=jenkins-idea
-LABEL jdk=${JDK}
-LABEL idea=${IDEA}
-LABEL idea.properties=yes

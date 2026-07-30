@@ -1,4 +1,7 @@
-FROM debian:bullseye-20220418
+# check=error=true;skip=InvalidDefaultArgInFrom
+ARG DEBIAN_RELEASE
+ARG DEBIAN_SNAPSHOT
+FROM debian:${DEBIAN_RELEASE}-${DEBIAN_SNAPSHOT}
 
 ARG JDK
 RUN <<EOF
@@ -15,6 +18,3 @@ set -e
 mkdir /var/jenkins-build-survivor
 chown ${JENKINS_OWNER} /var/jenkins-build-survivor
 EOF
-
-LABEL purpose=jenkins
-LABEL jdk=${JDK}
