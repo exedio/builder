@@ -153,8 +153,6 @@ try
 			}
 			archiveArtifacts 'ivy/artifacts/report/**'
 
-			assertGitUnchanged()
-
 			// There should be an assertIvyExtends for each <conf name="abc" extends="def" /> in ivy/ivy.xml.
 			assertIvyExtends("test", "runtime")
 			assertIvyExtends("ide", "runtime")
@@ -222,6 +220,7 @@ void nodeCheckoutAndDelete(@ClosureParams(value = SimpleType, options = ["Map<St
 			updateGitlabCommitStatus state: 'running'
 
 			body.call(scmResult)
+			assertGitUnchanged()
 		}
 		finally
 		{
@@ -321,9 +320,9 @@ void ant(String script)
 
 void assertGitUnchanged()
 {
-	String gitStatus = shStdout "git status --porcelain --untracked-files=normal"
+	String gitStatus = shStdout "git -c core.excludesFile=.gitignore-jenkins status --porcelain --untracked-files=normal"
 	if (gitStatus != '')
 	{
-		error 'FAILURE because fetching dependencies produces git diff:\n' + gitStatus
+		error 'FAILURE because build produces git diff:\n' + gitStatus
 	}
 }
