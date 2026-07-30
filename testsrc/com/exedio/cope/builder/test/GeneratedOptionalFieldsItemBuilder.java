@@ -141,4 +141,10 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 	{
 		return item(itemBuilderConsumer.apply( new com.exedio.cope.builder.test.SimpleItemBuilder() ).build());
 	}
+
+	@com.exedio.cope.builder.Setter
+	public final B itemNull()
+	{
+		return item((com.exedio.cope.builder.test.SimpleItem) null);
+	}
 }
