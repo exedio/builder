@@ -33,7 +33,7 @@ final class OptionalFieldsItem extends Item
 	// SetField is always mandatory
 	static final ListField<String> list = ListField.create(new StringField().optional());
 	// MapField is always mandatory
-	static final ItemField<SimpleItem> item = ItemField.create(SimpleItem.class);
+	static final ItemField<SimpleItem> item = ItemField.create(SimpleItem.class).optional();
 
 	enum Currency implements Money.Currency { EUR, GBP }
 
@@ -348,8 +348,6 @@ final class OptionalFieldsItem extends Item
 	@com.exedio.cope.instrument.Generated // customize with @Wrapper(wrap="set")
 	@java.lang.SuppressWarnings({"FinalMethodInFinalClass","RedundantSuppression","TypeParameterExtendsFinalClass","UnnecessarilyQualifiedStaticUsage"})
 	final void setItem(final SimpleItem item)
-			throws
-				com.exedio.cope.MandatoryViolationException
 	{
 		OptionalFieldsItem.item.set(this,item);
 	}
