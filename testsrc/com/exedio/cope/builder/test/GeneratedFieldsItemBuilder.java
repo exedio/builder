@@ -67,7 +67,7 @@ public abstract class GeneratedFieldsItemBuilder<B extends GeneratedFieldsItemBu
 		return money(com.exedio.cope.pattern.Money.storeOf(store,currency));
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Range<java.lang.Integer>> range = getFeature("range");
+	protected final com.exedio.cope.pattern.RangeField<java.lang.Integer> range = getFeature("range");
 
 	@com.exedio.cope.builder.Setter
 	public final B range(final com.exedio.cope.pattern.Range<java.lang.Integer> range)
@@ -76,7 +76,7 @@ public abstract class GeneratedFieldsItemBuilder<B extends GeneratedFieldsItemBu
 	}
 
 	@com.exedio.cope.builder.Setter
-	public final B range(final java.lang.Integer from, final java.lang.Integer to)
+	public final B range(final int from, final int to)
 	{
 		return range(com.exedio.cope.pattern.Range.valueOf(from, to));
 	}
@@ -164,18 +164,18 @@ public abstract class GeneratedFieldsItemBuilder<B extends GeneratedFieldsItemBu
 		return item(itemBuilderConsumer.apply( new com.exedio.cope.builder.test.SimpleItemBuilder() ).build());
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.builder.skipped.SkippedBecauseTargetDirectoryDoesNotExistsItem> skippedMissing = getFeature("skippedMissing");
+	protected final com.exedio.cope.Settable<com.exedio.cope.builder.skipped.@org.jspecify.annotations.Nullable SkippedBecauseTargetDirectoryDoesNotExistsItem> skippedMissing = getFeature("skippedMissing");
 
 	@com.exedio.cope.builder.Setter
-	public final B skippedMissing(final com.exedio.cope.builder.skipped.SkippedBecauseTargetDirectoryDoesNotExistsItem skippedMissing)
+	public final B skippedMissing(final com.exedio.cope.builder.skipped.@org.jspecify.annotations.Nullable SkippedBecauseTargetDirectoryDoesNotExistsItem skippedMissing)
 	{
 		return set(this.skippedMissing,skippedMissing);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.builderSkipped.SkippedBecauseNotInPackagePrefixItem> skippedExcluded = getFeature("skippedExcluded");
+	protected final com.exedio.cope.Settable<com.exedio.cope.builderSkipped.@org.jspecify.annotations.Nullable SkippedBecauseNotInPackagePrefixItem> skippedExcluded = getFeature("skippedExcluded");
 
 	@com.exedio.cope.builder.Setter
-	public final B skippedExcluded(final com.exedio.cope.builderSkipped.SkippedBecauseNotInPackagePrefixItem skippedExcluded)
+	public final B skippedExcluded(final com.exedio.cope.builderSkipped.@org.jspecify.annotations.Nullable SkippedBecauseNotInPackagePrefixItem skippedExcluded)
 	{
 		return set(this.skippedExcluded,skippedExcluded);
 	}

@@ -103,4 +103,16 @@ final class Params
 	{
 		this.skipMissingTargetDirectory = skipMissingTargetDirectory;
 	}
+
+	private @Nullable String nullableAnnotation ;
+
+	public @Nullable String getNullableAnnotation()
+	{
+		return nullableAnnotation;
+	}
+
+	public void setNullableAnnotation(final @Nullable String nullableAnnotation)
+	{
+		this.nullableAnnotation = nullableAnnotation;
+	}
 }

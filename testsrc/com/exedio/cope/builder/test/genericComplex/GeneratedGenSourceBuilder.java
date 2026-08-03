@@ -11,26 +11,26 @@ public abstract class GeneratedGenSourceBuilder<B extends GeneratedGenSourceBuil
 		super(GenSource.TYPE);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.genericComplex.GenSup<?,?>> sup = getFeature("sup");
+	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.genericComplex.@org.jspecify.annotations.Nullable GenSup<?,?>> sup = getFeature("sup");
 
 	@com.exedio.cope.builder.Setter
-	public final B sup(final com.exedio.cope.builder.test.genericComplex.GenSup<?,?> sup)
+	public final B sup(final com.exedio.cope.builder.test.genericComplex.@org.jspecify.annotations.Nullable GenSup<?,?> sup)
 	{
 		return set(this.sup,sup);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.genericComplex.GenMid<?>> mid = getFeature("mid");
+	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.genericComplex.@org.jspecify.annotations.Nullable GenMid<?>> mid = getFeature("mid");
 
 	@com.exedio.cope.builder.Setter
-	public final B mid(final com.exedio.cope.builder.test.genericComplex.GenMid<?> mid)
+	public final B mid(final com.exedio.cope.builder.test.genericComplex.@org.jspecify.annotations.Nullable GenMid<?> mid)
 	{
 		return set(this.mid,mid);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.genericComplex.GenSub> sub = getFeature("sub");
+	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.genericComplex.@org.jspecify.annotations.Nullable GenSub> sub = getFeature("sub");
 
 	@com.exedio.cope.builder.Setter
-	public final B sub(final com.exedio.cope.builder.test.genericComplex.GenSub sub)
+	public final B sub(final com.exedio.cope.builder.test.genericComplex.@org.jspecify.annotations.Nullable GenSub sub)
 	{
 		return set(this.sub,sub);
 	}
@@ -47,10 +47,10 @@ public abstract class GeneratedGenSourceBuilder<B extends GeneratedGenSourceBuil
 		return sub((com.exedio.cope.builder.test.genericComplex.GenSub) null);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.genericComplex.GenSup<?,?>>> moneySup = getFeature("moneySup");
+	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Money<com.exedio.cope.builder.test.genericComplex.GenSup<?,?>>> moneySup = getFeature("moneySup");
 
 	@com.exedio.cope.builder.Setter
-	public final B moneySup(final com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.genericComplex.GenSup<?,?>> moneySup)
+	public final B moneySup(final com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Money<com.exedio.cope.builder.test.genericComplex.GenSup<?,?>> moneySup)
 	{
 		return set(this.moneySup,moneySup);
 	}
@@ -67,10 +67,10 @@ public abstract class GeneratedGenSourceBuilder<B extends GeneratedGenSourceBuil
 		return moneySup(com.exedio.cope.pattern.Money.storeOf(store,currency));
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.genericComplex.GenMid<?>>> moneyMid = getFeature("moneyMid");
+	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Money<com.exedio.cope.builder.test.genericComplex.GenMid<?>>> moneyMid = getFeature("moneyMid");
 
 	@com.exedio.cope.builder.Setter
-	public final B moneyMid(final com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.genericComplex.GenMid<?>> moneyMid)
+	public final B moneyMid(final com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Money<com.exedio.cope.builder.test.genericComplex.GenMid<?>> moneyMid)
 	{
 		return set(this.moneyMid,moneyMid);
 	}
@@ -87,10 +87,10 @@ public abstract class GeneratedGenSourceBuilder<B extends GeneratedGenSourceBuil
 		return moneyMid(com.exedio.cope.pattern.Money.storeOf(store,currency));
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.genericComplex.GenSub>> moneySub = getFeature("moneySub");
+	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Money<com.exedio.cope.builder.test.genericComplex.GenSub>> moneySub = getFeature("moneySub");
 
 	@com.exedio.cope.builder.Setter
-	public final B moneySub(final com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.genericComplex.GenSub> moneySub)
+	public final B moneySub(final com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Money<com.exedio.cope.builder.test.genericComplex.GenSub> moneySub)
 	{
 		return set(this.moneySub,moneySub);
 	}
@@ -191,10 +191,10 @@ public abstract class GeneratedGenSourceBuilder<B extends GeneratedGenSourceBuil
 		return listSub(java.util.Arrays.asList(listSub));
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.genericComplex.GenSub> subFallback = getFeature("subFallback");
+	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.genericComplex.@org.jspecify.annotations.Nullable GenSub> subFallback = getFeature("subFallback");
 
 	@com.exedio.cope.builder.Setter
-	public final B subFallback(final com.exedio.cope.builder.test.genericComplex.GenSub subFallback)
+	public final B subFallback(final com.exedio.cope.builder.test.genericComplex.@org.jspecify.annotations.Nullable GenSub subFallback)
 	{
 		return set(this.subFallback,subFallback);
 	}

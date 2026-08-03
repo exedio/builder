@@ -11,26 +11,26 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 		super(OptionalFieldsItem.TYPE);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Media.Value> media = getFeature("media");
+	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Media.@org.jspecify.annotations.Nullable Value> media = getFeature("media");
 
 	@com.exedio.cope.builder.Setter
-	public final B media(final com.exedio.cope.pattern.Media.Value media)
+	public final B media(final com.exedio.cope.pattern.Media.@org.jspecify.annotations.Nullable Value media)
 	{
 		return set(this.media,media);
 	}
 
-	protected final com.exedio.cope.Settable<java.lang.String> hash = getFeature("hash");
+	protected final com.exedio.cope.Settable<java.lang.@org.jspecify.annotations.Nullable String> hash = getFeature("hash");
 
 	@com.exedio.cope.builder.Setter
-	public final B hash(final java.lang.String hash)
+	public final B hash(final java.lang.@org.jspecify.annotations.Nullable String hash)
 	{
 		return set(this.hash,hash);
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Price> price = getFeature("price");
+	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Price> price = getFeature("price");
 
 	@com.exedio.cope.builder.Setter
-	public final B price(final com.exedio.cope.pattern.Price price)
+	public final B price(final com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Price price)
 	{
 		return set(this.price,price);
 	}
@@ -47,10 +47,10 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 		return price(com.exedio.cope.pattern.Price.storeOf(store));
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.OptionalFieldsItem.Currency>> money = getFeature("money");
+	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Money<com.exedio.cope.builder.test.OptionalFieldsItem.Currency>> money = getFeature("money");
 
 	@com.exedio.cope.builder.Setter
-	public final B money(final com.exedio.cope.pattern.Money<com.exedio.cope.builder.test.OptionalFieldsItem.Currency> money)
+	public final B money(final com.exedio.cope.pattern.@org.jspecify.annotations.Nullable Money<com.exedio.cope.builder.test.OptionalFieldsItem.Currency> money)
 	{
 		return set(this.money,money);
 	}
@@ -67,21 +67,21 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 		return money(com.exedio.cope.pattern.Money.storeOf(store,currency));
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.pattern.Range<java.lang.Integer>> range = getFeature("range");
+	protected final com.exedio.cope.pattern.RangeField<java.lang.@org.jspecify.annotations.Nullable Integer> range = getFeature("range");
 
 	@com.exedio.cope.builder.Setter
-	public final B range(final com.exedio.cope.pattern.Range<java.lang.Integer> range)
+	public final B range(final com.exedio.cope.pattern.Range<java.lang.@org.jspecify.annotations.Nullable Integer> range)
 	{
 		return set(this.range,range);
 	}
 
 	@com.exedio.cope.builder.Setter
-	public final B range(final java.lang.Integer from, final java.lang.Integer to)
+	public final B range(final java.lang.@org.jspecify.annotations.Nullable Integer from, final java.lang.@org.jspecify.annotations.Nullable Integer to)
 	{
 		return range(com.exedio.cope.pattern.Range.valueOf(from, to));
 	}
 
-	protected final com.exedio.cope.pattern.EnumMapField<com.exedio.cope.builder.other.OuterClass.TestEnum,java.lang.String> enumMap = getFeature("enumMap");
+	protected final com.exedio.cope.pattern.EnumMapField<com.exedio.cope.builder.other.OuterClass.TestEnum,java.lang.@org.jspecify.annotations.Nullable String> enumMap = getFeature("enumMap");
 
 	@com.exedio.cope.builder.Setter
 	public final B enumMap(final java.util.Map<com.exedio.cope.builder.other.OuterClass.TestEnum,java.lang.String> enumMap)
@@ -114,24 +114,24 @@ public abstract class GeneratedOptionalFieldsItemBuilder<B extends GeneratedOpti
 		return enumMap(com.exedio.cope.builder.other.OuterClass.TestEnum.three,three);
 	}
 
-	protected final com.exedio.cope.pattern.ListField<java.lang.String> list = getFeature("list");
+	protected final com.exedio.cope.pattern.ListField<java.lang.@org.jspecify.annotations.Nullable String> list = getFeature("list");
 
 	@com.exedio.cope.builder.Setter
-	public final B list(final java.util.List<java.lang.String> list)
+	public final B list(final java.util.List<java.lang.@org.jspecify.annotations.Nullable String> list)
 	{
 		return set(this.list,list);
 	}
 
 	@com.exedio.cope.builder.Setter
-	public final B list(final java.lang.String... list)
+	public final B list(final java.lang.@org.jspecify.annotations.Nullable String... list)
 	{
 		return list(java.util.Arrays.asList(list));
 	}
 
-	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.SimpleItem> item = getFeature("item");
+	protected final com.exedio.cope.Settable<com.exedio.cope.builder.test.@org.jspecify.annotations.Nullable SimpleItem> item = getFeature("item");
 
 	@com.exedio.cope.builder.Setter
-	public final B item(final com.exedio.cope.builder.test.SimpleItem item)
+	public final B item(final com.exedio.cope.builder.test.@org.jspecify.annotations.Nullable SimpleItem item)
 	{
 		return set(this.item,item);
 	}

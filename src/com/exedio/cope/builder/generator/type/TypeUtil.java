@@ -3,9 +3,12 @@ package com.exedio.cope.builder.generator.type;
 import com.exedio.cope.Feature;
 import com.exedio.cope.Settable;
 import com.exedio.cope.misc.PrimitiveUtil;
+import com.exedio.cope.pattern.EnumMapField;
 import com.exedio.cope.pattern.ListField;
 import com.exedio.cope.pattern.MapField;
 import com.exedio.cope.pattern.MapFieldInterface;
+import com.exedio.cope.pattern.Range;
+import com.exedio.cope.pattern.RangeField;
 import com.exedio.cope.pattern.SetField;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -33,22 +36,37 @@ public final class TypeUtil
 
 	public static String getCanonicalName(final Type type)
 	{
+		return getCanonicalName(type, null);
+	}
+
+	public static String getCanonicalName(final Type type, final @Nullable String typeUseAnnotation)
+	{
 		if(type instanceof Class)
-			return getCanonicalName((Class<?>) type);
+			return getCanonicalName((Class<?>) type, typeUseAnnotation);
 		else if(type instanceof ParameterizedType)
-			return getCanonicalName((ParameterizedType) type);
+			return getCanonicalName((ParameterizedType) type, typeUseAnnotation);
 		else if(type instanceof WildcardType)
-			return getCanonicalName((WildcardType) type);
+			return getCanonicalName((WildcardType) type, typeUseAnnotation);
 		else
 			throw new RuntimeException("Unhandled type " + type + " -- " + type.getClass());
 	}
 
-	private static String getCanonicalName(final Class<?> clazz)
+	private static String canonicalNameWithTypeUseAnnotation(final Class<?> clazz, final @Nullable String typeUseAnnotation)
 	{
-		return clazz.getCanonicalName() + typeParameterWildCards(clazz);
+		final String name = clazz.getCanonicalName();
+		if(clazz.isPrimitive())
+			return name;
+		final int splitAt = name.lastIndexOf(".") + 1;
+		final String infix = typeUseAnnotation == null ? "" : "@" + typeUseAnnotation + " ";
+		return name.substring(0, splitAt) + infix + name.substring(splitAt);
 	}
 
-	private static String getCanonicalName(final WildcardType type)
+	private static String getCanonicalName(final Class<?> clazz, final @Nullable String typeUseAnnotation)
+	{
+		return canonicalNameWithTypeUseAnnotation(clazz, typeUseAnnotation) + typeParameterWildCards(clazz);
+	}
+
+	private static String getCanonicalName(final WildcardType type, final @Nullable String typeUseAnnotation)
 	{
 		final Type[] upper = type.getUpperBounds();
 		if(upper.length==1)
@@ -73,54 +91,84 @@ public final class TypeUtil
 		throw new RuntimeException(Arrays.asList(upper).toString() + Arrays.asList(lower));
 	}
 
-	private static String getCanonicalName(final ParameterizedType type)
+	private static String getCanonicalName(final ParameterizedType type, final @Nullable String typeUseAnnotation)
 	{
 		final Type ownerType = type.getOwnerType();
 		if(ownerType != null)
 			throw new IllegalArgumentException("ParameterizedType without owner:" + ownerType);
 
-		final String name = ((Class<?>)type.getRawType()).getCanonicalName();
+		final String name = canonicalNameWithTypeUseAnnotation((Class<?>) type.getRawType(), typeUseAnnotation);
 		if(type.getActualTypeArguments().length == 0) // TODO possible? add a test case
 			return name;
-		return name + "<" + Arrays.stream(type.getActualTypeArguments()).map(TypeUtil::getCanonicalName).collect(Collectors.joining(",")) + ">";
+		return name + "<" + Arrays.stream(type.getActualTypeArguments())
+			.map(TypeUtil::getCanonicalName).collect(Collectors.joining(","))
+			+ ">";
 	}
 
-	public static @Nullable String valueType(final Feature feature)
+	private static @Nullable String findNullableAnnotation(final Settable<?> field, final @Nullable String nullableAnnotation)
 	{
-		if(feature instanceof final Settable<?> field)
+		return field.isMandatory() ? null : nullableAnnotation;
+	}
+
+	public static @Nullable String valueType(final Feature feature, final @Nullable String nullableAnnotation)
+	{
+		if(feature instanceof final RangeField<?> field)
+		{
+			//TODO two different nullabilities
+			return Range.class.getName() + '<' +
+				getCanonicalName(field.getFrom().getValueClass(), findNullableAnnotation(field.getFrom(), nullableAnnotation))
+				+ '>';
+		}
+		else if(feature instanceof final Settable<?> field)
 		{
 			final Type valueClass = field.getInitialType();
 			final Type primitiveClass = (valueClass instanceof Class && field.isMandatory())
 				? PrimitiveUtil.toPrimitive((Class<?>) valueClass)
-				: valueClass;
-			return getCanonicalName((primitiveClass != null) ? primitiveClass : Objects.requireNonNull(valueClass));
+				: null;
+			if(primitiveClass != null)
+				return getCanonicalName(primitiveClass, null);
+			return getCanonicalName(Objects.requireNonNull(valueClass), findNullableAnnotation(field, nullableAnnotation));
 		}
 		else if(feature instanceof final SetField<?> field)
 		{
-			return Set.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass()) + '>';
+			return Set.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass(), null /*always mandatory*/) + '>';
 		}
 		else if(feature instanceof final ListField<?> field)
 		{
-			return List.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass()) + '>';
+			return List.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass(), findNullableAnnotation(field.getElement(), nullableAnnotation)) + '>';
 		}
 		else if(feature instanceof final MapField<?, ?> field)
 		{
-			return Map.class.getName() + '<' + getCanonicalName(field.getKey().getValueClass()) + ',' + getCanonicalName(field.getValue().getValueClass())
+			return Map.class.getName() + '<' +
+				getCanonicalName(field.getKey().getValueClass(), null /*always mandatory*/) + ',' +
+				getCanonicalName(field.getValue().getValueClass(), findNullableAnnotation(field.getValue(), nullableAnnotation))
 				+ '>';
 		}
 		return null;
 	}
 
-	public static String fieldType(final Feature feature)
+	public static String fieldType(final Feature feature, final @Nullable String nullableAnnotation)
 	{
 		if(feature instanceof final MapFieldInterface<?, ?> field)
 		{
 			final String featureClassName = field.getClass().getCanonicalName();
 			final TypeVariable<?>[] typeParams = field.getClass().getTypeParameters();
+			final String keyNullable = null; /*always mandatory*/
+			final String valueNullable;
+			if(field instanceof final EnumMapField<?, ?> enumMapField)
+			{
+				valueNullable = enumMapField.getValueTemplate().isMandatory() ? null : nullableAnnotation;
+			}
+			else
+			{
+				valueNullable = null; //MapField value is always mandatory; TODO handle other cases as needed
+			}
+
 			if(typeParams.length == 2)
 			{
-				return featureClassName + '<' + getCanonicalName(field.getKeyClass()) + ',' +
-					getCanonicalName(field.getValueClass()) + '>';
+				//noinspection ConstantValue
+				return featureClassName + '<' + getCanonicalName(field.getKeyClass(), keyNullable) + ',' +
+					getCanonicalName(field.getValueClass(), valueNullable) + '>';
 			}
 			else if(typeParams.length == 0)
 			{
@@ -131,11 +179,12 @@ public final class TypeUtil
 				//just a more than optimistic hack to guess the mapping
 				if("K".equals(typeParams[0].getName()))
 				{
-					return featureClassName + '<' + getCanonicalName(field.getKeyClass()) + '>';
+					//noinspection ConstantValue
+					return featureClassName + '<' + getCanonicalName(field.getKeyClass(), keyNullable) + '>';
 				}
 				else if("V".equals(typeParams[0].getName()))
 				{
-					return featureClassName + '<' + getCanonicalName(field.getValueClass()) + '>';
+					return featureClassName + '<' + getCanonicalName(field.getValueClass(), valueNullable) + '>';
 				}
 				else
 				{
@@ -149,17 +198,26 @@ public final class TypeUtil
 					"<" + Arrays.stream(typeParams).map(Type::getTypeName).collect(Collectors.joining(",")) + ">");
 			}
 		}
-		else if(feature instanceof Settable)
+		else if(feature instanceof final RangeField<?> field)
 		{
-			return Settable.class.getName() + '<' + getCanonicalName(((Settable<?>) feature).getInitialType()) + '>';
+			//TODO two different nullabilities
+			return RangeField.class.getName() + '<' +
+				getCanonicalName(field.getFrom().getValueClass(), findNullableAnnotation(field.getFrom(), nullableAnnotation))
+				+ '>';
 		}
-		else if(feature instanceof SetField)
+		else if(feature instanceof final Settable<?> settable)
 		{
-			return SetField.class.getName() + '<' + getCanonicalName(((SetField<?>) feature).getElement().getValueClass()) + '>';
+			return Settable.class.getName() + '<' +
+				getCanonicalName(settable.getInitialType(), findNullableAnnotation(settable, nullableAnnotation)) + '>';
 		}
-		else if(feature instanceof ListField)
+		else if(feature instanceof final SetField<?> field)
 		{
-			return ListField.class.getName() + '<' + getCanonicalName(((ListField<?>) feature).getElement().getValueClass()) + '>';
+			return SetField.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass(), null /*always mandatory*/) + '>';
+		}
+		else if(feature instanceof final ListField<?> field)
+		{
+			return ListField.class.getName() + '<' + getCanonicalName(field.getElement().getValueClass(),
+				findNullableAnnotation(field.getElement(), nullableAnnotation)) + '>';
 		}
 		throw new UnsupportedOperationException("Unhandled feature type: " + feature.getClass().getCanonicalName());
 	}

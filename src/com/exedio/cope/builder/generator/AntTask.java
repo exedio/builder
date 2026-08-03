@@ -24,6 +24,11 @@ public final class AntTask extends Task
 		params.setDestdir(value);
 	}
 
+	public void setNullableAnnotation(final String value)
+	{
+		params.setNullableAnnotation(value);
+	}
+
 	@Override
 	public void execute() throws BuildException
 	{

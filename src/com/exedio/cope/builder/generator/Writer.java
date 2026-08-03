@@ -27,7 +27,8 @@ import java.util.Set;
 
 public final class Writer
 {
-	static void writeGeneratedBuilder(final MyType<?> type, final JavaClassWriter writer, final Set<MyType<?>> generated) throws IOException
+	static void writeGeneratedBuilder(final Params params, final MyType<?> type, final JavaClassWriter writer, final Set<MyType<?>> generated)
+		throws IOException
 	{
 		final String simpleClassName = type.getSimpleClassName();
 
@@ -96,7 +97,7 @@ public final class Writer
 			final String featureName = type.getName(feature);
 			final String featureIdentifier = featureName.replace('-', '_');
 
-			final String valueType = TypeUtil.valueType(feature);
+			final String valueType = TypeUtil.valueType(feature, params.getNullableAnnotation());
 			if(valueType == null)
 			{
 				System.out.println("Skipping setter for " + feature + ". Not implemented yet.");
@@ -105,10 +106,11 @@ public final class Writer
 
 			final boolean isEnumMapFieldLike = TypeUtil.isEnumMapFieldLike(feature);
 			final boolean writeGenericSetter = !isEnumMapFieldLike; //set enum map by keys and skip common value setter, see below
+			final String fieldType = TypeUtil.fieldType(feature, params.getNullableAnnotation());
 			if(writeGenericSetter)
 			{
 				writer.writeLine();
-				writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
+				writer.writeLine("\tprotected final " + fieldType + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
 				writer.writeLine();
 				writer.writeSetterAnnotation();
 				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + valueType + " " + featureIdentifier + ")");
@@ -117,26 +119,26 @@ public final class Writer
 				writer.writeLine("\t}");
 			}
 
-			if(feature instanceof ListField<?>)
+			if(feature instanceof final ListField<?> field)
 			{
-				final Class<?> elementClass = ((ListField<?>) feature).getElement().getValueClass();
-				final String itemClass = TypeUtil.getCanonicalName(elementClass);
+				final Class<?> elementClass = field.getElement().getValueClass();
+				final String itemClass = TypeUtil.valueType(field.getElement(), params.getNullableAnnotation());
 				final String parameterList = "final " + itemClass + "... " + featureIdentifier;
 				final String mapping = "java.util.Arrays.asList(" + featureIdentifier + ")";
 				writeRedirectSetter(writer, featureIdentifier, featureIdentifier, parameterList, mapping);
 			}
-			else if(feature instanceof SetField<?>)
+			else if(feature instanceof final SetField<?> field)
 			{
-				final Class<?> elementClass = ((SetField<?>) feature).getElement().getValueClass();
-				final String itemClass = TypeUtil.getCanonicalName(elementClass);
+				final Class<?> elementClass = field.getElement().getValueClass();
+				final String itemClass = TypeUtil.valueType(field.getElement(), params.getNullableAnnotation());
 				final String parameterList = "final " + itemClass + "... " + featureIdentifier;
 				final String mapping = "new java.util.LinkedHashSet<>(java.util.Arrays.asList(" + featureIdentifier + "))";
 				writeRedirectSetter(writer, featureIdentifier, featureIdentifier, parameterList, mapping);
 			}
-			else if(feature instanceof RangeField<?>)
+			else if(feature instanceof final RangeField<?> field)
 			{
-				final String fromClass = ((RangeField<?>) feature).getFrom().getValueClass().getCanonicalName();
-				final String toClass = ((RangeField<?>) feature).getTo().getValueClass().getCanonicalName();
+				final String fromClass = TypeUtil.valueType(field.getFrom(), params.getNullableAnnotation());
+				final String toClass = TypeUtil.valueType(field.getTo(), params.getNullableAnnotation());
 				final String parameterList = "final " + fromClass + " from, final " + toClass + " to";
 				writeRedirectSetter(writer, featureIdentifier, parameterList, "com.exedio.cope.pattern.Range.valueOf(from, to)");
 			}
@@ -225,7 +227,7 @@ public final class Writer
 				final String enumValueType = TypeUtil.getCanonicalName(mapField.getValueClass());
 
 				writer.writeLine();
-				writer.writeLine("\tprotected final " + TypeUtil.fieldType(feature) + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
+				writer.writeLine("\tprotected final " + fieldType + ' ' + featureIdentifier + " = getFeature(\"" + featureName + "\");");
 				writer.writeLine();
 				writer.writeSetterAnnotation();
 				writer.writeLine("\tpublic final B " + featureIdentifier + "(final " + valueType + " " + featureIdentifier + ")");
