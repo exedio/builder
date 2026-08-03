@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A generic base class for builders.
@@ -41,7 +42,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<I, B>> e
 		this.type = type;
 	}
 
-	protected final <V> boolean isSet(final ListField<V> field)
+	protected final <V extends @Nullable Object> boolean isSet(final ListField<V> field)
 	{
 		return listValues.containsKey(field);
 	}
@@ -70,28 +71,28 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<I, B>> e
 	}
 
 	@SuppressWarnings("unchecked")
-	protected final <V> Set<V> get(final SetField<V> field)
+	protected final <V> @Nullable Set<V> get(final SetField<V> field)
 	{
 		if(!setValues.containsKey(field))
 			return null;
 		return (Set<V>) setValues.get(field);
 	}
 
-	protected final <V> B fallback(final ListField<V> field, final List<V> value)
+	protected final <V extends @Nullable Object> B fallback(final ListField<V> field, final List<V> value)
 	{
 		if(!isSet(field))
 			set(field, value);
 		return self();
 	}
 
-	protected final <V> B set(final ListField<V> field, final List<V> value)
+	protected final <V extends @Nullable Object> B set(final ListField<V> field, final List<V> value)
 	{
 		listValues.put(field, value);
 		return self();
 	}
 
 	@SuppressWarnings("unchecked")
-	protected final <V> List<V> get(final ListField<V> field)
+	protected final <V extends @Nullable Object> @Nullable List<V> get(final ListField<V> field)
 	{
 		if(!listValues.containsKey(field))
 			return null;
@@ -112,7 +113,7 @@ public abstract class ItemBuilder<I extends Item, B extends ItemBuilder<I, B>> e
 	}
 
 	@SuppressWarnings("unchecked")
-	protected final <K, V> Map<K, V> get(final MapField<K, V> field)
+	protected final <K, V> @Nullable Map<K, V> get(final MapField<K, V> field)
 	{
 		if(!mapValues.containsKey(field))
 			return null;

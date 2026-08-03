@@ -19,10 +19,10 @@
 		<conf visibility="private" name="test" extends="runtime" />
 		<conf visibility="private" name="jacoco" />
 		<conf visibility="private" name="ant" />
-		<conf visibility="private" name="jsr305" />
+		<conf visibility="private" name="jspecify" />
 		<conf visibility="private" name="instrument" />
 		<conf visibility="private" name="jenkins" />
-		<conf visibility="private" name="ide" extends="runtime,test,jsr305,ant,instrument"
+		<conf visibility="private" name="ide" extends="runtime,test,jspecify,ant,instrument"
 			  description="classpath for IDEs such as Eclipse and IntelliJ, includes java sources and changelogs" />
 	</configurations>
 	<publications>
@@ -39,7 +39,7 @@
 
 		<dependency org="org.jacoco" name="org.jacoco.ant" rev="0.8.12" conf="jacoco->default" />
 
-		<dependency org="com.google.code.findbugs" name="jsr305" rev="3.0.2" conf="jsr305->default" />
+		<dependency org="org.jspecify" name="jspecify" rev="1.0.0" conf="jspecify->default" />
 
 		<dependency org="com.exedio" name="copeutil" rev="1041" conf="runtime->runtime; ide->sources,changelog" />
 		<dependency org="com.exedio" name="cope" rev="12354" conf="runtime->runtime; test->hsqldb; instrument->instrument,servlet; ide->sources,changelog" />

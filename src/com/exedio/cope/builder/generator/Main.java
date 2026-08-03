@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 final class Main
 {
@@ -30,7 +30,7 @@ final class Main
 		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist = new HashMap<>();
 		final AtomicInteger progress = new AtomicInteger(0);
 		final HashSet<MyType<?>> generated = new HashSet<>();
-		final List<DelayedWriter> writer = new LinkedList<>();
+		final List<@Nullable DelayedWriter> writer = new LinkedList<>();
 		for(final Type<?> type : model.getTypes())
 		{
 			if(!type.isBound())
@@ -106,8 +106,8 @@ final class Main
 		}
 	}
 
-	@Nullable
-	private static DelayedWriter writeFiles(
+
+	private static @Nullable DelayedWriter writeFiles(
 		final Params params,
 		final MyType<?> type,
 		final HashMap<File, ArrayList<Class<?>>> skippedTargetDirectoryDoesNotExist,

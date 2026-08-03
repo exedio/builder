@@ -20,7 +20,7 @@ class DummyMapFeature<K, V> extends Pattern implements MapFieldInterface<K, V>
 
 	public Object getField(final K key)
 	{
-		return null;
+		throw new UnsupportedOperationException("Not implemented");
 	}
 
 	@Override
@@ -38,7 +38,7 @@ class DummyMapFeature<K, V> extends Pattern implements MapFieldInterface<K, V>
 	@Override
 	public V get(final Item item, final K key)
 	{
-		return null;
+		throw new UnsupportedOperationException("Not implemented");
 	}
 
 	@Override

@@ -33,7 +33,7 @@
 			<classpath>
 				<fileset dir="lib/runtime" />
 				<fileset dir="lib/ant" />
-				<fileset dir="lib/jsr305" />
+				<fileset dir="lib/jspecify" />
 			</classpath>
 		</compile>
 	</target>
@@ -204,7 +204,7 @@
 			</src>
 			<myClasspath>
 				<fileset dir="lib/runtime" />
-				<fileset dir="lib/jsr305" />
+				<fileset dir="lib/jspecify" />
 				<fileset dir="lib/ant" />
 			</myClasspath>
 		</api>

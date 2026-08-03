@@ -18,13 +18,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public final class TypeUtil
 {
-	@Nonnull
-	static String typeParameterWildCards(@Nonnull final Class<?> clazz)
+	static String typeParameterWildCards(final Class<?> clazz)
 	{
 		final int typeParameters = clazz.getTypeParameters().length;
 		if(typeParameters == 0)
@@ -33,8 +31,7 @@ public final class TypeUtil
 		return "<?" + ",?".repeat(typeParameters - 1) + '>';
 	}
 
-	@Nonnull
-	public static String getCanonicalName(@Nonnull final Type type)
+	public static String getCanonicalName(final Type type)
 	{
 		if(type instanceof Class)
 			return getCanonicalName((Class<?>) type);
@@ -46,14 +43,12 @@ public final class TypeUtil
 			throw new RuntimeException("Unhandled type " + type + " -- " + type.getClass());
 	}
 
-	@Nonnull
-	private static String getCanonicalName(@Nonnull final Class<?> clazz)
+	private static String getCanonicalName(final Class<?> clazz)
 	{
 		return clazz.getCanonicalName() + typeParameterWildCards(clazz);
 	}
 
-	@Nonnull
-	private static String getCanonicalName(@Nonnull final WildcardType type)
+	private static String getCanonicalName(final WildcardType type)
 	{
 		final Type[] upper = type.getUpperBounds();
 		if(upper.length==1)
@@ -78,8 +73,7 @@ public final class TypeUtil
 		throw new RuntimeException(Arrays.asList(upper).toString() + Arrays.asList(lower));
 	}
 
-	@Nonnull
-	private static String getCanonicalName(@Nonnull final ParameterizedType type)
+	private static String getCanonicalName(final ParameterizedType type)
 	{
 		final Type ownerType = type.getOwnerType();
 		if(ownerType != null)
@@ -91,8 +85,7 @@ public final class TypeUtil
 		return name + "<" + Arrays.stream(type.getActualTypeArguments()).map(TypeUtil::getCanonicalName).collect(Collectors.joining(",")) + ">";
 	}
 
-	@Nullable
-	public static String valueType(@Nonnull final Feature feature)
+	public static @Nullable String valueType(final Feature feature)
 	{
 		if(feature instanceof final Settable<?> field)
 		{
@@ -118,8 +111,7 @@ public final class TypeUtil
 		return null;
 	}
 
-	@Nonnull
-	public static String fieldType(@Nonnull final Feature feature)
+	public static String fieldType(final Feature feature)
 	{
 		if(feature instanceof final MapFieldInterface<?, ?> field)
 		{

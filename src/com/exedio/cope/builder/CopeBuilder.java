@@ -13,12 +13,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public abstract class CopeBuilder<O, B extends CopeBuilder<O, B>> implements Builder<O>
 {
 	protected Map<Settable<?>, SetValue<?>> values = new HashMap<>();
 
-	protected final <V> boolean isSet(final Settable<V> settable)
+	protected final <V extends @Nullable Object> boolean isSet(final Settable<V> settable)
 	{
 		return values.containsKey(settable);
 	}
@@ -35,7 +37,7 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<O, B>> implements Bui
 	}
 
 	@SuppressWarnings("UnusedReturnValue")
-	protected final <V> B fallback(final Settable<V> settable, final V value)
+	protected final <V extends @Nullable Object> B fallback(final Settable<V> settable, final V value)
 	{
 		if(!isSet(settable))
 			set(settable, value);
@@ -53,13 +55,13 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<O, B>> implements Bui
 		fallback(enumMapField.getField(key), value);
 	}
 
-	protected final <V> void fallback(final Settable<V> settable, final Builder<? extends V> builder)
+	protected final <V extends @Nullable Object> void fallback(final Settable<V> settable, final Builder<? extends @NonNull V> builder)
 	{
 		if(!isSet(settable))
 			set(settable, builder.build());
 	}
 
-	protected <K extends Enum<K>, V> void fallback(final EnumMapField<K, V> enumMapField, final K key, final Builder<V> builder)
+	protected <K extends Enum<K>, V extends @Nullable Object> void fallback(final EnumMapField<K, V> enumMapField, final K key, final Builder<@NonNull V> builder)
 	{
 		if(!isSet(enumMapField.getField(key)))
 			fallback(enumMapField.getField(key), builder.build());
@@ -71,14 +73,14 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<O, B>> implements Bui
 		return (B) this;
 	}
 
-	protected final <V> B set(final Settable<V> settable, final V value)
+	protected final <V extends @Nullable Object> B set(final Settable<V> settable, final V value)
 	{
 		values.put(settable, SetValue.map(settable, value));
 		return self();
 	}
 
 	@SuppressWarnings("unchecked")
-	protected final <V> V get(final Settable<V> settable)
+	protected final <V extends @Nullable Object> V get(final Settable<V> settable)
 	{
 		if(!values.containsKey(settable))
 			return null;
@@ -86,17 +88,19 @@ public abstract class CopeBuilder<O, B extends CopeBuilder<O, B>> implements Bui
 	}
 
 	//Handle enum map key-vise
-	protected final <K extends Enum<K>, V> V get(final EnumMapField<K, V> enumMapField, final K key)
+	protected final <K extends Enum<K>, V extends @Nullable Object> V get(final EnumMapField<K, V> enumMapField, final K key)
 	{
 		return get(enumMapField.getField(key));
 	}
 
-	protected final <K extends Enum<K>, V> EnumMap<K, V> get(final EnumMapField<K, V> enumMapField)
+	protected final <K extends Enum<K>, V extends @Nullable Object> EnumMap<K, V> get(final EnumMapField<K, V> enumMapField)
 	{
 		final EnumMap<K, V> enumMap = new EnumMap<>(enumMapField.getKeyClass());
 		for(final K key : enumMapField.getKeyClass().getEnumConstants())
 		{
-			enumMap.put(key, get(enumMapField, key));
+			final V value = get(enumMapField, key);
+			if(value != null)
+				enumMap.put(key, value);
 		}
 		return enumMap;
 	}

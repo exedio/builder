@@ -5,7 +5,6 @@ import com.exedio.cope.Item;
 import com.exedio.cope.Type;
 import com.exedio.cope.builder.ItemBuilder;
 import java.util.List;
-import javax.annotation.Nonnull;
 
 public final class ItemType extends MyType<Item>
 {
@@ -29,7 +28,6 @@ public final class ItemType extends MyType<Item>
 		return feature.getName();
 	}
 
-	@Nonnull
 	@Override
 	public String getGenericParams()
 	{
@@ -38,7 +36,6 @@ public final class ItemType extends MyType<Item>
 		return "<I extends " + simpleClassName + wildCards + ", " + "B extends Generated" + simpleClassName + "Builder <I,B>>";
 	}
 
-	@Nonnull
 	@Override
 	public String getExtends()
 	{
@@ -59,7 +56,6 @@ public final class ItemType extends MyType<Item>
 		return hasSubTypes();
 	}
 
-	@Nonnull
 	@Override
 	public String getTypeCast()
 	{

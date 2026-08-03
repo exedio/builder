@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A collection of common builders re-usable in projects.
@@ -26,7 +27,7 @@ public final class Builders
 	 * The result value is composed from the given pattern string
 	 * where a single %d token is replaced by an integer counting up from the given start value.
 	 */
-	public static Builder<String> autoIncrement(final Settable<String> field, final String pattern, final int start)
+	public static Builder<String> autoIncrement(final Settable<@Nullable String> field, final String pattern, final int start)
 	{
 		return new StringAutoIncrementBuilder(field, pattern, start);
 	}
@@ -35,7 +36,7 @@ public final class Builders
 	 * Generates per-field unique values every time {@link Builder#build()} is called.
 	 * The result value is counting up from the given start value.
 	 */
-	public static Builder<Integer> autoIncrement(final Settable<Integer> field, final int start)
+	public static Builder<Integer> autoIncrement(final Settable<@Nullable Integer> field, final int start)
 	{
 		return new IntegerAutoIncrementBuilder(field, start);
 	}
@@ -44,7 +45,7 @@ public final class Builders
 	 * Generates per-field unique values every time {@link Builder#build()} is called.
 	 * The result value is counting up from the given start value.
 	 */
-	public static Builder<Long> autoIncrement(final Settable<Long> field, final long start)
+	public static Builder<Long> autoIncrement(final Settable<@Nullable Long> field, final long start)
 	{
 		return new LongAutoIncrementBuilder(field, start);
 	}
@@ -55,7 +56,7 @@ public final class Builders
 	 * Using rotate = false will throw an IllegalStateException if end of the constants set is reached.
 	 * Using rotate = true will not fail if end of the constants set is reached but will not provide uniqueness in this case.
 	 */
-	public static <E extends Enum<E>> Builder<E> autoIncrement(final Settable<E> field, final E start, final boolean rotate)
+	public static <E extends Enum<E>> Builder<E> autoIncrement(final Settable<@Nullable E> field, final E start, final boolean rotate)
 	{
 		return new EnumAutoIncrementBuilder<>(field, start, rotate);
 	}
@@ -97,7 +98,7 @@ public final class Builders
 
 	private static class IntegerAutoIncrementBuilder extends AutoIncrementBuilder<Integer>
 	{
-		IntegerAutoIncrementBuilder(final Settable<Integer> field, final int start)
+		IntegerAutoIncrementBuilder(final Settable<@Nullable Integer> field, final int start)
 		{
 			super(field, start);
 		}
@@ -111,7 +112,7 @@ public final class Builders
 
 	private static class LongAutoIncrementBuilder extends AutoIncrementBuilder<Long>
 	{
-		LongAutoIncrementBuilder(final Settable<Long> field, final long start)
+		LongAutoIncrementBuilder(final Settable<@Nullable Long> field, final long start)
 		{
 			super(field, start);
 		}
@@ -127,7 +128,7 @@ public final class Builders
 	{
 		private final String pattern;
 
-		StringAutoIncrementBuilder(final Settable<String> field, final String pattern, final int start)
+		StringAutoIncrementBuilder(final Settable<@Nullable String> field, final String pattern, final int start)
 		{
 			super(field, start);
 			this.pattern = pattern;
@@ -148,7 +149,7 @@ public final class Builders
 		private final E       startValue;
 		private final boolean rotate;
 
-		EnumAutoIncrementBuilder(final Settable<E> field, final E start, final boolean rotate)
+		EnumAutoIncrementBuilder(final Settable<@Nullable E> field, final E start, final boolean rotate)
 		{
 			super(field, start.ordinal());
 			if(start.getClass().getEnumConstants().length == 0)

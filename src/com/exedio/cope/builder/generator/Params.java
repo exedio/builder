@@ -5,18 +5,21 @@ import com.exedio.cope.misc.ModelByString;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import org.jspecify.annotations.Nullable;
 
 final class Params
 {
-	private Model model = null;
+	private @Nullable Model model = null;
 
 	void setModel(final String model)
 	{
 		this.model = ModelByString.get(model);
 	}
 
-	Model getModel()
+	Model getModel() throws HumanReadableException
 	{
+		if(model == null)
+			throw new HumanReadableException("attribute model is mandatory");
 		return model;
 	}
 
@@ -74,9 +77,9 @@ final class Params
 		return packagePrefixesDisplay.toString();
 	}
 
-	private File destdir;
+	private @Nullable File destdir;
 
-	void setDestdir(final File destdir)
+	void setDestdir(final @Nullable File destdir)
 	{
 		this.destdir = destdir;
 	}

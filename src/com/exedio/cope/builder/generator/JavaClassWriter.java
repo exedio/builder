@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import javax.annotation.Nonnull;
 
 public class JavaClassWriter extends OutputStreamWriter
 {
@@ -17,13 +16,13 @@ public class JavaClassWriter extends OutputStreamWriter
 		super(new FileOutputStream(file), StandardCharsets.US_ASCII.newEncoder());// TODO customizable
 	}
 
-	public void writePackage(@Nonnull final String packageName) throws IOException
+	public void writePackage(final String packageName) throws IOException
 	{
 		writeLine("package " + packageName + ';');
 		writeLine();
 	}
 
-	public void writeImport(@Nonnull final String canonicalClass) throws IOException
+	public void writeImport(final String canonicalClass) throws IOException
 	{
 		writeLine("import " + canonicalClass + ";");
 	}
@@ -38,7 +37,7 @@ public class JavaClassWriter extends OutputStreamWriter
 		writeLine("\t@com.exedio.cope.builder.Setter");
 	}
 
-	public void writeLine(@Nonnull final String line) throws IOException
+	public void writeLine(final String line) throws IOException
 	{
 		write(line);
 		write(newLine);
@@ -49,7 +48,7 @@ public class JavaClassWriter extends OutputStreamWriter
 	 */
 	@Deprecated
 	@Override
-	public void write(@Nonnull final String str) throws IOException
+	public void write(final String str) throws IOException
 	{
 		super.write(str);
 	}
